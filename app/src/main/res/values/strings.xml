@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">拍拍味</string>
+    <string name="loading">加载中…</string>
+    <string name="image_desc">返回</string>
+
+
+    <string name="menu_name">菜单</string>
+    <string name="dish_name">菜名</string>
+    <string name="shopcart">购物车</string>
+    <string name="clear">清空</string>
+
+</resources>

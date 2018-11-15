@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <color name="colorPrimary">#F47646</color>
+    <color name="colorPrimaryDark">#F47646</color>
+    <color name="colorAccent">#F47646</color>
+    <color name="white">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="ed772b">#ED772B</color>
+    <!--不同灰度颜色 -->
+    <color name="gray1">#111111</color>
+    <color name="gray2">#222222</color>
+    <color name="gray3">#333333</color>
+    <color name="gray4">#444444</color>
+    <color name="gray49">#494949</color>
+    <color name="gray5">#555555</color>
+    <color name="gray6">#666666</color>
+    <color name="gray7">#777777</color>
+    <color name="gray75">#757575</color>
+    <color name="gray8">#888888</color>
+    <color name="gray9">#999999</color>
+    <color name="graya">#AAAAAA</color>
+    <color name="grayb">#BBBBBB</color>
+    <color name="grayc">#CCCCCC</color>
+    <color name="grayc2">#C2C2C2</color>
+    <color name="grayd">#DDDDDD</color>
+    <color name="grayd5">#D5D5D5</color>
+    <color name="all_e">#EEEEEE</color>
+    <color name="grayf1">#F1F1F1</color>
+    <color name="grayf9">#F9F9F9</color>
+    <color name="grayfe">#FEFEFE</color>
+
+    <color name="gray_e7e7e7">#e7e7e7</color>
+    <color name="deep_gray_2">#636262</color>
+
+    <color name="red">#FF0000</color>
+    <color name="light_black">#fd383838</color>
+
+    <color name="tab_unselect">#c9c9c9</color>
+
+
+    <color name="gray">#cccccc</color>
+
+    <color name="drop_down_selected">#7B1FA2</color>
+    <color name="drop_down_unselected">#111111</color>
+
+    <color name="mask_color">#88888888</color>
+    <color name="check_bg">#f2f2f2</color>
+    <color name="un_press_color">#9C27B0</color>
+
+
+
+    <color name="_9">#999999</color>
+    <color name="e">#EEEEEE</color>
+    <color name="c">#CCCCCC</color>
+    <color name="all_9">#999999</color>
+    <color name="light_gray">#efefef</color>
+
+    <color name="all_6">#666666</color>
+
+
+
+</resources>

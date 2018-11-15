@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="vertical"
+                  android:layout_height="wrap_content">
+
+
+        <RelativeLayout android:layout_width="match_parent"
+                        android:layout_marginTop="24dp"
+                        android:layout_height="wrap_content">
+
+
+            <RelativeLayout android:layout_width="match_parent"
+                            android:id="@+id/rl0"
+                            android:layout_height="wrap_content">
+                <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profile_image"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@mipmap/ic_launcher"
+                        app:civ_border_color="@color/colorPrimary"
+                        app:civ_border_width="2dp"/>
+
+                <TextView android:layout_width="match_parent"
+                          android:id="@+id/tv_name"
+                          android:layout_toLeftOf="@+id/iv_setting"
+                          android:layout_toRightOf="@+id/profile_image"
+                          android:paddingLeft="@dimen/spi_12"
+                          android:text="未登录"
+                          android:gravity="center_vertical"
+                          android:layout_height="60dp"/>
+
+
+                <ImageView android:layout_width="30dp"
+                           android:src="@mipmap/ic_launcher"
+                           android:id="@+id/iv_setting"
+
+                           android:layout_centerVertical="true"
+                           android:layout_alignParentRight="true"
+                           android:layout_height="30dp"/>
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+        <com.yjhh.ppwbusiness.views.cui.ItemEntryView
+                android:id="@+id/iev_evaluate"
+                app:ievtextValue="我的评价"
+                app:ievunderline="true"
+                app:ievbackground="@color/white"
+                app:ievtextColor="@color/all_9"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+
+        />
+
+
+        <com.yjhh.ppwbusiness.views.cui.ItemEntryView
+                android:id="@+id/iev_message"
+                app:ievtextValue="我的消息"
+                app:ievunderline="true"
+                app:ievbackground="@color/white"
+                app:ievtextColor="@color/all_9"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+
+        />
+
+        <com.yjhh.ppwbusiness.views.cui.ItemEntryView
+                android:id="@+id/iev_browse"
+                app:ievtextValue="最近浏览"
+                app:ievbackground="@color/white"
+                app:ievtextColor="@color/all_9"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+
+        />
+
+
+        <com.yjhh.ppwbusiness.views.cui.ItemEntryView
+                android:id="@+id/iev_address"
+                app:ievtextValue="我的收货地址"
+                app:ievbackground="@color/white"
+                app:ievtextColor="@color/all_9"
+                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+        <com.yjhh.ppwbusiness.views.cui.ItemEntryView
+                android:id="@+id/iev_service"
+                app:ievtextValue="在线客服"
+                app:ievbackground="@color/white"
+                app:ievtextColor="@color/all_9"
+                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+
+        <com.yjhh.ppwbusiness.views.cui.ItemEntryView
+                android:id="@+id/iev_about"
+                app:ievtextValue="关于我们"
+                app:ievbackground="@color/white"
+                app:ievtextColor="@color/all_9"
+                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
