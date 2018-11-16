@@ -14,15 +14,12 @@ class LoginPresent(var context: Context, var loginView: LoginView) : BasePresent
 
 
 
-
     fun login(username: String, password: String, identity: String) {
-
 
         toSubscribe2(loginModel.login(username, password, identity), object : ProcessObserver2(context) {
             override fun processValue(response: String?) {
                     loginView.onSuccess(response)
             }
-
 
             override fun onFault(message: String) {
                 loginView.onFault(message)

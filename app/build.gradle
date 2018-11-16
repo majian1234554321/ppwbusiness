@@ -55,8 +55,8 @@ dependencies {
     api 'io.reactivex.rxjava2:rxandroid:2.1.0'
     api 'io.reactivex.rxjava2:rxjava:2.2.2'
     api 'com.squareup.retrofit2:retrofit:2.4.0'
-    api ('com.squareup.retrofit2:converter-gson:2.3.0')  {
-        exclude group:'com.google.code.gson'
+    api('com.squareup.retrofit2:converter-gson:2.3.0') {
+        exclude group: 'com.google.code.gson'
         exclude group: 'com.squareup.okhttp3'
         //exclude module:'okhttp'
     }
@@ -96,5 +96,5 @@ dependencies {
     kapt 'android.arch.persistence.room:compiler:1.1.1'
     //  implementation 'com.github.arcadefire:nice-spinner:1.3.4'
     implementation files('libs/BaiduLBS_Android.jar')
-
+    api 'com.dsiner.lib:xrv:1.1.2'
 }

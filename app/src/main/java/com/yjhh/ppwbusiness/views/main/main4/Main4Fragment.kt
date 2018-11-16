@@ -10,10 +10,7 @@ import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.base.BaseMainFragment
 import com.yjhh.ppwbusiness.bean.LoginBean
-import com.yjhh.ppwbusiness.fragments.AboutFragment
-import com.yjhh.ppwbusiness.fragments.MainFragment
-import com.yjhh.ppwbusiness.fragments.MessageCenterFragment
-import com.yjhh.ppwbusiness.fragments.MessageSetFragment
+import com.yjhh.ppwbusiness.fragments.*
 import com.yjhh.ppwbusiness.utils.LogUtils
 import com.yjhh.ppwbusiness.utils.RxBus
 import com.yjhh.ppwbusiness.utils.SharedPreferencesUtils
@@ -49,38 +46,42 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener {
             }
 
 
-            R.id.iev_message->{
+            R.id.iev_message -> {
                 (parentFragment as MainFragment).startBrotherFragment(
                     MessageCenterFragment()
                 )
             }
 
-            R.id.iev_notice->{
+            R.id.iev_notice -> {
                 (parentFragment as MainFragment).startBrotherFragment(
                     MessageSetFragment()
                 )
 
-               // start(   MessageSetFragment())
+                // start(   MessageSetFragment())
             }
 
 
-            R.id.iev_Management->{
+            R.id.iev_Management -> {
+
+                (parentFragment as MainFragment).startBrotherFragment(
+                    EmployeeFragment()
+                )
 
             }
 
 
-            R.id.iev_about->{
+            R.id.iev_about -> {
                 (parentFragment as MainFragment).startBrotherFragment(
                     AboutFragment()
                 )
             }
 
 
-            R.id.iev_account->{
+            R.id.iev_account -> {
 
             }
 
-            R.id.iev_updateVersion->{
+            R.id.iev_updateVersion -> {
 
             }
 
@@ -93,8 +94,9 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener {
 
 
     override fun initView() {
-        val arrayView = arrayOf(profile_image, tv_name, tv_loginOut
-        ,iev_message,iev_notice,iev_Management,iev_about,iev_account,iev_updateVersion
+        val arrayView = arrayOf(
+            profile_image, tv_name, tv_loginOut
+            , iev_message, iev_notice, iev_Management, iev_about, iev_account, iev_updateVersion
         )
 
         arrayView.forEach {
