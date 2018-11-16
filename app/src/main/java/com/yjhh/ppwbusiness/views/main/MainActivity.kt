@@ -33,18 +33,6 @@ class MainActivity : BaseActivity() {
 
 
 
-    private var firstTime: Long = 0L
-    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
-        if (keyCode == KeyEvent.KEYCODE_BACK && event.action == KeyEvent.ACTION_DOWN) {
-            val secondTime = System.currentTimeMillis()
-            if (secondTime - firstTime > 2000) {
-                Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show()
-                firstTime = secondTime
-                return true
-            } else {
-                finish()
-            }
-        }
-        return super.onKeyDown(keyCode, event)
-    }
+
+
 }

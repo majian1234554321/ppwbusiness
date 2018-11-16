@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <com.yjhh.ppwbusiness.views.cui.TitleBarView android:layout_width="match_parent"
+                                                 app:textValue="提醒设置"
+                                                 app:textColor="@color/white"
+                                                 android:layout_height="wrap_content"/>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+
+              android:text="消息提醒"
+    />
+
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+
+                  android:text="语音播报"
+        />
+
+    </RelativeLayout>
+
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+
+                  android:text="新消息震动"
+        />
+
+    </RelativeLayout>
+
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+
+              android:text="播放频率"
+    />
+
+
+    <RadioGroup android:layout_width="match_parent" android:layout_height="wrap_content">
+        <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content"
+                     android:text="循环播放"
+        />
+
+        <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content"
+                     android:text="播放三遍"
+        />
+    </RadioGroup>
+
+
+</LinearLayout>

@@ -8,9 +8,20 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
-        <item name="android:windowTranslucentStatus">true</item>
+
         <item name="android:windowContentOverlay">@null</item>
     </style>
+
+
+
+
+    <declare-styleable name="TitleBarView">
+        <attr name="textColor" format="color"/>
+        <attr name="textValue" format="string"/>
+        <attr name="textSize" format="dimension"/>
+        <attr name="imageSrc" format="reference"/>
+        <attr name="titleBarBackground" format="color"/>
+    </declare-styleable>
 
 
     <style name="TopbarStyle">
