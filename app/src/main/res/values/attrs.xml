@@ -93,4 +93,11 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
+
+    <declare-styleable name="MeiTuanFoodView">
+        <attr name="leftSum" format="integer"></attr>
+        <attr name="rightSum" format="integer"></attr>
+        <attr name="topItemHeight" format="dimension"></attr>
+    </declare-styleable>
+
 </resources>

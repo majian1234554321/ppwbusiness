@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <com.yjhh.ppwbusiness.views.cui.TitleBarView android:layout_width="match_parent"
+                                                 android:id="@+id/tbv_title"
+                                                 app:textValue="意见反馈"
+                                                 app:textColor="@color/white"
+
+
+                                                 android:layout_height="wrap_content"/>
+
+    <android.support.v4.widget.NestedScrollView android:layout_width="match_parent"
+                                                android:layout_below="@+id/tbv_title"
+                                                android:layout_height="match_parent">
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="vertical"
+                      android:padding="@dimen/sp_12"
+
+                      android:layout_above="@+id/tv_commit"
+                      android:layout_height="wrap_content">
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:text="留下您的联系方式，以便我们了解问题后及时反馈和结果我们将以致电或者邮件发方式尽快回复您遇到的问题。"
+                      android:layout_marginBottom="@dimen/sp_12"
+            />
+
+            <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:background="@drawable/stroke_frame"
+                      android:hint="你的手机号 （必填项）"
+                      android:id="@+id/et_1"
+                      android:layout_marginBottom="@dimen/sp_12"
+            />
+            <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:background="@drawable/stroke_frame"
+                      android:id="@+id/et_2"
+                      android:hint="电子邮箱（必填项）" android:layout_marginBottom="@dimen/sp_12"
+            />
+            <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:background="@drawable/stroke_frame" android:layout_marginBottom="@dimen/sp_12"
+                      android:hint="姓名"
+                      android:id="@+id/et_3"
+            />
+            <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:background="@drawable/stroke_frame" android:layout_marginBottom="@dimen/sp_12"
+                      android:hint="标题"
+                      android:id="@+id/et_4"
+            />
+
+            <EditText android:layout_width="match_parent" android:layout_height="200dp"
+                      android:gravity="top|left"
+                      android:padding="8dp" android:layout_marginBottom="@dimen/sp_12"
+                      android:background="@drawable/stroke_frame"
+                      android:hint="详细内容"
+                      android:id="@+id/et_5"
+            />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
+    <android.support.design.button.MaterialButton android:layout_width="match_parent"
+                                                  android:text="提交"
+                                                  android:layout_margin="@dimen/sp_12"
+                                                  android:id="@+id/tv_commit"
+                                                  android:layout_above="@+id/tv_see"
+                                                  android:layout_height="wrap_content"/>
+
+    <TextView android:layout_width="wrap_content"
+              android:id="@+id/tv_see"
+              android:text="查看我的反馈"
+              android:layout_marginBottom="@dimen/sp_12"
+              android:layout_centerHorizontal="true"
+              android:layout_alignParentBottom="true"
+              android:layout_height="wrap_content"/>
+
+
+</RelativeLayout>

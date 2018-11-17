@@ -65,6 +65,7 @@
                     android:layout_width="match_parent"
                     app:ievbackground="@color/white"
                     app:ievtextValue="营业时间"
+                    android:id="@+id/tv_setTime"
                     app:ievtextColor="@color/all_9"
                     android:layout_height="wrap_content"/>
 

@@ -25,6 +25,11 @@ interface LoginService {
 
 
     @FormUrlEncoded
+    @POST("login/fromSms")
+    fun fromSms(@FieldMap map: Map<String, String>): Observable<ResponseBody>
+
+
+    @FormUrlEncoded
     @POST("register/regByAccount")
     fun regByAccount(@FieldMap map: Map<String, String>): Observable<ResponseBody>
 

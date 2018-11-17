@@ -3,12 +3,79 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent" android:layout_height="match_parent">
 
+    <com.yjhh.ppwbusiness.views.cui.TitleBarView
+            android:layout_width="match_parent"
+            android:id="@+id/tbv_title"
+            app:textValue="关于我们"
+            app:textColor="@color/white"
+            android:layout_height="wrap_content"/>
 
 
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="vertical"
+                  android:layout_marginTop="20dp"
+                  android:layout_below="@+id/tbv_title"
+                  android:layout_height="wrap_content">
 
-    <com.yjhh.ppwbusiness.views.cui.TitleBarView android:layout_width="match_parent"
-                                       app:textValue="关于我们"
-                                       app:textColor="@color/white"
-                                       android:layout_height="wrap_content"/>
 
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:gravity="center"
+                  android:drawableTop="@mipmap/ic_launcher_round"
+                  android:text="拍拍味"
+        />
+
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:id="@+id/tv_introduce"
+                  android:layout_margin="12dp"
+                  android:text="  湖北永建合宏科技有限公司成立于2018年，立足湖北武汉，致力于成为领先的综合性本地生活服务平台，用科技连接消费者和商家，提供服务以满足人们日常「食」的需求，并进一步扩展至多种生活周边服务。通过线下和线上相互促进，构建一个生活消费的生态链场景，配合平台庞大的实时配送网络，使这种连接成为可能。"
+        />
+
+
+        <com.yjhh.ppwbusiness.views.cui.ItemEntryView android:layout_width="match_parent"
+                                                      android:id="@+id/iev_1"
+                                                      app:ievtextColor="@color/all_9"
+                                                      app:ievtextValue="加盟合作"
+                                                      app:ievbackground="@color/white"
+
+                                                      app:ievunderline="true"
+                                                      app:ievtextpadding="@dimen/sp_12"
+                                                      android:layout_marginTop="8sp"
+                                                      android:layout_height="wrap_content"/>
+
+        <com.yjhh.ppwbusiness.views.cui.ItemEntryView android:layout_width="match_parent"
+                                                      android:id="@+id/iev_2"
+                                                      app:ievtextpadding="@dimen/sp_12"
+                                                      app:ievtextColor="@color/all_9"
+                                                      app:ievtextValue="帮助中心"
+                                                      app:ievbackground="@color/white"
+                                                      app:ievunderline="true"
+                                                      android:layout_height="wrap_content"/>
+
+        <com.yjhh.ppwbusiness.views.cui.ItemEntryView android:layout_width="match_parent"
+                                                      android:id="@+id/iev_3"
+                                                      app:ievtextColor="@color/all_9"
+                                                      app:ievbackground="@color/white"
+                                                      app:ievtextValue="意见反馈"
+                                                      app:ievtextpadding="@dimen/sp_12"
+                                                      app:ievunderline="true"
+                                                      android:layout_height="wrap_content"/>
+        <com.yjhh.ppwbusiness.views.cui.ItemEntryView android:layout_width="match_parent"
+                                                      android:id="@+id/iev_4"
+                                                      app:ievtextpadding="@dimen/sp_12"
+                                                      app:ievtextColor="@color/all_9"
+                                                      app:ievbackground="@color/white"
+                                                      app:ievtextValue="协议中心"
+                                                      android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+    <TextView android:layout_width="match_parent"
+              android:id="@+id/tv_servicePhone"
+              android:layout_alignParentBottom="true"
+              android:text="服务热线:"
+              android:gravity="center"
+              android:layout_marginBottom="@dimen/sp_12"
+              android:textColor="@color/all_9"
+              android:layout_height="wrap_content"/>
 </RelativeLayout>

@@ -13,7 +13,7 @@ import com.yjhh.ppwbusiness.bean.MyMessageBean
 import com.yjhh.ppwbusiness.ipresent.SectionUselessPresent
 import com.yjhh.ppwbusiness.iview.MyMessageView
 import com.yjhh.ppwbusiness.views.cui.SpaceItemDecoration
-import com.yjhh.ppwbusiness.views.main.main4.Main4Fragment
+
 import kotlinx.android.synthetic.main.messagecenter1fragment.*
 
 
@@ -26,6 +26,7 @@ class MessageCenter1Fragment : BaseFragment(), MyMessageView {
     var status = "-1"//状态，默认null(null/-1 全部 0未生效 1 有效的 2已过期的/失效的)
     override fun onSuccess(main1bean: MyMessageBean, flag: String) {
         if ("refresh" == flag) {
+            swipeLayout.finishRefresh()
             mAdapter.setNewData(main1bean.items as ArrayList<MyMessageBean.ItemsBean>)
 
         } else {
@@ -92,7 +93,7 @@ class MessageCenter1Fragment : BaseFragment(), MyMessageView {
     private fun initRefreshLayout() {
         swipeLayout.setOnRefreshListener { refreshLayout ->
             refresh()
-            refreshLayout.finishRefresh()
+
         }
 
 

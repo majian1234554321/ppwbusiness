@@ -41,8 +41,9 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener {
 
             R.id.tv_loginOut -> {
                 loginOut()
-                tv_name.text = "未登录"
+                //tv_name.text = "未登录"
                 startActivity(Intent(mActivity, LoginActivity::class.java))
+                mActivity.finish()
             }
 
 

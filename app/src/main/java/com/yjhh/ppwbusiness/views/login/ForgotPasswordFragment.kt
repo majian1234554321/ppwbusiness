@@ -1,41 +1,39 @@
 package com.yjhh.ppwbusiness.views.login
 
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
-import com.yjhh.ppwbusiness.BaseApplication.context
+import com.yjhh.ppwbusiness.BaseApplication
 import com.yjhh.ppwbusiness.R
-import com.yjhh.ppwbusiness.base.BaseActivity
+import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.ipresent.PasswordPresent
 import com.yjhh.ppwbusiness.iview.PasswordView
-import com.yjhh.ppwbusiness.iview.SendSMSView
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_forgot_password.*
 import java.util.concurrent.TimeUnit
 
-class ForgotPasswordActivity : BaseActivity(), View.OnClickListener, PasswordView {
+class ForgotPasswordFragment:BaseFragment(), View.OnClickListener, PasswordView {
+
     override fun onSuccess(value: String?) {
-        Toast.makeText(context, "重置密码成功", Toast.LENGTH_SHORT).show()
-        finish()
+        Toast.makeText(BaseApplication.context, "重置密码成功", Toast.LENGTH_SHORT).show()
+        mActivity.finish()
     }
 
     override fun onFault(errorMsg: String?) {
-        Toast.makeText(context, "重置密码失败$errorMsg", Toast.LENGTH_SHORT).show()
+        Toast.makeText(BaseApplication.context, "重置密码失败$errorMsg", Toast.LENGTH_SHORT).show()
     }
 
     override fun onSuccessSMS(value: String?) {
-        Toast.makeText(context, "验证码发送成功", Toast.LENGTH_SHORT).show()
+        Toast.makeText(BaseApplication.context, "验证码发送成功", Toast.LENGTH_SHORT).show()
     }
 
     override fun onFaultSMS(errorMsg: String?) {
-        Toast.makeText(context, "验证码发送失败$errorMsg", Toast.LENGTH_SHORT).show()
+        Toast.makeText(BaseApplication.context, "验证码发送失败$errorMsg", Toast.LENGTH_SHORT).show()
     }
 
 
@@ -45,28 +43,22 @@ class ForgotPasswordActivity : BaseActivity(), View.OnClickListener, PasswordVie
     val MAX_COUNT_TIME = 5L
 
 
-
     override fun onClick(v: View?) {
 
         if (et_phone.text.length == 11 && et_password.text.length >= 6 && et_verifyCode.text != null) {
-            val present = PasswordPresent(context, this)
+            val present = PasswordPresent(BaseApplication.context, this)
             present.forgotPassword(et_phone.text.toString(), et_password.text.toString(), et_verifyCode.text.toString())
         } else {
-            Toast.makeText(context, "手机号、密码、验证码不符合要求", Toast.LENGTH_SHORT).show()
+            Toast.makeText(BaseApplication.context, "手机号、密码、验证码不符合要求", Toast.LENGTH_SHORT).show()
         }
 
     }
 
+    override fun getLayoutRes(): Int = R.layout.activity_forgot_password
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_forgot_password)
-
-
+    override fun initView() {
         val regByAccountPresent = PasswordPresent(context, this)
         bt_commit.setOnClickListener(this)
-
-
 
 
         val disposable = RxView.clicks(tv_verifyCode)
@@ -78,7 +70,7 @@ class ForgotPasswordActivity : BaseActivity(), View.OnClickListener, PasswordVie
                 if (!TextUtils.isEmpty(phone) && phone.length == 11) {
                     Observable.just(true)
                 } else {
-                    Toast.makeText(this, "手机号码不符合要求", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(mActivity, "手机号码不符合要求", Toast.LENGTH_SHORT).show()
                     Observable.empty()
                 }
             }
@@ -119,4 +111,5 @@ class ForgotPasswordActivity : BaseActivity(), View.OnClickListener, PasswordVie
 
         compositeDisposable.add(disposable)
     }
+
 }

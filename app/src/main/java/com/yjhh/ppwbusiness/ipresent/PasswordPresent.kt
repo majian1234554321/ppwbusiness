@@ -17,20 +17,38 @@ class PasswordPresent(var context: Context, var registView: PasswordView) : Base
 
         toSubscribe2(
             regByAccountModel.sendSms(type, phone)
-            ,object :ProcessObserver2(context){
+            , object : ProcessObserver2(context) {
 
-            override fun processValue(response: String?) {
-                registView.onSuccessSMS(response)
-            }
+                override fun processValue(response: String?) {
+                    registView.onSuccessSMS(response)
+                }
 
-            override fun onFault(message: String) {
-                registView.onFaultSMS(message)
-            }
+                override fun onFault(message: String) {
+                    registView.onFaultSMS(message)
+                }
 
-        })
+            })
     }
 
+    fun fromSms(account: String, smsCode: String, identity: String, deviceName: String) {
 
+
+        toSubscribe2(
+            regByAccountModel.fromSms(account, smsCode, identity, deviceName)
+            , object : ProcessObserver2(context) {
+
+                override fun processValue(response: String?) {
+                    registView.onSuccess(response)
+                }
+
+                override fun onFault(message: String) {
+                    registView.onFault(message)
+                }
+
+            })
+
+
+    }
 
 
     fun regByAccount(phone: String, password: String, smsCode: String, identity: String, refId: String) {
@@ -47,7 +65,6 @@ class PasswordPresent(var context: Context, var registView: PasswordView) : Base
 
             })
     }
-
 
 
     fun forgotPassword(phone: String?, password: String?, smsCode: String?) {

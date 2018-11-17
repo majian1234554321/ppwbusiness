@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <color name="colorPrimary">#F47646</color>
-    <color name="colorPrimaryDark">#F47646</color>
-    <color name="colorAccent">#F47646</color>
+    <color name="colorPrimary">#454545</color>
+    <color name="colorPrimaryDark">#454545</color>
+    <color name="colorAccent">#454545</color>
     <color name="white">#FFFFFF</color>
     <color name="transparent">#00000000</color>
 
@@ -58,7 +58,7 @@
     <color name="light_gray">#efefef</color>
 
     <color name="all_6">#666666</color>
-
+    <color name="c6">#C6C6C6</color>
 
     <color name="lib_pub_color_trans">#00000000</color>
     <color name="lib_pub_color_translucent">#9900040a</color>

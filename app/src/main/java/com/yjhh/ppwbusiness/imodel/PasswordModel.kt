@@ -27,6 +27,21 @@ class PasswordModel {
     }
 
 
+    fun fromSms(account: String, smsCode: String,identity: String, deviceName: String): Observable<ResponseBody> {
+        map.clear()
+        with(map) {
+            put("account", account)
+            put("smsCode", smsCode)
+            put("identity", identity)
+            put("deviceName", deviceName)
+        }
+        return ApiServices.getInstance().create(LoginService::class.java).fromSms(map)
+    }
+
+
+
+
+
     fun regByAccount2(
         phone: String,
         password: String,

@@ -35,4 +35,14 @@ interface SectionUselessService {
 
 
 
+    @POST("about")
+    fun about(): Observable<ResponseBody>// 我的余额/积分
+
+
+
+
+    @FormUrlEncoded
+    @POST("about/feedback")
+    fun feedback(@FieldMap map: Map<String, String>): Observable<ResponseBody>// 资金记录/积分记录
+
 }
