@@ -14,12 +14,13 @@ import com.yjhh.ppwbusiness.R.id.iv
 import com.yjhh.ppwbusiness.utils.ImageLoaderUtils
 import kotlinx.android.synthetic.main.images.view.*
 
-class ProductAdd( var lists: List<String>) : BaseQuickAdapter<String,BaseViewHolder>(R.layout.images,lists) {
+class ProductAdd(lists: List<String>) : BaseQuickAdapter<String, BaseViewHolder>(R.layout.images, lists) {
     override fun convert(helper: BaseViewHolder?, item: String?) {
 
 
+        val iv = (helper?.getView<View>(R.id.iv) as ImageView)
 
-      val iv =  (helper?.getView<View>(R.id.iv) as ImageView)
+        val iv_delete = (helper?.getView<View>(R.id.iv_delete) as ImageView)
 
         if ("EMPTY" == item) {
 
@@ -31,9 +32,17 @@ class ProductAdd( var lists: List<String>) : BaseQuickAdapter<String,BaseViewHol
                 R.mipmap.ic_launcher_round,
                 0
             )
+
+            iv_delete.visibility = View.GONE
+
         } else {
             ImageLoaderUtils.load(context, iv, item, R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round, 0)
+            iv_delete.visibility = View.VISIBLE
         }
+
+
+        helper.addOnClickListener(R.id.iv_delete)
+
 
 
     }

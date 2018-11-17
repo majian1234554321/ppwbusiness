@@ -1,6 +1,7 @@
 package com.yjhh.ppwbusiness.views.product
 
 import android.graphics.Color
+import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -73,6 +74,11 @@ class ProductAllFragment : BaseFragment(), View.OnClickListener {
 
     lateinit var sectionCouponPresent: SectionUselessPresent
 
+
+    override fun onFragmentResult(requestCode: Int, resultCode: Int, data: Bundle?) {
+        super.onFragmentResult(requestCode, resultCode, data)
+        Toast.makeText(mActivity,"0000",Toast.LENGTH_SHORT).show()
+    }
 
     var list = ArrayList<String>()
 
