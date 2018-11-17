@@ -25,6 +25,7 @@ import com.yjhh.ppwbusiness.utils.Glide4Engine
 import com.yjhh.ppwbusiness.views.cui.AbsSheetDialog
 import com.yjhh.ppwbusiness.views.cui.AlertDialogFactory
 import com.yjhh.ppwbusiness.views.cui.BottomVerSheetDialog
+import com.yjhh.ppwbusiness.views.cui.GridRecyclerItemDecoration
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.internal.entity.CaptureStrategy
@@ -48,6 +49,8 @@ class ProductAddFragment : BaseFragment() {
         mAdapter = ProductAdd(lists)
         recyclerView.adapter = mAdapter
 
+        recyclerView.addItemDecoration(GridRecyclerItemDecoration(40))
+
         mAdapter?.setOnItemClickListener { adapter, view, position ->
 
             if (lists[position] == "EMPTY") {
@@ -57,17 +60,16 @@ class ProductAddFragment : BaseFragment() {
             } else {
 
             }
-
         }
 
 
 
         mAdapter?.setOnItemChildClickListener { adapter, view, position ->
-            Toast.makeText(mActivity, "" + "权限" + position+ "申请失败", Toast.LENGTH_SHORT).show()
+            Toast.makeText(mActivity, "" + "权限" + position + "申请失败", Toast.LENGTH_SHORT).show()
 
 
             lists.removeAt(position)
-            if (lists.size==0){
+            if (lists.size == 0) {
                 lists.add("EMPTY")
             }
 
