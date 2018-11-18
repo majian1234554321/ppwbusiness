@@ -12,12 +12,12 @@ class TOMainFragment : BaseFragment() {
     override fun getLayoutRes(): Int = R.layout.tomainfragment
 
 
-    override fun initView() {
-        val fragments = ArrayList<BaseFragment>()
-        fragments.add(TOMainFragment())
-        fragments.add(PFMainFragment())
-        viewPager.adapter = MyPagerAdapter(childFragmentManager, fragments, mTitles)
-    }
+//    override fun initView() {
+//        val fragments = ArrayList<BaseFragment>()
+//        fragments.add(TOMainFragment())
+//        fragments.add(PFMainFragment())
+//        viewPager.adapter = MyPagerAdapter(childFragmentManager, fragments, mTitles)
+//    }
 
 
 }

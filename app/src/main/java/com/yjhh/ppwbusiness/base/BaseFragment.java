@@ -7,15 +7,32 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.yjhh.ppwbusiness.utils.SharedPreferencesUtils;
 import io.reactivex.disposables.CompositeDisposable;
+import me.jessyan.autosize.AutoSize;
+import me.jessyan.autosize.internal.CustomAdapt;
 import me.yokeyword.fragmentation.SupportFragment;
 
-public abstract class BaseFragment extends SupportFragment {
+import java.util.List;
+
+public abstract class BaseFragment extends SupportFragment implements CustomAdapt {
+
+
+    @Override
+    public boolean isBaseOnWidth() {
+        return true;
+    }
+
+    @Override
+    public float getSizeInDp() {
+        return 375;
+    }
+
 
 
     public BaseFragment(){}
@@ -69,6 +86,7 @@ public abstract class BaseFragment extends SupportFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mRootView = inflater.inflate(getLayoutRes(), container, false);
+
         return mRootView;
     }
 
@@ -92,6 +110,8 @@ public abstract class BaseFragment extends SupportFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+
+        compositeDisposable.clear();
 
     }
 
@@ -189,6 +209,19 @@ public abstract class BaseFragment extends SupportFragment {
     @SuppressWarnings("unchecked")
     protected <T extends View> T findActivityViewById(@IdRes int id) {
         return (T) mActivity.findViewById(id);
+    }
+
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        List<Fragment> fragments = getChildFragmentManager().getFragments();
+        for (Fragment fragment : fragments) {
+            if (fragment != null) {
+                fragment.onRequestPermissionsResult(requestCode,permissions,grantResults);
+            }
+        }
     }
 
 

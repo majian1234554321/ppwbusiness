@@ -10,9 +10,9 @@ import java.util.List;
 
 public class MyPagerAdapter extends FragmentPagerAdapter {
 
-    public String[] mTitles;
+    private String[] mTitles;
 
-    List<BaseFragment> mFragments;
+    private List<BaseFragment> mFragments;
 
     public MyPagerAdapter(FragmentManager fm, List<BaseFragment> mFragments, String[] mTitles) {
         super(fm);

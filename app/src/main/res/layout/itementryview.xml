@@ -11,7 +11,7 @@
               android:layout_height="wrap_content"/>
     <View android:layout_width="match_parent"
           android:id="@+id/line"
-          android:layout_marginLeft="12dp"
+
           android:background="@color/all_9"
           android:layout_alignParentBottom="true"
           android:layout_height="1dp"/>

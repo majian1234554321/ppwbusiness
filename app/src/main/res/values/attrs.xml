@@ -65,6 +65,9 @@
         <attr name="ievtextValue" format="string"/>
         <attr name="ievtextContentValue" format="string"/>
         <attr name="ievtextSize" format="dimension"/>
+
+        <attr name="ievtextpadding" format="dimension"/>
+
         <attr name="ievimageSrc" format="reference"/>
         <attr name="ievbackground" format="color"/>
         <attr name="ievunderline" format="boolean"/>
@@ -72,6 +75,29 @@
         <attr name="ievarrow" format="boolean"/>
     </declare-styleable>
 
+    <declare-styleable name="lib_pub_ToggleButton">
+        <attr name="lib_pub_tbtn_colorThumb" format="color" />
+        <attr name="lib_pub_tbtn_colorTrackOpen" format="color" />
+        <attr name="lib_pub_tbtn_colorTrackOff" format="color" />
+        <attr name="lib_pub_tbtn_colorPadding" format="color" />
+        <attr name="lib_pub_tbtn_padding" format="dimension" />
+        <attr name="lib_pub_tbtn_duration" format="integer" />
+    </declare-styleable>
 
+    <!-- Public dialog -->
+    <style name="lib_pub_dialog_style" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+
+    <declare-styleable name="MeiTuanFoodView">
+        <attr name="leftSum" format="integer"></attr>
+        <attr name="rightSum" format="integer"></attr>
+        <attr name="topItemHeight" format="dimension"></attr>
+    </declare-styleable>
 
 </resources>
