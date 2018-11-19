@@ -51,6 +51,7 @@
     <com.yjhh.ppwbusiness.views.cui.ItemEntryView android:layout_width="match_parent"
                                                   app:ievtextValue="商品分类"
                                                   android:paddingLeft="24dp"
+                                                  android:visibility="gone"
                                                   app:ievbackground="@color/white"
                                                   android:layout_height="wrap_content"/>
 

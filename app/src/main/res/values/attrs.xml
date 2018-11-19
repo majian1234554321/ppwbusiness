@@ -95,9 +95,23 @@
 
 
     <declare-styleable name="MeiTuanFoodView">
-        <attr name="leftSum" format="integer"></attr>
-        <attr name="rightSum" format="integer"></attr>
-        <attr name="topItemHeight" format="dimension"></attr>
+        <attr name="leftSum" format="integer"/>
+        <attr name="rightSum" format="integer"/>
+        <attr name="topItemHeight" format="dimension"/>
     </declare-styleable>
+
+
+
+        <declare-styleable name="NineGridView">
+            <attr name="ngv_singleImageSize" format="dimension"/>
+            <attr name="ngv_singleImageRatio" format="float"/>
+            <attr name="ngv_gridSpacing" format="dimension"/>
+            <attr name="ngv_maxSize" format="integer"/>
+            <attr name="ngv_mode" format="enum">
+                <enum name="fill" value="0"/>
+                <enum name="grid" value="1"/>
+            </attr>
+        </declare-styleable>
+
 
 </resources>
