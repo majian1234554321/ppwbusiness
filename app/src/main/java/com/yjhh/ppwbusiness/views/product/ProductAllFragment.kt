@@ -35,7 +35,7 @@ class ProductAllFragment : BaseFragment(), View.OnClickListener {
 
             }
             R.id.tv_2 -> {
-                start(ProductAddFragment())
+                start(ProductAddFragment("ADD"))
             }
             R.id.tv_3 -> {
 
@@ -70,6 +70,9 @@ class ProductAllFragment : BaseFragment(), View.OnClickListener {
     val pageSize = 10
 
     var share = ""
+    var list = ArrayList<String>()
+
+    lateinit var mAdapter: ProductAdapter
 
 
     lateinit var sectionCouponPresent: SectionUselessPresent
@@ -77,12 +80,8 @@ class ProductAllFragment : BaseFragment(), View.OnClickListener {
 
     override fun onFragmentResult(requestCode: Int, resultCode: Int, data: Bundle?) {
         super.onFragmentResult(requestCode, resultCode, data)
-        Toast.makeText(mActivity,"0000",Toast.LENGTH_SHORT).show()
+        Toast.makeText(mActivity, "0000", Toast.LENGTH_SHORT).show()
     }
-
-    var list = ArrayList<String>()
-
-    lateinit var mAdapter: ProductAdapter
 
 
     override fun getLayoutRes(): Int = R.layout.productallfragment
@@ -105,10 +104,33 @@ class ProductAllFragment : BaseFragment(), View.OnClickListener {
 
         mAdapter.setOnItemClickListener { adapter, view, position ->
 
-            (parentFragment as BaseFragment).start(
-                MessageDetailFragment()
-            )
+            //            (parentFragment as BaseFragment).start(
+//                MessageDetailFragment()
+//            )
 
+        }
+
+
+        mAdapter.setOnItemChildClickListener { adapter, view, position ->
+
+
+            when (view.id) {
+                R.id.tv_delete -> {
+                    Toast.makeText(context, "删除$position", Toast.LENGTH_SHORT).show()
+                }
+
+                R.id.tv_stop -> {
+                    Toast.makeText(context, "下架$position", Toast.LENGTH_SHORT).show()
+                }
+
+                R.id.iv_edit -> {
+                    (parentFragment as BaseFragment).start(
+                        ProductAddFragment("EDIT")
+                    )
+                }
+                else -> {
+                }
+            }
         }
 
 
@@ -132,11 +154,7 @@ class ProductAllFragment : BaseFragment(), View.OnClickListener {
     private fun initRefreshLayout() {
         swipeLayout.setOnRefreshListener { refreshLayout ->
             refresh()
-
-
         }
-
-
     }
 
 

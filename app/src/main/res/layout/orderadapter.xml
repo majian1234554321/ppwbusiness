@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:padding="@dimen/sp_12"
+                android:layout_height="wrap_content">
+
+    <ImageView android:layout_width="80dp"
+               android:id="@+id/iv_image"
+               android:layout_marginRight="@dimen/sp_12"
+               android:src="@mipmap/ic_launcher"
+               android:layout_height="80dp"/>
+
+    <TextView android:layout_width="wrap_content"
+              tools:text="商品名称"
+              android:id="@+id/tv_name"
+              android:layout_toRightOf="@+id/iv_image"
+              android:layout_alignTop="@+id/iv_image"
+              android:layout_height="wrap_content"/>
+
+    <TextView android:layout_width="wrap_content"
+              tools:text="2018-11.11 23:23:59"
+              android:layout_alignTop="@+id/iv_image"
+              android:layout_alignParentRight="true"
+              android:layout_height="wrap_content"/>
+
+
+    <TextView android:layout_width="wrap_content"
+              tools:text="实付金额￥0.99"
+              android:id="@+id/tv_price"
+              android:layout_alignBottom="@+id/iv_image"
+              android:layout_toRightOf="@+id/iv_image"
+              android:layout_height="wrap_content"/>
+
+    <TextView android:layout_width="wrap_content"
+              tools:text="已使用券总价无门槛减99元"
+              android:layout_alignBottom="@+id/iv_image"
+              android:layout_toRightOf="@+id/tv_price"
+              android:layout_height="wrap_content"/>
+
+    <TextView android:layout_width="wrap_content"
+              tools:text="已使用券总价无门槛减99元"
+              android:id="@+id/remark"
+              android:layout_marginTop="@dimen/spi_8"
+              android:layout_below="@+id/tv_price"
+              android:layout_toRightOf="@+id/iv_image"
+              android:layout_height="wrap_content"/>
+
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_below="@+id/tv_name"
+              android:layout_toRightOf="@+id/iv_image"
+              android:gravity="center"
+              android:layout_above="@+id/tv_price"
+              tools:text="总价         ￥0.99"
+    />
+
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_below="@+id/tv_name"
+              android:layout_alignParentEnd="true"
+              android:gravity="center"
+              android:layout_above="@+id/tv_price"
+              tools:text="已付款"
+    />
+
+
+</RelativeLayout>

@@ -15,7 +15,7 @@ class ProductManagementFragment2 : BaseFragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.tv_add -> {
-                start(ProductAddFragment())
+                start(ProductAddFragment("ADD"))
             }
 
             R.id.tv_sort -> {

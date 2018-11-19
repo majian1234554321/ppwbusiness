@@ -24,8 +24,18 @@
                      android:layout_height="match_parent"/>-->
 
 
+    <TextView android:layout_width="match_parent" android:layout_height="48dp"
+              android:gravity="center"
+              android:id="@+id/tv_title"
+              android:text="XX商家"
+    />
+
     <LinearLayout android:layout_width="match_parent"
+                  android:layout_below="@id/tv_title"
                   android:id="@+id/ll_head"
+                  android:background="@color/all_e"
+                  android:paddingTop="@dimen/spi_12"
+                  android:paddingBottom="@dimen/spi_12"
                   android:orientation="horizontal"
                   android:layout_height="wrap_content">
 
@@ -43,10 +53,14 @@
 
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                       android:text="638.00"
+                      android:textSize="@dimen/spi_16"
+                      android:layout_margin="@dimen/spi_8"
+                      android:id="@+id/tv_Turnover"
                       android:textStyle="bold"
             />
 
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:id="@+id/tv_YTurnover"
                       android:text="昨日638.00"
             />
 
@@ -64,10 +78,14 @@
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                       android:textStyle="bold"
                       android:text="88"
+                      android:textSize="@dimen/spi_16"
+                      android:layout_margin="@dimen/spi_8"
+                      android:id="@+id/tv_TOrder"
             />
 
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                       android:text="昨日63"
+                      android:id="@+id/tv_YOrder"
             />
 
         </LinearLayout>

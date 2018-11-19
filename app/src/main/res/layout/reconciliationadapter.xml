@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:padding="@dimen/spi_16"
+                android:layout_height="wrap_content">
+
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:id="@+id/tv_paystatus"
+              android:layout_marginBottom="8dp"
+              android:text="微信收款"
+    />
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_alignParentRight="true"
+              android:id="@+id/tv_price"
+              android:layout_marginBottom="8dp"
+              android:text="+ 99.00"
+    />
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="2018-01-01"
+              android:id="@+id/tv_time"
+              android:layout_below="@+id/tv_paystatus"
+
+    />
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_alignParentRight="true"
+              android:layout_below="@+id/tv_paystatus"
+              android:text="微信收款"
+    />
+    <TextView android:layout_width="wrap_content"
+              android:layout_below="@+id/tv_paystatus"
+              android:id="@+id/tv_endstatus"
+              android:layout_marginLeft="@dimen/spi_16"
+              android:layout_height="wrap_content"
+              android:layout_toRightOf="@+id/tv_time"
+              android:text="微信收款"
+    />
+
+</RelativeLayout>

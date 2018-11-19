@@ -42,7 +42,7 @@ import java.util.*
 class MerchantSettingActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.iev_logo -> {
+ /*           R.id.iev_logo -> {
                 AlertDialogFactory.createFactory(this).getBottomVerDialog(null,
                     Arrays.asList<BottomVerSheetDialog.Bean>(
                         BottomVerSheetDialog.Bean(
@@ -104,10 +104,10 @@ class MerchantSettingActivity : BaseActivity(), View.OnClickListener {
 
                         }
                     })
-            }
+            }*/
 
             R.id.tv_setTime -> {
-                start(BusinessHoursFragment())
+                startActivityForResult(Intent(this, BusinessHoursActivity::class.java), 10086)
             }
             else -> {
             }

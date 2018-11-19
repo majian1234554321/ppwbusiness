@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical" android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+
+    <com.yjhh.ppwbusiness.views.cui.TitleBarView android:layout_width="match_parent"
+                                                 android:id="@+id/tbv_title"
+                                                 app:textValue="余额提现"
+                                                 app:textColor="@color/white"
+                                                 android:layout_height="wrap_content"/>
+
+
+    <TextView android:layout_width="match_parent"
+              android:text="可提现余额（元） ￥ 99.00"
+              android:gravity="center_vertical"
+              android:background="@color/all_e"
+              android:paddingLeft="@dimen/spi_12"
+              android:layout_height="48dp"/>
+
+
+    <TextView android:layout_width="wrap_content"
+              android:text="提现金额"
+              android:layout_marginTop="@dimen/spi_8"
+              android:layout_marginLeft="@dimen/spi_12"
+              android:layout_height="wrap_content"/>
+
+    <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:layout_margin="@dimen/spi_8"
+
+              android:padding="@dimen/spi_8"
+              android:background="@drawable/stroke_frame_all6"
+    />
+
+    <RadioGroup android:layout_width="match_parent"
+                android:id="@+id/rg"
+                android:background="@drawable/solid_frame_alle"
+                android:layout_margin="@dimen/spi_12"
+                android:orientation="vertical" android:layout_height="wrap_content">
+
+        <RadioButton android:layout_width="match_parent" android:layout_height="wrap_content"
+                     android:id="@+id/rb_wechat"
+                     android:button="@null"
+                     android:padding="@dimen/dpi_4"
+                     android:checked="true"
+                     android:drawableRight="@drawable/selector_radio"
+                     android:text="微信"
+        />
+        <View android:layout_width="match_parent" android:layout_height="1dp"
+              android:background="@color/white"
+
+        />
+        <RadioButton android:layout_width="match_parent" android:layout_height="wrap_content"
+                     android:button="@null"
+                     android:drawableRight="@drawable/selector_radio"
+                     android:text="支付宝"
+                     android:padding="@dimen/dpi_4"
+                     android:id="@+id/rb_alipay"
+        />
+
+        <View android:layout_width="match_parent" android:layout_height="1dp"
+
+              android:background="@color/white"
+        />
+
+        <RadioButton android:layout_width="match_parent" android:layout_height="wrap_content"
+                     android:id="@+id/rb_bank"
+                     android:button="@null"
+                     android:padding="@dimen/dpi_4"
+                     android:drawableRight="@drawable/selector_radio"
+                     android:text="银行卡"
+        />
+
+    </RadioGroup>
+
+
+    <TextView android:layout_width="wrap_content"
+              android:text="申请提现"
+              android:layout_gravity="center"
+              android:padding="@dimen/spi_8"
+              android:gravity="center"
+              android:id="@+id/tv_apply"
+              android:layout_margin="@dimen/spi_12"
+              android:layout_height="wrap_content"/>
+
+
+    <TextView android:layout_width="match_parent"
+              android:text="提现明细"
+              android:padding="@dimen/spi_12"
+              android:background="@color/c"
+              android:layout_marginBottom="@dimen/spi_8"
+              android:layout_height="wrap_content"/>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_marginLeft="@dimen/spi_12"
+                  android:orientation="horizontal"
+                  android:layout_height="wrap_content">
+
+        <TextView android:layout_width="0dp"
+                  android:id="@+id/tv_1"
+                  android:text="资金去处"
+                  android:layout_weight="1.5"
+                  android:layout_height="wrap_content"/>
+        <TextView android:layout_width="0dp"
+                  android:id="@+id/tv_2"
+                  android:text="当前状态"
+                  android:gravity="center"
+                  android:layout_weight="1.2"
+                  android:layout_height="wrap_content"/>
+        <TextView android:layout_width="0dp"
+                  android:id="@+id/tv_3"
+                  android:text="提现单号"
+                  android:gravity="center"
+                  android:layout_weight="1.2"
+                  android:layout_height="wrap_content"/>
+        <TextView android:layout_width="0dp"
+                  android:id="@+id/tv_4"
+                  android:text="金额"
+                  android:gravity="center"
+                  android:layout_weight="1.2"
+                  android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+    <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
+                                            android:id="@+id/recyclerView"
+                                            android:layout_height="wrap_content"/>
+
+
+</LinearLayout>

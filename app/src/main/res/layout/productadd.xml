@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
+              xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
               android:layout_width="match_parent" android:layout_height="match_parent">
 
     <com.yjhh.ppwbusiness.views.cui.TitleBarView android:layout_width="match_parent"
                                                  app:textValue="新建商品"
+                                                 android:id="@+id/tbv_title"
                                                  app:textColor="@color/white"
                                                  android:layout_height="wrap_content"/>
 
@@ -13,9 +14,10 @@
     <RelativeLayout android:layout_width="match_parent" android:layout_height="@dimen/dp_40">
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                   android:id="@+id/tv_name"
+                  android:drawableLeft="@drawable/iv_x"
                   android:layout_centerVertical="true"
                   android:text="商品名称:"
-        />
+                  android:layout_alignParentStart="true"/>
         <EditText android:layout_width="match_parent"
                   android:layout_toRightOf="@+id/tv_name"
                   android:background="@null"
@@ -31,8 +33,12 @@
 
     </RelativeLayout>
 
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+    <TextView android:layout_width="match_parent" android:layout_height="36dp"
               android:layout_centerVertical="true"
+              android:gravity="center_vertical"
+
+              android:drawableLeft="@drawable/iv_x"
+              android:background="@color/all_e"
               android:text="商品主图（注：默认第一张为主图，最多添加3张））"
     />
 
@@ -44,35 +50,48 @@
 
     <com.yjhh.ppwbusiness.views.cui.ItemEntryView android:layout_width="match_parent"
                                                   app:ievtextValue="商品分类"
+                                                  android:paddingLeft="24dp"
                                                   app:ievbackground="@color/white"
                                                   android:layout_height="wrap_content"/>
 
-    <LinearLayout android:layout_width="match_parent"
-                  android:orientation="horizontal"
-                  android:layout_height="wrap_content">
+    <RelativeLayout android:layout_width="match_parent"
+                    android:orientation="horizontal"
+
+                    android:layout_height="40dp">
 
 
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="match_parent"
                   android:layout_centerVertical="true"
+                  android:gravity="center"
+                  android:drawableLeft="@drawable/iv_x"
+
+                  android:id="@+id/tv_price"
                   android:text=" 商品价格"
         />
 
 
-        <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+        <EditText android:layout_width="match_parent" android:layout_height="match_parent"
                   android:background="@null"
+                  android:layout_centerVertical="true"
+                  android:layout_marginLeft="@dimen/spi_12"
+                  android:layout_toRightOf="@+id/tv_price"
+                  android:layout_gravity="center_vertical"
+                  android:textSize="@dimen/sp_14"
                   android:hint="请输入商品价格：99.99"
         />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <View android:layout_width="match_parent" android:layout_height="1dp"
           android:background="@color/c6"
     />
 
 
-    <RelativeLayout android:layout_width="match_parent" android:layout_height="48dp">
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="40dp">
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                   android:layout_centerVertical="true"
+                  android:paddingLeft="24dp"
                   android:text="上架"
         />
 
@@ -94,8 +113,12 @@
     <EditText android:layout_width="match_parent"
               android:gravity="left|top"
               android:hint="说些什么吧"
+              android:layout_marginTop="@dimen/spi_12"
+              android:layout_marginLeft="24dp"
+              android:layout_marginRight="24dp"
+              android:layout_marginBottom="24dp"
               android:background="@drawable/stroke_frame"
-              android:layout_height="100dp"/>
+              android:layout_height="150dp"/>
 
 
     <LinearLayout android:layout_width="match_parent"

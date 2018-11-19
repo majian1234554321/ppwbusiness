@@ -11,7 +11,7 @@
     <com.yjhh.ppwbusiness.views.cui.TitleBarView android:layout_width="match_parent"
                                                  android:id="@+id/tbv_title"
                                                  app:textColor="@color/white"
-                                                 app:textValue="商户设置"
+                                                 app:textValue="店铺设置"
                                                  android:layout_height="wrap_content"/>
 
     <android.support.v4.widget.NestedScrollView android:layout_width="match_parent"
@@ -21,10 +21,13 @@
         >
 
 
-            <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+            <RelativeLayout android:layout_width="match_parent"
+                            android:padding="@dimen/spi_12"
+                            android:layout_height="wrap_content">
 
-                <ImageView android:layout_width="80dp"
-                           android:layout_height="80dp"
+                <ImageView android:layout_width="60dp"
+                           android:src="@mipmap/ic_launcher"
+                           android:layout_height="60dp"
                            android:id="@+id/iv_image"
                 />
 
@@ -38,13 +41,13 @@
 
 
             <RelativeLayout android:layout_width="match_parent"
-                            android:padding="8dp"
+                            android:padding="@dimen/spi_12"
                             android:layout_height="wrap_content">
 
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                           android:layout_centerVertical="true"
                           android:textSize="@dimen/sp_14"
-                          android:text="商户状态"
+                          android:text="店铺状态"
                 />
 
                 <com.yjhh.ppwbusiness.views.cui.toggle.ToggleButton
@@ -65,51 +68,66 @@
                     android:layout_width="match_parent"
                     app:ievbackground="@color/white"
                     app:ievtextValue="营业时间"
+                    android:paddingLeft="@dimen/spi_12"
                     android:id="@+id/tv_setTime"
+
                     app:ievtextColor="@color/all_9"
                     android:layout_height="wrap_content"/>
 
             <com.yjhh.ppwbusiness.views.cui.ItemEntryView
                     android:layout_width="match_parent"
                     app:ievbackground="@color/white"
+                    android:visibility="gone"
                     app:ievtextValue="商户LOGO"
                     android:id="@+id/iev_logo"
+                    android:layout_marginLeft="@dimen/spi_12"
                     app:ievtextColor="@color/all_9"
                     android:layout_height="wrap_content"/>
 
 
             <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:text="商户名称"
+                      android:layout_marginTop="@dimen/spi_12"
+                      android:layout_marginLeft="@dimen/spi_12"
+
             />
 
             <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:background="@drawable/stroke_frame"
                       android:padding="4dp"
+                      android:layout_margin="@dimen/spi_12"
+
             />
             <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:text="商户电话"
+                      android:layout_marginLeft="@dimen/spi_12"
             />
 
             <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:background="@drawable/stroke_frame"
+                      android:layout_margin="@dimen/spi_12"
                       android:padding="4dp"
             />
 
             <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:text="商户地址"
+                      android:layout_marginLeft="@dimen/spi_12"
             />
 
             <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:background="@drawable/stroke_frame"
+                      android:layout_margin="@dimen/spi_12"
                       android:padding="4dp"
             />
 
             <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:layout_marginLeft="@dimen/spi_12"
                       android:text="商户描述"
             />
 
             <EditText android:layout_width="match_parent" android:layout_height="180dp"
                       android:gravity="left|top"
+                      android:layout_margin="@dimen/spi_12"
                       android:background="@drawable/stroke_frame"
                       android:padding="@dimen/sp_12"
             />

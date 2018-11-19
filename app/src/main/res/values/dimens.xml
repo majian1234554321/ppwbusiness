@@ -46,8 +46,9 @@
     <dimen name="dpi_72">72dp</dimen>
     <dimen name="spi_12">12sp</dimen>
     <dimen name="spi_14">14sp</dimen>
+    <dimen name="spi_8">8sp</dimen>
     <dimen name="spi_16">16sp</dimen>
-
+    <dimen name="spi_6">6sp</dimen>
 
 
     <dimen name="lib_pub_dimen_title_height">50dp</dimen>

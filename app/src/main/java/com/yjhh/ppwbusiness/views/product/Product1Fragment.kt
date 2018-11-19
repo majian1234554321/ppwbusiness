@@ -24,7 +24,7 @@ class Product1Fragment : BaseFragment(), View.OnClickListener {
             }
             R.id.tv_2 -> {
 
-               start(ProductAddFragment())
+               start(ProductAddFragment("ADD"))
 
 
             }

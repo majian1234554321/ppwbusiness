@@ -13,14 +13,21 @@
 
 
     <com.flyco.tablayout.SlidingTabLayout
-
             android:layout_below="@+id/tbv_title"
             android:id="@+id/mTabLayout"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
+            android:background="#666666"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
+            app:tl_tab_space_equal="true"
+
+            app:tl_indicator_width_equal_title="true"
             tl:tl_tab_space_equal="true"
-            android:background="#F6CE59"
-            tl:tl_indicator_width="10dp"/>
+            tl:tl_textBold="SELECT"
+            tl:tl_underline_color="#1A000000"
+            tl:tl_underline_gravity="TOP"
+            tl:tl_underline_height="1dp"/>
 
 
     <android.support.v4.view.ViewPager android:layout_width="match_parent"
@@ -32,10 +39,13 @@
 
     <LinearLayout android:layout_width="match_parent"
                   android:id="@+id/ll"
+                  android:background="@color/all_e"
+                  android:gravity="center"
                   android:layout_alignParentBottom="true"
                   android:layout_height="wrap_content">
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                   android:text="新建商品"
+                  android:padding="@dimen/spi_12"
                   android:id="@+id/tv_add"
         />
 

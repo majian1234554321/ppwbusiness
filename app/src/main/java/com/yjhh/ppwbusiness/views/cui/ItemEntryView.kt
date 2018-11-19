@@ -50,7 +50,7 @@ class ItemEntryView @JvmOverloads constructor(
             )
 
 
-        val textSize = type.getDimension(R.styleable.ItemEntryView_ievtextSize, 18f)
+        val textSize = type.getDimension(R.styleable.ItemEntryView_ievtextSize, 14f)
 
         val titleBarBackground = type.getColor(
             R.styleable.ItemEntryView_ievbackground,

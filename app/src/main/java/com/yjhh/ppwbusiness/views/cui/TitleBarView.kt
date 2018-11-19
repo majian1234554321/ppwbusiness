@@ -22,7 +22,7 @@ class TitleBarView @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : RelativeLayout(
+) : Toolbar(
     context,
     attributeSet,
     defStyleAttr
@@ -60,7 +60,7 @@ class TitleBarView @JvmOverloads constructor(
         tv_title.textSize = textSize
 
 
-        val rl_background = view.findViewById<RelativeLayout>(R.id.rl_background)
+        val rl_background = view.findViewById<Toolbar>(R.id.rl_background)
 
         rl_background.setBackgroundColor(titleBarBackground)
 

@@ -2,25 +2,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               android:orientation="horizontal"
-              android:layout_width="match_parent" android:layout_height="match_parent">
+              android:gravity="center"
+              android:layout_width="match_parent" android:layout_height="wrap_content">
 
     <TextView android:layout_width="wrap_content"
               tools:text="08:00"
+              android:textColor="@color/all_6"
               android:id="@+id/tv_sTime"
-              android:gravity="center"
-              android:layout_weight="1"
+
+
               android:layout_height="wrap_content"/>
     <TextView android:layout_width="wrap_content" android:gravity="center"
-              tools:text="至" android:layout_weight="1"
+              android:text="至"
+              android:textColor="@color/all_6"
+              android:layout_margin="@dimen/spi_12"
               android:layout_height="wrap_content"/>
 
     <TextView android:layout_width="wrap_content" android:gravity="center"
-              tools:text="09:00" android:layout_weight="1"
+              tools:text="09:00"
+              android:textColor="@color/all_6"
               android:id="@+id/tv_eTime"
+              android:layout_marginRight="@dimen/spi_12"
               android:layout_height="wrap_content"/>
 
     <TextView android:layout_width="wrap_content" android:gravity="center"
-              tools:text="删除" android:layout_weight="1"
+              android:text="删除"
+              android:textColor="@color/all_6"
               android:id="@+id/tv_delete"
               android:layout_height="wrap_content"/>
 

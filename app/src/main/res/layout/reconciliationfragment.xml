@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tl="http://schemas.android.com/tools"
+        android:layout_below="@+id/tbv_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <android.support.design.widget.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:contentScrim="@color/colorAccent"
+                app:expandedTitleMarginBottom="100dp"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+        >
+
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_marginTop="48dp"
+                          android:layout_below="@+id/tbv_title"
+                          android:orientation="vertical"
+                          android:layout_height="wrap_content">
+
+                <TextView android:layout_width="wrap_content"
+                          android:text="今日营业额（元）"
+                          android:layout_marginLeft="@dimen/spi_12"
+                          android:layout_height="wrap_content"/>
+
+                <TextView android:layout_width="wrap_content"
+                          android:text="￥ 0.00"
+                          android:layout_marginLeft="@dimen/spi_12"
+                          android:layout_height="wrap_content"/>
+                <View android:layout_width="match_parent" android:layout_height="1dp"
+                      android:layout_marginTop="@dimen/sp_12"
+                      android:layout_marginBottom="@dimen/sp_12"
+                      android:background="@color/white"
+                />
+
+
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_marginRight="@dimen/spi_12"
+                                android:layout_marginLeft="@dimen/spi_12" android:layout_height="50dp">
+
+
+                    <TextView android:layout_width="wrap_content"
+                              android:text="可提现金额"
+                              android:layout_height="wrap_content"/>
+
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_alignParentBottom="true"
+                              android:text="￥ 0.00"
+                              android:layout_height="wrap_content"/>
+
+
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+
+                              android:id="@+id/tv_forward"
+                              android:layout_centerVertical="true"
+
+                              android:layout_alignParentRight="true"
+                              android:text="提现"
+                    />
+
+                </RelativeLayout>
+
+
+                <TextView android:layout_width="match_parent"
+                          android:layout_marginTop="@dimen/spi_8"
+                          android:layout_marginLeft="@dimen/spi_12" android:layout_height="wrap_content"
+                          android:text="今日账单 （2018-11-11）"
+                />
+
+
+                <LinearLayout android:layout_width="match_parent"
+                              android:orientation="horizontal"
+                              android:layout_marginLeft="@dimen/spi_12"
+                              android:layout_marginRight="@dimen/spi_12"
+                              android:layout_marginTop="@dimen/spi_6"
+                              android:layout_marginBottom="@dimen/spi_6"
+                              android:layout_height="wrap_content">
+
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                              android:text="收入账单"
+
+                              android:layout_weight="1"
+
+
+                    />
+
+
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                              android:text="共88笔"
+
+                              android:layout_weight="1"
+
+                    />
+
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                              android:text="+999.00"
+                              android:gravity="right"
+                              android:layout_weight="2"
+
+                    />
+
+
+                </LinearLayout>
+
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_marginLeft="@dimen/spi_12"
+                              android:layout_marginBottom="@dimen/spi_6"
+                              android:orientation="horizontal"
+                              android:layout_marginRight="@dimen/spi_12"
+                              android:layout_height="wrap_content">
+
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                              android:text="支出订单"
+
+                              android:layout_weight="1"
+
+
+                    />
+
+
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                              android:text="共88笔"
+
+                              android:layout_weight="1"
+
+                    />
+
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                              android:text="+999.00"
+                              android:gravity="right"
+                              android:layout_weight="2"
+
+                    />
+
+
+                </LinearLayout>
+
+
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:text="历史账单 （2018-11-11）"
+                          android:layout_marginBottom="@dimen/spi_6"
+                          android:layout_marginLeft="@dimen/spi_12"
+                />
+
+
+            </LinearLayout>
+
+
+            <android.support.v7.widget.Toolbar
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_gravity="top"
+                    app:contentInsetStart="@dimen/spi_8"
+                    android:background="@color/colorPrimary"
+                    app:layout_collapseMode="pin">
+
+                <RelativeLayout android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                    <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                               android:id="@+id/iv_back"
+                               android:src="@drawable/icon_back"
+                    />
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_height="wrap_content"
+                            android:text="资金对账"/>
+
+                </RelativeLayout>
+
+
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.CollapsingToolbarLayout>
+        <com.flyco.tablayout.SlidingTabLayout
+                app:tl_tab_space_equal="true"
+                android:id="@+id/mTabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#666666"
+                android:layout_gravity="center"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
+                app:tl_indicator_width_equal_title="true"
+
+                tl:tl_textBold="SELECT"
+                tl:tl_underline_color="#1A000000"
+                tl:tl_underline_gravity="TOP"
+                tl:tl_underline_height="1dp"/>
+
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <android.support.v4.view.ViewPager
+
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_width="match_parent"
+            android:id="@+id/mViewPager"
+            android:layout_height="match_parent"/>
+</android.support.design.widget.CoordinatorLayout>

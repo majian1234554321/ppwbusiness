@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:gravity="center_horizontal"
+              android:orientation="vertical" android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <com.yjhh.ppwbusiness.views.cui.TitleBarView android:layout_width="match_parent"
+                                                 app:textValue="申请成功"
+                                                 app:textColor="@color/white"
+                                                 android:layout_height="wrap_content"/>
+
+
+    <ImageView android:layout_width="60dp" android:layout_height="60dp"
+               android:layout_margin="@dimen/spi_16"
+               android:src="@mipmap/ic_launcher"
+
+    />
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="余额提现到微信"
+    />
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/spi_12"
+              android:text="99.99"
+    />
+
+    <View android:layout_width="match_parent" android:layout_height="1dp"
+          android:layout_marginTop="@dimen/spi_16"
+          android:layout_marginBottom="@dimen/spi_16"
+          android:background="@color/all_e"
+    />
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_marginLeft="60dp"
+                  android:layout_marginRight="40dp"
+                  android:orientation="vertical" android:layout_height="wrap_content">
+
+
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:text="当前状态        申请成功"
+                  android:id="@+id/tv_1"
+                  android:layout_marginBottom="@dimen/spi_8"
+        />
+        <TextView android:layout_width="match_parent"
+                  android:id="@+id/tv_2"
+                  android:layout_marginBottom="@dimen/spi_8" android:layout_height="wrap_content"
+                  android:text="申请时间        2018-01-01 01:01:01"
+        />
+        <TextView android:layout_width="match_parent"
+                  android:id="@+id/tv_3"
+                  android:layout_marginBottom="@dimen/spi_8" android:layout_height="wrap_content"
+                  android:text="到账时间        具体到账时间以第三方服务为准"
+        />
+        <TextView android:layout_width="match_parent"
+                  android:id="@+id/tv_4"
+                  android:layout_marginBottom="@dimen/spi_8" android:layout_height="wrap_content"
+                  android:text="提现金额        99.99"
+        />
+        <TextView android:layout_width="match_parent"
+                  android:id="@+id/tv_5"
+                  android:layout_marginBottom="@dimen/spi_8" android:layout_height="wrap_content"
+                  android:text="资金去处        微信"
+        />
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:id="@+id/tv_6"
+                  android:text="提现单号        100000000"
+        />
+
+    </LinearLayout>
+
+
+</LinearLayout>

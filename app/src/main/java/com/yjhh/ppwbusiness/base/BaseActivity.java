@@ -87,7 +87,6 @@ public class BaseActivity extends SupportActivity implements CustomAdapt {
     }
 
 
-
     @Override
     protected void onResume() {
         super.onResume();
