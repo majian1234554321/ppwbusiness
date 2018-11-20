@@ -73,6 +73,8 @@
         <attr name="ievunderline" format="boolean"/>
         <attr name="ievdisplaytextContent" format="boolean"/>
         <attr name="ievarrow" format="boolean"/>
+
+        <attr name="ievdrwableleft" format="reference"/>
     </declare-styleable>
 
     <declare-styleable name="lib_pub_ToggleButton">
@@ -111,7 +113,11 @@
                 <enum name="fill" value="0"/>
                 <enum name="grid" value="1"/>
             </attr>
+
         </declare-styleable>
+
+
+
 
 
 </resources>

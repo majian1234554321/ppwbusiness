@@ -9,6 +9,25 @@
                                                  android:layout_height="wrap_content"/>
 
 
+    <com.flyco.tablayout.CommonTabLayout
+            android:id="@+id/mTabLayout_7"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="#E45171"
+            app:tl_iconVisible="false"
+            app:tl_indicator_color="#eeeeee"
+            app:tl_indicator_corner_radius="1.5dp"
+            app:tl_indicator_height="3dp"
+            app:tl_indicator_style="TRIANGLE"
+            app:tl_indicator_width="10dp"
+            app:tl_textsize="14sp"/>
+
+    <CheckBox android:layout_width="wrap_content"
+              android:id="@+id/checkbox"
+              android:text="仅看有图"
+              android:layout_height="wrap_content"/>
+
+
     <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
                                             android:id="@+id/recyclerView"
                                             android:layout_height="match_parent"/>

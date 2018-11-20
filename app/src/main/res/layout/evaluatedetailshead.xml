@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+        android:layout_width="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
         android:background="@color/white"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -27,25 +27,50 @@
                 android:layout_marginLeft="10dp"
                 android:orientation="vertical">
 
-            <TextView
-                    android:id="@+id/tv_username"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="姓名"
-                    android:textColor="#6b8747"
-                    android:textSize="13sp"/>
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView
+                        android:id="@+id/tv_username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="姓名"
+                        android:textColor="#6b8747"
+                        android:textSize="13sp"/>
 
-            <RatingBar
-                    android:id="@+id/rb_grade"
-                    android:layout_width="wrap_content"
-                    android:layout_height="16dp"
-                    android:layout_gravity="center_vertical"
+                <TextView
+                        android:id="@+id/tv_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_alignParentRight="true"
+
+                        android:textColor="#6b8747"
+                        android:textSize="13sp"/>
+
+
+            </RelativeLayout>
+
+
+            <com.yjhh.ppwbusiness.views.cui.RatingBar
+                    android:id="@+id/id_ratingbar"
+                    android:layout_width="100dp"
+                    android:layout_height="25dp"
+                    android:gravity="center"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="9dp"
-                    android:isIndicator="true"
-                    android:progressDrawable="@drawable/ratingbar_progress"
-                    android:rating="4"/>
+                    app:allStarsCount="5"
+                    android:layout_below="@+id/tv_storeName"
+                    android:layout_above="@+id/tv_info"
+                    app:curSelectValue="1.5"
+                    android:layout_toRightOf="@+id/iv_image"
+                    app:starEmpty="@drawable/star_empty"
+                    app:starFill="@drawable/star_full"
+                    app:starHalf="@drawable/star_half_full"
+                    app:starImageSize="15dp"
+                    app:starPadding="5dp"
+                    app:clickable="false"
+                    app:stepSize="Half"/>
+
 
             <TextView
                     android:id="@+id/tv_content"
@@ -65,6 +90,7 @@
 
             <RelativeLayout
                     android:layout_width="match_parent"
+                    android:visibility="gone"
                     android:layout_height="wrap_content">
 
                 <TextView

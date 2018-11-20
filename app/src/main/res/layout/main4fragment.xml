@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
-
+                android:background="@color/f8"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -13,7 +13,8 @@
 
 
         <RelativeLayout android:layout_width="match_parent"
-                        android:layout_marginTop="24dp"
+                        android:paddingTop="24dp"
+                        android:background="@color/colorPrimary"
                         android:padding="@dimen/sp_12"
                         android:layout_height="wrap_content">
 
@@ -23,29 +24,55 @@
                             android:layout_height="wrap_content">
                 <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/profile_image"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:src="@mipmap/ic_launcher"
+                        android:layout_width="73.5pt"
+                        android:layout_height="73.5pt"
+                        android:src="@drawable/icon_place"
                         app:civ_border_color="@color/colorPrimary"
                         app:civ_border_width="2dp"/>
 
                 <TextView android:layout_width="match_parent"
                           android:id="@+id/tv_name"
-                          android:layout_toLeftOf="@+id/iv_setting"
+                          android:layout_alignTop="@+id/profile_image"
+                          android:textColor="#FFF3DAAF"
                           android:layout_toRightOf="@+id/profile_image"
                           android:paddingLeft="@dimen/spi_12"
                           android:text="未登录"
+                          android:textSize="16pt"
+                          android:layout_height="22.5pt"/>
+
+                <TextView android:layout_width="match_parent"
+                          android:id="@+id/tv_time"
+                          android:layout_below="@+id/tv_name"
+                          android:layout_marginTop="14pt"
+                          android:layout_toRightOf="@+id/profile_image"
+                          android:paddingLeft="@dimen/spi_12"
+                          android:text="123123132"
+                          android:textColor="#FFE2E2E2"
+                          android:textSize="12pt"
+                          android:layout_height="16.5pt"/>
+
+                <TextView android:layout_width="match_parent"
+                          android:id="@+id/tv_address"
+                          android:layout_below="@+id/tv_time"
+                          android:textColor="#FFE2E2E2"
+                          android:layout_marginTop="9pt"
+                          android:layout_toRightOf="@+id/profile_image"
+                          android:paddingLeft="@dimen/spi_12"
+                          android:text="未登录21212121212"
+                          android:textSize="12pt"
+                          android:layout_height="wrap_content"/>
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:layout_below="@+id/tv_address"
+                          android:textColor="#FFF3DAAF"
                           android:gravity="center_vertical"
-                          android:layout_height="60dp"/>
+                          android:textSize="10pt"
+                          android:drawablePadding="@dimen/spi_8"
+                          android:drawableRight="@drawable/icon_arrright"
+                          android:layout_alignParentRight="true"
+                          android:text="点击前往设置"
+                />
 
-
-                <ImageView android:layout_width="30dp"
-                           android:src="@mipmap/ic_launcher"
-                           android:id="@+id/iv_setting"
-                           android:visibility="gone"
-                           android:layout_centerVertical="true"
-                           android:layout_alignParentRight="true"
-                           android:layout_height="30dp"/>
 
             </RelativeLayout>
 
@@ -55,6 +82,7 @@
 
         <com.yjhh.ppwbusiness.views.cui.ItemEntryView
                 android:id="@+id/iev_message"
+                android:layout_marginTop="10pt"
                 app:ievtextValue="消息中心"
                 app:ievunderline="true"
                 app:ievtextpadding="@dimen/sp_12"
@@ -69,6 +97,7 @@
                 app:ievtextValue="提醒设置"
                 app:ievunderline="true"
                 app:ievtextpadding="@dimen/sp_12"
+                android:visibility="gone"
                 app:ievbackground="@color/white"
                 app:ievtextColor="@color/all_9"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -81,6 +110,7 @@
                 app:ievtextValue="店员管理"
                 app:ievbackground="@color/white"
                 app:ievtextColor="@color/all_9"
+                android:visibility="gone"
                 app:ievtextpadding="@dimen/sp_12"
                 app:ievunderline="true"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -101,7 +131,7 @@
         <com.yjhh.ppwbusiness.views.cui.ItemEntryView
                 android:id="@+id/iev_account"
                 app:ievtextValue="当前账户"
-                app:ievunderline="true"
+
                 app:ievbackground="@color/white"
                 app:ievtextpadding="@dimen/sp_12"
                 app:ievtextColor="@color/all_9"
@@ -110,19 +140,14 @@
         <com.yjhh.ppwbusiness.views.cui.ItemEntryView
                 android:id="@+id/iev_updateVersion"
                 app:ievtextValue="版本更新"
+                android:layout_marginTop="10pt"
                 app:ievtextpadding="@dimen/sp_12"
+                app:ievdrwableleft="@drawable/icon_place"
                 app:ievbackground="@color/white"
-                app:ievunderline="true"
+
                 app:ievtextColor="@color/all_9"
                 android:layout_width="match_parent" android:layout_height="wrap_content"/>
 
-
-        <android.support.design.button.MaterialButton android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:layout_gravity="center"
-                  android:layout_marginTop="@dimen/sp_16"
-                  android:id="@+id/tv_loginOut"
-                  android:text="退出登录"
-        />
 
     </LinearLayout>
 

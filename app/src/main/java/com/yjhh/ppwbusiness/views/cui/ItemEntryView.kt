@@ -1,6 +1,7 @@
 package com.yjhh.ppwbusiness.views.cui
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 
 import android.support.v4.content.ContextCompat
 
@@ -66,6 +67,12 @@ class ItemEntryView @JvmOverloads constructor(
         )
 
 
+        val ievdrwableleft = type.getDrawable(
+            R.styleable.ItemEntryView_ievdrwableleft
+
+        )
+
+
         val ievunderline = type.getBoolean(
             R.styleable.ItemEntryView_ievunderline,
             false
@@ -86,7 +93,23 @@ class ItemEntryView @JvmOverloads constructor(
         tv_name.text = textValue
         tv_name.setTextColor(textColor)
         tv_name.textSize = textSize
-        tv_name.setPadding( paddingValue.toInt(), 0, 0, 0)
+        tv_name.setPadding(paddingValue.toInt(), 0, 0, 0)
+
+
+
+
+        tv_name.setCompoundDrawablesWithIntrinsicBounds(
+            ievdrwableleft,
+            null, null, null
+        )
+        tv_name.compoundDrawablePadding = 4
+
+
+
+//        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+//        textView2.setCompoundDrawables(drawable,null,null,null);
+
+
 
 
         val line = view.findViewById<View>(R.id.line)

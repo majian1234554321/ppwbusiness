@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import com.yjhh.ppwbusiness.R;
+import com.yjhh.ppwbusiness.utils.GlideImageLoader;
+import com.yjhh.ppwbusiness.utils.ImageLoaderUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +22,7 @@ public class NineGridView extends ViewGroup {
     public static final int MODE_FILL = 0;          //填充模式，类似于微信
     public static final int MODE_GRID = 1;          //网格模式，类似于QQ，4张图会 2X2布局
 
-    private static ImageLoader mImageLoader;        //全局的图片加载器(必须设置,否者不显示图片)
+    private static ImageLoader mImageLoader = new GlideImageLoader();        //全局的图片加载器(必须设置,否者不显示图片)
 
     private int singleImageSize = 250;              // 单张图片时的最大大小,单位dp
     private float singleImageRatio = 1.0f;          // 单张图片的宽高比(宽/高)
@@ -104,8 +106,9 @@ public class NineGridView extends ViewGroup {
             int right = left + gridWidth;
             int bottom = top + gridHeight;
             childrenView.layout(left, top, right, bottom);
-            
-            if (mImageLoader != null) {
+
+
+            if (mImageLoader !=null) {
                 mImageLoader.onDisplayImage(getContext(), childrenView, mImageInfo.get(i));
             }
         }
@@ -214,13 +217,15 @@ public class NineGridView extends ViewGroup {
         return maxImageSize;
     }
 
-    public static void setImageLoader(ImageLoader imageLoader) {
-        mImageLoader = imageLoader;
+/*    public  void setImageLoader(ImageLoader imageLoader) {
+
+
+        mImageLoader =  new GlideImageLoader();
     }
 
-    public static ImageLoader getImageLoader() {
+    public  ImageLoader getImageLoader() {
         return mImageLoader;
-    }
+    }*/
 
     public interface ImageLoader {
         /**

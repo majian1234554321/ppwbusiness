@@ -8,12 +8,13 @@
     <TextView android:layout_width="wrap_content"
               android:id="@+id/tv_name"
               android:textSize="@dimen/spi_14"
+              android:gravity="center_vertical"
               android:layout_centerVertical="true"
               android:layout_height="wrap_content"/>
     <View android:layout_width="match_parent"
           android:id="@+id/line"
 
-          android:background="@color/all_9"
+          android:background="@color/e6"
           android:layout_alignParentBottom="true"
           android:layout_height="1dp"/>
 

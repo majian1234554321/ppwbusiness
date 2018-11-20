@@ -12,9 +12,15 @@
             android:id="@+id/mTabLayout"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            tl:tl_tab_space_equal="true"
+            app:tl_tab_space_equal="true"
             android:layout_gravity="center"
-            android:background="#F6CE59"
+            app:tl_textSelectColor="#FFC8AF85"
+            app:tl_textUnselectColor="#FF333333"
+            app:tl_indicator_color="#FFC8AF85"
+            app:tl_indicator_width_equal_title="true"
+            android:background="@color/white"
+
+
             tl:tl_indicator_width="10dp"/>
 
     <android.support.v4.view.ViewPager

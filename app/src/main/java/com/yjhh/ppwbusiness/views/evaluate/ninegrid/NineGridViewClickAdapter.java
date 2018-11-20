@@ -30,7 +30,7 @@ public class NineGridViewClickAdapter extends NineGridViewAdapter {
 //        bundle.putInt(ImagePreviewActivity.CURRENT_ITEM, index);
 //        intent.putExtras(bundle);
 //        context.startActivity(intent);
-        Toast.makeText(context, "index"+index, Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "index" + index, Toast.LENGTH_SHORT).show();
     }
 
     /**

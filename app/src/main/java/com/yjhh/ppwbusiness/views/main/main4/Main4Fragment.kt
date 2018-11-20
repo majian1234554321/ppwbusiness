@@ -39,12 +39,7 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener {
                 }
             }
 
-            R.id.tv_loginOut -> {
-                loginOut()
-                //tv_name.text = "未登录"
-                startActivity(Intent(mActivity, LoginActivity::class.java))
-                mActivity.finish()
-            }
+
 
 
             R.id.iev_message -> {
@@ -80,6 +75,10 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener {
 
             R.id.iev_account -> {
 
+                (parentFragment as MainFragment).startBrotherFragment(
+                    AccountFragment()
+                )
+
             }
 
             R.id.iev_updateVersion -> {
@@ -96,7 +95,7 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener {
 
     override fun initView() {
         val arrayView = arrayOf(
-            profile_image, tv_name, tv_loginOut
+            profile_image, tv_name
             , iev_message, iev_notice, iev_Management, iev_about, iev_account, iev_updateVersion
         )
 

@@ -59,6 +59,9 @@
 
     <color name="all_6">#666666</color>
     <color name="c6">#C6C6C6</color>
+    <color name="f8">#F8f8f8</color>
+
+    <color name="e6">#e6e6e6</color>
 
     <color name="lib_pub_color_trans">#00000000</color>
     <color name="lib_pub_color_translucent">#9900040a</color>
