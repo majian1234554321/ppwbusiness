@@ -1,14 +1,17 @@
 package com.yjhh.ppwbusiness.base
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.text.TextUtils
 import android.widget.Toast
 import com.baidu.location.g.j.s
 import com.google.gson.Gson
+import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.utils.LogUtils
 import com.yjhh.ppwbusiness.utils.SharedPreferencesUtils
+import com.yjhh.ppwbusiness.views.cui.AlertDialogFactory
 import com.yjhh.ppwbusiness.views.login.LoginActivity
 
 import io.reactivex.Observer
@@ -20,19 +23,28 @@ import org.json.JSONObject
 abstract class ProcessObserver2(var context: Context) : Observer<ResponseBody> {
     private var showProgress: Boolean = true
 
+    private var dialog: AlertDialog? = null
+
+
+
 
     object constructor {
         val gson = Gson()
     }
 
 
-    // private var progressDialog: WaitProgressDialog = WaitProgressDialog(context)
-    override fun onSubscribe(d: Disposable) {
 
+    override fun onSubscribe(d: Disposable) {
+        if (showProgress){
+
+        }
     }
+
+
 
     constructor(context: Context, showProgress: Boolean) : this(context) {
         this.showProgress = showProgress
+        dialog =  AlertDialogFactory.createFactory(context).getLoadingDialog("加载中...")
     }
 
     override fun onNext(t: ResponseBody) {
@@ -48,8 +60,6 @@ abstract class ProcessObserver2(var context: Context) : Observer<ResponseBody> {
                 val jsonString = jsonValue.getString("data")
                 processValue(jsonString)
             } else {
-
-
 
 
                 if ("01001" == jsonValue.optString("code")) {
@@ -85,19 +95,20 @@ abstract class ProcessObserver2(var context: Context) : Observer<ResponseBody> {
     }
 
     override fun onComplete() {
-
+        dismissProgressDialog()
     }
 
 
     private fun showProgressDialog() {
         if (showProgress) {
+
         }
-        //   progressDialog.show()
+
     }
 
     private fun dismissProgressDialog() {
         if (showProgress) {
-
+            dialog?.dismiss()
         }
         // progressDialog.dismiss()
     }

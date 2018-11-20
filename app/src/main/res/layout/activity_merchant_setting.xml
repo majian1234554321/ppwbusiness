@@ -52,12 +52,13 @@
 
                 <com.yjhh.ppwbusiness.views.cui.toggle.ToggleButton
                         android:layout_width="60dp"
+                        android:id="@+id/tv_editOpen"
                         android:layout_height="28dp"
                         android:layout_alignParentRight="true"
                         app:lib_pub_tbtn_colorPadding="@color/lib_pub_color_hint"
                         app:lib_pub_tbtn_colorThumb="@color/lib_pub_color_white"
                         app:lib_pub_tbtn_colorTrackOff="@color/lib_pub_color_white"
-                        app:lib_pub_tbtn_colorTrackOpen="@color/lib_pub_color_main"
+                        app:lib_pub_tbtn_colorTrackOpen="@color/lib_pub_color_main_90"
                         app:lib_pub_tbtn_duration="250"
                         app:lib_pub_tbtn_padding="1.5dp"/>
 

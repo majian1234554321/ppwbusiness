@@ -71,6 +71,7 @@
 
             <com.yjhh.ppwbusiness.views.cui.ItemEntryView android:layout_width="match_parent"
                                                           android:paddingLeft="12pt"
+                                                          android:id="@+id/iev_reset"
                                                           app:ievtextValue="修改密码"
                                                           app:ievbackground="@color/white"
                                                           android:layout_height="wrap_content"/>

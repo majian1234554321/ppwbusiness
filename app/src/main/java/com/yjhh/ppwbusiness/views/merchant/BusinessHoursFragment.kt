@@ -2,6 +2,7 @@ package com.yjhh.ppwbusiness.views.merchant
 
 import android.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
+import android.util.ArrayMap
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -17,10 +18,15 @@ import com.bigkoo.pickerview.listener.OnOptionsSelectListener
 import com.bigkoo.pickerview.view.OptionsPickerView
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.BusinessHoursAdapter
+import com.yjhh.ppwbusiness.api.ApiServices
+import com.yjhh.ppwbusiness.api.ShopSetServices
 import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.bean.BusinessHoursBean
 import com.yjhh.ppwbusiness.views.cui.AlertDialogFactory
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.businesshoursfragment.*
+import org.json.JSONArray
 import java.lang.StringBuilder
 
 class BusinessHoursFragment : BaseFragment() {
@@ -76,10 +82,10 @@ class BusinessHoursFragment : BaseFragment() {
                         null,
                         "确定删除该时间段吗?",
                         "确定", "取消",
-                        AlertDialogFactory.OnClickListener { dlg, v ->
+                        { dlg, v ->
                             list.removeAt(position)
                             mAdapter?.notifyItemRemoved(position)
-                        }, AlertDialogFactory.OnClickListener { dlg, v -> })
+                        }, { dlg, v -> })
 
 
                 }
@@ -143,6 +149,18 @@ class BusinessHoursFragment : BaseFragment() {
 
 
                 (view as TextView).text = sb.toString()
+
+
+
+                val map = ArrayMap<String,String>()
+                map["begin"]="00:00"
+                map["begin"]="18:00"
+
+
+
+
+
+
 
 
             })

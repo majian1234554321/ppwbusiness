@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -16,8 +17,13 @@ import com.bigkoo.pickerview.listener.OnOptionsSelectListener
 import com.bigkoo.pickerview.view.OptionsPickerView
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.BusinessHoursAdapter
+import com.yjhh.ppwbusiness.api.ApiServices
+import com.yjhh.ppwbusiness.api.ShopSetServices
+import com.yjhh.ppwbusiness.bean.SETime
 import com.yjhh.ppwbusiness.bean.BusinessHoursBean
 import com.yjhh.ppwbusiness.views.cui.AlertDialogFactory
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_business_hours.*
 import java.lang.StringBuilder
 
@@ -91,8 +97,6 @@ class BusinessHoursActivity : AppCompatActivity() {
     }
 
 
-
-
     private fun getNoLinkData() {
         AValue.add("上午")
         AValue.add("下午")
@@ -148,6 +152,24 @@ class BusinessHoursActivity : AppCompatActivity() {
                 (view as TextView).text = sb.toString()
 
 
+                val aa = SETime("00:00", "18:00")
+
+                val s = arrayOf(aa)
+
+
+                ApiServices.getInstance().create(ShopSetServices::class.java)
+                    .editTimes(s)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                        {
+                            Log.i("BusinessHoursActivity", it.string())
+                        }, {
+                            Log.i("BusinessHoursActivity", it.toString())
+                        }
+                    )
+
+
             })
             .setLayoutRes(R.layout.pickerview_custom_options) { v ->
                 val tvSubmit = v.findViewById(R.id.tv_finish) as TextView
@@ -191,8 +213,6 @@ class BusinessHoursActivity : AppCompatActivity() {
 
 
     }
-
-
 
 
 }

@@ -13,7 +13,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <Button
+        <TextView
             android:id="@+id/btn_cancel"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -22,7 +22,7 @@
             android:gravity="center"
             android:text="取消"
             android:textAllCaps="false"
-            android:textColor="@color/lib_pub_color_main"
+            android:textColor="@color/lib_pub_color_main_90"
             android:textSize="@dimen/lib_pub_dimen_text_main"
             android:textStyle="normal" />
 
@@ -32,7 +32,7 @@
             android:layout_height="match_parent"
             android:background="@color/lib_pub_color_line" />
 
-        <Button
+        <TextView
             android:id="@+id/btn_ok"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -41,7 +41,7 @@
             android:gravity="center"
             android:text="确定"
             android:textAllCaps="false"
-            android:textColor="@color/lib_pub_color_main"
+            android:textColor="@color/lib_pub_color_main_90"
             android:textSize="@dimen/lib_pub_dimen_text_main"
             android:textStyle="normal" />
     </LinearLayout>

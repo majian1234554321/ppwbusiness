@@ -16,11 +16,15 @@ import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.FileProvider
+import android.util.ArrayMap
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.yjhh.ppwbusiness.R
+import com.yjhh.ppwbusiness.api.ApiServices
+import com.yjhh.ppwbusiness.api.ShopSetServices
 import com.yjhh.ppwbusiness.base.BaseActivity
+import com.yjhh.ppwbusiness.base.ProcessObserver2
 import com.yjhh.ppwbusiness.bean.LoginBean
 import com.yjhh.ppwbusiness.utils.Glide4Engine
 import com.yjhh.ppwbusiness.utils.RxBus
@@ -33,6 +37,8 @@ import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.internal.entity.CaptureStrategy
 import com.zhihu.matisse.listener.OnCheckedListener
 import com.zhihu.matisse.listener.OnSelectedListener
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_merchant_setting.*
 import java.io.File
 import java.io.IOException
@@ -42,69 +48,69 @@ import java.util.*
 class MerchantSettingActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
- /*           R.id.iev_logo -> {
-                AlertDialogFactory.createFactory(this).getBottomVerDialog(null,
-                    Arrays.asList<BottomVerSheetDialog.Bean>(
-                        BottomVerSheetDialog.Bean(
-                            "拍照",
-                            R.color.lib_pub_color_text_main,
-                            false
-                        ),
-                        BottomVerSheetDialog.Bean(
-                            "从手机相册选择",
-                            R.color.lib_pub_color_text_main,
-                            false
-                        )
-                    ),
-                    object : AbsSheetDialog.OnItemClickListener<BottomVerSheetDialog.Bean> {
-                        override fun onClick(dlg: Dialog, position: Int, item: BottomVerSheetDialog.Bean) {
+            /*           R.id.iev_logo -> {
+                           AlertDialogFactory.createFactory(this).getBottomVerDialog(null,
+                               Arrays.asList<BottomVerSheetDialog.Bean>(
+                                   BottomVerSheetDialog.Bean(
+                                       "拍照",
+                                       R.color.lib_pub_color_text_main,
+                                       false
+                                   ),
+                                   BottomVerSheetDialog.Bean(
+                                       "从手机相册选择",
+                                       R.color.lib_pub_color_text_main,
+                                       false
+                                   )
+                               ),
+                               object : AbsSheetDialog.OnItemClickListener<BottomVerSheetDialog.Bean> {
+                                   override fun onClick(dlg: Dialog, position: Int, item: BottomVerSheetDialog.Bean) {
 
-                            when (position) {
-                                0 -> {
-                                    showTakePicture()
-                                }
-                                else -> {
+                                       when (position) {
+                                           0 -> {
+                                               showTakePicture()
+                                           }
+                                           else -> {
 
 
-                                    Matisse.from(this@MerchantSettingActivity)
-                                        .choose(MimeType.ofAll(), false)
-                                        .countable(true)
-                                        .capture(true)
-                                        .captureStrategy(
-                                            CaptureStrategy(true, "com.yjhh.ppwcustomer.fileProvider")
-                                        )
-                                        .maxSelectable(1)
-                                        //.addFilter(GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
-                                        .gridExpectedSize(
-                                            resources.getDimensionPixelSize(R.dimen.grid_expected_size)
-                                        )
-                                        .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
-                                        .thumbnailScale(0.85f)
-                                        //                                            .imageEngine(new GlideEngine())  // for glide-V3
-                                        .imageEngine(Glide4Engine())    // for glide-V4
-                                        .setOnSelectedListener { uriList, pathList ->
-                                            // DO SOMETHING IMMEDIATELY HERE
-                                            Log.e("onSelected", "onSelected: pathList=$pathList")
-                                        }
-                                        .originalEnable(true)
-                                        .maxOriginalSize(10)
-                                        //.autoHideToolbarOnSingleTap(true)
-                                        .setOnCheckedListener { isChecked ->
-                                            // DO SOMETHING IMMEDIATELY HERE
-                                            Log.e("isChecked", "onCheck: isChecked=$isChecked")
-                                        }
-                                        .forResult(10085)
+                                               Matisse.from(this@MerchantSettingActivity)
+                                                   .choose(MimeType.ofAll(), false)
+                                                   .countable(true)
+                                                   .capture(true)
+                                                   .captureStrategy(
+                                                       CaptureStrategy(true, "com.yjhh.ppwcustomer.fileProvider")
+                                                   )
+                                                   .maxSelectable(1)
+                                                   //.addFilter(GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
+                                                   .gridExpectedSize(
+                                                       resources.getDimensionPixelSize(R.dimen.grid_expected_size)
+                                                   )
+                                                   .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+                                                   .thumbnailScale(0.85f)
+                                                   //                                            .imageEngine(new GlideEngine())  // for glide-V3
+                                                   .imageEngine(Glide4Engine())    // for glide-V4
+                                                   .setOnSelectedListener { uriList, pathList ->
+                                                       // DO SOMETHING IMMEDIATELY HERE
+                                                       Log.e("onSelected", "onSelected: pathList=$pathList")
+                                                   }
+                                                   .originalEnable(true)
+                                                   .maxOriginalSize(10)
+                                                   //.autoHideToolbarOnSingleTap(true)
+                                                   .setOnCheckedListener { isChecked ->
+                                                       // DO SOMETHING IMMEDIATELY HERE
+                                                       Log.e("isChecked", "onCheck: isChecked=$isChecked")
+                                                   }
+                                                   .forResult(10085)
 
-                                }
-                            }
+                                           }
+                                       }
 
-                        }
+                                   }
 
-                        override fun onCancel(dlg: Dialog) {
+                                   override fun onCancel(dlg: Dialog) {
 
-                        }
-                    })
-            }*/
+                                   }
+                               })
+                       }*/
 
             R.id.tv_setTime -> {
                 startActivityForResult(Intent(this, BusinessHoursActivity::class.java), 10086)
@@ -120,6 +126,42 @@ class MerchantSettingActivity : BaseActivity(), View.OnClickListener {
 
         iev_logo.setOnClickListener(this)
         tv_setTime.setOnClickListener(this)
+
+
+        tv_editOpen.setOnToggleListener {
+            val map = ArrayMap<String, String>()
+            map.clear()
+            if (it) {
+                Log.i("ProductAddFragment", it.toString())
+                map.put("status", "0")
+
+            } else {
+                Log.i("ProductAddFragment", it.toString())
+                map.put("status", "1")
+            }
+
+
+
+            ApiServices.getInstance()
+                .create(ShopSetServices::class.java)
+                .editOpen(map)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : ProcessObserver2(this@MerchantSettingActivity,true) {
+                    override fun onFault(message: String) {
+                        Log.i("ProductAddFragment", it.toString())
+                        Toast.makeText(this@MerchantSettingActivity, "设置店铺状态失败", Toast.LENGTH_LONG).show()
+                    }
+
+                    override fun processValue(response: String?) {
+                        Toast.makeText(this@MerchantSettingActivity, if (it) "开始营业" else "打烊", Toast.LENGTH_LONG).show()
+                    }
+
+                })
+
+
+        }
+
     }
 
 

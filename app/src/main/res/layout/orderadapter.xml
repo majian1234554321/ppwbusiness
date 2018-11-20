@@ -51,6 +51,7 @@
               android:layout_below="@+id/tv_name"
               android:layout_toRightOf="@+id/iv_image"
               android:gravity="center"
+              android:id="@+id/tv_totalMoeny"
               android:layout_above="@+id/tv_price"
               tools:text="总价         ￥0.99"
     />

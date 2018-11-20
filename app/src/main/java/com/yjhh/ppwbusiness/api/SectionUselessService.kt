@@ -23,26 +23,25 @@ interface SectionUselessService {
     fun usercollect(@FieldMap map: Map<String, String>): Observable<ResponseBody>// 我的收藏
 
 
-
     @FormUrlEncoded
     @POST("useraccount/logs")
     fun useraccount(@FieldMap map: Map<String, String>): Observable<ResponseBody>// 资金记录/积分记录
-
 
 
     @POST("useraccount")
     fun useraccountindex(): Observable<ResponseBody>// 我的余额/积分
 
 
-
     @POST("about")
     fun about(): Observable<ResponseBody>// 我的余额/积分
-
-
 
 
     @FormUrlEncoded
     @POST("about/feedback")
     fun feedback(@FieldMap map: Map<String, String>): Observable<ResponseBody>// 资金记录/积分记录
+
+
+    @POST("shopAdmin/currInfo")
+    fun currInfo(): Observable<ResponseBody>// 资金记录/积分记录
 
 }

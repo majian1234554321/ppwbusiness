@@ -1,154 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
-              android:layout_width="match_parent" android:layout_height="match_parent">
-
-    <com.yjhh.ppwbusiness.views.cui.TitleBarView android:layout_width="match_parent"
-                                                 app:textValue="新建商品"
-                                                 android:id="@+id/tbv_title"
-                                                 app:textColor="@color/white"
-                                                 android:layout_height="wrap_content"/>
-
-
-    <RelativeLayout android:layout_width="match_parent" android:layout_height="@dimen/dp_40">
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:id="@+id/tv_name"
-                  android:drawableLeft="@drawable/iv_x"
-                  android:layout_centerVertical="true"
-                  android:text="商品名称:"
-                  android:layout_alignParentStart="true"/>
-        <EditText android:layout_width="match_parent"
-                  android:layout_toRightOf="@+id/tv_name"
-                  android:background="@null"
-                  android:layout_marginLeft="@dimen/sp_12"
-                  android:hint="请输入商品名称"
-                  android:layout_centerVertical="true"
-                  android:layout_height="wrap_content"/>
-
-        <View android:layout_width="match_parent" android:layout_height="1dp"
-              android:layout_alignParentBottom="true"
-              android:background="@color/all_e"
-        />
-
-    </RelativeLayout>
-
-    <TextView android:layout_width="match_parent" android:layout_height="36dp"
-              android:layout_centerVertical="true"
-              android:gravity="center_vertical"
-
-              android:drawableLeft="@drawable/iv_x"
-              android:background="@color/all_e"
-              android:text="商品主图（注：默认第一张为主图，最多添加3张））"
-    />
-
-
-    <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
-                                            android:id="@+id/recyclerView"
-                                            android:layout_height="wrap_content"/>
-
-
-    <com.yjhh.ppwbusiness.views.cui.ItemEntryView android:layout_width="match_parent"
-                                                  app:ievtextValue="商品分类"
-                                                  android:paddingLeft="24dp"
-                                                  android:visibility="gone"
-                                                  app:ievbackground="@color/white"
-                                                  android:layout_height="wrap_content"/>
-
-    <RelativeLayout android:layout_width="match_parent"
-                    android:orientation="horizontal"
-
-                    android:layout_height="40dp">
-
-
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="match_parent"
-                  android:layout_centerVertical="true"
-                  android:gravity="center"
-                  android:drawableLeft="@drawable/iv_x"
-
-                  android:id="@+id/tv_price"
-                  android:text=" 商品价格"
-        />
-
-
-        <EditText android:layout_width="match_parent" android:layout_height="match_parent"
-                  android:background="@null"
-                  android:layout_centerVertical="true"
-                  android:layout_marginLeft="@dimen/spi_12"
-                  android:layout_toRightOf="@+id/tv_price"
-                  android:layout_gravity="center_vertical"
-                  android:textSize="@dimen/sp_14"
-                  android:hint="请输入商品价格：99.99"
-        />
-
-    </RelativeLayout>
-
-    <View android:layout_width="match_parent" android:layout_height="1dp"
-          android:background="@color/c6"
-    />
-
-
-    <RelativeLayout android:layout_width="match_parent" android:layout_height="40dp">
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:layout_centerVertical="true"
-                  android:paddingLeft="24dp"
-                  android:text="上架"
-        />
-
-        <com.yjhh.ppwbusiness.views.cui.toggle.ToggleButton
-                android:layout_width="60dp"
-                android:layout_centerVertical="true"
-                android:layout_height="28dp"
-                android:layout_alignParentRight="true"
-                app:lib_pub_tbtn_colorPadding="@color/lib_pub_color_hint"
-                app:lib_pub_tbtn_colorThumb="@color/lib_pub_color_white"
-                app:lib_pub_tbtn_colorTrackOff="@color/lib_pub_color_white"
-                app:lib_pub_tbtn_colorTrackOpen="@color/lib_pub_color_main"
-                app:lib_pub_tbtn_duration="250"
-                app:lib_pub_tbtn_padding="1.5dp"/>
-
-    </RelativeLayout>
-
-
-    <EditText android:layout_width="match_parent"
-              android:gravity="left|top"
-              android:hint="说些什么吧"
-              android:layout_marginTop="@dimen/spi_12"
-              android:layout_marginLeft="24dp"
-              android:layout_marginRight="24dp"
-              android:layout_marginBottom="24dp"
-              android:background="@drawable/stroke_frame"
-              android:layout_height="150dp"/>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
+                android:layout_width="match_parent" android:layout_height="match_parent">
 
 
     <LinearLayout android:layout_width="match_parent"
-                  android:orientation="horizontal"
+                  android:orientation="vertical"
                   android:layout_height="wrap_content">
+        <com.yjhh.ppwbusiness.views.cui.TitleBarView android:layout_width="match_parent"
+                                                     app:textValue="新建商品"
+                                                     android:id="@+id/tbv_title"
+                                                     app:textColor="@color/white"
+                                                     android:layout_height="wrap_content"/>
+
+
+        <RelativeLayout android:layout_width="match_parent" android:layout_height="@dimen/dp_40">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:id="@+id/tv_name"
+                      android:drawableLeft="@drawable/iv_x"
+                      android:layout_centerVertical="true"
+                      android:text="商品名称:"
+                      android:layout_alignParentStart="true"/>
+            <EditText android:layout_width="match_parent"
+                      android:layout_toRightOf="@+id/tv_name"
+                      android:background="@null"
+                      android:id="@+id/et_name"
+                      android:layout_marginLeft="@dimen/sp_12"
+                      android:hint="请输入商品名称"
+                      android:layout_centerVertical="true"
+                      android:layout_height="wrap_content"/>
+
+            <View android:layout_width="match_parent" android:layout_height="1dp"
+                  android:layout_alignParentBottom="true"
+                  android:background="@color/all_e"
+            />
+
+        </RelativeLayout>
+
+        <TextView android:layout_width="match_parent" android:layout_height="36dp"
+                  android:layout_centerVertical="true"
+                  android:gravity="center_vertical"
+
+                  android:drawableLeft="@drawable/iv_x"
+                  android:background="@color/all_e"
+                  android:text="商品主图（注：默认第一张为主图，最多添加3张））"
+        />
+
+
+        <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
+                                                android:id="@+id/recyclerView"
+                                                android:layout_height="wrap_content"/>
+
+
+        <com.yjhh.ppwbusiness.views.cui.ItemEntryView android:layout_width="match_parent"
+                                                      app:ievtextValue="商品分类"
+                                                      android:paddingLeft="24dp"
+                                                      android:visibility="gone"
+                                                      app:ievbackground="@color/white"
+                                                      android:layout_height="wrap_content"/>
+
+        <RelativeLayout android:layout_width="match_parent"
+                        android:orientation="horizontal"
+
+                        android:layout_height="40dp">
+
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="match_parent"
+                      android:layout_centerVertical="true"
+                      android:gravity="center"
+                      android:drawableLeft="@drawable/iv_x"
+
+                      android:id="@+id/tv_price"
+                      android:text=" 商品价格"
+            />
+
+
+            <EditText android:layout_width="match_parent" android:layout_height="match_parent"
+                      android:background="@null"
+                      android:id="@+id/et_price"
+                      android:layout_centerVertical="true"
+                      android:layout_marginLeft="@dimen/spi_12"
+                      android:layout_toRightOf="@+id/tv_price"
+                      android:layout_gravity="center_vertical"
+                      android:textSize="@dimen/sp_14"
+                      android:hint="请输入商品价格：99.99"
+            />
+
+        </RelativeLayout>
+
+        <View android:layout_width="match_parent" android:layout_height="1dp"
+              android:background="@color/c6"
+        />
+
+
+        <RelativeLayout android:layout_width="match_parent"
+                        android:layout_marginRight="24dp"
+                        android:layout_height="40dp">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:layout_centerVertical="true"
+                      android:paddingLeft="24dp"
+                      android:text="上架"
+            />
+
+            <com.yjhh.ppwbusiness.views.cui.toggle.ToggleButton
+                    android:layout_width="60dp"
+                    android:layout_centerVertical="true"
+                    android:layout_height="28dp"
+                    android:layout_alignParentRight="true"
+                    app:lib_pub_tbtn_colorPadding="@color/lib_pub_color_hint"
+                    app:lib_pub_tbtn_colorThumb="@color/lib_pub_color_white"
+                    app:lib_pub_tbtn_colorTrackOff="@color/lib_pub_color_white"
+                    app:lib_pub_tbtn_colorTrackOpen="@color/lib_pub_color_main_90"
+                    app:lib_pub_tbtn_duration="250"
+
+                    app:lib_pub_tbtn_padding="1.5dp"/>
+
+        </RelativeLayout>
+
+
+        <EditText android:layout_width="match_parent"
+                  android:gravity="left|top"
+                  android:hint="说些什么吧"
+                  android:layout_marginTop="@dimen/spi_12"
+                  android:layout_marginLeft="24dp"
+                  android:id="@+id/et_desc"
+                  android:layout_marginRight="24dp"
+                  android:layout_marginBottom="24dp"
+                  android:background="@drawable/stroke_frame"
+                  android:layout_height="150dp"/>
+
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="horizontal"
+                      android:layout_height="wrap_content">
+
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:layout_centerVertical="true"
+                      android:text=" 商品排序"
+            />
+
+
+            <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:background="@null"
+                      android:hint="数字越大展示越靠前"
+            />
+
+        </LinearLayout>
+
+        <View android:layout_width="match_parent" android:layout_height="1dp"
+              android:background="@color/c6"
+        />
 
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                   android:layout_centerVertical="true"
-                  android:text=" 商品排序"
-        />
-
-
-        <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
-                  android:background="@null"
-                  android:hint="数字越大展示越靠前"
+                  android:text="  注：序号≥0"
         />
 
     </LinearLayout>
 
-    <View android:layout_width="match_parent" android:layout_height="1dp"
-          android:background="@color/c6"
+
+    <Button android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:id="@+id/bt_add"
+            android:layout_alignParentBottom="true"
+            android:text="确认新建"
     />
 
-
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:layout_centerVertical="true"
-              android:text="  注：序号≥0"
-    />
-
-
-</LinearLayout>
+</RelativeLayout>

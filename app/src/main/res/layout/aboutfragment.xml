@@ -20,6 +20,10 @@
 
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                   android:gravity="center"
+                  android:layout_marginTop="27.5pt"
+                  android:drawablePadding="7pt"
+                  android:textSize="17pt"
+                  android:layout_marginBottom="5pt"
                   android:drawableTop="@mipmap/ic_launcher_round"
                   android:text="拍拍味"
         />
@@ -65,16 +69,25 @@
                                                       app:ievtextColor="@color/all_9"
                                                       app:ievbackground="@color/white"
                                                       app:ievtextValue="协议中心"
+                                                      app:ievunderline="true"
                                                       android:layout_height="wrap_content"/>
+        <com.yjhh.ppwbusiness.views.cui.ItemEntryView android:layout_width="match_parent"
+                                                      android:id="@+id/iev_5"
+                                                      app:ievtextpadding="@dimen/sp_12"
+                                                      app:ievtextColor="@color/all_9"
+                                                      app:ievbackground="@color/white"
 
+                                                      app:ievtextValue="服务热线"
+                                                      android:layout_height="wrap_content"/>
     </LinearLayout>
 
 
     <TextView android:layout_width="match_parent"
               android:id="@+id/tv_servicePhone"
               android:layout_alignParentBottom="true"
-              android:text="服务热线:"
+              android:text="湖北永建合宏科技有限公司\nCopyright© Tencent. AllRights Reserved"
               android:gravity="center"
+              android:lineSpacingExtra="4dp"
               android:layout_marginBottom="@dimen/sp_12"
               android:textColor="@color/all_9"
               android:layout_height="wrap_content"/>

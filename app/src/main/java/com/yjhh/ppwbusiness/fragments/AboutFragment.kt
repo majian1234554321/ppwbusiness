@@ -15,14 +15,14 @@ import org.json.JSONObject
 class AboutFragment : BaseFragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
-             R.id.iev_1-> {
+            R.id.iev_1 -> {
             }
-            R.id.iev_2-> {
+            R.id.iev_2 -> {
             }
-            R.id.iev_3-> {
+            R.id.iev_3 -> {
                 start(A_FeedBackFragment())
             }
-            R.id.iev_4-> {
+            R.id.iev_4 -> {
             }
             else -> {
             }
@@ -34,9 +34,9 @@ class AboutFragment : BaseFragment(), View.OnClickListener {
 
     override fun initView() {
 
-        arrayOf(iev_1,iev_2,iev_3,iev_4).forEach {
-           it.setOnClickListener(this)
-       }
+        arrayOf(iev_1, iev_2, iev_3, iev_4).forEach {
+            it.setOnClickListener(this)
+        }
 
         ApiServices.getInstance().create(SectionUselessService::class.java)
             .about()
@@ -52,7 +52,7 @@ class AboutFragment : BaseFragment(), View.OnClickListener {
 
                     tv_introduce.text = jsonObject.optString("content")
 
-                    tv_servicePhone.text = "服务热线: ${jsonObject.optString("tel")}"
+                    iev_5.setTextContent(jsonObject.optString("tel"))
                 }
 
                 override fun onFault(message: String) {

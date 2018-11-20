@@ -22,10 +22,10 @@ public class MainFragment extends SupportFragment {
 
     public static final int FIRST = 0;
     public static final int SECOND = 1;
-    public static final int THIRD = 2;
-    public static final int FOURTH = 3;
+   // public static final int THIRD = 2;
+    public static final int FOURTH = 2;
 
-    private SupportFragment[] mFragments = new SupportFragment[4];
+    private SupportFragment[] mFragments = new SupportFragment[3];
 
     private BottomBar mBottomBar;
 
@@ -54,13 +54,13 @@ public class MainFragment extends SupportFragment {
         if (firstFragment == null) {
             mFragments[FIRST] = new Main1Fragment();
             mFragments[SECOND] = new Main2Fragment();
-            mFragments[THIRD] = new Main3Fragment();
+           // mFragments[THIRD] = new Main3Fragment();
             mFragments[FOURTH] = new Main4Fragment();
 
             loadMultipleRootFragment(R.id.fl_tab_container, FIRST,
                     mFragments[FIRST],
                     mFragments[SECOND],
-                    mFragments[THIRD],
+                  //  mFragments[THIRD],
                     mFragments[FOURTH]);
         } else {
             // 这里库已经做了Fragment恢复,所有不需要额外的处理了, 不会出现重叠问题
@@ -68,7 +68,7 @@ public class MainFragment extends SupportFragment {
             // 这里我们需要拿到mFragments的引用
             mFragments[FIRST] = firstFragment;
             mFragments[SECOND] = findChildFragment(Main2Fragment.class);
-            mFragments[THIRD] = findChildFragment(Main3Fragment.class);
+          //  mFragments[THIRD] = findChildFragment(Main3Fragment.class);
             mFragments[FOURTH] = findChildFragment(Main4Fragment.class);
         }
     }
@@ -79,7 +79,7 @@ public class MainFragment extends SupportFragment {
         mBottomBar
                 .addItem(new BottomBarTab(_mActivity, R.drawable.tab_contact_unselect, "A"))
                 .addItem(new BottomBarTab(_mActivity, R.drawable.tab_home_select, "B"))
-                .addItem(new BottomBarTab(_mActivity, R.drawable.tab_speech_select, "C"))
+               // .addItem(new BottomBarTab(_mActivity, R.drawable.tab_speech_select, "C"))
                 .addItem(new BottomBarTab(_mActivity, R.drawable.tab_speech_select, "D"));
 
         // 模拟未读消息

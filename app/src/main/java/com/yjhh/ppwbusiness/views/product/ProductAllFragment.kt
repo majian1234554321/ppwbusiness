@@ -69,7 +69,7 @@ class ProductAllFragment : BaseFragment(), View.OnClickListener {
     var startindex = 0
     val pageSize = 10
 
-    var share = ""
+
     var list = ArrayList<String>()
 
     lateinit var mAdapter: ProductAdapter
@@ -94,6 +94,7 @@ class ProductAllFragment : BaseFragment(), View.OnClickListener {
 
         mRecyclerView.addItemDecoration(SpaceItemDecoration(30))
         mAdapter = ProductAdapter(list)
+
         // sectionCouponPresent = SectionUselessPresent(context, this)
         mRecyclerView.layoutManager = LinearLayoutManager(context)
         swipeLayout.setRefreshHeader(ClassicsHeader(context))
@@ -138,14 +139,19 @@ class ProductAllFragment : BaseFragment(), View.OnClickListener {
 
 
     private fun initAdapter() {
+        mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
+
+        mRecyclerView.adapter = mAdapter
+
+
 
         mAdapter.setOnLoadMoreListener({
             loadMore()
         }, mRecyclerView)
-        mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
 
 
-        mRecyclerView.adapter = mAdapter
+        mAdapter.disableLoadMoreIfNotFullPage(mRecyclerView)
+
 
 
     }

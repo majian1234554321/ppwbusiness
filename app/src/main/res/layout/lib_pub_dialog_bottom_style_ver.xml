@@ -27,6 +27,6 @@
         android:background="@drawable/lib_pub_corner_dialog"
         android:gravity="center"
         android:text="取消"
-        android:textColor="@color/lib_pub_color_main"
+        android:textColor="@color/lib_pub_color_main_90"
         android:textSize="@dimen/lib_pub_dimen_text_main" />
 </LinearLayout>

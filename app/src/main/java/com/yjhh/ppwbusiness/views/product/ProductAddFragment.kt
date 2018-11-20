@@ -20,11 +20,19 @@ import android.support.v7.widget.GridLayoutManager
 import android.util.Log
 import android.widget.Toast
 import com.yjhh.ppwbusiness.R
+
 import com.yjhh.ppwbusiness.adapter.ProductAdd
+import com.yjhh.ppwbusiness.api.ApiServices
+import com.yjhh.ppwbusiness.api.ProductService
 import com.yjhh.ppwbusiness.base.BaseActivity
 import com.yjhh.ppwbusiness.base.BaseActivity.requestRuntimePermission
 import com.yjhh.ppwbusiness.base.BaseFragment
+import com.yjhh.ppwbusiness.base.ProcessObserver2
+import com.yjhh.ppwbusiness.bean.SETime
+import com.yjhh.ppwbusiness.bean.SubmitProductInfoModel
+import com.yjhh.ppwbusiness.fragments.PhotoFragment
 import com.yjhh.ppwbusiness.interfaces.PermissionListener
+import com.yjhh.ppwbusiness.ipresent.CommonPresent
 import com.yjhh.ppwbusiness.utils.Glide4Engine
 import com.yjhh.ppwbusiness.utils.PhotoUtils
 import com.yjhh.ppwbusiness.views.cui.AbsSheetDialog
@@ -34,21 +42,33 @@ import com.yjhh.ppwbusiness.views.cui.GridRecyclerItemDecoration
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.internal.entity.CaptureStrategy
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.productadapter.*
 import kotlinx.android.synthetic.main.productadd.*
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 @SuppressLint("ValidFragment")
+
+
 class ProductAddFragment(var string: String) : BaseFragment() {
     override fun getLayoutRes(): Int = R.layout.productadd
 
+    val imageId = ArrayList<String>()
 
     var mAdapter: ProductAdd? = null
     val lists = ArrayList<String>()
+
+    var present: CommonPresent? = null
+
     override fun initView() {
 
+
+        present = CommonPresent(mActivity)
 
         if ("ADD" == string) {
             tbv_title.setTitle("新建商品")
@@ -59,9 +79,8 @@ class ProductAddFragment(var string: String) : BaseFragment() {
 
         recyclerView.layoutManager = GridLayoutManager(mActivity, 3)
 
-        lists.add("EMPTY3")
-        lists.add("EMPTY2")
-        lists.add("EMPTY1")
+        lists.add("EMPTY")
+
         mAdapter = ProductAdd(lists)
         recyclerView.adapter = mAdapter
 
@@ -77,14 +96,17 @@ class ProductAddFragment(var string: String) : BaseFragment() {
                 photo()
 
             } else {
-
+                start(PhotoFragment(lists[position]))
             }
         }
 
 
 
+
+
+
         mAdapter?.setOnItemChildClickListener { adapter, view, position ->
-            Toast.makeText(mActivity, "" + "权限" + position + "申请失败", Toast.LENGTH_SHORT).show()
+
 
             lists.removeAt(position)
             if (lists.size == 0) {
@@ -97,6 +119,59 @@ class ProductAddFragment(var string: String) : BaseFragment() {
 
             mAdapter?.setNewData(lists)
 
+        }
+
+
+
+
+        bt_add.setOnClickListener {
+
+
+            val aa = SubmitProductInfoModel()
+            aa.name = et_name.text.toString()
+            aa.status = "0"
+            aa.describe = et_desc.text.toString()
+            aa.price = et_price.text.toString()
+
+
+            val s = arrayOf(aa)
+
+
+
+
+            ApiServices.getInstance()
+                .create(ProductService::class.java)
+                .editProducts(s)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : ProcessObserver2(mActivity) {
+                    override fun processValue(response: String?) {
+                        Log.i("ProductAddFragment", response)
+
+                        AlertDialogFactory.createFactory(mActivity).getAlertDialog(
+                            "添加商品成功",
+                            "继续添加?",
+                            "确定", "取消",
+                            { dlg, v ->
+
+                                et_name.text.clear()
+                                et_price.text.clear()
+                                et_desc.text.clear()
+                                lists.clear()
+                                lists.add("EMPTY")
+                                mAdapter?.notifyDataSetChanged()
+                            }, { dlg, v ->
+                                mActivity.onBackPressed()
+                            })
+
+
+                    }
+
+                    override fun onFault(message: String) {
+                        Log.i("ProductAddFragment", message)
+                    }
+
+                })
 
         }
 
@@ -205,13 +280,18 @@ class ProductAddFragment(var string: String) : BaseFragment() {
             val file = File(list[0])
 
 
+
+
             lists.add(0, file.path)
 
             while (lists.size > 3) {
                 lists.removeAt(lists.lastIndex)
             }
 
+
             mAdapter?.setNewData(lists)
+
+            present?.UpLoadFile(file)
 
 
         }
@@ -234,10 +314,8 @@ class ProductAddFragment(var string: String) : BaseFragment() {
             }
 
             mAdapter?.setNewData(lists)
-            /* val dis = present?.setAvatarUpLoadJoin(file)
-             if (dis != null) {
-                 compositeDisposable.add(dis)
-             }*/
+            present?.UpLoadFile(file)
+
         }
 
 

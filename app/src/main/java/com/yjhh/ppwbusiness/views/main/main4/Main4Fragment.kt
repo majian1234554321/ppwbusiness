@@ -3,19 +3,27 @@ package com.yjhh.ppwbusiness.views.main.main4
 
 import android.content.Intent
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import com.alibaba.android.arouter.launcher.ARouter
 import com.baidu.mapsdkplatform.comapi.map.MessageCenter
+import com.google.gson.JsonObject
 import com.yjhh.ppwbusiness.R
+import com.yjhh.ppwbusiness.api.ApiServices
+import com.yjhh.ppwbusiness.api.SectionUselessService
 import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.base.BaseMainFragment
+import com.yjhh.ppwbusiness.base.ProcessObserver2
 import com.yjhh.ppwbusiness.bean.LoginBean
 import com.yjhh.ppwbusiness.fragments.*
 import com.yjhh.ppwbusiness.utils.LogUtils
 import com.yjhh.ppwbusiness.utils.RxBus
 import com.yjhh.ppwbusiness.utils.SharedPreferencesUtils
 import com.yjhh.ppwbusiness.views.login.LoginActivity
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.main4fragment.*
+import org.json.JSONObject
 
 
 class Main4Fragment : BaseMainFragment(), View.OnClickListener {
@@ -124,6 +132,27 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener {
             }
         }
 
+
+
+        /*******************************获取当前账户*************************************/
+
+        ApiServices.getInstance()
+            .create(SectionUselessService::class.java)
+            .currInfo()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : ProcessObserver2(mActivity) {
+                override fun processValue(response: String?) {
+                    Log.i("AccountFragment", response)
+
+                    iev_account.setTextContent(JSONObject(response).optString("roleName"))
+                }
+
+                override fun onFault(message: String) {
+                    Log.i("AccountFragment", message)
+                }
+
+            })
 
     }
 

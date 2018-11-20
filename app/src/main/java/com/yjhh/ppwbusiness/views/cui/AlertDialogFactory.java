@@ -70,10 +70,10 @@ public class AlertDialogFactory {
         tv_content.setVisibility(!TextUtils.isEmpty(content) ? View.VISIBLE : View.GONE);
         tv_content.setText(!TextUtils.isEmpty(content) ? content : "");
 
-        Button btnOk = (Button) dlg.findViewById(R.id.btn_ok);
+        TextView btnOk =  dlg.findViewById(R.id.btn_ok);
         btnOk.setText(!TextUtils.isEmpty(btnOkText) ? btnOkText : "确定");
 
-        Button btnCancel = (Button) dlg.findViewById(R.id.btn_cancel);
+        TextView btnCancel =  dlg.findViewById(R.id.btn_cancel);
         btnCancel.setText(!TextUtils.isEmpty(btnCancelText) ? btnCancelText : "");
         btnCancel.setVisibility(!TextUtils.isEmpty(btnCancelText) ? View.VISIBLE : View.GONE);
 
