@@ -10,6 +10,7 @@ import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.provider.Settings
@@ -17,6 +18,7 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.FileProvider
 import android.support.v7.widget.GridLayoutManager
+import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
 import com.yjhh.ppwbusiness.R
@@ -28,11 +30,13 @@ import com.yjhh.ppwbusiness.base.BaseActivity
 import com.yjhh.ppwbusiness.base.BaseActivity.requestRuntimePermission
 import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.base.ProcessObserver2
+import com.yjhh.ppwbusiness.bean.ProductBean
 import com.yjhh.ppwbusiness.bean.SETime
 import com.yjhh.ppwbusiness.bean.SubmitProductInfoModel
 import com.yjhh.ppwbusiness.fragments.PhotoFragment
 import com.yjhh.ppwbusiness.interfaces.PermissionListener
 import com.yjhh.ppwbusiness.ipresent.CommonPresent
+import com.yjhh.ppwbusiness.iview.CommonView
 import com.yjhh.ppwbusiness.utils.Glide4Engine
 import com.yjhh.ppwbusiness.utils.PhotoUtils
 import com.yjhh.ppwbusiness.views.cui.AbsSheetDialog
@@ -52,13 +56,22 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-@SuppressLint("ValidFragment")
 
+class ProductAddFragment : BaseFragment(), CommonView {
+    override fun onFault(errorMsg: String?) {
+        //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
-class ProductAddFragment(var string: String) : BaseFragment() {
+    override fun onSuccess(value: String?) {
+        //  TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun getLayoutRes(): Int = R.layout.productadd
 
     val imageId = ArrayList<String>()
+
+
+    var toggleStatus = true
 
     var mAdapter: ProductAdd? = null
     val lists = ArrayList<String>()
@@ -68,12 +81,26 @@ class ProductAddFragment(var string: String) : BaseFragment() {
     override fun initView() {
 
 
-        present = CommonPresent(mActivity)
+        val bundle = arguments
 
-        if ("ADD" == string) {
+        val objectValue = bundle?.getSerializable("objectValue") as ProductBean.ItemsBean
+        val type = bundle?.getString("type")
+
+
+
+
+        present = CommonPresent(mActivity, this)
+
+        if ("ADD" == type) {
+            toggle.isOpen = true
+            toggleStatus = true
             tbv_title.setTitle("新建商品")
         } else {
             tbv_title.setTitle("编辑商品")
+            et_name.setText(objectValue.name)
+            et_price.setText(objectValue.price.toString())
+            et_desc.setText(objectValue.describe)
+
         }
 
 
@@ -85,7 +112,7 @@ class ProductAddFragment(var string: String) : BaseFragment() {
         recyclerView.adapter = mAdapter
 
 
-
+        toggle.setOnToggleListener { }
 
         recyclerView.addItemDecoration(GridRecyclerItemDecoration(40))
 
@@ -127,51 +154,59 @@ class ProductAddFragment(var string: String) : BaseFragment() {
         bt_add.setOnClickListener {
 
 
-            val aa = SubmitProductInfoModel()
-            aa.name = et_name.text.toString()
-            aa.status = "0"
-            aa.describe = et_desc.text.toString()
-            aa.price = et_price.text.toString()
+            if (!TextUtils.isEmpty(et_name.text.toString()) &&
+                !TextUtils.isEmpty(et_price.text.toString())
+            ) {
+                val aa = SubmitProductInfoModel()
+                aa.name = et_name.text.toString()
+                aa.status = "0"
+                aa.describe = et_desc.text.toString()
+                aa.price = et_price.text.toString()
 
 
-            val s = arrayOf(aa)
+                val s = arrayOf(aa)
+                ApiServices.getInstance()
+                    .create(ProductService::class.java)
+                    .editProducts(s)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(object : ProcessObserver2(mActivity) {
+                        override fun processValue(response: String?) {
+                            Log.i("ProductAddFragment", response)
 
 
+                            if ("ADD" == type) {
+                                AlertDialogFactory.createFactory(mActivity).getAlertDialog(
+                                    "添加商品成功",
+                                    "继续添加?",
+                                    "确定", "取消",
+                                    { dlg, v ->
 
-
-            ApiServices.getInstance()
-                .create(ProductService::class.java)
-                .editProducts(s)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : ProcessObserver2(mActivity) {
-                    override fun processValue(response: String?) {
-                        Log.i("ProductAddFragment", response)
-
-                        AlertDialogFactory.createFactory(mActivity).getAlertDialog(
-                            "添加商品成功",
-                            "继续添加?",
-                            "确定", "取消",
-                            { dlg, v ->
-
-                                et_name.text.clear()
-                                et_price.text.clear()
-                                et_desc.text.clear()
-                                lists.clear()
-                                lists.add("EMPTY")
-                                mAdapter?.notifyDataSetChanged()
-                            }, { dlg, v ->
+                                        et_name.text.clear()
+                                        et_price.text.clear()
+                                        et_desc.text.clear()
+                                        lists.clear()
+                                        lists.add("EMPTY")
+                                        mAdapter?.notifyDataSetChanged()
+                                    }, { dlg, v ->
+                                        mActivity.onBackPressed()
+                                    })
+                            } else {
+                                Toast.makeText(mActivity, "商品修改成功", Toast.LENGTH_SHORT).show()
                                 mActivity.onBackPressed()
-                            })
+                            }
 
+                        }
 
-                    }
+                        override fun onFault(message: String) {
+                            Log.i("ProductAddFragment", message)
+                        }
 
-                    override fun onFault(message: String) {
-                        Log.i("ProductAddFragment", message)
-                    }
+                    })
+            } else {
+                Toast.makeText(mActivity, "商品名称和价格不能为空", Toast.LENGTH_SHORT).show()
+            }
 
-                })
 
         }
 
@@ -232,16 +267,13 @@ class ProductAddFragment(var string: String) : BaseFragment() {
 
             requestRuntimePermission(permissions, object : PermissionListener {
                 override fun onGranted() {
-
                     if ("photo" == string) {
                         mPublicPhotoPath = PhotoUtils.takePhote(this@ProductAddFragment, mActivity, 10084)
                     } else {
                         PhotoUtils.selectPhoto(this@ProductAddFragment, 10085)
                     }
 
-
                     Log.i("requestRuntime", "onGranted")
-
                 }
 
                 override fun onDenied(deniedPermission: List<String>) {
@@ -316,6 +348,21 @@ class ProductAddFragment(var string: String) : BaseFragment() {
             mAdapter?.setNewData(lists)
             present?.UpLoadFile(file)
 
+        }
+
+
+    }
+
+
+    companion object {
+
+        fun newInstance(objectValue: ProductBean.ItemsBean, type: String): ProductAddFragment {
+            val fragment = ProductAddFragment()
+            val bundle = Bundle()
+            bundle.putString("type", type)
+            bundle.putSerializable("objectValue", objectValue)
+            fragment.arguments = bundle
+            return fragment
         }
 
 

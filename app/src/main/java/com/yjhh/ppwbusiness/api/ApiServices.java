@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 
 import com.yjhh.ppwbusiness.BaseApplication;
 import com.yjhh.ppwbusiness.Constants;
+import com.yjhh.ppwbusiness.utils.APKVersionCodeUtils;
 import com.yjhh.ppwbusiness.utils.SharedPreferencesUtils;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -41,10 +42,9 @@ public class ApiServices {
                         Request request = original.newBuilder()
                                 .header("userAgent", "PPW_App")
                                 .header("X-Requested-With", "XMLHttpRequest")
-                                .header("PPW-TERMINAL", "3") //（1 用户端 2 骑手端 3 商户端）
-                                .header("PPW-APP-VERSION", "1.0")
+                                .header("PPW-TERMINAL", "1") //（0 用户端 1商户端)
+                                .header("PPW-APP-VERSION", String.valueOf(APKVersionCodeUtils.getVersionCode(BaseApplication.context)))
                                 //  .header("PPW-SIGN", "XMLHttpRequest")
-
                                 .header("PPW-TIMESTAMP", String.valueOf((int) (System.currentTimeMillis() / 1000)))
                                 .header("PPW-API-VERSION", "1.0")
                                 .header("JSESSIONID", String.valueOf(SharedPreferencesUtils.getParam(BaseApplication.context, "sessionId", "-1")))

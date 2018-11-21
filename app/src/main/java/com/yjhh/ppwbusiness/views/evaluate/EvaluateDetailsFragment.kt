@@ -16,6 +16,7 @@ import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.base.ProcessObserver2
 import com.yjhh.ppwbusiness.bean.EvaluateDetailsBean
 import com.yjhh.ppwbusiness.bean.EvaluateManageBean
+import com.yjhh.ppwbusiness.bean.EvaluateManageItemBean
 import com.yjhh.ppwbusiness.utils.TimeUtil
 import com.yjhh.ppwbusiness.views.cui.RatingBar
 import com.yjhh.ppwbusiness.views.evaluate.ninegrid.NineGridView
@@ -31,7 +32,7 @@ class EvaluateDetailsFragment(id: Int) : BaseFragment() {
 
     var mAdapter: EvaluateDetailsAdapter? = null
 
-    val list = ArrayList<EvaluateManageBean.ItemsBean>()
+    val list = ArrayList<EvaluateManageItemBean>()
     override fun initView() {
 
 

@@ -108,6 +108,8 @@
                     android:layout_width="60dp"
                     android:layout_centerVertical="true"
                     android:layout_height="28dp"
+                    android:id="@+id/toggle"
+
                     android:layout_alignParentRight="true"
                     app:lib_pub_tbtn_colorPadding="@color/lib_pub_color_hint"
                     app:lib_pub_tbtn_colorThumb="@color/lib_pub_color_white"

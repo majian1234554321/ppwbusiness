@@ -1,7 +1,10 @@
 package com.yjhh.ppwbusiness.ipresent
 
 import android.content.Context
+import android.util.ArrayMap
 import android.util.Log
+import com.yjhh.ppwbusiness.api.ApiServices
+import com.yjhh.ppwbusiness.api.SectionUserService
 
 import com.yjhh.ppwbusiness.base.BasePresent
 import com.yjhh.ppwbusiness.base.ProcessObserver2
@@ -81,5 +84,28 @@ class PasswordPresent(var context: Context, var registView: PasswordView) : Base
         })
     }
 
+
+    fun resetPassword(newPassword: String, smsCode: String,type:String) {
+        val map = ArrayMap<String, String>()
+        map.put("newPassword", newPassword)
+        map.put("smsCode", smsCode)
+        map.put("type", type)
+
+
+
+        toSubscribe2(ApiServices.getInstance().create(SectionUserService::class.java)
+            .resetPassword(map),object :ProcessObserver2(context){
+            override fun processValue(response: String?) {
+                registView. onSuccess(response)
+            }
+
+            override fun onFault(message: String) {
+                registView. onSuccess(message)
+            }
+
+        })
+
+
+    }
 
 }

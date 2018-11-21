@@ -85,6 +85,7 @@
                 android:layout_marginTop="10pt"
                 app:ievtextValue="消息中心"
                 app:ievunderline="true"
+                app:ievdrwableleft="@drawable/icon_xiaoxi"
                 app:ievtextpadding="@dimen/sp_12"
                 app:ievbackground="@color/white"
                 app:ievtextColor="@color/all_9"
@@ -121,6 +122,7 @@
         <com.yjhh.ppwbusiness.views.cui.ItemEntryView
                 android:id="@+id/iev_about"
                 app:ievtextValue="关于我们"
+                app:ievdrwableleft="@drawable/icon_guanyu"
                 app:ievbackground="@color/white"
                 app:ievtextColor="@color/all_9"
                 app:ievunderline="true"
@@ -131,7 +133,7 @@
         <com.yjhh.ppwbusiness.views.cui.ItemEntryView
                 android:id="@+id/iev_account"
                 app:ievtextValue="当前账户"
-
+                app:ievdrwableleft="@drawable/icon_zhanghu"
                 app:ievbackground="@color/white"
                 app:ievtextpadding="@dimen/sp_12"
                 app:ievtextColor="@color/all_9"
@@ -142,7 +144,7 @@
                 app:ievtextValue="版本更新"
                 android:layout_marginTop="10pt"
                 app:ievtextpadding="@dimen/sp_12"
-                app:ievdrwableleft="@drawable/icon_place"
+                app:ievdrwableleft="@drawable/icon_banben"
                 app:ievbackground="@color/white"
 
                 app:ievtextColor="@color/all_9"

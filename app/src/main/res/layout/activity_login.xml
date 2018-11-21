@@ -35,7 +35,7 @@
 
 
     <FrameLayout
-            android:id="@+id/fr_fragment"
+            android:id="@+id/fl_container"
             android:layout_below="@+id/rl_title"
             android:layout_width="match_parent" android:layout_height="match_parent">
 

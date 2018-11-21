@@ -16,8 +16,11 @@ import com.yjhh.ppwbusiness.adapter.MyMessageFragmentAdapter
 import com.yjhh.ppwbusiness.adapter.ProductAdapter
 import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.bean.MyMessageBean
+import com.yjhh.ppwbusiness.bean.ProductBean
 import com.yjhh.ppwbusiness.fragments.MessageDetailFragment
+import com.yjhh.ppwbusiness.ipresent.ProductPresent
 import com.yjhh.ppwbusiness.ipresent.SectionUselessPresent
+import com.yjhh.ppwbusiness.iview.ProductView
 import com.yjhh.ppwbusiness.views.cui.SpaceItemDecoration
 import com.yjhh.ppwbusiness.views.product.twoview.BaseViewAdapter
 import com.yjhh.ppwbusiness.views.product.twoview.BindData
@@ -28,54 +31,61 @@ import kotlinx.android.synthetic.main.product1fragment.*
 import kotlinx.android.synthetic.main.productallfragment.*
 import java.util.ArrayList
 
-class ProductAllFragment : BaseFragment(), View.OnClickListener {
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.tv_1 -> {
-
-            }
-            R.id.tv_2 -> {
-                start(ProductAddFragment("ADD"))
-            }
-            R.id.tv_3 -> {
-
-            }
-            R.id.tv_4 -> {
+class ProductAllFragment : BaseFragment(), ProductView {
 
 
-            }
-            else -> {
-            }
-        }
-    }
-
-
-    /*  var status = "-1"//状态，默认null(null/-1 全部 0未生效 1 有效的 2已过期的/失效的)
-      override fun onSuccess(main1bean: MyMessageBean, flag: String) {
-          if ("refresh" == flag) {
-              swipeLayout.finishRefresh()
-              mAdapter.setNewData(main1bean.items as ArrayList<MyMessageBean.ItemsBean>)
-
-          } else {
-              mAdapter.addData(main1bean.items as ArrayList<MyMessageBean.ItemsBean>)
-              mAdapter.loadMoreComplete()
-          }
-      }
-
-      override fun onFault(errorMsg: String?) {
-          // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-      }*/
-
+    val categoryId = ""
+    var status = ""//状态，默认null(null全部（不含已删除） 0 上架中 1已下架 3已删除)
     var startindex = 0
     val pageSize = 10
 
 
-    var list = ArrayList<String>()
+    override fun onSuccess(result: ProductBean?, flag: String) {
+
+        when (flag) {
+            "refresh" -> {
+                swipeLayout.finishRefresh()
+                mAdapter.setNewData(result?.items)
+                swipeLayout.finishRefresh()
+            }
+            "DELETE" -> {
+                result?.position?.let { mAdapter.data.removeAt(it) }
+                result?.position?.let {
+                    mAdapter.notifyItemRemoved(it)
+                }
+            }
+
+            "load" -> {
+                mAdapter.addData(result?.items!!)
+                mAdapter.loadMoreComplete()
+            }
+
+            "UNSELL" -> {
+                Toast.makeText(mActivity, "商品下架成功", Toast.LENGTH_SHORT).show()
+            }
+
+            "SELL" -> {
+                Toast.makeText(mActivity, "商品上架成功", Toast.LENGTH_SHORT).show()
+            }
+
+            else -> {
+            }
+        }
+
+
+    }
+
+    override fun onFault(errorMsg: String?) {
+
+    }
+
+
+    var list = ArrayList<ProductBean.ItemsBean>()
 
     lateinit var mAdapter: ProductAdapter
 
 
-    lateinit var sectionCouponPresent: SectionUselessPresent
+    lateinit var present: ProductPresent
 
 
     override fun onFragmentResult(requestCode: Int, resultCode: Int, data: Bundle?) {
@@ -87,46 +97,43 @@ class ProductAllFragment : BaseFragment(), View.OnClickListener {
     override fun getLayoutRes(): Int = R.layout.productallfragment
 
     override fun initView() {
-        list.add("A")
-
-        list.add("B")
-        list.add("C")
 
         mRecyclerView.addItemDecoration(SpaceItemDecoration(30))
         mAdapter = ProductAdapter(list)
 
-        // sectionCouponPresent = SectionUselessPresent(context, this)
+        present = ProductPresent(context, this)
         mRecyclerView.layoutManager = LinearLayoutManager(context)
         swipeLayout.setRefreshHeader(ClassicsHeader(context))
         initAdapter()
         initRefreshLayout()
-        //  swipeLayout.autoRefresh()
+        swipeLayout.autoRefresh()
 
 
         mAdapter.setOnItemClickListener { adapter, view, position ->
-
-            //            (parentFragment as BaseFragment).start(
-//                MessageDetailFragment()
-//            )
 
         }
 
 
         mAdapter.setOnItemChildClickListener { adapter, view, position ->
-
-
             when (view.id) {
                 R.id.tv_delete -> {
-                    Toast.makeText(context, "删除$position", Toast.LENGTH_SHORT).show()
+
+                    present.delProduct(
+                        (adapter.data[position] as ProductBean.ItemsBean).id.toString(),
+                        position,
+                        "DELETE"
+                    )
+
                 }
 
                 R.id.tv_stop -> {
-                    Toast.makeText(context, "下架$position", Toast.LENGTH_SHORT).show()
+
+                    present.editSaleStatus("1", "0", position, "UNSELL")
                 }
 
                 R.id.iv_edit -> {
                     (parentFragment as BaseFragment).start(
-                        ProductAddFragment("EDIT")
+                        ProductAddFragment.newInstance(adapter.data[position] as ProductBean.ItemsBean, "EDIT")
                     )
                 }
                 else -> {
@@ -143,16 +150,11 @@ class ProductAllFragment : BaseFragment(), View.OnClickListener {
 
         mRecyclerView.adapter = mAdapter
 
-
-
         mAdapter.setOnLoadMoreListener({
             loadMore()
         }, mRecyclerView)
 
-
         mAdapter.disableLoadMoreIfNotFullPage(mRecyclerView)
-
-
 
     }
 
@@ -166,7 +168,7 @@ class ProductAllFragment : BaseFragment(), View.OnClickListener {
 
     private fun refresh() {
         startindex = 0
-        //sectionCouponPresent.usermessage(status, share, startindex, pageSize, "refresh")
+        present.allproducts(categoryId, status, startindex, pageSize, "refresh")
 
     }
 
@@ -174,7 +176,7 @@ class ProductAllFragment : BaseFragment(), View.OnClickListener {
     private fun loadMore() {
         Toast.makeText(context, "onload", Toast.LENGTH_SHORT).show()
         startindex++
-        //  sectionCouponPresent.usermessage(status, share, startindex, pageSize, "load")
+        present.allproducts(categoryId, status, startindex, pageSize, "load")
 
     }
 

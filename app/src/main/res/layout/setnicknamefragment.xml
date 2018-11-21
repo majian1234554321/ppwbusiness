@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent" android:layout_height="match_parent">
+    <com.yjhh.ppwbusiness.views.cui.TitleBarView android:layout_width="match_parent"
+                                                 app:textValue="设置昵称"
+                                                 app:textColor="@color/white"
+                                                 android:layout_height="wrap_content"/>
+    <EditText
+            android:layout_width="315pt"
+            android:layout_marginTop="27.5pt"
+            android:layout_gravity="center"
+            android:padding="10pt"
+            android:layout_marginBottom="9.5pt"
+            android:id="@+id/et_nickName"
+            android:layout_height="wrap_content"
+            android:background="@drawable/stroke_frame_cd"
+    />
+
+
+    <TextView
+            android:layout_marginLeft="30pt"
+            android:layout_width="298pt"
+            android:layout_height="15pt"
+            android:text="以英文版字母或汉字开头，限4-16个字符，一个汉字为2个字符"
+            android:textColor="#FFB2B2B2"
+            android:textSize="11pt"
+    />
+
+
+    <TextView android:layout_width="315pt"
+              android:text="确定"
+
+              android:id="@+id/tv_commit"
+              android:textColor="@color/white"
+              android:background="#FFC6AC81"
+              android:layout_marginTop="21.5pt"
+              android:textSize="18pt"
+              android:layout_gravity="center"
+              android:gravity="center"
+              android:layout_height="39pt"/>
+
+
+</LinearLayout>

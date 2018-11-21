@@ -38,7 +38,7 @@ class LoginSMSFragment : BaseFragment(), PasswordView, View.OnClickListener {
 
             }
             R.id.loginPassword -> {
-                mActivity.finish()
+                mActivity.onBackPressed()
             }
             else -> {
             }

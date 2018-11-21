@@ -6,13 +6,15 @@ import com.yjhh.ppwbusiness.api.ApiServices
 import com.yjhh.ppwbusiness.api.CommonService
 import com.yjhh.ppwbusiness.base.BasePresent
 import com.yjhh.ppwbusiness.base.ProcessObserver2
+import com.yjhh.ppwbusiness.iview.CommonView
 import io.reactivex.disposables.Disposable
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
+import java.lang.StringBuilder
 
-class CommonPresent(var context: Context) : BasePresent() {
+class CommonPresent(var context: Context, var view: CommonView) : BasePresent() {
 
 
     fun UpLoadFile(file: File) {
@@ -24,11 +26,16 @@ class CommonPresent(var context: Context) : BasePresent() {
         toSubscribe2(ApiServices.getInstance().create(CommonService::class.java)
             .uploadFile(body), object : ProcessObserver2(context, true) {
             override fun processValue(response: String?) {
-                Log.i("UpLoadFile",response)
+
+                var sb = StringBuilder()
+                sb.append("{\"item\":").append(response).append("}")
+                Log.i("UpLoadFile", sb.toString())
+                view.onSuccess(sb.toString())
             }
 
             override fun onFault(message: String) {
-                Log.i("UpLoadFile",message)
+                Log.i("UpLoadFile", message)
+                view.onFault(message)
             }
         }
         )

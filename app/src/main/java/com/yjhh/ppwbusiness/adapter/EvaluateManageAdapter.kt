@@ -2,6 +2,7 @@ package com.yjhh.ppwbusiness.adapter
 
 import android.content.Context
 import android.opengl.Visibility
+import android.util.Log
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
@@ -11,6 +12,8 @@ import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.R.id.*
 import com.yjhh.ppwbusiness.R.layout.item
 import com.yjhh.ppwbusiness.bean.EvaluateManageBean
+import com.yjhh.ppwbusiness.bean.EvaluateManageItemBean
+import com.yjhh.ppwbusiness.bean.SubCommentsBean
 
 import com.yjhh.ppwbusiness.utils.TimeUtil
 import com.yjhh.ppwbusiness.views.cui.RatingBar
@@ -34,43 +37,51 @@ class EvaluateManageAdapter(var context: Context, data: List<MultiItemEntity>) :
         //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
 
 
+        Log.i("EvaluateManageAdapter", helper?.itemViewType.toString())
+
         when (helper?.itemViewType) {
             TYPE_LEVEL_0 -> {
 
-                val item = item22 as EvaluateManageBean.ItemsBean
+                val item = item22 as EvaluateManageItemBean
 
                 val list = ArrayList<String>()
 
-                if (item?.files != null) {
+                if (item.files != null) {
                     item.files.forEach {
                         list.add(it.url)
                     }
 
-                    val view = helper?.getView<NineGridView>(R.id.nineGrid)
+                    val view = helper.getView<NineGridView>(R.id.nineGrid)
 
                     view?.setAdapter(NineGridViewClickAdapter(context, list))
-                    helper?.setVisible(R.id.nineGrid, true)
+                    helper.setVisible(R.id.nineGrid, true)
                 } else {
-                    helper?.setVisible(R.id.nineGrid, false)
+                    helper.setVisible(R.id.nineGrid, false)
                 }
 
 
 
-                helper?.setText(R.id.tv_username, item?.nickName)
-                helper?.setText(R.id.tv_content, item?.content)
-                helper?.setText(R.id.tv_time, TimeUtil.stampToDate2(item?.time.toString()))
+                helper.setText(R.id.tv_username, item?.nickName)
+                helper.setText(R.id.tv_content, item?.content)
+                helper.setText(R.id.tv_time, TimeUtil.stampToDate2(item?.time.toString()))
 
 
-                helper?.getView<RatingBar>(R.id.id_ratingbar)?.setStar(item?.grade?.toFloat()!!)
+                helper.getView<RatingBar>(R.id.id_ratingbar)?.setStar(item?.grade?.toFloat()!!)
 
             }
 
-            TYPE_LEVEL_1->{
+            TYPE_LEVEL_1 -> {
 
-                val item = item22 as EvaluateManageBean.ItemsBean.SubCommentsBean
+                val item = item22 as SubCommentsBean
 
 
-                helper?.setText(R.id.title, item?.content)
+                helper.setText(R.id.tv_reply22, item.nickName)
+
+                helper.setText(R.id.tv_content22, item.content)
+
+                helper.setText(R.id.tv_time22, TimeUtil.stampToDate2(item.time.toString()))
+
+
             }
 
         }
@@ -82,8 +93,8 @@ class EvaluateManageAdapter(var context: Context, data: List<MultiItemEntity>) :
     companion object {
 
 
-        val TYPE_LEVEL_0 = 0
-        val TYPE_LEVEL_1 = 1
+        const val TYPE_LEVEL_0 = 0
+        const val TYPE_LEVEL_1 = 1
 
     }
 }

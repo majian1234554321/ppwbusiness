@@ -2,6 +2,7 @@ package com.yjhh.ppwbusiness.views.login
 
 import android.arch.lifecycle.Transformations.map
 import android.content.Intent
+import android.os.Bundle
 import android.text.InputType
 import android.text.TextUtils
 import android.util.Log
@@ -30,7 +31,7 @@ class LoginFragment : BaseFragment(), View.OnClickListener, LoginView {
 
 
     override fun onFault(errorMsg: String?) {
-        //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+      Toast.makeText(mActivity,errorMsg,Toast.LENGTH_SHORT).show()
     }
 
     override fun onSuccess(result: String?) {
@@ -75,19 +76,15 @@ class LoginFragment : BaseFragment(), View.OnClickListener, LoginView {
 
             R.id.forget_password -> {
 
-                startActivity(
-                    Intent(mActivity, LoginActivity::class.java).putExtra(
-                        "displayTab",
-                        "ForgotPasswordFragment"
-                    )
-                )
+                start(ForgotPasswordFragment())
+
             }
 
 
             R.id.loginSMS -> {
-                //  start(LoginSMSFragment())
 
-                startActivity(Intent(mActivity, LoginActivity::class.java).putExtra("displayTab", "LoginSMSFragment"))
+                start(LoginSMSFragment())
+
             }
 
 
@@ -149,6 +146,19 @@ class LoginFragment : BaseFragment(), View.OnClickListener, LoginView {
 
     private fun isPasswordValid(password: String): Boolean {
         return password.length >= 6
+    }
+
+
+
+    companion object {
+        fun newInstance(): LoginFragment {
+
+            val args = Bundle()
+
+            val fragment = LoginFragment()
+            fragment.arguments = args
+            return fragment
+        }
     }
 
 }

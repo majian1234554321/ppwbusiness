@@ -112,11 +112,6 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener {
         }
 
 
-
-
-
-
-
         if (!TextUtils.isEmpty(SharedPreferencesUtils.getParam(context, "sessionId", "") as String)) {
             tv_name.text = SharedPreferencesUtils.getParam(context, "nickName", "") as String
         } else {

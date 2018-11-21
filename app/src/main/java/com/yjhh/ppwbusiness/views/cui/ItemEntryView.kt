@@ -102,7 +102,7 @@ class ItemEntryView @JvmOverloads constructor(
             ievdrwableleft,
             null, null, null
         )
-        tv_name.compoundDrawablePadding = 4
+        tv_name.compoundDrawablePadding = 12
 
 
 

@@ -13,6 +13,15 @@
     </style>
 
 
+    <style name="SplashAppTheme" parent="AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+
+    </style>
+
 
     <style name="AppTheme2" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->

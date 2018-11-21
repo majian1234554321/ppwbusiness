@@ -7,6 +7,7 @@ import com.flyco.tablayout.listener.OnTabSelectListener
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.MyPagerAdapter
 import com.yjhh.ppwbusiness.base.BaseFragment
+import com.yjhh.ppwbusiness.bean.ProductBean
 
 import kotlinx.android.synthetic.main.productmanagementfragment.*
 import java.util.ArrayList
@@ -14,12 +15,17 @@ import java.util.ArrayList
 class ProductManagementFragment2 : BaseFragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.tv_add -> {
-                start(ProductAddFragment("ADD"))
+            R.id.tv_right -> {
+                start(ProductAddFragment.newInstance(ProductBean.ItemsBean(), "ADD"))
             }
 
-            R.id.tv_sort -> {
+            R.id.tv_sortNO -> {
+
             }
+            R.id.iv_back -> {
+                mActivity.onBackPressed()
+            }
+
             else -> {
             }
         }
@@ -33,7 +39,7 @@ class ProductManagementFragment2 : BaseFragment(), View.OnClickListener {
     override fun initView() {
 
 
-        arrayOf(tv_add, tv_sort).forEach {
+        arrayOf(tv_right, tv_sortNO, iv_back).forEach {
             it.setOnClickListener(this)
         }
 

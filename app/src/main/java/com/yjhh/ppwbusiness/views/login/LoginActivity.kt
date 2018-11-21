@@ -17,60 +17,70 @@ import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.base.BaseActivity
 import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.bean.LoginBean
+import com.yjhh.ppwbusiness.fragments.MainFragment
 import com.yjhh.ppwbusiness.ipresent.LoginPresent
 import com.yjhh.ppwbusiness.iview.LoginView
 import com.yjhh.ppwbusiness.utils.RxBus
 import com.yjhh.ppwbusiness.utils.SharedPreferencesUtils
 import com.yjhh.ppwbusiness.views.main.MainActivity
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.BiFunction
-import org.json.JSONObject
-import java.util.concurrent.TimeUnit
-import kotlinx.android.synthetic.main.activity_login.*
+
+import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator
+import me.yokeyword.fragmentation.anim.FragmentAnimator
 
 class LoginActivity : BaseActivity() {
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            setContentView(R.layout.activity_login)
 
-
-        if (!TextUtils.isEmpty(SharedPreferencesUtils.getParam(this, "sessionId", "") as String)) {
-            startActivity(Intent(this, MainActivity::class.java))
-        } else {
-            val displayTab = intent.getStringExtra("displayTab")
-
-
-            val fragmentTransaction = supportFragmentManager.beginTransaction()
-            var fragments: BaseFragment? = null
-            fragments = when (displayTab) {
-
-                "LoginFragment" -> {
-                    LoginFragment()
-                }
-
-
-                "LoginSMSFragment" -> {
-                    LoginSMSFragment()
-                }
-
-                "ForgotPasswordFragment" -> {
-                    ForgotPasswordFragment()
-                }
-
-                else -> {
-                    LoginFragment()
-                }
-
+            if (findFragment(LoginFragment::class.java) == null) {
+                loadRootFragment(R.id.fl_container, LoginFragment.newInstance())
             }
+        }
 
-            fragmentTransaction.replace(R.id.fr_fragment, fragments).commit()
+        override fun onBackPressedSupport() {
+
+            super.onBackPressedSupport()
+        }
+
+        override fun onCreateFragmentAnimator(): FragmentAnimator {
+
+            return DefaultHorizontalAnimator()
         }
 
 
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

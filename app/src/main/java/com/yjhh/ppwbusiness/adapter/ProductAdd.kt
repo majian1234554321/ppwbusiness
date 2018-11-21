@@ -41,6 +41,8 @@ class ProductAdd(lists: List<String>) : BaseQuickAdapter<String, BaseViewHolder>
         }
 
 
+
+
         helper.addOnClickListener(R.id.iv_delete)
 
 

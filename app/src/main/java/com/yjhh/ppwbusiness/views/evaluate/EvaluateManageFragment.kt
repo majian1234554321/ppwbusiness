@@ -14,6 +14,8 @@ import com.yjhh.ppwbusiness.api.SectionEvluateService
 import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.base.ProcessObserver2
 import com.yjhh.ppwbusiness.bean.EvaluateManageBean
+import com.yjhh.ppwbusiness.bean.EvaluateManageItemBean
+import com.yjhh.ppwbusiness.bean.SubCommentsBean
 import com.yjhh.ppwbusiness.views.cui.TabEntity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -95,10 +97,31 @@ class EvaluateManageFragment : BaseFragment() {
                     val bean = gson.fromJson<EvaluateManageBean>(response, EvaluateManageBean::class.java)
 
 
-                    list.addAll(bean.items as List<MultiItemEntity>)
 
-                    mAdapter?.setNewData(bean.items as List<MultiItemEntity>)
 
+
+                    for (i in 0 until bean.items.size) {
+                        val lv0 = bean.items[i]
+                        for (j in 0 until bean.items[i].subComments.size) {
+                            //  val lv1 = bean.items[i].subComments[j] as SubCommentsBean
+
+                            val modle = bean.items[i].subComments[j]
+
+// public SubCommentsBean(String content, boolean ifFile, boolean ifShop, String nickName, int time)
+                            val lv1 =
+                                SubCommentsBean(modle.content, modle.ifFile, modle.ifShop, modle.nickName, modle.time)
+
+
+                            lv0.addSubItem(lv1)
+                        }
+                        list.add(lv0)
+                    }
+
+
+
+
+                    mAdapter?.setNewData(list)
+                    mAdapter?.expandAll()
                 }
 
             })
@@ -106,7 +129,7 @@ class EvaluateManageFragment : BaseFragment() {
 
 
         mAdapter?.setOnItemClickListener { adapter, view, position ->
-            start(EvaluateDetailsFragment((list[position] as EvaluateManageBean.ItemsBean).id))
+            start(EvaluateDetailsFragment((list[position] as EvaluateManageItemBean).id))
 
         }
 
