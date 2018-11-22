@@ -6,6 +6,9 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 import android.util.Log;
 
+import com.umeng.commonsdk.UMConfigure;
+import com.umeng.message.IUmengRegisterCallback;
+import com.umeng.message.PushAgent;
 import com.yjhh.ppwbusiness.utils.SharedPreferencesUtils;
 import me.jessyan.autosize.AutoSizeConfig;
 import me.jessyan.autosize.onAdaptListener;
@@ -36,13 +39,11 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-      //  MultiDex.install(getIns());
+        //  MultiDex.install(getIns());
 
         configUnits();
 
         AutoSizeConfig.getInstance()
-
-
                 .setCustomFragment(true)
                 .setOnAdaptListener(new onAdaptListener() {
                     @Override
@@ -65,6 +66,29 @@ public class BaseApplication extends Application {
         sInstance = this;
         Log.i("BaseApplication", String.valueOf(SharedPreferencesUtils.getParam(BaseApplication.context, "sessionId", "-1")));
 
+
+        UMConfigure.init(context, int deviceType, String pushSecret);
+
+
+        PushAgent mPushAgent = PushAgent.getInstance(this);
+//注册推送服务，每次调用register方法都会回调该接口
+        mPushAgent.register(new IUmengRegisterCallback() {
+
+            @Override
+            public void onSuccess(String deviceToken) {
+
+            }
+
+            @Override
+            public void onFailure(String s, String s1) {
+
+            }
+        });
+
+
+        mPushAgent.getRegistrationId();
+
+        //如需手动获取device token，可以调用mPushAgent.getRegistrationId()方法（需在注册成功后调用）。
 
     }
 

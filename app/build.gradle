@@ -111,4 +111,11 @@ dependencies {
     implementation 'me.jessyan:autosize:1.0.6'
 
     implementation 'com.azhon:appupdate:1.7.3'
+
+    //PushSDK必须依赖基础组件库，所以需要加入对应依赖
+    implementation 'com.umeng.sdk:common:1.5.3'
+//PushSDK必须依赖utdid库，所以需要加入对应依赖
+    implementation 'com.umeng.sdk:utdid:1.1.5.3'
+//PushSDK
+    implementation 'com.umeng.sdk:push:4.2.0'
 }

@@ -16,6 +16,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import android.widget.Toast;
+import com.umeng.message.PushAgent;
 import com.yjhh.ppwbusiness.interfaces.PermissionListener;
 import com.yjhh.ppwbusiness.utils.ActivityCollector;
 import com.yjhh.ppwbusiness.utils.BDLocationUtils;
@@ -41,7 +42,7 @@ public class BaseActivity extends SupportActivity implements CustomAdapt {
 
         // SystemBarUtil.tintStatusBar(this, ContextCompat.getColor(this,R.color.colorPrimary),0.0f);
         super.onCreate(savedInstanceState);
-
+        PushAgent.getInstance(this).onAppStart();
         ActivityCollector.addActivity(this);
 
 

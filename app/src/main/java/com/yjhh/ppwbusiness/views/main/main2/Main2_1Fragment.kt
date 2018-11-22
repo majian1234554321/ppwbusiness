@@ -74,6 +74,8 @@ class Main2_1Fragment : BaseFragment(), OrderView {
 
     override fun initView() {
 
+
+
         mRecyclerView.addItemDecoration(DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL))
         mAdapter = OrderAdapter(list)
         present = OrderPresent(context, this)
@@ -96,9 +98,10 @@ class Main2_1Fragment : BaseFragment(), OrderView {
         mAdapter.setOnLoadMoreListener({
             loadMore()
         }, mRecyclerView)
+
+
         mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
-
-
+        mAdapter.isFirstOnly(false)
         mRecyclerView.adapter = mAdapter
 
 
