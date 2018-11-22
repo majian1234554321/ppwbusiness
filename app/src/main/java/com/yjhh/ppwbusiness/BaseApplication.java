@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 import android.util.Log;
+
 import com.yjhh.ppwbusiness.utils.SharedPreferencesUtils;
 import me.jessyan.autosize.AutoSizeConfig;
 import me.jessyan.autosize.onAdaptListener;

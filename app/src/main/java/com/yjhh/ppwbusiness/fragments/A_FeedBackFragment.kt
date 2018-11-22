@@ -1,6 +1,7 @@
 package com.yjhh.ppwbusiness.fragments
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
@@ -15,6 +16,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.google.gson.Gson
+import com.jakewharton.rxbinding2.widget.RxTextView
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.PhotoAdapter
 import com.yjhh.ppwbusiness.adapter.ProductAdd
@@ -122,6 +124,7 @@ class A_FeedBackFragment : BaseFragment(), View.OnClickListener, CommonView {
     val lists = ArrayList<String>()
 
     val listsId = ArrayList<String>()
+    @SuppressLint("CheckResult")
     override fun initView() {
         arrayOf(tv_commit, tv_see)
             .forEach {
@@ -170,6 +173,13 @@ class A_FeedBackFragment : BaseFragment(), View.OnClickListener, CommonView {
 
             mAdapter?.setNewData(lists)
 
+        }
+
+
+
+
+        RxTextView.textChanges(et_5).subscribe {
+            text.text = "${it.toString().length}/200"
         }
 
     }

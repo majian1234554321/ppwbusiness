@@ -9,14 +9,13 @@ import retrofit2.http.POST
 interface SectionOrderService {
 
 
-
-
     @FormUrlEncoded
     @POST("shopAdmin/orders")
     fun orders(@FieldMap map: Map<String, String>): Observable<ResponseBody>//
 
 
-
+    @POST("shopAdmin/orderTask")
+    fun orderTask(): Observable<ResponseBody>//
 
 
 }

@@ -18,13 +18,20 @@
     <uses-permission android:name="android.permission.CALL_PHONE"/>
     <!-- 访问网络，网络定位需要上网 -->
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+
+
+
+
+
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+
 
     <application
             android:name=".BaseApplication"
@@ -46,6 +53,17 @@
                     android:resource="@xml/cameras"
                     tools:replace="name,resource"/>
         </provider>
+
+        <provider
+                android:name="android.support.v4.content.FileProvider"
+                android:authorities="${applicationId}"
+                android:exported="false"
+                android:grantUriPermissions="true">
+            <meta-data
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/file_paths_public" />
+        </provider>
+
 
         <meta-data
                 android:name="design_width_in_dp"

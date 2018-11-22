@@ -10,6 +10,8 @@ public class OrderBean {
     public int recordCount;
     public List<ItemsBeanX> items;
 
+
+
     public static class ItemsBeanX {
 
 
@@ -50,4 +52,8 @@ public class OrderBean {
             }
         }
     }
+
+
+
+
 }

@@ -1,16 +1,19 @@
 package com.yjhh.ppwbusiness.bean;
 
+import java.util.List;
+
 public class ShopAdminBean {
+
 
     /**
      * account : {"blance":154,"order":88,"today":543,"yesOrder":20}
-     * mobile : 176****86
-     * nickName : 6660
+     * functions : [{"code":"pro-mgr","name":"商品管理","orderBy":100,"url":"apps:/shop/product"},{"code":"report-mgr","name":"报表","orderBy":200,"url":"http://www.baidu.com"}]
+     * shopName : 哇哈哈
      */
 
     public AccountBean account;
-    public String mobile;
-    public String nickName;
+    public String shopName;
+    public List<FunctionsBean> functions;
 
     public static class AccountBean {
         /**
@@ -23,7 +26,21 @@ public class ShopAdminBean {
         public double blance;
         public int order;
         public double today;
-        public int yesOrder;
         public double yesToday;
+        public int yesOrder;
+    }
+
+    public static class FunctionsBean {
+        /**
+         * code : pro-mgr
+         * name : 商品管理
+         * orderBy : 100
+         * url : apps:/shop/product
+         */
+
+        public String code;
+        public String name;
+        public int orderBy;
+        public String url;
     }
 }

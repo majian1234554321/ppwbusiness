@@ -51,10 +51,11 @@ import java.util.*
 class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetView {
     override fun onFault(errorMsg: String?) {
 
+        Toast.makeText(this, "设置店铺信息成功", Toast.LENGTH_LONG).show()
     }
 
     override fun onSuccess() {
-
+        Toast.makeText(this, "设置店铺信息失败", Toast.LENGTH_LONG).show()
     }
 
 

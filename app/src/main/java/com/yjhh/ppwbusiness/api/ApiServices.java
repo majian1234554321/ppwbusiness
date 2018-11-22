@@ -3,6 +3,7 @@ package com.yjhh.ppwbusiness.api;
 
 import android.support.annotation.NonNull;
 
+import android.webkit.WebSettings;
 import com.yjhh.ppwbusiness.BaseApplication;
 import com.yjhh.ppwbusiness.Constants;
 import com.yjhh.ppwbusiness.utils.APKVersionCodeUtils;
@@ -40,6 +41,10 @@ public class ApiServices {
                         Request original = chain.request();
 
                         Request request = original.newBuilder()
+
+
+                                .removeHeader("User-Agent")
+                                .addHeader("User-Agent", WebSettings.getDefaultUserAgent(BaseApplication.context)+"PPW_App")
                                 .header("userAgent", "PPW_App")
                                 .header("X-Requested-With", "XMLHttpRequest")
                                 .header("PPW-TERMINAL", "1") //（0 用户端 1商户端)

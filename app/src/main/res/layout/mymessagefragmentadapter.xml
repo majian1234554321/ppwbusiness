@@ -1,37 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
-
-
-
-                android:background="@drawable/stroke_frame_all6"
+                android:background="@drawable/solid_frame_white"
                 android:layout_width="match_parent" android:layout_height="wrap_content">
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent" android:layout_height="wrap_content">
+
+
+        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:id="@+id/tv1"
+                      android:gravity="center_vertical"
+                      android:drawablePadding="@dimen/spi_12"
+                      android:drawableLeft="@drawable/icon_xiaoxixi"
+                      android:paddingTop="8dp"
+                      android:paddingLeft="8dp"
+                      android:paddingRight="8dp"
+
+                      tools:text="1"
+            />
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:padding="8dp"
+
+                      android:layout_gravity="center_vertical"
+
+                      android:textColor="#FFC8AF85"
+                      android:layout_alignParentRight="true"
+                      android:id="@+id/tv_time"
+            />
+
+
+        </RelativeLayout>
+
+
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                  android:id="@+id/tv1"
-
-                  android:paddingTop="8dp"
-                  android:paddingLeft="8dp"
-                  android:paddingRight="8dp"
-
-                  tools:text="1"
-        />
-
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                  android:padding="8dp"
+                  android:padding="8dp" android:textColor="#FF999999"
+                  android:textSize="12pt"
                   android:id="@+id/tv2"
         />
         <View android:layout_width="match_parent" android:layout_height="1dp"
-              android:background="@color/all_e"
+
+              android:background="#E6E6E6"
         />
 
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                   android:padding="8dp"
                   android:text="查看详情"
-
-
+                  android:layout_gravity="center_vertical"
+                  android:drawableRight="@drawable/icon_jiantou3"
+                  android:textColor="#FFC8AF85"
                   android:id="@+id/tv3"
         />
 

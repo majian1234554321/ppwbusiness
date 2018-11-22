@@ -42,7 +42,7 @@ class MessageCenter1Fragment : BaseFragment(), MyMessageView {
     var startindex = 0
     val pageSize = 10
 
-    var share = ""
+    var share = "1"
 
 
     lateinit var sectionCouponPresent: SectionUselessPresent
@@ -66,8 +66,9 @@ class MessageCenter1Fragment : BaseFragment(), MyMessageView {
 
         mAdapter.setOnItemClickListener { adapter, view, position ->
 
+
             (parentFragment as BaseFragment).start(
-                MessageDetailFragment()
+                MessageDetailFragment.newInstance(adapter.data[position] as MyMessageBean.ItemsBean)
             )
 
         }

@@ -33,6 +33,9 @@ class Main2Fragment : BaseMainFragment() {
 
 
         mViewPager.adapter = MyPagerAdapter(childFragmentManager, fagments, mTitles)
+
+        mViewPager.offscreenPageLimit = 3
+
         mTabLayout.setViewPager(mViewPager)
 
         mTabLayout.setOnTabSelectListener(object : OnTabSelectListener {

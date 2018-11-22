@@ -42,7 +42,7 @@ class MessageCenter2Fragment : BaseFragment(), MyMessageView {
     var startindex = 0
     val pageSize = 10
 
-    var share = ""
+    var share = "0"
 
 
     lateinit var sectionCouponPresent: SectionUselessPresent
@@ -111,8 +111,5 @@ class MessageCenter2Fragment : BaseFragment(), MyMessageView {
     }
 
 
-    override fun initData() {
-        Log.i("TAG", "Main2_1Fragment")
 
-    }
 }

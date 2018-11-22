@@ -27,7 +27,7 @@ public class MainFragment extends SupportFragment {
 
     private SupportFragment[] mFragments = new SupportFragment[3];
 
-    private BottomBar mBottomBar;
+    public  BottomBar mBottomBar;
 
 
     public static MainFragment newInstance() {

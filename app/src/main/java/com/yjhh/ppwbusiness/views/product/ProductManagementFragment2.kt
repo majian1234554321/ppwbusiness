@@ -51,7 +51,7 @@ class ProductManagementFragment2 : BaseFragment(), View.OnClickListener {
         fagments.add(Product3Fragment())
         // fagments.add(Product4Fragment())
 
-
+        mViewPager.offscreenPageLimit = 3
         mViewPager.adapter = MyPagerAdapter(childFragmentManager, fagments, mTitles)
         mTabLayout.setViewPager(mViewPager)
 

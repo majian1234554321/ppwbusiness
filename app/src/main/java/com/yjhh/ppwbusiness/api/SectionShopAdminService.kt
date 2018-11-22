@@ -9,7 +9,7 @@ import retrofit2.http.POST
 interface SectionShopAdminService {
 
 
-    @POST("shopAdmin")
+    @POST("shopAdmin/home")
     fun shopAdmin(): Observable<ResponseBody>//
 
     @FormUrlEncoded

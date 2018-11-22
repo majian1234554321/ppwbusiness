@@ -6,10 +6,12 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import com.alibaba.android.arouter.launcher.ARouter
+
 import com.baidu.mapsdkplatform.comapi.map.MessageCenter
 import com.google.gson.JsonObject
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.api.ApiServices
+import com.yjhh.ppwbusiness.api.CommonService
 import com.yjhh.ppwbusiness.api.SectionUselessService
 import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.base.BaseMainFragment
@@ -46,8 +48,6 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener {
                     startActivity(Intent(mActivity, LoginActivity::class.java))
                 }
             }
-
-
 
 
             R.id.iev_message -> {
@@ -91,12 +91,17 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener {
 
             R.id.iev_updateVersion -> {
 
+
+
+
             }
 
             else -> {
             }
         }
     }
+
+
 
     override fun getLayoutRes(): Int = R.layout.main4fragment
 
@@ -126,7 +131,6 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener {
                 tv_name.text = "未登录"
             }
         }
-
 
 
         /*******************************获取当前账户*************************************/

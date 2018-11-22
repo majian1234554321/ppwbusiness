@@ -10,9 +10,13 @@ import retrofit2.http.Part
 interface CommonService {
 
 
-
-
     @Multipart
     @POST("common/upload")
-    fun uploadFile( @Part file: MultipartBody.Part): Observable<ResponseBody>// 文件上传
+    fun uploadFile(@Part file: MultipartBody.Part): Observable<ResponseBody>// 文件上传
+
+
+    @POST("common/version")
+    fun version(): Observable<ResponseBody>// 文件上传
+
+
 }

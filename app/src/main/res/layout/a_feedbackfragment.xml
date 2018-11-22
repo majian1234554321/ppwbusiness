@@ -63,14 +63,29 @@
                       android:id="@+id/et_4"
             />
 
-            <EditText android:layout_width="match_parent" android:layout_height="200dp"
-                      android:gravity="top|left"
-                      android:padding="12pt" android:textSize="14pt"
-                      android:layout_marginBottom="@dimen/sp_12"
-                      android:background="@color/white"
-                      android:hint="详细内容"
-                      android:id="@+id/et_5"
-            />
+
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="200dp">
+                <EditText android:layout_width="match_parent" android:layout_height="200dp"
+                          android:gravity="top|left"
+                          android:padding="12pt" android:textSize="14pt"
+                          android:layout_marginBottom="@dimen/sp_12"
+                          android:background="@color/white"
+                          android:maxLength="200"
+                          android:hint="详细内容(长度不超过200字)"
+                          android:id="@+id/et_5"
+                />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:layout_alignParentRight="true"
+                          android:id="@+id/text"
+                          android:padding="12pt" android:textSize="14pt"
+                          android:layout_alignParentBottom="true"
+                          android:text="0/200"
+                />
+
+
+            </RelativeLayout>
+
+
 
             <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
                                                     android:id="@+id/recyclerView"
@@ -78,13 +93,7 @@
         </LinearLayout>
 
 
-
-
-
-
-
     </android.support.v4.widget.NestedScrollView>
-
 
 
     <RelativeLayout android:layout_width="match_parent"
@@ -112,7 +121,6 @@
                   android:layout_marginBottom="@dimen/sp_12"
                   android:layout_height="wrap_content"/>
     </RelativeLayout>
-
 
 
 </RelativeLayout>

@@ -33,6 +33,17 @@ android {
             jniLibs.srcDir 'libs'
         }
     }
+
+
+    android {
+        lintOptions {
+            checkReleaseBuilds false
+            // Or, if you prefer, you can continue to check for errors in release builds,
+            // but continue the build even when errors are found:
+            abortOnError true
+        }
+    }
+
 }
 
 dependencies {
@@ -98,4 +109,6 @@ dependencies {
     implementation files('libs/BaiduLBS_Android.jar')
     api 'com.dsiner.lib:xrv:1.1.2'
     implementation 'me.jessyan:autosize:1.0.6'
+
+    implementation 'com.azhon:appupdate:1.7.3'
 }

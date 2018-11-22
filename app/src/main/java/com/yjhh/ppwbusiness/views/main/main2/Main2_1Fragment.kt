@@ -1,6 +1,7 @@
 package com.yjhh.ppwbusiness.views.main.main2
 
 
+import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.util.ArrayMap
@@ -28,6 +29,15 @@ import java.util.ArrayList
 
 
 class Main2_1Fragment : BaseFragment(), OrderView {
+
+
+
+
+
+
+
+
+
     override fun onSuccess(model: OrderBean, flag: String) {
         if ("refresh" == flag) {
             mAdapter.setNewData(model.items)
@@ -42,6 +52,12 @@ class Main2_1Fragment : BaseFragment(), OrderView {
     override fun onFault(errorMsg: String?) {
 
     }
+
+
+    override fun onLazyInitView(savedInstanceState: Bundle?) {
+        swipeLayout.autoRefresh()
+    }
+
 
 
     var startindex = 0
@@ -66,14 +82,10 @@ class Main2_1Fragment : BaseFragment(), OrderView {
         swipeLayout.setRefreshHeader(ClassicsHeader(context))
         initAdapter()
         initRefreshLayout()
-        swipeLayout.autoRefresh()
+
 
 
         mAdapter.setOnItemClickListener { adapter, view, position ->
-
-//            start(
-//                MessageDetailFragment()
-//            )
 
         }
     }

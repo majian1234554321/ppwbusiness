@@ -34,8 +34,8 @@ public abstract class BaseFragment extends SupportFragment implements CustomAdap
     }
 
 
-
-    public BaseFragment(){}
+    public BaseFragment() {
+    }
 
 
     public void loginOut() {
@@ -53,27 +53,17 @@ public abstract class BaseFragment extends SupportFragment implements CustomAdap
 
 
     protected Activity mActivity;
-    protected View mRootView;
-
-    /**
-     * 是否对用户可见
-     */
-    protected boolean mIsVisible;
-    /**
-     * 是否加载完成
-     * 当执行完onViewCreated方法后即为true
-     */
-    protected boolean mIsPrepare;
-
-    /**
-     * 是否加载完成
-     * 当执行完onViewCreated方法后即为true
-     */
-    protected boolean mIsImmersion;
-
-
     public Context context;
 
+
+    /**
+     * 标记已加载完成，保证懒加载只能加载一次
+     */
+    private boolean hasLoaded = true;
+
+    public boolean isViewCreated;
+
+    public boolean isUIVisible;
 
     @Override
     public void onAttach(Context context) {
@@ -82,30 +72,54 @@ public abstract class BaseFragment extends SupportFragment implements CustomAdap
         this.context = context;
     }
 
+
+    View mRootView;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mRootView = inflater.inflate(getLayoutRes(), container, false);
+
+        if (mRootView == null)
+            mRootView = inflater.inflate(getLayoutRes(), container, false);
 
         return mRootView;
     }
+
+    protected abstract int getLayoutRes();
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if (isLazyLoad()) {
-            mIsPrepare = true;
-            mIsImmersion = true;
-            onLazyLoad();
-        } else {
-            initData();
-
-
-        }
         initView();
-        setListener();
+
+        isViewCreated = true;
+        lazyLoad();
     }
+
+    private void lazyLoad() {
+
+
+        if (isViewCreated && isUIVisible && hasLoaded) {
+            loadData();
+            isUIVisible = false;
+            isViewCreated = false;
+            hasLoaded = false;
+        }
+    }
+
+
+    protected void loadData() {
+
+    }
+
+    ;
+
+    protected void initView() {
+
+    }
+
+    ;
 
     @Override
     public void onDestroy() {
@@ -113,104 +127,24 @@ public abstract class BaseFragment extends SupportFragment implements CustomAdap
 
         compositeDisposable.clear();
 
+        isViewCreated = false;
+
+
     }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
 
-        if (getUserVisibleHint()) {
-            mIsVisible = true;
-            onVisible();
+        if (isVisibleToUser) {
+            isUIVisible = true;
+            lazyLoad();
+
         } else {
-            mIsVisible = false;
-            onInvisible();
+            isUIVisible = false;
         }
-    }
-
-    /**
-     * 是否懒加载
-     *
-     * @return the boolean
-     */
-    protected boolean isLazyLoad() {
-        return true;
-    }
-
-    /**
-     * 是否在Fragment使用沉浸式
-     *
-     * @return the boolean
-     */
-    protected boolean isImmersionBarEnabled() {
-        return true;
-    }
-
-    /**
-     * 用户可见时执行的操作
-     */
-    protected void onVisible() {
-        onLazyLoad();
-    }
-
-    private void onLazyLoad() {
-        if (mIsVisible && mIsPrepare) {
-            mIsPrepare = false;
-            initData();
-        }
-        if (mIsVisible && mIsImmersion && isImmersionBarEnabled()) {
-            // initImmersionBar();
-        }
-    }
-
-    /**
-     * Sets layout id.
-     *
-     * @return the layout id
-     */
-    protected abstract int getLayoutRes();
-
-    /**
-     * 初始化数据
-     */
-    protected void initData() {
 
     }
-
-
-    /**
-     * view与数据绑定
-     */
-    protected void initView() {
-
-    }
-
-    /**
-     * 设置监听
-     */
-    protected void setListener() {
-
-    }
-
-    /**
-     * 用户不可见执行
-     */
-    protected void onInvisible() {
-
-    }
-
-    /**
-     * 找到activity的控件
-     *
-     * @param <T> the type parameter
-     * @param id  the id
-     * @return the t
-     */
-    @SuppressWarnings("unchecked")
-    protected <T extends View> T findActivityViewById(@IdRes int id) {
-        return (T) mActivity.findViewById(id);
-    }
-
 
 
     @Override
@@ -219,7 +153,7 @@ public abstract class BaseFragment extends SupportFragment implements CustomAdap
         List<Fragment> fragments = getChildFragmentManager().getFragments();
         for (Fragment fragment : fragments) {
             if (fragment != null) {
-                fragment.onRequestPermissionsResult(requestCode,permissions,grantResults);
+                fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
             }
         }
     }
