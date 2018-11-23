@@ -119,6 +119,23 @@
 
 
 
+    <declare-styleable name="SuperCircleView">
+        <attr name="insideCircleRadius" format="dimension"/>
+        <attr name="insideCircleColor" format="color"/>
+        <attr name="insideStrokeWidth" format="dimension"/>
+
+
+        <attr name="outsideCircleRadius" format="dimension"/>
+        <attr name="outsideCircleColor" format="color"/>
+        <attr name="outsideStrokeWidth" format="dimension"/>
+
+        <attr name="CircleLTextSize" format="dimension"/>
+
+        <attr name="CircleSTextSize" format="dimension"/>
+
+
+    </declare-styleable>
+
 
 
 

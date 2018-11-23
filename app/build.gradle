@@ -12,6 +12,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
+        flavorDimensions "default"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -43,6 +44,25 @@ android {
             abortOnError true
         }
     }
+
+
+    /*配置渠道*/
+
+
+
+    productFlavors {
+        yingyongbao {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "yingyongbao"]
+        }
+        wandoujia {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "wandoujia"]
+        }
+        xiaomi {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "xiaomi"]
+        }
+    }
+
+
 
 }
 
@@ -118,4 +138,5 @@ dependencies {
     implementation 'com.umeng.sdk:utdid:1.1.5.3'
 //PushSDK
     implementation 'com.umeng.sdk:push:4.2.0'
+    implementation 'com.github.florent37:arclayout:1.0.3'
 }

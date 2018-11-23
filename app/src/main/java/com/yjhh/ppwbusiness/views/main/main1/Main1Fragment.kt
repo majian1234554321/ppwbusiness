@@ -2,10 +2,12 @@ package com.yjhh.ppwbusiness.views.main.main1
 
 
 import android.content.Intent
+import android.graphics.Color
 import android.media.Image
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
+import android.text.SpannableString
 import android.view.View
 import com.flyco.tablayout.listener.OnTabSelectListener
 import com.yjhh.ppwbusiness.R
@@ -23,6 +25,7 @@ import com.yjhh.ppwbusiness.ipresent.OrderPresent
 
 import com.yjhh.ppwbusiness.iview.Main1View
 import com.yjhh.ppwbusiness.iview.OrderView
+import com.yjhh.ppwbusiness.utils.RecyclerGridSpace
 import com.yjhh.ppwbusiness.views.cui.GridRecyclerItemDecoration
 import com.yjhh.ppwbusiness.views.cui.SpaceItemDecoration
 import com.yjhh.ppwbusiness.views.evaluate.EvaluateManageFragment
@@ -34,20 +37,33 @@ import com.yjhh.ppwbusiness.views.product.ProductManagementFragment2
 import com.yjhh.ppwbusiness.views.reconciliation.ReconciliationFragment
 
 import kotlinx.android.synthetic.main.main1fragment.*
+import android.text.Spanned
+import android.text.style.AbsoluteSizeSpan
+import com.yjhh.ppwbusiness.utils.TextStyleUtils
+
 
 class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, OrderView {
 
 
     override fun onSuccess(model: OrderBean, flag: String) {
-        recyclerView2.adapter = OrderTaskAdapter(model.items)
+      //  recyclerView2.adapter = OrderTaskAdapter(model.items)
     }
 
     override fun onsuccessShopAdmin(bean: ShopAdminBean) {
-        tv_Turnover.text = bean.account.today.toString()
-        tv_YTurnover.text = bean.account.blance.toString()
+
+        val stringToday =    mActivity.getString(
+            R.string.rmb_price_double,
+            bean.account.today)
+        tv_Turnover.text = TextStyleUtils.changeTextAa(stringToday,stringToday.length-2,stringToday.length,20)
+
+        val  stringBlance = "昨日营业额  ${mActivity.getString(R.string.rmb_price_double,bean.account.blance)}"
+        tv_YTurnover.text = TextStyleUtils.changeTextColor(stringBlance,0,5,Color.parseColor("#8C8C8C"))
 
         tv_TOrder.text = bean.account.order.toString()
-        tv_YOrder.text = bean.account.yesOrder.toString()
+
+
+        val stringYesOrder = "昨日订单量  ${bean.account.yesOrder}"
+        tv_YOrder.text = TextStyleUtils.changeTextColor(stringYesOrder,0,5,Color.parseColor("#8C8C8C"))
     }
 
     override fun onFault(errorMsg: String?) {
@@ -78,11 +94,11 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
 
     val values = arrayOf("店铺设置", "商品管理", "评价管理", "活动中心", "资金对账")
     val images = arrayOf(
-        R.mipmap.ic_launcher,
-        R.mipmap.ic_launcher,
-        R.mipmap.ic_launcher,
-        R.mipmap.ic_launcher,
-        R.mipmap.ic_launcher
+        R.drawable.grid1,
+        R.drawable.grid2,
+        R.drawable.grid3,
+        R.drawable.grid4,
+        R.drawable.grid5
 
     )
 
@@ -104,7 +120,7 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
         recyclerView.layoutManager = GridLayoutManager(mActivity, 3)
         val mAdapter = Main1Adapter(lists)
         recyclerView.adapter = mAdapter
-        recyclerView.addItemDecoration(GridRecyclerItemDecoration(40))
+        recyclerView.addItemDecoration(RecyclerGridSpace(3,Color.parseColor("#ECECEC")))
         mAdapter.setOnItemClickListener { adapter, view, position ->
 
             when (position) {
@@ -151,7 +167,7 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
         OrderPresent(mActivity, this).orderTask("")
 
 
-        recyclerView2.layoutManager = LinearLayoutManager(mActivity)
+
 
 
     }

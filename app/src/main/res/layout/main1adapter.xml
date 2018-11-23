@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-
+                android:gravity="center"
                 android:layout_height="wrap_content">
 
-    <ImageView android:layout_width="50dp"
+    <ImageView android:layout_width="30.4pt"
                android:id="@+id/iv_image"
+               android:layout_marginTop="35pt"
                android:layout_centerHorizontal="true"
-               android:layout_height="50dp"/>
+               android:layout_height="30.4pt"/>
 
     <TextView android:layout_width="wrap_content"
+              android:layout_marginTop="7.6pt"
               android:id="@+id/tv_value"
               android:layout_below="@+id/iv_image"
               android:layout_centerHorizontal="true"
+              android:textColor="#FF333333"
+              android:textSize="12pt"
+              android:layout_marginBottom="19.6pt"
               android:gravity="center"
               android:layout_height="wrap_content"/>
 </RelativeLayout>

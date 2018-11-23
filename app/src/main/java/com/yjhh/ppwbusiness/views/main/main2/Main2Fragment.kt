@@ -10,6 +10,7 @@ import com.yjhh.ppwbusiness.base.BaseMainFragment
 import com.yjhh.ppwbusiness.views.product.Product2Fragment
 import com.yjhh.ppwbusiness.views.product.Product3Fragment
 import com.yjhh.ppwbusiness.views.product.ProductAllFragment
+import com.yjhh.ppwbusiness.views.reservation.ReservationOrderFragment
 import kotlinx.android.synthetic.main.main2fragment.*
 
 import java.util.*
@@ -30,6 +31,12 @@ class Main2Fragment : BaseMainFragment() {
         fagments.add(Main2_2Fragment())
         fagments.add(Main2_3Fragment())
         // fagments.add(Product4Fragment())
+        title.setOnClickListener {
+
+            (preFragment as BaseMainFragment).start(ReservationOrderFragment())
+        }
+
+
 
 
         mViewPager.adapter = MyPagerAdapter(childFragmentManager, fagments, mTitles)

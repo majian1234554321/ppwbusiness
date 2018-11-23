@@ -12,6 +12,11 @@ class Main1Adapter(data: List<Main1Fragment.Main1Bean>) :
         helper?.setImageResource(R.id.iv_image, item?.image!!)
 
         helper?.setText(R.id.tv_value, item?.value)
+
+
+
+
+
     }
 
 }

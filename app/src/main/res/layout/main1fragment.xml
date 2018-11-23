@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tl="http://schemas.android.com/apk/res-auto"
+
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools">
 
 
     <!--    <com.flyco.tablayout.SegmentTabLayout
@@ -24,126 +25,252 @@
                      android:layout_height="match_parent"/>-->
 
 
-    <TextView android:layout_width="match_parent" android:layout_height="48dp"
+    <TextView android:layout_width="match_parent"
               android:gravity="center"
+              android:background="@color/colorPrimary"
               android:id="@+id/tv_title"
-              android:text="XX商家"
+              android:layout_height="48dp"
+              android:text="海底捞火锅（光谷世界城店）"
+              android:textColor="#FFFFFFFF"
+              android:textSize="17pt"
     />
 
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_below="@id/tv_title"
-                  android:id="@+id/ll_head"
-                  android:background="@color/all_e"
-                  android:paddingTop="@dimen/spi_12"
-                  android:paddingBottom="@dimen/spi_12"
-                  android:orientation="horizontal"
-                  android:layout_height="wrap_content">
 
 
-        <LinearLayout android:layout_width="wrap_content"
-                      android:orientation="vertical"
-                      android:layout_weight="1"
-                      android:id="@+id/tv_setting"
-                      android:gravity="center"
+    <com.github.florent37.arclayout.ArcLayout
+            android:layout_below="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/arc"
+            app:arc_cropDirection="cropInside"
+            app:arc_height="25pt"
+            android:elevation="5dp"
+    >
 
-                      android:layout_height="wrap_content">
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                      android:text="今日营业额"
-            />
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_below="@id/tv_title"
+                      android:id="@+id/ll_head"
+                      android:background="@color/colorPrimary"
+                      android:paddingTop="20pt"
+                      android:paddingBottom="@dimen/spi_12"
+                      android:orientation="horizontal"
+                      android:layout_height="200dp">
 
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                      android:text="638.00"
-                      android:textSize="@dimen/spi_16"
-                      android:layout_margin="@dimen/spi_8"
-                      android:id="@+id/tv_Turnover"
-                      android:textStyle="bold"
-            />
 
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                      android:id="@+id/tv_YTurnover"
-                      android:text="昨日638.00"
-            />
+            <LinearLayout android:layout_width="wrap_content"
+                          android:orientation="vertical"
+                          android:layout_weight="1"
+                          android:id="@+id/tv_setting"
+                          android:gravity="center"
+
+                          android:layout_height="wrap_content">
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textColor="#FFBBBBBB"
+                          android:textSize="14pt"
+                          android:layout_marginBottom="8pt"
+                          android:text="今日营业额 (元)"
+                />
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          tools:text="638.00"
+                          android:textSize="33pt"
+
+                          android:id="@+id/tv_Turnover"
+                          android:textColor="@color/thj"
+                          android:textStyle="bold"
+                />
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:id="@+id/tv_YTurnover"
+                          android:layout_marginTop="24.5pt"
+                          android:textSize="14pt"
+                          android:text="昨日订单量"
+                          android:textColor="#99FFFFFF"
+                />
+
+            </LinearLayout>
+
+
+            <LinearLayout android:layout_width="wrap_content"
+                          android:orientation="vertical"
+                          android:layout_weight="1"
+                          android:gravity="center"
+                          android:layout_height="wrap_content">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="今日订单量 (单)"
+                          android:layout_marginBottom="8pt"
+                          android:textColor="#FFBBBBBB"
+                          android:textSize="14pt"
+                />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textStyle="bold"
+                          android:textSize="33pt"
+                          tools:text="0"
+                          android:textColor="@color/thj"
+
+                          android:id="@+id/tv_TOrder"
+                />
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="昨日订单量"
+                          android:layout_marginTop="24.5pt"
+                          android:textSize="14pt"
+                          android:textColor="#99FFFFFF"
+                          android:id="@+id/tv_YOrder"
+                />
+
+            </LinearLayout>
+
+
+            <LinearLayout android:layout_width="wrap_content"
+                          android:orientation="vertical"
+                          android:layout_weight="1"
+                          android:visibility="gone"
+                          android:gravity="center"
+                          android:layout_height="wrap_content">
+                <TextView android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:text="有效订单量(单)"
+                />
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="88"
+                          android:textStyle="bold"
+                />
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="昨日订单量"
+
+                />
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
-
-        <LinearLayout android:layout_width="wrap_content"
-                      android:orientation="vertical"
-                      android:layout_weight="1"
-                      android:gravity="center"
-                      android:layout_height="wrap_content">
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                      android:text="今日订单量(单)"
-            />
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                      android:textStyle="bold"
-                      android:text="88"
-                      android:textSize="@dimen/spi_16"
-                      android:layout_margin="@dimen/spi_8"
-                      android:id="@+id/tv_TOrder"
-            />
-
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                      android:text="昨日63"
-                      android:id="@+id/tv_YOrder"
-            />
-
-        </LinearLayout>
+    </com.github.florent37.arclayout.ArcLayout>
 
 
-        <LinearLayout android:layout_width="wrap_content"
-                      android:orientation="vertical"
-                      android:layout_weight="1"
-                      android:visibility="gone"
-                      android:gravity="center"
-                      android:layout_height="wrap_content">
-            <TextView android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:text="有效订单量(单)"
-            />
-
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                      android:text="88"
-                      android:textStyle="bold"
-            />
-
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                      android:text="昨日63"
-            />
-
-        </LinearLayout>
-
-
-    </LinearLayout>
 
 
     <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
                                             android:id="@+id/recyclerView"
-                                            android:layout_below="@+id/ll_head"
+                                            android:layout_marginTop="-25pt"
+                                            android:layout_below="@+id/arc"
                                             android:layout_height="wrap_content">
 
     </android.support.v7.widget.RecyclerView>
 
+    <View android:layout_width="match_parent"
+          android:layout_below="@+id/recyclerView"
+          android:id="@+id/view"
+          android:background="#ececec"
+          android:layout_height="9.9pt"/>
+
     <RelativeLayout android:layout_width="match_parent"
                     android:id="@+id/rl"
-                    android:layout_below="@+id/recyclerView"
+                    android:layout_marginTop="8pt"
+                    android:layout_marginLeft="12pt"
+                    android:layout_marginRight="12pt"
+                    android:layout_below="@+id/view"
+                   android:layout_marginBottom="12pt"
                     android:layout_height="wrap_content">
 
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:textColor="#FF333333"
+                  android:textSize="15pt"
                   android:text="订单提醒"
         />
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:text="查看更多"
+                  android:text="更多"
+                  android:drawableRight="@drawable/arrow_right_48"
+                  android:textColor="#FF999999"
+                  android:textSize="13pt"
                   android:id="@+id/tv_more"
                   android:layout_alignParentRight="true"
         />
     </RelativeLayout>
-    <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
-                                            android:layout_below="@+id/rl"
-                                            android:id="@+id/recyclerView2"
-                                            android:layout_height="match_parent"/>
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                 android:layout_below="@+id/rl"
+                  android:layout_marginLeft="12pt"
+                  android:layout_marginRight="12pt"
+                  android:orientation="horizontal"
+    >
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="即将到时"
+                    android:gravity="center"
+                    android:layout_marginBottom="5pt"
+                    android:textColor="#FF666666"
+                    android:textSize="14pt"
+            />
+
+
+            <com.yjhh.ppwbusiness.views.cui.SuperCircleView
+                    android:layout_width="82.5pt"
+                    app:outsideCircleRadius="41pt"
+                    app:outsideCircleColor = "#F1D4D4"
+                    app:outsideStrokeWidth="1pt"
+                    app:CircleLTextSize="18pt"
+                    app:CircleSTextSize="12pt"
+                    app:insideCircleRadius="35pt"
+                    app:insideCircleColor = "#FF8988"
+                    app:insideStrokeWidth="3pt"
+
+                    android:layout_height="82.5pt"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="今日预定"
+                    android:gravity="center"
+                    android:layout_marginBottom="5pt"
+                    android:textColor="#FF666666"
+                    android:textSize="14pt"
+            />
+
+
+            <com.yjhh.ppwbusiness.views.cui.SuperCircleView
+                    android:layout_width="82.5pt"
+                    app:outsideCircleRadius="41pt"
+                    app:outsideCircleColor = "#D0F0E3"
+                    app:outsideStrokeWidth="1pt"
+                    app:CircleLTextSize="18pt"
+                    app:CircleSTextSize="12pt"
+
+                    app:insideCircleRadius="35pt"
+                    app:insideCircleColor ="#20D990"
+                    app:insideStrokeWidth="3pt"
+                    android:layout_height="82.5pt"/>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
 
 
 </RelativeLayout>
