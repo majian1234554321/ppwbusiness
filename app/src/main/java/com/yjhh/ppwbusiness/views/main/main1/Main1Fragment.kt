@@ -1,6 +1,7 @@
 package com.yjhh.ppwbusiness.views.main.main1
 
 
+import android.Manifest
 import android.content.Intent
 import android.graphics.Color
 import android.media.Image
@@ -40,6 +41,7 @@ import kotlinx.android.synthetic.main.main1fragment.*
 import android.text.Spanned
 import android.text.style.AbsoluteSizeSpan
 import android.widget.Toast
+import com.tbruyelle.rxpermissions2.RxPermissions
 import com.uuzuche.lib_zxing.activity.CaptureActivity
 import com.yjhh.ppwbusiness.utils.TextStyleUtils
 
@@ -48,24 +50,25 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
 
 
     override fun onSuccess(model: OrderBean, flag: String) {
-      //  recyclerView2.adapter = OrderTaskAdapter(model.items)
+        //  recyclerView2.adapter = OrderTaskAdapter(model.items)
     }
 
     override fun onsuccessShopAdmin(bean: ShopAdminBean) {
 
-        val stringToday =    mActivity.getString(
+        val stringToday = mActivity.getString(
             R.string.rmb_price_double,
-            bean.account.today)
-        tv_Turnover.text = TextStyleUtils.changeTextAa(stringToday,stringToday.length-2,stringToday.length,20)
+            bean.account.today
+        )
+        tv_Turnover.text = TextStyleUtils.changeTextAa(stringToday, stringToday.length - 2, stringToday.length, 20)
 
-        val  stringBlance = "昨日营业额  ${mActivity.getString(R.string.rmb_price_double,bean.account.blance)}"
-        tv_YTurnover.text = TextStyleUtils.changeTextColor(stringBlance,0,5,Color.parseColor("#8C8C8C"))
+        val stringBlance = "昨日营业额  ${mActivity.getString(R.string.rmb_price_double, bean.account.blance)}"
+        tv_YTurnover.text = TextStyleUtils.changeTextColor(stringBlance, 0, 5, Color.parseColor("#8C8C8C"))
 
         tv_TOrder.text = bean.account.order.toString()
 
 
         val stringYesOrder = "昨日订单量  ${bean.account.yesOrder}"
-        tv_YOrder.text = TextStyleUtils.changeTextColor(stringYesOrder,0,5,Color.parseColor("#8C8C8C"))
+        tv_YOrder.text = TextStyleUtils.changeTextColor(stringYesOrder, 0, 5, Color.parseColor("#8C8C8C"))
     }
 
     override fun onFault(errorMsg: String?) {
@@ -85,10 +88,21 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
                 (parentFragment as MainFragment).mBottomBar.setCurrentItem(1)
             }
 
-            R.id.iv_scan->{
-                val intent = Intent(context, CaptureActivity::class.java)
+            R.id.iv_scan -> {
 
-                this@Main1Fragment.startActivityForResult(intent, 10086)
+
+                RxPermissions(this)
+                    .request(Manifest.permission.CAMERA)
+                    .subscribe {
+                        if (it) {
+                            val intent = Intent(context, CaptureActivity::class.java)
+                            this@Main1Fragment.startActivityForResult(intent, 10086)
+                        } else {
+                            Toast.makeText(mActivity, "请前往设置中心开启照相机权限", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+
             }
 
             else -> {
@@ -114,7 +128,7 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
 
         Main1Present(mActivity, this).ShopAdmin()
 
-        arrayOf(tv_setting, tv_more,iv_scan).forEach {
+        arrayOf(tv_setting, tv_more, iv_scan).forEach {
             it.setOnClickListener(this)
         }
 
@@ -128,7 +142,7 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
         recyclerView.layoutManager = GridLayoutManager(mActivity, 3)
         val mAdapter = Main1Adapter(lists)
         recyclerView.adapter = mAdapter
-        recyclerView.addItemDecoration(RecyclerGridSpace(3,Color.parseColor("#ECECEC")))
+        recyclerView.addItemDecoration(RecyclerGridSpace(3, Color.parseColor("#ECECEC")))
         mAdapter.setOnItemClickListener { adapter, view, position ->
 
             when (position) {
@@ -175,9 +189,6 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
         OrderPresent(mActivity, this).orderTask("")
 
 
-
-
-
     }
 
 
@@ -193,7 +204,7 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
                     val content = data?.getStringExtra("result_string")
 
 
-                    Toast.makeText(mActivity,content,Toast.LENGTH_SHORT).show()
+                    Toast.makeText(mActivity, content, Toast.LENGTH_SHORT).show()
                 }
             }
 

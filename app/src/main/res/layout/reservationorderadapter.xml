@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" xmlns:tools="http://schemas.android.com/tools">
+
+<TextView android:layout_width="wrap_content"
+          tools:text="李四"
+          android:id="@+id/tv_name"
+          android:layout_height="wrap_content"/>
+
+<TextView android:layout_width="wrap_content"
+          android:id="@+id/tv_phone"
+          tools:text="180000000000"
+          android:layout_alignParentRight="true"
+          android:layout_height="wrap_content"/>
+    <TextView android:layout_width="wrap_content"
+              android:layout_below="@+id/tv_name"
+              android:id="@+id/tv_info"
+              tools:text="人数1231321231132122112212213"
+              android:layout_height="wrap_content"/>
+
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              tools:text="已接受预约"
+              android:layout_below="@+id/tv_info"
+              android:id="@+id/tv_status"
+    />
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_below="@+id/tv_info"
+              android:layout_alignParentRight="true"
+              tools:text="查看详细"
+    />
+
+</RelativeLayout>

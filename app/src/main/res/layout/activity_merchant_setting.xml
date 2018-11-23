@@ -28,7 +28,7 @@
                   android:id="@+id/tv_save"
                   android:textSize="15pt"
                   android:paddingRight="@dimen/spi_12"
-                  android:textColor="@color/thj"
+                  android:textColor="@color/zthj"
                   android:layout_alignParentRight="true"
                   android:layout_centerInParent="true"
                   android:text="保存"
@@ -49,18 +49,21 @@
 
 
             <RelativeLayout android:layout_width="match_parent"
-                            android:padding="@dimen/spi_12"
+                            android:layout_marginLeft="24pt"
+                            android:layout_marginRight="24pt"
+                            android:layout_marginTop="7.5pt"
+                            android:layout_marginBottom="7.5pt"
                             android:layout_height="wrap_content">
 
-                <ImageView android:layout_width="60dp"
+                <de.hdodenhof.circleimageview.CircleImageView android:layout_width="51.5pt"
                            android:src="@mipmap/ic_launcher"
                            android:layout_alignParentRight="true"
-                           android:layout_height="60dp"
+                           android:layout_height="51.5pt"
                            android:id="@+id/iv_image"
                 />
 
                 <TextView android:layout_width="wrap_content"
-                          android:layout_marginLeft="@dimen/sp_12"
+
                           android:text="店铺图标"
                           android:textColor="#FF333333"
                           android:textSize="14pt"
@@ -231,6 +234,7 @@ android:maxLength="80"
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                           android:layout_alignParentBottom="true"
 android:layout_alignParentRight="true"
+                          android:id="@+id/text"
                           android:padding="@dimen/spi_12"
                           android:text="0/80"
                 />

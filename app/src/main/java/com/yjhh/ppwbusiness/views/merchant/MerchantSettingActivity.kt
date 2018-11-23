@@ -21,6 +21,7 @@ import android.util.ArrayMap
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.jakewharton.rxbinding2.widget.RxTextView
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.api.ApiServices
 import com.yjhh.ppwbusiness.api.ShopSetServices
@@ -124,6 +125,10 @@ class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetVie
             present?.editOpen(typeStatus)
 
 
+        }
+
+        RxTextView.textChanges(tv_shopDesc).subscribe {
+            text.text = "${it.toString().length}/80"
         }
 
     }
