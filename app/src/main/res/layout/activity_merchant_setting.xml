@@ -20,14 +20,15 @@
 
         <TextView android:layout_width="wrap_content"
                   android:text="店铺设置"
-                  android:textSize="@dimen/spi_16"
+                  android:textSize="17pt"
                   android:layout_centerInParent="true"
                   android:layout_height="wrap_content"/>
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                   android:id="@+id/tv_save"
-                  android:textSize="@dimen/sp_14"
+                  android:textSize="15pt"
                   android:paddingRight="@dimen/spi_12"
+                  android:textColor="@color/thj"
                   android:layout_alignParentRight="true"
                   android:layout_centerInParent="true"
                   android:text="保存"
@@ -35,7 +36,10 @@
 
 
     </RelativeLayout>
-
+    <View android:layout_width="match_parent" android:layout_height="1pt"
+          android:layout_gravity="center"
+          android:background="@color/e6"
+    />
 
     <android.support.v4.widget.NestedScrollView android:layout_width="match_parent"
                                                 android:layout_height="wrap_content">
@@ -50,27 +54,56 @@
 
                 <ImageView android:layout_width="60dp"
                            android:src="@mipmap/ic_launcher"
+                           android:layout_alignParentRight="true"
                            android:layout_height="60dp"
                            android:id="@+id/iv_image"
                 />
 
                 <TextView android:layout_width="wrap_content"
                           android:layout_marginLeft="@dimen/sp_12"
+                          android:text="店铺图标"
+                          android:textColor="#FF333333"
+                          android:textSize="14pt"
                           android:id="@+id/tv_shopName"
-                          tools:text="1212" android:layout_centerVertical="true"
-                          android:layout_toRightOf="@+id/iv_image"
+                         android:layout_centerVertical="true"
                           android:layout_height="wrap_content"/>
 
             </RelativeLayout>
+            <View android:layout_width="347pt" android:layout_height="1pt"
+                  android:layout_gravity="center"
+                  android:background="@color/e6"
+            />
+
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:text="商户名称"
+                      android:layout_marginTop="12pt"
+                      android:layout_marginBottom="9pt"
+
+                      android:textColor="#FF333333"
+                      android:textSize="14pt"
+                      android:layout_marginLeft="24pt"
+
+            />
+
+
+            <View android:layout_width="347pt" android:layout_height="1pt"
+                  android:layout_gravity="center"
+                  android:background="@color/e6"
+            />
 
 
             <RelativeLayout android:layout_width="match_parent"
-                            android:padding="@dimen/spi_12"
+                          android:layout_marginTop="12pt"
+                            android:layout_marginBottom="9pt"
+                            android:layout_marginRight="24pt"
                             android:layout_height="wrap_content">
 
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                           android:layout_centerVertical="true"
-                          android:textSize="@dimen/sp_14"
+                        android:paddingLeft="24pt"
+                          android:textColor="#FF333333"
+                          android:textSize="14pt"
+                          android:gravity="center"
                           android:text="店铺状态"
                 />
 
@@ -82,22 +115,40 @@
                         app:lib_pub_tbtn_colorPadding="@color/lib_pub_color_hint"
                         app:lib_pub_tbtn_colorThumb="@color/lib_pub_color_white"
                         app:lib_pub_tbtn_colorTrackOff="@color/lib_pub_color_white"
-                        app:lib_pub_tbtn_colorTrackOpen="@color/lib_pub_color_main_90"
+                        app:lib_pub_tbtn_colorTrackOpen="#4CD964"
                         app:lib_pub_tbtn_duration="250"
                         app:lib_pub_tbtn_padding="1.5dp"/>
 
             </RelativeLayout>
+            <View android:layout_width="347pt" android:layout_height="1pt"
+                  android:layout_gravity="center"
+                  android:background="@color/e6"
+            />
 
-
-            <com.yjhh.ppwbusiness.views.cui.ItemEntryView
-                    android:layout_width="match_parent"
-                    app:ievbackground="@color/white"
-                    app:ievtextValue="营业时间"
-                    android:paddingLeft="@dimen/spi_12"
+            <TextView
+                    android:layout_width="327pt"
+                    android:textColor="#FF333333"
+                    android:text="营业时间"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="12pt"
+                    android:layout_marginBottom="9pt"
+                    android:textSize="14pt"
+                    android:drawableRight="@drawable/arrow_right_48"
                     android:id="@+id/tv_setTime"
 
-                    app:ievtextColor="@color/all_9"
                     android:layout_height="wrap_content"/>
+
+            <TextView android:layout_width="327pt"
+                      android:textSize="12pt"
+                      android:layout_gravity="center"
+                      android:text="暂未设置"
+                      android:layout_marginBottom="8pt"
+                      android:layout_height="wrap_content"/>
+
+            <View android:layout_width="match_parent"
+                  android:background="#F8f8f8"
+                  android:layout_height="10pt"/>
+
 
             <com.yjhh.ppwbusiness.views.cui.ItemEntryView
                     android:layout_width="match_parent"
@@ -110,59 +161,84 @@
                     android:layout_height="wrap_content"/>
 
 
+
+
+
             <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                      android:text="商户名称"
-                      android:visibility="gone"
-                      android:layout_marginTop="@dimen/spi_12"
-                      android:layout_marginLeft="@dimen/spi_12"
-
+                      android:text="店铺电话"
+                      android:paddingLeft="24pt"
+                      android:layout_marginTop="12pt"
+                      android:layout_marginBottom="9pt"
+                      android:textColor="#FF333333"
+                      android:textSize="14pt"
             />
 
-            <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
-                      android:background="@drawable/stroke_frame"
-                      android:padding="4dp"
-                      android:visibility="gone"
-                      android:layout_margin="@dimen/spi_12"
+            <EditText android:layout_width="327pt" android:layout_height="39pt"
 
-            />
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                      android:text="商户电话"
-                      android:layout_marginLeft="@dimen/spi_12"
-            />
-
-            <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
-                      android:background="@drawable/stroke_frame"
-                      android:layout_margin="@dimen/spi_12"
+                      android:background="@drawable/stroke_frame_cd"
+                     android:layout_gravity="center"
                       android:id="@+id/tv_shopTel"
                       android:padding="4dp"
             />
 
             <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:text="商户地址"
+                      android:paddingLeft="24pt"
+                      android:textColor="#FF333333"
+                      android:layout_marginTop="12pt"
+                      android:textSize="14pt"
+                      android:layout_marginBottom="9pt"
 
-                      android:layout_marginLeft="@dimen/spi_12"
             />
 
-            <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
-                      android:background="@drawable/stroke_frame"
-                      android:layout_margin="@dimen/spi_12"
+            <EditText android:layout_width="327pt" android:layout_height="39pt"
+                      android:background="@drawable/stroke_frame_cd"
+                      android:layout_gravity="center"
+                      android:layout_marginTop="12pt"
+
+
+                      android:textColor="#FF333333"
                       android:id="@+id/tv_shopAddress"
                       android:padding="4dp"
             />
 
             <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                      android:layout_marginLeft="@dimen/spi_12"
 
+                      android:layout_marginTop="12pt"
+                      android:layout_marginBottom="9pt"
+                      android:paddingLeft="24pt"
+                      android:textSize="14pt"
+                      android:textColor="#FF333333"
                       android:text="商户描述"
             />
 
-            <EditText android:layout_width="match_parent" android:layout_height="180dp"
-                      android:gravity="left|top"
-                      android:id="@+id/tv_shopDesc"
-                      android:layout_margin="@dimen/spi_12"
-                      android:background="@drawable/stroke_frame"
-                      android:padding="@dimen/sp_12"
-            />
+
+            <RelativeLayout android:layout_width="327pt"
+                            android:layout_gravity="center"
+                            android:layout_height="125pt">
+
+                <EditText android:layout_width="327pt" android:layout_height="125pt"
+                          android:gravity="left|top"
+
+                          android:textSize="14pt"
+                          android:hint="限80字内"
+                          android:id="@+id/tv_shopDesc"
+android:maxLength="80"
+                          android:background="@drawable/stroke_frame_cd"
+                          android:padding="@dimen/sp_12"
+                />
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:layout_alignParentBottom="true"
+android:layout_alignParentRight="true"
+                          android:padding="@dimen/spi_12"
+                          android:text="0/80"
+                />
+
+
+            </RelativeLayout>
+
+
 
 
         </LinearLayout>

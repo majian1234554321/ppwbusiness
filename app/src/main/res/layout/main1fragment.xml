@@ -6,39 +6,45 @@
                 xmlns:tools="http://schemas.android.com/tools">
 
 
-    <!--    <com.flyco.tablayout.SegmentTabLayout
-                android:id="@+id/sTabLayout"
-                android:layout_width="150dp"
-                android:layout_centerHorizontal="true"
-                android:layout_height="40dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                tl:tl_bar_color="#ffffff"
-                tl:tl_indicator_color="#2C97DE"
-                tl:tl_indicator_corner_radius="8dp"
-                tl:tl_tab_padding="20dp"/>
 
 
-        <FrameLayout android:layout_width="match_parent"
-                     android:id="@+id/f_content"
-                     android:layout_below="@+id/sTabLayout"
-                     android:layout_height="match_parent"/>-->
 
 
-    <TextView android:layout_width="match_parent"
-              android:gravity="center"
-              android:background="@color/colorPrimary"
-              android:id="@+id/tv_title"
-              android:layout_height="48dp"
-              android:text="海底捞火锅（光谷世界城店）"
-              android:textColor="#FFFFFFFF"
-              android:textSize="17pt"
-    />
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:id="@+id/rl_head"
+                    android:layout_height="48dp">
+
+        <TextView android:layout_width="match_parent"
+                  android:gravity="center"
+                  android:background="@color/colorPrimary"
+                  android:id="@+id/tv_title"
+                  android:layout_height="48dp"
+                  android:text="海底捞火锅（光谷世界城店）"
+                  android:textColor="#FFFFFFFF"
+                  android:textSize="17pt"
+        />
+
+        <ImageView android:layout_width="20pt" android:layout_height="20pt"
+                   android:id="@+id/iv_scan"
+                   android:layout_alignParentRight="true"
+                   android:layout_centerVertical="true"
+                   android:layout_marginRight="12pt"
+                   android:src="@drawable/iv_scan"
+        />
+
+
+    </RelativeLayout>
+
+
+
+
+
 
 
 
     <com.github.florent37.arclayout.ArcLayout
-            android:layout_below="@+id/tv_title"
+            android:layout_below="@+id/rl_head"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/arc"

@@ -39,6 +39,8 @@ import com.yjhh.ppwbusiness.views.reconciliation.ReconciliationFragment
 import kotlinx.android.synthetic.main.main1fragment.*
 import android.text.Spanned
 import android.text.style.AbsoluteSizeSpan
+import android.widget.Toast
+import com.uuzuche.lib_zxing.activity.CaptureActivity
 import com.yjhh.ppwbusiness.utils.TextStyleUtils
 
 
@@ -83,6 +85,12 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
                 (parentFragment as MainFragment).mBottomBar.setCurrentItem(1)
             }
 
+            R.id.iv_scan->{
+                val intent = Intent(context, CaptureActivity::class.java)
+
+                this@Main1Fragment.startActivityForResult(intent, 10086)
+            }
+
             else -> {
             }
         }
@@ -106,7 +114,7 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
 
         Main1Present(mActivity, this).ShopAdmin()
 
-        arrayOf(tv_setting, tv_more).forEach {
+        arrayOf(tv_setting, tv_more,iv_scan).forEach {
             it.setOnClickListener(this)
         }
 
@@ -170,6 +178,26 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
 
 
 
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+
+
+        when (requestCode) {
+            10086 -> {
+                if (data != null) {
+
+                    val content = data?.getStringExtra("result_string")
+
+
+                    Toast.makeText(mActivity,content,Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        }
     }
 
 

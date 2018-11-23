@@ -16,6 +16,6 @@
         app:tabSelectedTextColor="@color/colorPrimary"
         app:tabBackground="@color/white"
         app:tabGravity="center"
-        android:layout_height="70dp"/>
+        android:layout_height="60dp"/>
 
 </LinearLayout>
