@@ -56,10 +56,10 @@
                             android:layout_height="wrap_content">
 
                 <de.hdodenhof.circleimageview.CircleImageView android:layout_width="51.5pt"
-                           android:src="@mipmap/ic_launcher"
-                           android:layout_alignParentRight="true"
-                           android:layout_height="51.5pt"
-                           android:id="@+id/iv_image"
+                                                              android:src="@mipmap/ic_launcher"
+                                                              android:layout_alignParentRight="true"
+                                                              android:layout_height="51.5pt"
+                                                              android:id="@+id/iv_image"
                 />
 
                 <TextView android:layout_width="wrap_content"
@@ -68,7 +68,7 @@
                           android:textColor="#FF333333"
                           android:textSize="14pt"
                           android:id="@+id/tv_shopName"
-                         android:layout_centerVertical="true"
+                          android:layout_centerVertical="true"
                           android:layout_height="wrap_content"/>
 
             </RelativeLayout>
@@ -96,14 +96,14 @@
 
 
             <RelativeLayout android:layout_width="match_parent"
-                          android:layout_marginTop="12pt"
+                            android:layout_marginTop="12pt"
                             android:layout_marginBottom="9pt"
                             android:layout_marginRight="24pt"
                             android:layout_height="wrap_content">
 
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                           android:layout_centerVertical="true"
-                        android:paddingLeft="24pt"
+                          android:paddingLeft="24pt"
                           android:textColor="#FF333333"
                           android:textSize="14pt"
                           android:gravity="center"
@@ -164,9 +164,6 @@
                     android:layout_height="wrap_content"/>
 
 
-
-
-
             <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:text="店铺电话"
                       android:paddingLeft="24pt"
@@ -179,7 +176,7 @@
             <EditText android:layout_width="327pt" android:layout_height="39pt"
 
                       android:background="@drawable/stroke_frame_cd"
-                     android:layout_gravity="center"
+                      android:layout_gravity="center"
                       android:id="@+id/tv_shopTel"
                       android:padding="4dp"
             />
@@ -218,6 +215,7 @@
 
             <RelativeLayout android:layout_width="327pt"
                             android:layout_gravity="center"
+                            android:paddingBottom="12pt"
                             android:layout_height="125pt">
 
                 <EditText android:layout_width="327pt" android:layout_height="125pt"
@@ -226,14 +224,14 @@
                           android:textSize="14pt"
                           android:hint="限80字内"
                           android:id="@+id/tv_shopDesc"
-android:maxLength="80"
+                          android:maxLength="80"
                           android:background="@drawable/stroke_frame_cd"
                           android:padding="@dimen/sp_12"
                 />
 
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                           android:layout_alignParentBottom="true"
-android:layout_alignParentRight="true"
+                          android:layout_alignParentRight="true"
                           android:id="@+id/text"
                           android:padding="@dimen/spi_12"
                           android:text="0/80"
@@ -241,8 +239,6 @@ android:layout_alignParentRight="true"
 
 
             </RelativeLayout>
-
-
 
 
         </LinearLayout>

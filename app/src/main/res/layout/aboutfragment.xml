@@ -37,7 +37,7 @@
 
         <com.yjhh.ppwbusiness.views.cui.ItemEntryView android:layout_width="match_parent"
                                                       android:id="@+id/iev_1"
-                                                      app:ievtextColor="@color/all_9"
+                                                      app:ievtextColor="@color/all_3"
                                                       app:ievtextValue="加盟合作"
                                                       app:ievbackground="@color/white"
 
@@ -49,7 +49,7 @@
         <com.yjhh.ppwbusiness.views.cui.ItemEntryView android:layout_width="match_parent"
                                                       android:id="@+id/iev_2"
                                                       app:ievtextpadding="@dimen/sp_12"
-                                                      app:ievtextColor="@color/all_9"
+                                                      app:ievtextColor="@color/all_3"
                                                       app:ievtextValue="帮助中心"
                                                       app:ievbackground="@color/white"
                                                       app:ievunderline="true"
@@ -57,7 +57,7 @@
 
         <com.yjhh.ppwbusiness.views.cui.ItemEntryView android:layout_width="match_parent"
                                                       android:id="@+id/iev_3"
-                                                      app:ievtextColor="@color/all_9"
+                                                      app:ievtextColor="@color/all_3"
                                                       app:ievbackground="@color/white"
                                                       app:ievtextValue="意见反馈"
                                                       app:ievtextpadding="@dimen/sp_12"
@@ -66,7 +66,7 @@
         <com.yjhh.ppwbusiness.views.cui.ItemEntryView android:layout_width="match_parent"
                                                       android:id="@+id/iev_4"
                                                       app:ievtextpadding="@dimen/sp_12"
-                                                      app:ievtextColor="@color/all_9"
+                                                      app:ievtextColor="@color/all_3"
                                                       app:ievbackground="@color/white"
                                                       app:ievtextValue="协议中心"
                                                       app:ievunderline="true"
@@ -74,7 +74,7 @@
         <com.yjhh.ppwbusiness.views.cui.ItemEntryView android:layout_width="match_parent"
                                                       android:id="@+id/iev_5"
                                                       app:ievtextpadding="@dimen/sp_12"
-                                                      app:ievtextColor="@color/all_9"
+                                                      app:ievtextColor="@color/all_3"
                                                       app:ievbackground="@color/white"
 
                                                       app:ievtextValue="服务热线"

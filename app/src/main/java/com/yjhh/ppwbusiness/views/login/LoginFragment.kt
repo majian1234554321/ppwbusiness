@@ -55,7 +55,7 @@ class LoginFragment : BaseFragment(), View.OnClickListener, LoginView {
         mActivity.finish()
     }
 
-    val identity = "2"//2商户
+    val identity = ""//2商户
 
 
     override fun onClick(v: View?) {

@@ -45,7 +45,6 @@ android {
         }
     }
 
-
     /*配置渠道*/
 
 
@@ -66,7 +65,6 @@ android {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "xiaomi"]
         }
     }
-
 
 
 }
@@ -95,7 +93,7 @@ dependencies {
     api 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     api 'com.squareup.okhttp3:okhttp:3.11.0'
     api 'com.squareup.okio:okio:2.1.0'
-     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
+    implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
     api 'com.google.code.gson:gson:2.8.2'
     api 'com.alibaba:arouter-api:1.4.0'
     kapt 'com.alibaba:arouter-compiler:1.2.1'
@@ -137,6 +135,6 @@ dependencies {
     implementation 'com.umeng.sdk:utdid:1.1.5.3'
     //PushSDK
     implementation 'com.umeng.sdk:push:4.2.0'
-    implementation 'com.github.florent37:arclayout:1.0.3'
+    implementation(name: 'arclayout-release', ext: 'aar' )
     implementation project(':lib-zxing')
 }

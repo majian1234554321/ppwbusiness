@@ -5,9 +5,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+    <TextView android:layout_width="match_parent" android:layout_height="44pt"
+              android:background="@color/colorPrimary"
+              android:id="@+id/tv_head"
+    />
+
 
     <LinearLayout android:layout_width="match_parent"
+                  android:layout_below="@+id/tv_head"
                   android:orientation="vertical"
+
 
                   android:layout_height="match_parent">
 
@@ -88,7 +95,7 @@
                 app:ievdrwableleft="@drawable/icon_xiaoxi"
                 app:ievtextpadding="@dimen/sp_12"
                 app:ievbackground="@color/white"
-                app:ievtextColor="@color/all_9"
+                app:ievtextColor="@color/all_3"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
         />
 
@@ -124,7 +131,7 @@
                 app:ievtextValue="关于我们"
                 app:ievdrwableleft="@drawable/icon_guanyu"
                 app:ievbackground="@color/white"
-                app:ievtextColor="@color/all_9"
+                app:ievtextColor="@color/all_3"
                 app:ievunderline="true"
                 app:ievtextpadding="@dimen/sp_12"
                 android:layout_width="match_parent" android:layout_height="wrap_content"/>
@@ -136,7 +143,7 @@
                 app:ievdrwableleft="@drawable/icon_zhanghu"
                 app:ievbackground="@color/white"
                 app:ievtextpadding="@dimen/sp_12"
-                app:ievtextColor="@color/all_9"
+                app:ievtextColor="@color/all_3"
                 android:layout_width="match_parent" android:layout_height="wrap_content"/>
 
         <com.yjhh.ppwbusiness.views.cui.ItemEntryView
@@ -147,7 +154,7 @@
                 app:ievdrwableleft="@drawable/icon_banben"
                 app:ievbackground="@color/white"
 
-                app:ievtextColor="@color/all_9"
+                app:ievtextColor="@color/all_3"
                 android:layout_width="match_parent" android:layout_height="wrap_content"/>
 
 

@@ -79,7 +79,7 @@ class LoginSMSFragment : BaseFragment(), PasswordView, View.OnClickListener {
     }
 
 
-    val identity = "2"//身份（即客户端类型，0用户 1骑手 2商户）
+    val identity = ""//身份（即客户端类型，0用户 1骑手 2商户）
     val TYPE = "1"//1登录 2注册 21 重置密码 22找回密码
     val refId = "";//推荐人ID/phone
     val MAX_COUNT_TIME = 5L

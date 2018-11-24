@@ -128,7 +128,7 @@ class BusinessHoursActivity : AppCompatActivity() {
         pvNoLinkOptions = OptionsPickerBuilder(this,
             OnOptionsSelectListener { options1, options2, options3, v ->
                 //返回的分别是三个级别的选中位置
-                Toast.makeText(this, "$options1,$options2,$options3", Toast.LENGTH_SHORT).show()
+              //  Toast.makeText(this, "$options1,$options2,$options3", Toast.LENGTH_SHORT).show()
 
 
                 val sb = StringBuilder()

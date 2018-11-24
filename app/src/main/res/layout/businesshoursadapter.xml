@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:orientation="horizontal"
-              android:gravity="center"
-              android:layout_width="match_parent" android:layout_height="wrap_content">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:orientation="horizontal"
+                android:paddingTop="7pt"
+                android:paddingBottom="7pt"
+                android:layout_width="match_parent" android:layout_height="wrap_content">
 
     <TextView android:layout_width="78pt"
               tools:text="08:00"
               android:gravity="center"
               android:textSize="14pt"
               android:textStyle="bold"
+              android:layout_toLeftOf="@+id/tv_mid"
               android:background="@drawable/stroke_frame_97"
               android:textColor="@color/all_6"
               android:id="@+id/tv_sTime"
@@ -18,13 +20,17 @@
               android:layout_height="wrap_content"/>
     <TextView android:layout_width="wrap_content" android:gravity="center"
               android:text="至"
+              android:id="@+id/tv_mid"
               android:textColor="@color/all_6"
-              android:layout_margin="@dimen/spi_12"
+              android:layout_centerInParent="true"
+              android:layout_marginLeft="30pt"
+              android:layout_marginRight="30pt"
               android:layout_height="wrap_content"/>
 
     <TextView android:layout_width="78pt" android:gravity="center"
               tools:text="09:00"
               android:textSize="14pt"
+              android:layout_toRightOf="@+id/tv_mid"
               android:textStyle="bold"
               android:textColor="@color/all_6"
               android:id="@+id/tv_eTime"
@@ -32,10 +38,13 @@
               android:layout_marginRight="@dimen/spi_12"
               android:layout_height="wrap_content"/>
 
-    <TextView android:layout_width="wrap_content" android:gravity="center"
-              android:text="删除"
-              android:textColor="@color/all_6"
-              android:id="@+id/tv_delete"
-              android:layout_height="wrap_content"/>
+    <ImageView android:layout_width="12pt" android:gravity="center"
+               android:background="@drawable/icon_delete"
+               android:textColor="@color/all_6"
+               android:layout_alignParentRight="true"
+              android:layout_centerVertical="true"
+               android:layout_marginRight="12pt"
+               android:id="@+id/tv_delete"
+               android:layout_height="12pt"/>
 
-</LinearLayout>
+</RelativeLayout>
