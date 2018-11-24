@@ -1,39 +1,41 @@
 package com.yjhh.ppwbusiness.adapter
 
+import android.content.Context
+import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.widget.ImageView
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.BaseViewHolder
-import com.yjhh.ppwbusiness.BaseApplication.context
+import android.view.ViewGroup
+
+import com.yjhh.ppwbusiness.BaseApplication
+
 import com.yjhh.ppwbusiness.R
-import com.yjhh.ppwbusiness.R.layout.item
+import com.yjhh.ppwbusiness.R.id.*
+
 import com.yjhh.ppwbusiness.utils.ImageLoaderUtils
 
-class ProductAdd(var lists: List<String>) : BaseQuickAdapter<String, BaseViewHolder>(R.layout.images, lists) {
-    override fun convert(helper: BaseViewHolder?, item: String?) {
-
-        helper?.addOnClickListener(R.id.iv_delete)
-
+class ProductAdd(var context: Context, var lists: List<String>) : RecyclerView.Adapter<ProductAdd.ViewHolder>() {
+    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
+        val view = View.inflate(context, R.layout.images, null);
+        return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-        super.onBindViewHolder(holder, position)
+    override fun getItemCount(): Int = when {
+        lists.size >= 3 -> 3
+        else -> 1 + lists.size
+    }
 
+    override fun onBindViewHolder(holder: ViewHolder, adapterPosition: Int) {
 
-        val iv = (holder?.getView<View>(R.id.iv) as ImageView)
-
-        val iv_delete = (holder.getView<View>(R.id.iv_delete) as ImageView)
 
         if (holder.adapterPosition == itemCount) {
             ImageLoaderUtils.loadImgId(
-                context,
-                iv,
+                BaseApplication.context,
+                holder.iv,
                 R.mipmap.ic_launcher_round,
                 R.mipmap.ic_launcher_round,
                 R.mipmap.ic_launcher_round,
                 0
             )
-            iv_delete.visibility = View.GONE
+            holder.iv_delete.visibility = View.GONE
 
 
             if (holder.adapterPosition == 3) {
@@ -43,26 +45,30 @@ class ProductAdd(var lists: List<String>) : BaseQuickAdapter<String, BaseViewHol
             }
 
         } else {
-            ImageLoaderUtils.load(context, iv, item, R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round, 0)
-            iv_delete.visibility = View.VISIBLE
+            ImageLoaderUtils.load(
+                BaseApplication.context,
+                holder.iv,
+                lists.get(position),
+                R.mipmap.ic_launcher_round,
+                R.mipmap.ic_launcher_round,
+                0
+            )
+            holder.iv_delete.visibility = View.VISIBLE
         }
-
 
 
     }
 
-
-
-    override fun getItemCount(): Int {
-        return when {
-            lists.size >= 3 -> 3
-            else -> 1 + lists.size
-        }
-    }
-
-
-
-
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
 
 }
+
+
+
+
+
+
+
+
+
