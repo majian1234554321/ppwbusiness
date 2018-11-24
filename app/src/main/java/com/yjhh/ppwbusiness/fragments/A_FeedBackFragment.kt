@@ -242,7 +242,7 @@ class A_FeedBackFragment : BaseFragment(), View.OnClickListener, CommonView {
                     if ("photo" == string) {
                         mPublicPhotoPath = PhotoUtils.takePhote(this@A_FeedBackFragment, mActivity, 10084)
                     } else {
-                        PhotoUtils.selectPhoto(this@A_FeedBackFragment, 10085)
+                        PhotoUtils.selectPhoto(this@A_FeedBackFragment, 9-lists.size,10085)
                     }
 
                     Log.i("requestRuntime", "onGranted")
@@ -264,7 +264,7 @@ class A_FeedBackFragment : BaseFragment(), View.OnClickListener, CommonView {
             if ("photo" == string) {
                 mPublicPhotoPath = PhotoUtils.takePhote(this@A_FeedBackFragment, mActivity, 10084)
             } else {
-                PhotoUtils.selectPhoto(this@A_FeedBackFragment, 10085)
+                PhotoUtils.selectPhoto(this@A_FeedBackFragment, 9-lists.size,10085)
             }
 
         }

@@ -16,6 +16,8 @@ import com.yjhh.ppwbusiness.BaseApplication.context
 import com.yjhh.ppwbusiness.R
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
+import com.zhihu.matisse.engine.impl.PicassoEngine
+import com.zhihu.matisse.filter.Filter
 import com.zhihu.matisse.internal.entity.CaptureStrategy
 import java.io.File
 import java.io.IOException
@@ -23,40 +25,53 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 object PhotoUtils {
-    fun selectPhoto(fragment: Fragment, code: Int) {
+    fun selectPhoto(fragment: Fragment,  max:Int, code: Int) {
+
+//        Matisse.from(fragment)
+//            .choose(MimeType.ofAll(), false)
+//            .countable(true)
+//            .capture(true)
+//            .captureStrategy(
+//                CaptureStrategy(true, "com.yjhh.ppwcustomer.fileProvider")
+//            )
+//            .maxSelectable(1)
+//            //.addFilter(GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
+//            .gridExpectedSize(
+//                fragment.resources.getDimensionPixelSize(R.dimen.grid_expected_size)
+//            )
+//            .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+//            .thumbnailScale(0.85f)
+//            //                                            .imageEngine(new GlideEngine())  // for glide-V3
+//            .imageEngine(Glide4Engine())    // for glide-V4
+//
+//            .originalEnable(true)
+//            .maxOriginalSize(10)
+//
+//
+//            .forResult(code)
+
 
         Matisse.from(fragment)
-            .choose(MimeType.ofAll(), false)
-            .countable(true)
-            .capture(true)
-            .captureStrategy(
-                CaptureStrategy(true, "com.yjhh.ppwcustomer.fileProvider")
-            )
-            .maxSelectable(1)
-            //.addFilter(GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
-            .gridExpectedSize(
-                fragment.resources.getDimensionPixelSize(R.dimen.grid_expected_size)
-            )
-            .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
-            .thumbnailScale(0.85f)
-            //                                            .imageEngine(new GlideEngine())  // for glide-V3
-            .imageEngine(Glide4Engine())    // for glide-V4
-
+            .choose(MimeType.ofImage())
+            .theme(R.style.Matisse_Dracula)
+            .countable(false)
+//            .captureStrategy(
+//                CaptureStrategy(true, "com.yjhh.ppwcustomer.fileProvider")
+//            )
+            // .addFilter(GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
+            .maxSelectable(max)
             .originalEnable(true)
             .maxOriginalSize(10)
-
-
+            .imageEngine(Glide4Engine())
             .forResult(code)
 
     }
 
 
+    fun takePhote(fragment: Fragment, mActivity: Activity, code: Int): String? {
 
 
-    fun takePhote(fragment: Fragment, mActivity: Activity,code :Int):String? {
-
-
-        var mPublicPhotoPath :String? = null
+        var mPublicPhotoPath: String? = null
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         //判断是否有相机应用
         if (takePictureIntent.resolveActivity(mActivity.packageManager) != null) {
@@ -68,14 +83,14 @@ object PhotoUtils {
                 val timeStamp =
                     SimpleDateFormat("yyyyMMdd_HHmmss", Locale.CHINA).format(Date())
                 //文件路径是公共的DCIM目录下的/camerademo目录
-               var storagePath = Environment
+                var storagePath = Environment
                     .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
                     .getAbsolutePath() + File.separator + "camerademo"
 
-               var storageDir = File(storagePath)
+                var storageDir = File(storagePath)
                 storageDir.mkdirs()
                 photoFile = File.createTempFile(timeStamp, ".jpg", storageDir);
-                mPublicPhotoPath = photoFile.getAbsolutePath()
+                mPublicPhotoPath = photoFile.absolutePath
 
 
             } catch (e: IOException) {
@@ -111,13 +126,9 @@ object PhotoUtils {
             context.sendBroadcast(mediaScanIntent)
         }
 
-        return  mPublicPhotoPath
+        return mPublicPhotoPath
 
     }
-
-
-
-
 
 
 }

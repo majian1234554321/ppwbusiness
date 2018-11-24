@@ -102,19 +102,16 @@ class ProductAddFragment : BaseFragment(), CommonView {
             et_desc.setText(objectValue.describe)
 
         }
-
-
-        recyclerView.layoutManager = GridLayoutManager(mActivity, 3)
-
         lists.add("EMPTY")
-
+        recyclerView.addItemDecoration(GridRecyclerItemDecoration(40))
+        recyclerView.layoutManager = GridLayoutManager(mActivity, 3)
         mAdapter = ProductAdd(lists)
         recyclerView.adapter = mAdapter
 
 
         toggle.setOnToggleListener { }
 
-        recyclerView.addItemDecoration(GridRecyclerItemDecoration(40))
+
 
         mAdapter?.setOnItemClickListener { adapter, view, position ->
 
@@ -137,11 +134,11 @@ class ProductAddFragment : BaseFragment(), CommonView {
 
             lists.removeAt(position)
             if (lists.size == 0) {
-                lists.add("EMPTY")
+
             }
 
             if (lists.size < 3 && !lists.contains("EMPTY")) {
-                lists.add("EMPTY")
+
             }
 
             mAdapter?.setNewData(lists)
@@ -186,7 +183,7 @@ class ProductAddFragment : BaseFragment(), CommonView {
                                         et_price.text.clear()
                                         et_desc.text.clear()
                                         lists.clear()
-                                        lists.add("EMPTY")
+
                                         mAdapter?.notifyDataSetChanged()
                                     }, { dlg, v ->
                                         mActivity.onBackPressed()
@@ -270,7 +267,7 @@ class ProductAddFragment : BaseFragment(), CommonView {
                     if ("photo" == string) {
                         mPublicPhotoPath = PhotoUtils.takePhote(this@ProductAddFragment, mActivity, 10084)
                     } else {
-                        PhotoUtils.selectPhoto(this@ProductAddFragment, 10085)
+                        PhotoUtils.selectPhoto(this@ProductAddFragment, 3 - lists.size, 10085)
                     }
 
                     Log.i("requestRuntime", "onGranted")
@@ -292,7 +289,7 @@ class ProductAddFragment : BaseFragment(), CommonView {
             if ("photo" == string) {
                 mPublicPhotoPath = PhotoUtils.takePhote(this@ProductAddFragment, mActivity, 10084)
             } else {
-                PhotoUtils.selectPhoto(this@ProductAddFragment, 10085)
+                PhotoUtils.selectPhoto(this@ProductAddFragment, 3 - lists.size, 10085)
             }
 
         }
