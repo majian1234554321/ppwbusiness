@@ -8,13 +8,13 @@ import android.view.ViewGroup
 import com.yjhh.ppwbusiness.BaseApplication
 
 import com.yjhh.ppwbusiness.R
-import com.yjhh.ppwbusiness.R.id.*
+import kotlinx.android.synthetic.main.images.view.*
 
 import com.yjhh.ppwbusiness.utils.ImageLoaderUtils
 
 class ProductAdd(var context: Context, var lists: List<String>) : RecyclerView.Adapter<ProductAdd.ViewHolder>() {
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
-        val view = View.inflate(context, R.layout.images, null);
+        val view = View.inflate(context, R.layout.images, null)
         return ViewHolder(view)
     }
 
@@ -26,16 +26,16 @@ class ProductAdd(var context: Context, var lists: List<String>) : RecyclerView.A
     override fun onBindViewHolder(holder: ViewHolder, adapterPosition: Int) {
 
 
-        if (holder.adapterPosition == itemCount) {
+        if (holder.adapterPosition == lists.size) {
             ImageLoaderUtils.loadImgId(
                 BaseApplication.context,
-                holder.iv,
+                holder.itemView.iv,
                 R.mipmap.ic_launcher_round,
                 R.mipmap.ic_launcher_round,
                 R.mipmap.ic_launcher_round,
                 0
             )
-            holder.iv_delete.visibility = View.GONE
+            holder.itemView.iv_delete.visibility = View.GONE
 
 
             if (holder.adapterPosition == 3) {
@@ -47,13 +47,13 @@ class ProductAdd(var context: Context, var lists: List<String>) : RecyclerView.A
         } else {
             ImageLoaderUtils.load(
                 BaseApplication.context,
-                holder.iv,
-                lists.get(position),
+                holder.itemView.iv,
+                lists[adapterPosition],
                 R.mipmap.ic_launcher_round,
                 R.mipmap.ic_launcher_round,
                 0
             )
-            holder.iv_delete.visibility = View.VISIBLE
+            holder.itemView.iv_delete.visibility = View.VISIBLE
         }
 
 

@@ -102,10 +102,10 @@ class ProductAddFragment : BaseFragment(), CommonView {
             et_desc.setText(objectValue.describe)
 
         }
-        lists.add("EMPTY")
+
         recyclerView.addItemDecoration(GridRecyclerItemDecoration(40))
         recyclerView.layoutManager = GridLayoutManager(mActivity, 3)
-        mAdapter = ProductAdd(lists)
+        mAdapter = ProductAdd(mActivity,lists)
         recyclerView.adapter = mAdapter
 
 
@@ -113,7 +113,7 @@ class ProductAddFragment : BaseFragment(), CommonView {
 
 
 
-        mAdapter?.setOnItemClickListener { adapter, view, position ->
+      /*  mAdapter?.setOnItemClickListener { adapter, view, position ->
 
             if (lists[position] == "EMPTY") {
                 //拍照或者选择照片
@@ -124,12 +124,12 @@ class ProductAddFragment : BaseFragment(), CommonView {
             }
         }
 
+*/
 
 
 
 
-
-        mAdapter?.setOnItemChildClickListener { adapter, view, position ->
+       /* mAdapter?.setOnItemChildClickListener { adapter, view, position ->
 
 
             lists.removeAt(position)
@@ -144,7 +144,7 @@ class ProductAddFragment : BaseFragment(), CommonView {
             mAdapter?.setNewData(lists)
 
         }
-
+*/
 
 
 
@@ -318,7 +318,7 @@ class ProductAddFragment : BaseFragment(), CommonView {
             }
 
 
-            mAdapter?.setNewData(lists)
+           // mAdapter?.setNewData(lists)
 
             present?.UpLoadFile(file)
 
@@ -342,7 +342,7 @@ class ProductAddFragment : BaseFragment(), CommonView {
                 lists.removeAt(lists.lastIndex)
             }
 
-            mAdapter?.setNewData(lists)
+           // mAdapter?.setNewData(lists)
             present?.UpLoadFile(file)
 
         }
