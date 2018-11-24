@@ -103,6 +103,10 @@ class ProductAddFragment : BaseFragment(), CommonView {
 
         }
 
+        lists.add("AA")
+        lists.add("AA")
+        lists.add("AA")
+
         recyclerView.addItemDecoration(GridRecyclerItemDecoration(40))
         recyclerView.layoutManager = GridLayoutManager(mActivity, 3)
         mAdapter = ProductAdd(mActivity,lists)
