@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:orientation="vertical"
+                android:background="@color/white"
                 android:layout_width="match_parent" android:layout_height="match_parent">
 
     <com.yjhh.ppwbusiness.views.cui.TitleBarView android:layout_width="match_parent"
@@ -12,9 +13,9 @@
 
     <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
                                             android:id="@+id/recyclerView"
-                                            android:layout_marginLeft="12.5dp"
+
                                             android:background="@color/all_e"
-                                            android:layout_marginRight="18.5dp"
+
                                             android:layout_below="@+id/tbv_title"
                                             android:layout_above="@+id/rl_send"
                                             android:layout_height="match_parent"/>

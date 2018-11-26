@@ -4,10 +4,13 @@ import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import com.chad.library.adapter.base.BaseViewHolder
 
 import com.yjhh.ppwbusiness.BaseApplication
 
 import com.yjhh.ppwbusiness.R
+import com.yjhh.ppwbusiness.interfaces.OnRecycleViewItemChildClickListener
+import com.yjhh.ppwbusiness.interfaces.OnRecycleViewItemClickListener
 import kotlinx.android.synthetic.main.images.view.*
 
 import com.yjhh.ppwbusiness.utils.ImageLoaderUtils
@@ -30,20 +33,14 @@ class ProductAdd(var context: Context, var lists: List<String>) : RecyclerView.A
             ImageLoaderUtils.loadImgId(
                 BaseApplication.context,
                 holder.itemView.iv,
-                R.mipmap.ic_launcher_round,
-                R.mipmap.ic_launcher_round,
-                R.mipmap.ic_launcher_round,
+                R.drawable.ic_upload,
+                R.drawable.ic_upload,
+                R.drawable.ic_upload,
                 0
             )
             holder.itemView.iv_delete.visibility = View.GONE
 
-
-            if (holder.adapterPosition == 3) {
-
-            } else {
-
-            }
-
+            holder.itemView.setOnClickListener { v -> mOnItemClickListener?.onRecycleViewItemClick(v, adapterPosition,false) }
         } else {
             ImageLoaderUtils.load(
                 BaseApplication.context,
@@ -54,12 +51,33 @@ class ProductAdd(var context: Context, var lists: List<String>) : RecyclerView.A
                 0
             )
             holder.itemView.iv_delete.visibility = View.VISIBLE
+
+
+            holder.itemView.iv_delete.setOnClickListener { v ->
+                mOnItemChildClickListener?.onItemChildClick(v, adapterPosition)
+            }
+            holder.itemView.setOnClickListener { v -> mOnItemClickListener?.onRecycleViewItemClick(v, adapterPosition,true) }
         }
+
+
 
 
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
+    fun setOnItemClickListener(listener: OnRecycleViewItemClickListener?) {
+        this.mOnItemClickListener = listener
+    }
+
+
+    fun setOnItemChildClickListener(listener: OnRecycleViewItemChildClickListener) {
+        this.mOnItemChildClickListener = listener
+    }
+
+    private var mOnItemClickListener: OnRecycleViewItemClickListener? = null
+    private var mOnItemChildClickListener: OnRecycleViewItemChildClickListener? = null
+
+    class ViewHolder(itemView: View) : BaseViewHolder(itemView)
 
 
 }

@@ -10,7 +10,10 @@
                                                  app:textColor="@color/white"
                                                  android:layout_height="wrap_content"/>
 
-    <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
+    <android.support.v7.widget.RecyclerView android:layout_width="351pt"
+                                            android:layout_gravity="center"
+                                            android:background="@color/white"
+                                            android:paddingBottom="12pt"
                                             android:id="@+id/recyclerView"
                                             android:layout_height="match_parent"/>
 

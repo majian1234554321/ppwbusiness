@@ -2,15 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tl="http://schemas.android.com/tools" xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
+                android:background="@color/f8"
                 android:orientation="vertical" android:layout_height="match_parent">
-
-
-
-
 
 
     <RelativeLayout android:layout_width="match_parent"
                     android:id="@+id/rl_title"
+                    android:paddingRight="12pt"
                     android:layout_height="48dp">
 
         <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -21,26 +19,24 @@
         />
 
         <TextView android:layout_width="wrap_content"
-                  android:text="店铺设置"
+                  android:text="商品管理"
                   android:textSize="@dimen/spi_16"
+                  android:textColor="@color/all_3"
                   android:layout_centerInParent="true"
                   android:layout_height="wrap_content"/>
 
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:id="@+id/tv_right"
-                  android:textSize="@dimen/sp_14"
-                  android:paddingRight="@dimen/spi_12"
-                  android:layout_alignParentRight="true"
-                  android:layout_centerInParent="true"
-                  android:text="新增"
+        <TextView android:layout_width="20pt" android:layout_height="20pt"
+                   android:background="@drawable/icon_add"
+                   android:id="@+id/tv_right"
+                   android:textSize="@dimen/sp_14"
+
+                   android:layout_alignParentRight="true"
+                   android:layout_centerInParent="true"
+
         />
 
 
     </RelativeLayout>
-
-
-
-
 
 
     <com.flyco.tablayout.SlidingTabLayout
@@ -48,22 +44,21 @@
             android:id="@+id/mTabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#666666"
+            android:background="@color/white"
             android:paddingBottom="15dp"
             android:paddingTop="15dp"
             app:tl_tab_space_equal="true"
-
+            app:tl_indicator_color="@color/zthj"
+            app:tl_textUnselectColor="@color/all_3"
+            app:tl_textSelectColor="@color/zthj"
             app:tl_indicator_width_equal_title="true"
-            tl:tl_tab_space_equal="true"
-            tl:tl_textBold="SELECT"
-            tl:tl_underline_color="#1A000000"
-            tl:tl_underline_gravity="TOP"
-            tl:tl_underline_height="1dp"/>
+            app:tl_textBold="SELECT"/>
 
 
     <android.support.v4.view.ViewPager android:layout_width="match_parent"
                                        android:id="@+id/mViewPager"
-                                       android:layout_above="@+id/ll"
+                                       android:layout_above="@+id/rg"
+                                       android:layout_marginBottom="8pt"
                                        android:layout_below="@+id/mTabLayout"
                                        android:layout_height="match_parent"/>
 
@@ -71,6 +66,7 @@
     <LinearLayout android:layout_width="match_parent"
                   android:id="@+id/ll"
                   android:background="@color/all_e"
+                  android:visibility="gone"
                   android:gravity="center"
                   android:layout_alignParentBottom="true"
                   android:layout_height="wrap_content">
@@ -100,5 +96,38 @@
         />
 
     </LinearLayout>
+
+
+    <RadioGroup android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginLeft="16.5pt"
+                android:layout_marginRight="16.5pt"
+                android:layout_marginBottom="12pt"
+                android:id="@+id/rg"
+                android:background="@drawable/stroke_rg"
+                android:layout_alignParentBottom="true"
+                android:layout_height="35pt">
+        <com.yjhh.ppwbusiness.views.cui.ToggleRadioButton android:layout_width="0dp"
+                                                          android:text="时间排序"
+                                                          android:button="@null"
+                                                          android:id="@+id/tv_timeSort"
+                                                          android:gravity="center"
+                                                          android:textColor="#FF333333"
+                                                          android:textSize="14pt"
+                                                          android:layout_weight="1"
+                                                          android:layout_height="match_parent"/>
+        <com.yjhh.ppwbusiness.views.cui.ToggleRadioButton android:layout_width="0dp"
+                                                          android:text="价格排序"
+
+                                                          android:id="@+id/tv_priceSort"
+                                                          android:layout_weight="1"
+                                                          android:button="@null"
+                                                          android:textColor="#FF333333"
+                                                          android:textSize="14pt"
+                                                          android:gravity="center"
+                                                          android:layout_height="match_parent"/>
+
+    </RadioGroup>
+
 
 </RelativeLayout>

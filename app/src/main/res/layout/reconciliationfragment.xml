@@ -167,9 +167,10 @@
                 <RelativeLayout android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
 
-                    <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    <ImageView android:layout_width="17pt" android:layout_height="17pt"
                                android:id="@+id/iv_back"
-                               android:src="@drawable/icon_back"
+                               android:layout_centerVertical="true"
+                               android:src="@drawable/icon_arrow_left_white"
                     />
 
                     <TextView

@@ -1,85 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
                 android:orientation="vertical"
+                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
     <ImageView
             android:src="@mipmap/ic_launcher"
             android:id="@+id/iv_image"
-            android:layout_width="60dp" android:layout_height="60dp"/>
+
+            android:layout_margin="@dimen/dp_10"
+            android:layout_width="102pt" android:layout_height="89pt"/>
+
+
+    <TextView
+            android:id="@+id/right_dish_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:layout_toRightOf="@+id/iv_image"
+            tools:text="121"
+            android:textSize="15pt"
+            android:layout_alignTop="@+id/iv_image"
+            android:textColor="@color/colorPrimary"
+    />
 
 
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:text="编辑"
-              android:padding="@dimen/spi_12"
-              android:id="@+id/iv_edit"
               android:layout_alignTop="@+id/iv_image"
+              android:paddingRight="12pt"
+              android:textColor="#2C85FF"
+              android:id="@+id/iv_edit"
+              android:textSize="14pt"
+
               android:layout_alignParentRight="true"
     />
 
-    <LinearLayout
 
-            android:layout_toRightOf="@+id/iv_image"
-            android:id="@+id/right_dish_item"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="60dp">
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:id="@+id/tv_desc"
 
 
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/item_dish_top_margin"
-                android:layout_weight="1">
-            <TextView
-                    android:id="@+id/right_dish_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="top"
-                    android:layout_marginLeft="@dimen/item_dish_horizontal_margin"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/spi_16"/>
-        </LinearLayout>
-
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                  android:id="@+id/tv_desc"
-                  android:layout_marginLeft="@dimen/item_dish_horizontal_margin"
-                  android:visibility="visible"
-                  android:layout_marginRight="@dimen/activity_horizontal_margin"
-                  android:text="月销量:9999 库存：99"
-        />
+              android:layout_below="@+id/right_dish_name"
+              android:layout_above="@+id/tv_price"
+              android:layout_marginTop="4.5pt"
+              android:layout_marginRight="12pt"
+              android:textColor="#FF999999"
+              android:textSize="11pt"
+              android:layout_toRightOf="@+id/iv_image"
+              android:text="月销量:9999 库存：99"
+    />
 
 
-    </LinearLayout>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:id="@+id/tv_price"
+              android:layout_toRightOf="@+id/iv_image"
+              android:textColor="#FFFF552E"
+              android:textSize="14pt"
+              android:layout_alignBottom="@+id/iv_image"
+              tools:text="55"
+    />
 
+    <View
+            android:layout_below="@+id/iv_image"
+            android:id="@+id/view"
+            android:layout_width="352pt"
+            android:background="@color/f8"
+            android:layout_centerHorizontal="true"
+            android:layout_height="1dp"
+    />
 
     <LinearLayout android:layout_width="match_parent"
                   android:orientation="horizontal"
-                  android:layout_below="@+id/iv_image"
+                  android:id="@+id/ll"
+                  android:layout_below="@+id/view"
                   android:layout_height="wrap_content">
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:padding="@dimen/sp_12"
+                  android:padding="7pt"
                   android:gravity="center"
                   android:layout_weight="1"
                   android:id="@+id/tv_delete"
                   android:visibility="visible"
-
-                  android:text="删除"
+                  android:textColor="#FFFF552E"
+                  android:textSize="14pt"
+                  android:text="删除商品"
         />
 
+        
+        <View android:layout_width="1dp" android:layout_height="35.75pt"
+              android:background="@color/f8"
+        />
+        
 
         <TextView android:layout_width="wrap_content"
                   android:gravity="center"
-
-                  android:padding="@dimen/sp_12"
+                  android:textSize="14pt"
+                  android:padding="7pt"
                   android:layout_height="wrap_content"
                   android:layout_weight="1"
                   android:id="@+id/tv_stop"
                   android:visibility="visible"
-                  android:text="下架"
+                  android:text="下架商品"
         />
 
     </LinearLayout>

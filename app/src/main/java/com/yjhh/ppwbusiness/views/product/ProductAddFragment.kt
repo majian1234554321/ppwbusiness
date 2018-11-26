@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -20,7 +21,11 @@ import android.support.v4.content.FileProvider
 import android.support.v7.widget.GridLayoutManager
 import android.text.TextUtils
 import android.util.Log
+import android.view.View
 import android.widget.Toast
+import com.google.gson.Gson
+import com.tbruyelle.rxpermissions2.RxPermissions
+import com.uuzuche.lib_zxing.activity.CaptureActivity
 import com.yjhh.ppwbusiness.R
 
 import com.yjhh.ppwbusiness.adapter.ProductAdd
@@ -30,15 +35,19 @@ import com.yjhh.ppwbusiness.base.BaseActivity
 import com.yjhh.ppwbusiness.base.BaseActivity.requestRuntimePermission
 import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.base.ProcessObserver2
+import com.yjhh.ppwbusiness.bean.PhotoBean
 import com.yjhh.ppwbusiness.bean.ProductBean
 import com.yjhh.ppwbusiness.bean.SETime
 import com.yjhh.ppwbusiness.bean.SubmitProductInfoModel
 import com.yjhh.ppwbusiness.fragments.PhotoFragment
+import com.yjhh.ppwbusiness.interfaces.OnRecycleViewItemChildClickListener
+import com.yjhh.ppwbusiness.interfaces.OnRecycleViewItemClickListener
 import com.yjhh.ppwbusiness.interfaces.PermissionListener
 import com.yjhh.ppwbusiness.ipresent.CommonPresent
 import com.yjhh.ppwbusiness.iview.CommonView
 import com.yjhh.ppwbusiness.utils.Glide4Engine
 import com.yjhh.ppwbusiness.utils.PhotoUtils
+import com.yjhh.ppwbusiness.utils.TextStyleUtils
 import com.yjhh.ppwbusiness.views.cui.AbsSheetDialog
 import com.yjhh.ppwbusiness.views.cui.AlertDialogFactory
 import com.yjhh.ppwbusiness.views.cui.BottomVerSheetDialog
@@ -47,24 +56,33 @@ import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.internal.entity.CaptureStrategy
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.productadapter.*
+
 import kotlinx.android.synthetic.main.productadd.*
 import java.io.File
-import java.io.IOException
-import java.text.SimpleDateFormat
+import java.lang.StringBuilder
+
 import java.util.*
 import kotlin.collections.ArrayList
 
 
 class ProductAddFragment : BaseFragment(), CommonView {
-    override fun onFault(errorMsg: String?) {
-        //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
     override fun onSuccess(value: String?) {
-        //  TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val gson = Gson()
+        val model = gson.fromJson<PhotoBean>(value, PhotoBean::class.java)
+
+
+        model.item.forEach {
+            listsId.add(it.id)
+        }
     }
+
+    override fun onFault(errorMsg: String?) {
+
+    }
+
 
     override fun getLayoutRes(): Int = R.layout.productadd
 
@@ -75,7 +93,7 @@ class ProductAddFragment : BaseFragment(), CommonView {
 
     var mAdapter: ProductAdd? = null
     val lists = ArrayList<String>()
-
+    val listsId = java.util.ArrayList<String>()
     var present: CommonPresent? = null
 
     override fun initView() {
@@ -86,6 +104,17 @@ class ProductAddFragment : BaseFragment(), CommonView {
         val objectValue = bundle?.getSerializable("objectValue") as ProductBean.ItemsBean
         val type = bundle?.getString("type")
 
+
+
+
+
+        val tips = "商品主图（注：默认第一张为主图，最多添加3张）"
+        tv_tip.text = TextStyleUtils.changeTextColor(
+            tips,
+            0,
+            4,
+             Color.parseColor("#333333")
+        )
 
 
 
@@ -103,13 +132,11 @@ class ProductAddFragment : BaseFragment(), CommonView {
 
         }
 
-        lists.add("AA")
-        lists.add("AA")
-        lists.add("AA")
+
 
         recyclerView.addItemDecoration(GridRecyclerItemDecoration(40))
         recyclerView.layoutManager = GridLayoutManager(mActivity, 3)
-        mAdapter = ProductAdd(mActivity,lists)
+        mAdapter = ProductAdd(mActivity, lists)
         recyclerView.adapter = mAdapter
 
 
@@ -117,38 +144,23 @@ class ProductAddFragment : BaseFragment(), CommonView {
 
 
 
-      /*  mAdapter?.setOnItemClickListener { adapter, view, position ->
-
-            if (lists[position] == "EMPTY") {
-                //拍照或者选择照片
-                photo()
-
-            } else {
+        mAdapter?.setOnItemClickListener(OnRecycleViewItemClickListener { view, position, flag ->
+            if (flag) {
                 start(PhotoFragment(lists[position]))
+            } else {
+                photo()
             }
-        }
 
-*/
-
+        })
 
 
 
-       /* mAdapter?.setOnItemChildClickListener { adapter, view, position ->
 
-
+        mAdapter?.setOnItemChildClickListener(OnRecycleViewItemChildClickListener { view, position ->
             lists.removeAt(position)
-            if (lists.size == 0) {
-
-            }
-
-            if (lists.size < 3 && !lists.contains("EMPTY")) {
-
-            }
-
-            mAdapter?.setNewData(lists)
-
-        }
-*/
+            listsId.removeAt(position)
+            mAdapter?.notifyItemRemoved(position)
+        })
 
 
 
@@ -163,6 +175,11 @@ class ProductAddFragment : BaseFragment(), CommonView {
                 aa.status = "0"
                 aa.describe = et_desc.text.toString()
                 aa.price = et_price.text.toString()
+
+
+                val arrayimageIds = listsId.toArray(arrayOfNulls<String>(listsId.size))
+
+                aa.imageIds = arrayimageIds
 
 
                 val s = arrayOf(aa)
@@ -187,6 +204,7 @@ class ProductAddFragment : BaseFragment(), CommonView {
                                         et_price.text.clear()
                                         et_desc.text.clear()
                                         lists.clear()
+                                        listsId.clear()
 
                                         mAdapter?.notifyDataSetChanged()
                                     }, { dlg, v ->
@@ -214,6 +232,7 @@ class ProductAddFragment : BaseFragment(), CommonView {
 
     }
 
+
     private fun photo() {
         AlertDialogFactory.createFactory(mActivity).getBottomVerDialog(null,
             Arrays.asList<BottomVerSheetDialog.Bean>(
@@ -237,9 +256,7 @@ class ProductAddFragment : BaseFragment(), CommonView {
                         }
                         else -> {
 
-
                             requestPermission("select")
-
                         }
                     }
 
@@ -252,51 +269,47 @@ class ProductAddFragment : BaseFragment(), CommonView {
     }
 
 
-    var permissions = arrayOf(
-        Manifest.permission.CAMERA,
-        Manifest.permission.READ_EXTERNAL_STORAGE,
-        Manifest.permission.WRITE_EXTERNAL_STORAGE
-
-    )
-
-
     var mPublicPhotoPath: String? = null
-    //1111111111111111111111111111111111
+
     private fun requestPermission(string: String) {
-        //        判断手机版本,如果低于6.0 则不用申请权限,直接拍照
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
-            requestRuntimePermission(permissions, object : PermissionListener {
-                override fun onGranted() {
-                    if ("photo" == string) {
-                        mPublicPhotoPath = PhotoUtils.takePhote(this@ProductAddFragment, mActivity, 10084)
+
+        var disposable: Disposable? = null
+
+        if ("photo" == string) {
+
+            disposable = RxPermissions(this)
+                .request(Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE)
+                .subscribe {
+                    if (it) {
+                        PhotoUtils.takePhote(this@ProductAddFragment, mActivity, 10084)
                     } else {
-                        PhotoUtils.selectPhoto(this@ProductAddFragment, 3 - lists.size, 10085)
+                        Toast.makeText(mActivity, "请前往设置中心开启照相机权限", Toast.LENGTH_SHORT).show()
                     }
-
-                    Log.i("requestRuntime", "onGranted")
                 }
-
-                override fun onDenied(deniedPermission: List<String>) {
-                    for (i in deniedPermission.indices) {
-                        Log.i("requestRuntime", deniedPermission[i])
-                    }
-
-                    Toast.makeText(mActivity, "请先设置权限", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(Settings.ACTION_SEARCH_SETTINGS);
-                    startActivity(intent)
-
-                }
-            })
 
         } else {
-            if ("photo" == string) {
-                mPublicPhotoPath = PhotoUtils.takePhote(this@ProductAddFragment, mActivity, 10084)
-            } else {
-                PhotoUtils.selectPhoto(this@ProductAddFragment, 3 - lists.size, 10085)
-            }
+
+            disposable = RxPermissions(this)
+                .request(
+                    Manifest.permission.CAMERA,
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+                .subscribe {
+                    if (it) {
+                        PhotoUtils.selectPhoto(this@ProductAddFragment, 3 - lists.size, 10085)
+                    } else {
+                        Toast.makeText(mActivity, "请前往设置中心开启照相机权限", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
 
         }
+
+
+        compositeDisposable.add(disposable)
+
 
     }
 
@@ -305,26 +318,31 @@ class ProductAddFragment : BaseFragment(), CommonView {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == 10085 && resultCode == BaseActivity.RESULT_OK) {
-            val mSelected = Matisse.obtainResult(data)
-            Matisse.obtainResult(data)
+
             val list = Matisse.obtainPathResult(data)
-            Log.i("OnActivityResult ", list[0])
+
 
             val file = File(list[0])
 
-
-
-
-            lists.add(0, file.path)
+            lists.add(file.path)
 
             while (lists.size > 3) {
                 lists.removeAt(lists.lastIndex)
             }
 
 
-           // mAdapter?.setNewData(lists)
-
+            mAdapter?.notifyDataSetChanged()
             present?.UpLoadFile(file)
+
+            /*val listFiles  = ArrayList<File>()
+            list.forEach {
+
+                val file = File(it)
+                listFiles.add(file)
+            }
+              present?.UpLoadFiles(listFiles)
+
+            */
 
 
         }
@@ -334,19 +352,17 @@ class ProductAddFragment : BaseFragment(), CommonView {
             val uri = Uri.parse(mPublicPhotoPath)
             val path = uri.path
             val file = File(path)
-            lists.add(0, file.path)
-
-            if (lists.size > 3) {
-
-            }
-
-
+            lists.add(file.path)
 
             while (lists.size > 3) {
                 lists.removeAt(lists.lastIndex)
             }
 
-           // mAdapter?.setNewData(lists)
+
+
+
+            mAdapter?.notifyDataSetChanged()
+
             present?.UpLoadFile(file)
 
         }

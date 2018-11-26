@@ -1,31 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:padding="@dimen/spi_12"
+                android:paddingTop="8pt"
                 android:layout_height="wrap_content">
 
 
-    <TextView android:layout_width="wrap_content"
-              android:id="@+id/tv_reply22"
-              android:text="商家回复："
-              android:layout_height="wrap_content"/>
+    <LinearLayout android:layout_width="351pt"
+                  android:orientation="vertical"
+                  android:id="@+id/ll_content"
+                  android:layout_centerHorizontal="true"
+                  android:layout_height="wrap_content">
+
+        <RelativeLayout android:layout_width="351pt"
+                        android:id="@+id/rll"
+                        android:paddingTop="4pt"
+                        android:paddingBottom="4pt"
+                        android:background="#F7EEDD"
+                        android:layout_centerHorizontal="true"
+                        android:layout_height="wrap_content">
 
 
-    <TextView android:layout_width="wrap_content"
-              android:id="@+id/tv_time22"
-              android:text="2018-08-11"
-              android:layout_alignParentRight="true"
-              android:layout_height="wrap_content"/>
+            <TextView
+                    android:id="@+id/tv_reply22" android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10pt"
+                    android:text="商家回复"
+                    android:textColor="#FF333333"
+                    android:textSize="12pt"
+            />
 
 
-    <TextView android:layout_width="wrap_content"
-              android:id="@+id/tv_content22"
-              android:layout_marginTop="@dimen/spi_12"
-              android:layout_below="@+id/tv_reply22"
-              android:text="121212121212121："
-              android:layout_height="wrap_content"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:paddingLeft="10pt"
+                    android:layout_height="15pt"
+                    android:paddingRight="10pt"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:text="2018/10/10" android:id="@+id/tv_time22"
+                    android:textColor="#FF999999"
+                    android:textSize="11pt"
+            />
 
 
+        </RelativeLayout>
+
+
+        <TextView android:layout_width="351pt"
+                  android:id="@+id/tv_content22"
+                  android:padding="10pt"
+                  android:layout_centerHorizontal="true"
+                  android:layout_below="@+id/rll"
+                  android:maxLines="3"
+
+                  android:ellipsize="end"
+
+                  android:textColor="#FF555555"
+                  android:textSize="13pt"
+
+                  android:text="121212121212121："
+                  android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+    <RelativeLayout android:layout_width="351pt"
+
+                    android:id="@+id/rl_more"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/ll_content"
+                    android:paddingBottom="9.5pt"
+                    android:layout_height="wrap_content">
+
+        <View
+                android:layout_width="351pt"
+                android:layout_height="1pt"
+                android:id="@+id/view"
+                android:background="#FFF2F2F2"
+        />
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_below="@+id/view"
+                  android:paddingTop="9pt"
+                  android:paddingBottom="9pt"
+                  android:layout_centerVertical="true"
+                  android:gravity="center"
+                  android:drawablePadding="6pt"
+                  android:textSize="12pt"
+                  android:drawableLeft="@drawable/icon_liulan"
+                  android:layout_height="wrap_content"
+                  android:text="999"
+        />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="16.5pt"
+                android:text="查看详情"
+                android:id="@+id/tv_more"
+                android:layout_centerVertical="true"
+                android:drawablePadding="6pt"
+                android:layout_alignParentRight="true"
+                android:drawableRight="@drawable/icon_jiantou3"
+                android:textColor="#FFC8AF85"
+                android:textSize="12pt"
+        />
+
+
+    </RelativeLayout>
+
+    <View android:layout_width="match_parent"
+          android:background="@color/f8"
+          android:layout_alignParentBottom="true"
+          android:layout_height="10pt"/>
 
 
 </RelativeLayout>

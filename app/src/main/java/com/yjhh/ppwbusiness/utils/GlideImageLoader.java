@@ -31,7 +31,7 @@ public class GlideImageLoader implements NineGridView.ImageLoader {
                 .transform(new CornersTranform(context, 5f));
         // 图片加载库采用Glide框架
         Glide.with(context).load(url)
-                // .apply(options)
+                 .apply(options)
                 .transition(new DrawableTransitionOptions().crossFade())
                 .into(imageView);
 

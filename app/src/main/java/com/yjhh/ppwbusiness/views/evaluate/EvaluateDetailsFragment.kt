@@ -1,6 +1,7 @@
 package com.yjhh.ppwbusiness.views.evaluate
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import android.support.v4.util.ArrayMap
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
@@ -26,8 +27,8 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.evaluatedetailsfragment.*
 
 
-@SuppressLint("ValidFragment")
-class EvaluateDetailsFragment(id: Int) : BaseFragment() {
+
+class EvaluateDetailsFragment : BaseFragment() {
     override fun getLayoutRes(): Int = R.layout.evaluatedetailsfragment
 
     var mAdapter: EvaluateDetailsAdapter? = null
@@ -41,6 +42,9 @@ class EvaluateDetailsFragment(id: Int) : BaseFragment() {
         recyclerView.adapter = EvaluateDetailsAdapter(list)
 
         val map = ArrayMap<String, String>()
+
+      val  id  =  arguments?.getString("id")
+
         map["id"] = id.toString()//类别，默认null（null/0全部 1好评 2中评 3差评）
 
         ApiServices.getInstance()
@@ -115,4 +119,18 @@ class EvaluateDetailsFragment(id: Int) : BaseFragment() {
 
         mAdapter?.addHeaderView(headView)
     }
+
+
+    companion object {
+        fun newInstance(id: String): EvaluateDetailsFragment {
+            val fragment = EvaluateDetailsFragment()
+            val bundle = Bundle()
+            bundle.putSerializable("id", id)
+            fragment.arguments = bundle
+            return fragment
+        }
+    }
+
+
+
 }

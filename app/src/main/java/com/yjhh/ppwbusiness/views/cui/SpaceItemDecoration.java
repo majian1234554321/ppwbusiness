@@ -7,6 +7,9 @@ import android.view.View;
 public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
     int mSpace;
 
+
+    String flag;
+
     /**
      * Retrieve any offsets for the given item. Each field of <code>outRect</code> specifies
      * the number of pixels that the item view should be inset by, similar to padding or margin.
@@ -32,9 +35,15 @@ public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
         super.getItemOffsets(outRect, view, parent, state);
         outRect.left = mSpace;
         outRect.right = mSpace;
-        outRect.bottom = mSpace;
 
-            outRect.top = mSpace;
+        outRect.top = mSpace;
+
+
+        if ("bottom".equals(flag)) {
+            outRect.bottom = 0;
+        } else {
+            outRect.bottom = mSpace;
+        }
 
 
     }
@@ -42,4 +51,11 @@ public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
     public SpaceItemDecoration(int space) {
         this.mSpace = space;
     }
+
+
+    public SpaceItemDecoration(int space, String flag) {
+        this.mSpace = space;
+        this.flag = flag;
+    }
+
 }

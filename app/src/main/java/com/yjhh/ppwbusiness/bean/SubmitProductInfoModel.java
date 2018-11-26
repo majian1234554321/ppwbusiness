@@ -7,6 +7,8 @@ public class SubmitProductInfoModel {
     public String catgeoryName;
     public String describe;
     public String image;
+
+    public String []  imageIds;
     public String name;
     public String orderBy;
     public String price;

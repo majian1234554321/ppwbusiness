@@ -13,7 +13,7 @@ class ProductAdapter(list: List<ProductBean.ItemsBean>) :
         with(helper) {
 
             setText(R.id.right_dish_name, item?.name)
-            setText(R.id.tv_desc, "￥ ${item?.price}")
+            setText(R.id.tv_price, "￥ ${item?.price}")
 
 
             addOnClickListener(R.id.tv_delete)

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent">
+
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:text="999"
+    />
+
+    <TextView
+            android:layout_width="48pt"
+            android:layout_height="16.5pt"
+            android:text="查看详情"
+            android:layout_alignParentRight="true"
+            android:drawableRight="@drawable/icon_jiantou3"
+            android:textColor="#FFC8AF85"
+
+            android:textSize="12pt"
+    />
+
+</RelativeLayout>

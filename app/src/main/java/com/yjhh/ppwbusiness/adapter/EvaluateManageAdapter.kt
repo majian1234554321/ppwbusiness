@@ -3,6 +3,7 @@ package com.yjhh.ppwbusiness.adapter
 import android.content.Context
 import android.opengl.Visibility
 import android.util.Log
+import android.view.View
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
@@ -29,6 +30,7 @@ class EvaluateManageAdapter(var context: Context, data: List<MultiItemEntity>) :
     init {
         addItemType(TYPE_LEVEL_0, R.layout.evaluatemanageadapter)
         addItemType(TYPE_LEVEL_1, R.layout.item_expandable_lv1)
+
 
     }
 
@@ -75,14 +77,25 @@ class EvaluateManageAdapter(var context: Context, data: List<MultiItemEntity>) :
                 val item = item22 as SubCommentsBean
 
 
-                helper.setText(R.id.tv_reply22, item.nickName)
 
-                helper.setText(R.id.tv_content22, item.content)
+                if (item.nickName != null) {
 
-                helper.setText(R.id.tv_time22, TimeUtil.stampToDate2(item.time.toString()))
+                    helper.setText(R.id.tv_reply22, item.nickName)
+
+                    helper.setText(R.id.tv_content22, item.content)
+
+                    helper.setText(R.id.tv_time22, TimeUtil.stampToDate2(item.time.toString()))
+
+                    helper.setVisible(R.id.rl_more, !item.flag)
+
+                } else {
+                    helper.setVisible(R.id.ll_content,item.flag)
+                    helper.setVisible(R.id.rl_more, !item.flag)
+                }
 
 
             }
+
 
         }
 
@@ -95,6 +108,7 @@ class EvaluateManageAdapter(var context: Context, data: List<MultiItemEntity>) :
 
         const val TYPE_LEVEL_0 = 0
         const val TYPE_LEVEL_1 = 1
+
 
     }
 }

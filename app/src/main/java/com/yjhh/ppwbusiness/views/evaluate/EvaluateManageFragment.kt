@@ -1,7 +1,10 @@
 package com.yjhh.ppwbusiness.views.evaluate
 
+import android.support.v4.content.ContextCompat
 import android.support.v4.util.ArrayMap
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import com.chad.library.adapter.base.entity.MultiItemEntity
 import com.flyco.tablayout.listener.CustomTabEntity
@@ -16,10 +19,12 @@ import com.yjhh.ppwbusiness.base.ProcessObserver2
 import com.yjhh.ppwbusiness.bean.EvaluateManageBean
 import com.yjhh.ppwbusiness.bean.EvaluateManageItemBean
 import com.yjhh.ppwbusiness.bean.SubCommentsBean
+import com.yjhh.ppwbusiness.views.cui.SpaceItemDecoration
 import com.yjhh.ppwbusiness.views.cui.TabEntity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.evaluatemanagefragment.*
+import kotlinx.android.synthetic.main.messagecenter1fragment.*
 import java.util.*
 
 class EvaluateManageFragment : BaseFragment() {
@@ -37,7 +42,9 @@ class EvaluateManageFragment : BaseFragment() {
 
     val list = ArrayList<MultiItemEntity>()
     override fun initView() {
-        recyclerView.layoutManager = GridLayoutManager(activity, 1)
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+
+
         mAdapter = EvaluateManageAdapter(mActivity, list)
         recyclerView.adapter = mAdapter
 
@@ -102,18 +109,46 @@ class EvaluateManageFragment : BaseFragment() {
 
                     for (i in 0 until bean.items.size) {
                         val lv0 = bean.items[i]
-                        for (j in 0 until bean.items[i].subComments.size) {
-                            //  val lv1 = bean.items[i].subComments[j] as SubCommentsBean
 
-                            val modle = bean.items[i].subComments[j]
+                        var lv1: SubCommentsBean? = null
+                        if (bean.items[i].subComments != null) {
+                            for (j in 0 until bean.items[i].subComments.size) {
+                                val modle = bean.items[i].subComments[j]
+                                if (j == bean.items[i].subComments.size - 1) {
 
-// public SubCommentsBean(String content, boolean ifFile, boolean ifShop, String nickName, int time)
-                            val lv1 =
-                                SubCommentsBean(modle.content, modle.ifFile, modle.ifShop, modle.nickName, modle.time)
-
-
+                                    lv1 = SubCommentsBean(
+                                        modle.content,
+                                        modle.ifFile,
+                                        modle.ifShop,
+                                        modle.nickName,
+                                        modle.time,
+                                        bean.items[i].id.toString(),
+                                        false
+                                    )
+                                } else {
+                                    lv1 =
+                                            SubCommentsBean(
+                                                modle.content,
+                                                modle.ifFile,
+                                                modle.ifShop,
+                                                modle.nickName,
+                                                modle.time,
+                                                bean.items[i].id.toString(),
+                                                true
+                                            )
+                                }
+                                lv0.addSubItem(lv1)
+                            }
+                        } else {
+                            lv1 =
+                                    SubCommentsBean(
+                                        "", false, false, "", 0,
+                                        bean.items[i].id.toString(), false
+                                    )
                             lv0.addSubItem(lv1)
                         }
+
+
                         list.add(lv0)
                     }
 
@@ -129,7 +164,13 @@ class EvaluateManageFragment : BaseFragment() {
 
 
         mAdapter?.setOnItemClickListener { adapter, view, position ->
-            start(EvaluateDetailsFragment((list[position] as EvaluateManageItemBean).id))
+
+            if (list[position] is EvaluateManageItemBean) {
+                start(EvaluateDetailsFragment.newInstance((list[position] as EvaluateManageItemBean).id.toString()))
+            } else {
+                start(EvaluateDetailsFragment.newInstance((list[position] as SubCommentsBean).id))
+            }
+
 
         }
 

@@ -15,7 +15,7 @@ class PutForwardFragment : BaseFragment() {
         val list = ArrayList<String>()
 
         list.add("a")
-        list.add("a")
+        list.add("b")
         list.add("a")
         list.add("a")
         list.add("a")

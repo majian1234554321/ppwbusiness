@@ -159,4 +159,5 @@ public abstract class BaseFragment extends SupportFragment implements CustomAdap
     }
 
 
+
 }

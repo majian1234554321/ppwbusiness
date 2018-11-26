@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:background="@color/f8"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <ImageView android:layout_width="351pt"
+               android:layout_marginTop="12.4pt"
+               android:layout_height="97.7pt"/>
+
+    <LinearLayout android:layout_width="351pt"
+                  android:orientation="vertical"
+                  android:layout_gravity="center"
+                  android:background="@color/white"
+                  android:layout_height="wrap_content">
+
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="horizontal" android:paddingTop="12pt"
+                      android:paddingBottom="9.5pt"
+                      android:layout_height="wrap_content">
+
+            <LinearLayout android:layout_width="0dp"
+                          android:layout_weight="1"
+                          android:gravity="center"
+                          android:orientation="vertical"
+                          android:layout_height="wrap_content">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:padding="5pt"
+                        android:layout_height="wrap_content"
+                        android:text="期号"
+
+                        android:textColor="#FF666666"
+                        android:textSize="12pt"
+                />
+
+                <TextView
+                        android:layout_width="72pt"
+                        android:layout_height="21pt"
+                        android:text="20181111"
+                        android:textColor="#FF2E86FF"
+                        android:textSize="15pt"
+                />
+
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="0dp"
+                          android:layout_weight="1"
+                          android:gravity="center"
+                          android:orientation="vertical"
+                          android:layout_height="wrap_content">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:padding="5pt"
+                        android:layout_height="wrap_content"
+                        android:text="活动状态"
+                        android:textColor="#FF666666"
+                        android:textSize="12pt"
+                />
+
+                <TextView
+                        android:layout_width="72pt"
+                        android:layout_height="21pt"
+                        android:text="20181111"
+                        android:textColor="#FF2E86FF"
+                        android:textSize="15pt"
+                />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <View
+                android:layout_width="313pt"
+                android:layout_gravity="center"
+                android:background="@color/e6"
+                android:layout_height="1pt"
+        />
+
+        <TextView android:layout_width="wrap_content"
+                  tools:text="12121212"
+                  android:paddingTop="14pt"
+                  android:id="@+id/tv_sTime"
+                  android:layout_gravity="center"
+                  android:textColor="#FF333333"
+                  android:textSize="11pt"
+                  android:layout_height="wrap_content"/>
+
+
+        <TextView android:layout_width="wrap_content"
+                  tools:text="12121212"
+                  android:paddingTop="8pt"
+                  android:id="@+id/tv_eTime"
+                  android:paddingBottom="14pt"
+                  android:textColor="#FFFF552E"
+                  android:textSize="11pt"
+                  android:layout_gravity="center"
+                  android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout android:layout_width="351pt"
+                  android:layout_marginTop="10pt"
+                  android:layout_marginBottom="10pt"
+                  android:layout_gravity="center"
+                  android:orientation="horizontal" android:background="@color/white"
+                  android:layout_height="wrap_content">
+
+        <LinearLayout android:layout_width="0dp"
+                      android:layout_weight="1"
+                      android:gravity="center"
+                      android:orientation="vertical"
+                      android:layout_height="wrap_content">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="20.5pt"
+                    android:text="昨日总参与(人)"
+
+                    android:textColor="#FF666666"
+                    android:textSize="12pt"
+            />
+
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="12121"
+                    android:textStyle="bold"
+                    android:padding="23pt"
+
+
+                    android:textColor="#FFC6AC81"
+                    android:textSize="24pt"
+            />
+
+        </LinearLayout>
+
+
+        <View
+                android:layout_width="1pt"
+                android:layout_gravity="center"
+                android:background="@color/e6"
+                android:layout_height="76.5pt"
+        />
+
+        <LinearLayout android:layout_width="0dp"
+                      android:layout_weight="1"
+
+                      android:gravity="center"
+                      android:orientation="vertical"
+                      android:layout_height="wrap_content">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="20.5pt"
+                    android:text="今日总参与(人)"
+                    android:textColor="#FF666666"
+                    android:textSize="12pt"
+            />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFC6AC81"
+                    android:text="1212"
+                    android:textStyle="bold"
+                    android:padding="23pt"
+                    android:textSize="24pt"
+
+            />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <TextView android:layout_width="351pt"
+              android:padding="12pt"
+              android:gravity="center"
+              android:layout_gravity="center"
+              android:background="@color/white"
+              android:text="活动每日数据统计(人)"
+              android:textColor="#FF666666"
+              android:textSize="14pt"
+              android:layout_height="wrap_content"/>
+
+
+</LinearLayout>
