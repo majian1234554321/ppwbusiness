@@ -77,16 +77,37 @@
                   android:background="@color/e6"
             />
 
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                      android:text="商户名称"
-                      android:layout_marginTop="12pt"
-                      android:layout_marginBottom="9pt"
 
-                      android:textColor="#FF333333"
-                      android:textSize="14pt"
-                      android:layout_marginLeft="24pt"
+            <RelativeLayout android:layout_width="match_parent"
+                            android:layout_marginRight="24pt"
+                            android:layout_height="wrap_content">
 
-            />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="商户名称"
+                          android:layout_marginTop="12pt"
+                          android:layout_marginBottom="9pt"
+
+                          android:textColor="#FF333333"
+                          android:textSize="14pt"
+                          android:layout_marginLeft="24pt"
+
+                />
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:layout_alignParentRight="true"
+                            android:id="@+id/tv_name"
+                          android:text="商户名称"
+                          android:layout_marginTop="12pt"
+                          android:layout_marginBottom="9pt"
+
+                          android:textColor="#FF333333"
+                          android:textSize="14pt"
+
+
+                />
+
+
+            </RelativeLayout>
 
 
             <View android:layout_width="347pt" android:layout_height="1pt"
@@ -143,6 +164,7 @@
 
             <TextView android:layout_width="327pt"
                       android:textSize="12pt"
+                      android:id="@+id/tv_time"
                       android:layout_gravity="center"
                       android:text="暂未设置"
                       android:layout_marginBottom="8pt"

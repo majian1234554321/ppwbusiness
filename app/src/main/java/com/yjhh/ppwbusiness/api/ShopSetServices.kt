@@ -1,6 +1,7 @@
 package com.yjhh.ppwbusiness.api
 
 import android.support.v4.util.ArrayMap
+import com.yjhh.ppwbusiness.bean.BusinessHoursBean
 import com.yjhh.ppwbusiness.bean.SETime
 import com.yjhh.ppwbusiness.bean.SubmitShopAdminConfigModel
 import io.reactivex.Observable
@@ -11,7 +12,7 @@ import retrofit2.http.*
 interface ShopSetServices {
     @Headers("Content-Type: application/json", "Accept: application/json")//需要添加头
     @POST("shopAdmin/editTimes")
-    fun editTimes(@Body a: Array<SETime>): Observable<ResponseBody>
+    fun editTimes(@Body a: Array<BusinessHoursBean>): Observable<ResponseBody>
 
 
     @FormUrlEncoded
@@ -28,6 +29,11 @@ interface ShopSetServices {
     @POST("shopAdmin/editProductStatusByBatch")
     fun editProductStatusByBatch(@FieldMap map: Map<String, String>): Observable<ResponseBody>
 
+
+
+
+    @POST("shopAdmin")
+    fun getAllInfo(): Observable<ResponseBody>//
 
 
 

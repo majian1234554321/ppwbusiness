@@ -1,33 +1,106 @@
 package com.yjhh.ppwbusiness.views.evaluate
 
-import android.support.v4.content.ContextCompat
-import android.support.v4.util.ArrayMap
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.GridLayoutManager
+import android.graphics.Color
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import android.widget.Toast
+import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.entity.MultiItemEntity
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener
 import com.google.gson.Gson
+import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.EvaluateManageAdapter
-import com.yjhh.ppwbusiness.api.ApiServices
-import com.yjhh.ppwbusiness.api.SectionEvluateService
 import com.yjhh.ppwbusiness.base.BaseFragment
-import com.yjhh.ppwbusiness.base.ProcessObserver2
 import com.yjhh.ppwbusiness.bean.EvaluateManageBean
 import com.yjhh.ppwbusiness.bean.EvaluateManageItemBean
 import com.yjhh.ppwbusiness.bean.SubCommentsBean
-import com.yjhh.ppwbusiness.views.cui.SpaceItemDecoration
+import com.yjhh.ppwbusiness.ipresent.EvaluatePresent
+import com.yjhh.ppwbusiness.iview.EvaluateView
 import com.yjhh.ppwbusiness.views.cui.TabEntity
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.evaluatemanagefragment.*
-import kotlinx.android.synthetic.main.messagecenter1fragment.*
+
 import java.util.*
 
-class EvaluateManageFragment : BaseFragment() {
+class EvaluateManageFragment : BaseFragment(), EvaluateView {
+    override fun onFault(errorMsg: String?) {
+
+    }
+
+    override fun onSuccess(value: String?, flag: String) {
+
+
+        val gson = Gson()
+        val bean = gson.fromJson<EvaluateManageBean>(value, EvaluateManageBean::class.java)
+        for (i in 0 until bean.items.size) {
+            val lv0 = bean.items[i]
+
+            var lv1: SubCommentsBean? = null
+            if (bean.items[i].subComments != null) {
+                for (j in 0 until bean.items[i].subComments.size) {
+                    val modle = bean.items[i].subComments[j]
+                    if (j == bean.items[i].subComments.size - 1) {
+
+                        lv1 = SubCommentsBean(
+                            modle.content,
+                            modle.ifFile,
+                            modle.ifShop,
+                            modle.nickName,
+                            modle.time,
+                            bean.items[i].id.toString(),
+                            false
+                        )
+                    } else {
+                        lv1 =
+                                SubCommentsBean(
+                                    modle.content,
+                                    modle.ifFile,
+                                    modle.ifShop,
+                                    modle.nickName,
+                                    modle.time,
+                                    bean.items[i].id.toString(),
+                                    true
+                                )
+                    }
+                    lv0.addSubItem(lv1)
+                }
+            } else {
+                lv1 =
+                        SubCommentsBean(
+                            "", false, false, "", 0,
+                            bean.items[i].id.toString(), false
+                        )
+                lv0.addSubItem(lv1)
+            }
+
+
+            list.add(lv0)
+        }
+
+        when (flag) {
+            "refresh" -> {
+                swipeLayout.finishRefresh()
+                mAdapter?.setNewData(list)
+                swipeLayout.finishRefresh()
+            }
+
+
+            "load" -> {
+                mAdapter?.addData(list)
+                mAdapter?.loadMoreComplete()
+            }
+        }
+
+
+
+
+
+        mAdapter?.expandAll()
+
+
+    }
+
 
     private val mTitles = arrayOf("全部评价", "好评", "中评", "差评")
     private val mTabEntities = java.util.ArrayList<CustomTabEntity>()
@@ -36,23 +109,34 @@ class EvaluateManageFragment : BaseFragment() {
     var type = "0"
     var startIndex = 0
     val pageSize = 15
-
+    var isHasfile = "0"
 
     var mAdapter: EvaluateManageAdapter? = null
 
     val list = ArrayList<MultiItemEntity>()
-    override fun initView() {
-        recyclerView.layoutManager = LinearLayoutManager(activity)
 
+    var present: EvaluatePresent? = null
+
+    override fun initView() {
+
+        present = EvaluatePresent(mActivity, this)
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+        swipeLayout.setRefreshHeader(ClassicsHeader(context))
 
         mAdapter = EvaluateManageAdapter(mActivity, list)
-        recyclerView.adapter = mAdapter
 
-        mAdapter?.expandAll()
+
+
 
         for (i in mTitles.indices) {
             mTabEntities.add(TabEntity(mTitles[i], R.mipmap.ic_launcher, R.mipmap.ic_launcher))
         }
+
+        initRefreshLayout()
+
+        initAdapter()
+        swipeLayout.autoRefresh()
+
 
 
         mTabLayout_7.setTabData(mTabEntities)
@@ -73,93 +157,31 @@ class EvaluateManageFragment : BaseFragment() {
         })
 
 
+
+
+
+
         checkbox.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                Log.i("EvaluateManageFragment", isChecked.toString())
+
+                checkbox.setTextColor(Color.parseColor("#FF552E"))
+                isHasfile = "1"
+                startIndex = 0
+                present?.allcomments(type, isHasfile, startIndex, pageSize, "refresh")
             } else {
-                Log.i("EvaluateManageFragment", isChecked.toString())
+                checkbox.setTextColor(Color.parseColor("#888888"))
+                isHasfile = "0"
+                startIndex = 0
+                present?.allcomments(type, isHasfile, startIndex, pageSize, "refresh")
+
             }
         }
 
 
-        val map = ArrayMap<String, String>()
-        map["type"] = type//类别，默认null（null/0全部 1好评 2中评 3差评）
-        map["isHasfile"] = "0"//是否包含附件，默认null（null/0 全部 1包含附件）
-        map["pageIndex"] = startIndex.toString()
-        map["pageSize"] = pageSize.toString()
-
-        ApiServices.getInstance()
-            .create(SectionEvluateService::class.java)
-            .allcomments(map)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : ProcessObserver2(mActivity) {
-                override fun onFault(message: String) {
-                    Log.i("EvaluateManageFragment", message)
-                }
-
-                override fun processValue(response: String?) {
-                    Log.i("EvaluateManageFragment", response)
-                    val gson = Gson()
-                    val bean = gson.fromJson<EvaluateManageBean>(response, EvaluateManageBean::class.java)
 
 
 
 
-
-                    for (i in 0 until bean.items.size) {
-                        val lv0 = bean.items[i]
-
-                        var lv1: SubCommentsBean? = null
-                        if (bean.items[i].subComments != null) {
-                            for (j in 0 until bean.items[i].subComments.size) {
-                                val modle = bean.items[i].subComments[j]
-                                if (j == bean.items[i].subComments.size - 1) {
-
-                                    lv1 = SubCommentsBean(
-                                        modle.content,
-                                        modle.ifFile,
-                                        modle.ifShop,
-                                        modle.nickName,
-                                        modle.time,
-                                        bean.items[i].id.toString(),
-                                        false
-                                    )
-                                } else {
-                                    lv1 =
-                                            SubCommentsBean(
-                                                modle.content,
-                                                modle.ifFile,
-                                                modle.ifShop,
-                                                modle.nickName,
-                                                modle.time,
-                                                bean.items[i].id.toString(),
-                                                true
-                                            )
-                                }
-                                lv0.addSubItem(lv1)
-                            }
-                        } else {
-                            lv1 =
-                                    SubCommentsBean(
-                                        "", false, false, "", 0,
-                                        bean.items[i].id.toString(), false
-                                    )
-                            lv0.addSubItem(lv1)
-                        }
-
-
-                        list.add(lv0)
-                    }
-
-
-
-
-                    mAdapter?.setNewData(list)
-                    mAdapter?.expandAll()
-                }
-
-            })
 
 
 
@@ -173,6 +195,46 @@ class EvaluateManageFragment : BaseFragment() {
 
 
         }
+
+        mAdapter?.expandAll()
+
+    }
+
+
+    private fun initAdapter() {
+        mAdapter?.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
+
+        recyclerView.adapter = mAdapter
+
+        mAdapter?.setOnLoadMoreListener({
+            loadMore()
+        }, recyclerView)
+
+        mAdapter?.disableLoadMoreIfNotFullPage(recyclerView)
+
+    }
+
+
+    private fun initRefreshLayout() {
+        swipeLayout.setOnRefreshListener { refreshLayout ->
+            refresh()
+        }
+    }
+
+
+    private fun refresh() {
+        startIndex = 0
+
+        present?.allcomments(type, isHasfile, startIndex, pageSize, "refresh")
+    }
+
+
+    private fun loadMore() {
+        // Toast.makeText(context, "onload", Toast.LENGTH_SHORT).show()
+        startIndex++
+
+        present?.allcomments(type, isHasfile, startIndex, pageSize, "load")
+
 
     }
 

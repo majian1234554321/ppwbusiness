@@ -13,6 +13,8 @@ public class ShopAdminBean {
 
     public AccountBean account;
     public String shopName;
+    public String preNum;
+    public String preTotal;
     public List<FunctionsBean> functions;
 
     public static class AccountBean {

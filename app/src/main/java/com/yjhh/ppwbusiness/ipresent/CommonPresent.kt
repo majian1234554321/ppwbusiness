@@ -56,13 +56,14 @@ class CommonPresent(var context: Context, var view: CommonView) : BasePresent() 
         val list = ArrayList<MultipartBody.Part>()
 
 
-        files.forEach {
-            var requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), it)
-            var body = MultipartBody.Part.createFormData("multipartFile", it.name, requestFile)
-            list.add(body)
+        files.forEachIndexed { index, it ->
+            run {
+                val requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), it)
+                val body = MultipartBody.Part.createFormData("multipartFile$index", it.name, requestFile)
+                list.add(body)
+            }
+
         }
-
-
         toSubscribe2(ApiServices.getInstance().create(CommonService::class.java)
             .uploadFiles(list), object : ProcessObserver2(context, true) {
             override fun processValue(response: String?) {
@@ -82,6 +83,4 @@ class CommonPresent(var context: Context, var view: CommonView) : BasePresent() 
 
 
     }
-
-
 }

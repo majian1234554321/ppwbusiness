@@ -226,6 +226,7 @@
                         app:outsideCircleRadius="41pt"
                         app:outsideCircleColor="#F1D4D4"
                         app:outsideStrokeWidth="1pt"
+                        android:id="@+id/sc_left"
                         app:CircleLTextSize="18pt"
                         app:CircleSTextSize="12pt"
                         app:insideCircleRadius="35pt"
@@ -263,6 +264,7 @@
                         app:outsideStrokeWidth="1pt"
                         app:CircleLTextSize="18pt"
                         app:CircleSTextSize="12pt"
+                        android:id="@+id/sc_right"
 
                         app:insideCircleRadius="35pt"
                         app:insideCircleColor="#20D990"

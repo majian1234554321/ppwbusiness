@@ -27,10 +27,13 @@ import com.yjhh.ppwbusiness.api.ApiServices
 import com.yjhh.ppwbusiness.api.ShopSetServices
 import com.yjhh.ppwbusiness.base.BaseActivity
 import com.yjhh.ppwbusiness.base.ProcessObserver2
+import com.yjhh.ppwbusiness.bean.AllShopInfo
+import com.yjhh.ppwbusiness.bean.BusinessHoursBean
 import com.yjhh.ppwbusiness.bean.LoginBean
 import com.yjhh.ppwbusiness.ipresent.ShopSetPresent
 import com.yjhh.ppwbusiness.iview.ShopSetView
 import com.yjhh.ppwbusiness.utils.Glide4Engine
+import com.yjhh.ppwbusiness.utils.ImageLoaderUtils
 import com.yjhh.ppwbusiness.utils.RxBus
 import com.yjhh.ppwbusiness.utils.SharedPreferencesUtils
 import com.yjhh.ppwbusiness.views.cui.AbsSheetDialog
@@ -46,10 +49,53 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_merchant_setting.*
 import java.io.File
 import java.io.IOException
+import java.lang.StringBuilder
 import java.text.SimpleDateFormat
 import java.util.*
 
 class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetView {
+
+    var listHours = ArrayList<BusinessHoursBean>()
+
+    override fun AllShopInfoSuccess(model: AllShopInfo) {
+
+        // tv_name.setText(model.status)
+        tv_shopTel.setText(model.mobile)
+        tv_shopAddress.setText(model.address)
+        tv_shopDesc.setText(model.content)
+
+
+        if (model.times.size > 0) {
+
+            listHours.clear()
+
+
+            val sb = StringBuilder()
+            model.times.forEach {
+                sb.append(it.begin)
+                    .append(" - ")
+                    .append(it.end)
+                    .append("   ")
+
+
+
+                listHours.add(BusinessHoursBean(it.begin, it.end))
+
+            }
+            tv_time.text = sb.toString()
+        }
+
+        ImageLoaderUtils.loadCircle(
+            this,
+            iv_image,
+            model.logoUrl,
+            R.drawable.icon_logoholder,
+            R.drawable.icon_logoholder
+        )
+
+
+    }
+
     override fun onFault(errorMsg: String?) {
 
         Toast.makeText(this, "设置店铺信息成功", Toast.LENGTH_LONG).show()
@@ -66,7 +112,11 @@ class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetVie
         when (v?.id) {
 
             R.id.tv_setTime -> {
-                startActivityForResult(Intent(this, BusinessHoursActivity::class.java), 10086)
+
+                val intent = Intent(this, BusinessHoursActivity::class.java)
+                intent.putParcelableArrayListExtra("time", listHours)
+
+                startActivityForResult(intent, 10086)
             }
 
             R.id.iv_back -> {
@@ -102,6 +152,9 @@ class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetVie
 
         present = ShopSetPresent(this, this)
 
+
+        present?.getAllInfo()
+
         arrayOf(iev_logo, tv_setTime, iv_back, tv_save).forEach {
             it.setOnClickListener(this)
         }
@@ -112,13 +165,13 @@ class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetVie
         tv_editOpen.setOnToggleListener {
             val map = ArrayMap<String, String>()
             map.clear()
-            if (it) {
+            typeStatus = if (it) {
                 Log.i("ProductAddFragment", it.toString())
-                typeStatus = "0"
+                "0"
 
             } else {
                 Log.i("ProductAddFragment", it.toString())
-                typeStatus = "1"
+                "1"
 
             }
 
@@ -127,9 +180,12 @@ class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetVie
 
         }
 
-        RxTextView.textChanges(tv_shopDesc).subscribe {
+        val dis = RxTextView.textChanges(tv_shopDesc).subscribe {
             text.text = "${it.toString().length}/80"
         }
+
+        compositeDisposable.add(dis)
+
 
     }
 
@@ -137,6 +193,27 @@ class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetVie
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+        if (requestCode == 10086) {
+            val timeList = data?.getParcelableArrayListExtra<BusinessHoursBean>("time")
+            if (timeList != null) {
+                val sb = StringBuilder()
+                timeList.forEach {
 
+                    listHours.clear()
+
+                    sb.append(it.begin)
+                        .append(" - ")
+                        .append(it.end)
+                        .append("   ")
+
+
+
+                    listHours.add(BusinessHoursBean(it.begin, it.end))
+
+                }
+
+                tv_time.text = sb.toString()
+            }
+        }
     }
 }

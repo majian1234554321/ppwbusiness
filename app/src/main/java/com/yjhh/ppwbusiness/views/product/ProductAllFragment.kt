@@ -26,6 +26,7 @@ import com.yjhh.ppwbusiness.views.product.twoview.BaseViewAdapter
 import com.yjhh.ppwbusiness.views.product.twoview.BindData
 import com.yjhh.ppwbusiness.views.product.twoview.LeftBean
 import com.yjhh.ppwbusiness.views.product.twoview.RightBean
+import kotlinx.android.synthetic.main.pickerview_custom_time.*
 
 import kotlinx.android.synthetic.main.product1fragment.*
 import kotlinx.android.synthetic.main.productallfragment.*
@@ -38,6 +39,10 @@ class ProductAllFragment : BaseFragment(), ProductView {
     var status = ""//状态，默认null(null全部（不含已删除） 0 上架中 1已下架 3已删除)
     var startindex = 0
     val pageSize = 10
+
+
+    var order = ""   //排序,0（0 时间排序 1价格排序）
+    var orderType = "" //排序方式，0(0升序 1倒叙)
 
 
     override fun onSuccess(result: ProductBean?, flag: String) {
@@ -62,10 +67,16 @@ class ProductAllFragment : BaseFragment(), ProductView {
 
             "UNSELL" -> {
                 Toast.makeText(mActivity, "商品下架成功", Toast.LENGTH_SHORT).show()
+                mAdapter.getItem(result?.position!!)?.status = 1
+                mAdapter.notifyDataSetChanged()
             }
 
             "SELL" -> {
                 Toast.makeText(mActivity, "商品上架成功", Toast.LENGTH_SHORT).show()
+
+                mAdapter.getItem(result?.position!!)?.status = 0
+
+                mAdapter.notifyDataSetChanged()
             }
 
             else -> {
@@ -128,7 +139,25 @@ class ProductAllFragment : BaseFragment(), ProductView {
 
                 R.id.tv_stop -> {
 
-                    present.editSaleStatus("1", "0", position, "UNSELL")
+
+                    //	上下架状态(0上 1下)
+                    if ((adapter.data[position] as ProductBean.ItemsBean).status == 0) {
+                        present.editSaleStatus(
+                            (adapter.data[position] as ProductBean.ItemsBean).id.toString(),
+                            "1",
+                            position,
+                            "UNSELL"
+                        )
+                    } else {
+                        present.editSaleStatus(
+                            (adapter.data[position] as ProductBean.ItemsBean).id.toString(),
+                            "0",
+                            position,
+                            "SELL"
+                        )
+                    }
+
+
                 }
 
                 R.id.iv_edit -> {
@@ -168,7 +197,7 @@ class ProductAllFragment : BaseFragment(), ProductView {
 
     private fun refresh() {
         startindex = 0
-        present.allproducts(categoryId, status, startindex, pageSize, "refresh")
+        present.allproducts(categoryId, order, orderType, status, startindex, pageSize, "refresh")
 
     }
 
@@ -176,9 +205,17 @@ class ProductAllFragment : BaseFragment(), ProductView {
     private fun loadMore() {
         Toast.makeText(context, "onload", Toast.LENGTH_SHORT).show()
         startindex++
-        present.allproducts(categoryId, status, startindex, pageSize, "load")
+        present.allproducts(categoryId, order, orderType, status, startindex, pageSize, "load")
 
     }
 
+
+    public fun sortType(order: String, orderType: String) {
+        this.order = order
+        this.orderType = orderType
+        if (swipeLayout != null)
+            swipeLayout.autoRefresh()
+
+    }
 
 }

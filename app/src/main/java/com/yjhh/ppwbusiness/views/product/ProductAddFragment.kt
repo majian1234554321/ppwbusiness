@@ -105,15 +105,12 @@ class ProductAddFragment : BaseFragment(), CommonView {
         val type = bundle?.getString("type")
 
 
-
-
-
         val tips = "商品主图（注：默认第一张为主图，最多添加3张）"
         tv_tip.text = TextStyleUtils.changeTextColor(
             tips,
             0,
             4,
-             Color.parseColor("#333333")
+            Color.parseColor("#333333")
         )
 
 
@@ -124,12 +121,13 @@ class ProductAddFragment : BaseFragment(), CommonView {
             toggle.isOpen = true
             toggleStatus = true
             tbv_title.setTitle("新建商品")
+            bt_add.text = "新建商品"
         } else {
             tbv_title.setTitle("编辑商品")
             et_name.setText(objectValue.name)
             et_price.setText(objectValue.price.toString())
             et_desc.setText(objectValue.describe)
-
+            bt_add.text = "编辑完成"
         }
 
 
@@ -322,27 +320,28 @@ class ProductAddFragment : BaseFragment(), CommonView {
             val list = Matisse.obtainPathResult(data)
 
 
-            val file = File(list[0])
+//            val file = File(list[0])
+//
+//            lists.add(file.path)
+//
+//            while (lists.size > 3) {
+//                lists.removeAt(lists.lastIndex)
+//            }
+//
+//
+//            mAdapter?.notifyDataSetChanged()
+//            present?.UpLoadFile(file)
 
-            lists.add(file.path)
+            val listFiles = ArrayList<File>()
 
-            while (lists.size > 3) {
-                lists.removeAt(lists.lastIndex)
-            }
-
-
-            mAdapter?.notifyDataSetChanged()
-            present?.UpLoadFile(file)
-
-            /*val listFiles  = ArrayList<File>()
+            lists.addAll(list)
             list.forEach {
-
                 val file = File(it)
                 listFiles.add(file)
             }
-              present?.UpLoadFiles(listFiles)
+            present?.UpLoadFiles(listFiles)
 
-            */
+            mAdapter?.notifyDataSetChanged()
 
 
         }
@@ -357,9 +356,6 @@ class ProductAddFragment : BaseFragment(), CommonView {
             while (lists.size > 3) {
                 lists.removeAt(lists.lastIndex)
             }
-
-
-
 
             mAdapter?.notifyDataSetChanged()
 

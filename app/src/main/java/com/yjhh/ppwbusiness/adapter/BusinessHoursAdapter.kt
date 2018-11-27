@@ -12,9 +12,9 @@ class BusinessHoursAdapter(data:List<BusinessHoursBean>) :
 
     override fun convert(helper: BaseViewHolder?, item: BusinessHoursBean?) {
 
-        helper?.setText(R.id.tv_sTime,item?.sTime)
+        helper?.setText(R.id.tv_sTime,item?.begin)
 
-        helper?.setText(R.id.tv_eTime,item?.eTime)
+        helper?.setText(R.id.tv_eTime,item?.end)
 
         helper?.addOnClickListener(R.id.tv_sTime)?.addOnClickListener(R.id.tv_eTime)
             ?.addOnClickListener(R.id.tv_delete)

@@ -1,5 +1,6 @@
 package com.yjhh.ppwbusiness.views.merchant
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
@@ -27,7 +28,36 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_business_hours.*
 import java.lang.StringBuilder
 
-class BusinessHoursActivity : AppCompatActivity() {
+class BusinessHoursActivity : AppCompatActivity(), View.OnClickListener {
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.iv_back -> {
+                this.finish()
+            }
+
+            R.id.tv_save -> {
+                ApiServices.getInstance().create(ShopSetServices::class.java)
+                    .editTimes(list.toArray(arrayOfNulls<BusinessHoursBean>(list.size)))
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                        {
+                            Log.i("BusinessHoursActivity", it.string())
+                            val intent = Intent()
+                            intent.putExtra("time", list)
+                            setResult(RESULT_OK, intent)
+                            finish()
+
+                        }, {
+                            Log.i("BusinessHoursActivity", it.toString())
+                        }
+                    )
+            }
+
+            else -> {
+            }
+        }
+    }
 
 
     private val AValue = java.util.ArrayList<String>()
@@ -42,11 +72,14 @@ class BusinessHoursActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_business_hours)
 
-
+        arrayOf(iv_back, tv_save).forEach {
+            it.setOnClickListener(this)
+        }
 
         getNoLinkData()
-
-
+        list.clear()
+        val timeList = intent.getParcelableArrayListExtra<BusinessHoursBean>("time")
+        list.addAll(timeList)
 
 
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -67,18 +100,31 @@ class BusinessHoursActivity : AppCompatActivity() {
         mAdapter?.setOnItemChildClickListener { adapter, view, position ->
             when (view.id) {
                 R.id.tv_sTime -> {
-                    initNoLinkOptionsPicker(0, 1, 1, view, position, "sTime")
+                    initNoLinkOptionsPicker(
+                        0,
+                        arrivePositionH(list[position].begin),
+                        arrivePositionS(list[position].begin),
+                        view,
+                        position,
+                        "sTime"
+                    )
                     pvNoLinkOptions?.show()
                 }
 
                 R.id.tv_eTime -> {
-                    initNoLinkOptionsPicker(0, 1, 1, view, position, "eTime")
+                    initNoLinkOptionsPicker(
+                        0,
+                        arrivePositionH(list[position].end),
+                        arrivePositionS(list[position].end),
+                        view,
+                        position,
+                        "eTime"
+                    )
 
                     pvNoLinkOptions?.show()
                 }
 
                 else -> {
-
 
                     AlertDialogFactory.createFactory(this).getAlertDialog(
                         null,
@@ -97,11 +143,22 @@ class BusinessHoursActivity : AppCompatActivity() {
     }
 
 
-    private fun getNoLinkData() {
-        AValue.add("上午")
-        AValue.add("下午")
+    fun arrivePositionH(value: String): Int {
 
-        for (i in 0..11) {
+        return BValue.indexOf(value.subSequence(0, 2))
+
+    }
+
+    fun arrivePositionS(value: String): Int {
+        return BValue.indexOf(value.subSequence(3, 5))
+    }
+
+
+    private fun getNoLinkData() {
+        AValue.add("")
+
+
+        for (i in 0..23) {
             if (i < 10) {
                 BValue.add("0$i")
             } else {
@@ -128,7 +185,7 @@ class BusinessHoursActivity : AppCompatActivity() {
         pvNoLinkOptions = OptionsPickerBuilder(this,
             OnOptionsSelectListener { options1, options2, options3, v ->
                 //返回的分别是三个级别的选中位置
-              //  Toast.makeText(this, "$options1,$options2,$options3", Toast.LENGTH_SHORT).show()
+                //  Toast.makeText(this, "$options1,$options2,$options3", Toast.LENGTH_SHORT).show()
 
 
                 val sb = StringBuilder()
@@ -143,31 +200,13 @@ class BusinessHoursActivity : AppCompatActivity() {
                 sb.append(CValue[options3])
 
                 if ("sTime" == flag) {
-                    list[position].sTime = sb.toString()
+                    list[position].begin = sb.toString()
                 } else {
-                    list[position].eTime = sb.toString()
+                    list[position].end = sb.toString()
                 }
 
 
                 (view as TextView).text = sb.toString()
-
-
-                val aa = SETime("00:00", "18:00")
-
-                val s = arrayOf(aa)
-
-
-                ApiServices.getInstance().create(ShopSetServices::class.java)
-                    .editTimes(s)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(
-                        {
-                            Log.i("BusinessHoursActivity", it.string())
-                        }, {
-                            Log.i("BusinessHoursActivity", it.toString())
-                        }
-                    )
 
 
             })
@@ -188,7 +227,7 @@ class BusinessHoursActivity : AppCompatActivity() {
             .build()
 
         pvNoLinkOptions?.setNPicker(AValue, BValue, CValue)
-        pvNoLinkOptions?.setSelectOptions(0, 1, 1)
+        pvNoLinkOptions?.setSelectOptions(a, b, c)
         // pvNoLinkOptions.show()
 
         val mDialog = pvNoLinkOptions?.getDialog()
@@ -202,9 +241,9 @@ class BusinessHoursActivity : AppCompatActivity() {
 
             params.leftMargin = 0
             params.rightMargin = 0
-            pvNoLinkOptions?.getDialogContainerLayout()?.setLayoutParams(params)
+            pvNoLinkOptions?.dialogContainerLayout?.layoutParams = params
 
-            val dialogWindow = mDialog!!.getWindow()
+            val dialogWindow = mDialog.window
             if (dialogWindow != null) {
                 dialogWindow.setWindowAnimations(com.bigkoo.pickerview.R.style.picker_view_slide_anim)//修改动画样式
                 dialogWindow.setGravity(Gravity.BOTTOM)//改成Bottom,底部显示

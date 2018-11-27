@@ -10,8 +10,8 @@ import com.yjhh.ppwbusiness.bean.ShopAdminBean
 import com.yjhh.ppwbusiness.iview.Main1View
 
 class Main1Present(var context: Context, var main1: Main1View) : BasePresent() {
-    fun ShopAdmin() {
-        toSubscribe2(ApiServices.getInstance().create(SectionShopAdminService::class.java).shopAdmin()
+    fun shopAdminHome() {
+        toSubscribe2(ApiServices.getInstance().create(SectionShopAdminService::class.java).shopAdminHome()
             , object : ProcessObserver2(context) {
                 override fun processValue(response: String?) {
                     Log.i("ShopAdminPresent", response)

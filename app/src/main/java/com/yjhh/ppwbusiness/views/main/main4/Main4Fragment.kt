@@ -18,10 +18,12 @@ import com.yjhh.ppwbusiness.base.BaseMainFragment
 import com.yjhh.ppwbusiness.base.ProcessObserver2
 import com.yjhh.ppwbusiness.bean.LoginBean
 import com.yjhh.ppwbusiness.fragments.*
+import com.yjhh.ppwbusiness.utils.ImageLoaderUtils
 import com.yjhh.ppwbusiness.utils.LogUtils
 import com.yjhh.ppwbusiness.utils.RxBus
 import com.yjhh.ppwbusiness.utils.SharedPreferencesUtils
 import com.yjhh.ppwbusiness.views.login.LoginActivity
+import com.yjhh.ppwbusiness.views.merchant.MerchantSettingActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.main4fragment.*
@@ -92,7 +94,12 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener {
             R.id.iev_updateVersion -> {
 
 
+            }
+            R.id.tv_to -> {
+                startActivity(Intent(mActivity, MerchantSettingActivity::class.java))
+            }
 
+            R.id.tv_status -> {
 
             }
 
@@ -102,13 +109,12 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener {
     }
 
 
-
     override fun getLayoutRes(): Int = R.layout.main4fragment
 
 
     override fun initView() {
         val arrayView = arrayOf(
-            profile_image, tv_name
+            profile_image, tv_name, tv_to, tv_status
             , iev_message, iev_notice, iev_Management, iev_about, iev_account, iev_updateVersion
         )
 
@@ -145,6 +151,16 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener {
                     Log.i("AccountFragment", response)
 
                     iev_account.setTextContent(JSONObject(response).optString("roleName"))
+
+                    ImageLoaderUtils.loadCircle(
+                        mActivity,
+                        profile_image,
+                        JSONObject(response).optString("avatarUrl"),
+                        R.drawable.icon_logoholder,
+                        R.drawable.icon_logoholder
+                    )
+
+
                 }
 
                 override fun onFault(message: String) {

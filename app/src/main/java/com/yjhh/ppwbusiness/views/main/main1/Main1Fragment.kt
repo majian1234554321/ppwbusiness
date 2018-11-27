@@ -43,6 +43,7 @@ import android.text.style.AbsoluteSizeSpan
 import android.widget.Toast
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.uuzuche.lib_zxing.activity.CaptureActivity
+import com.yjhh.ppwbusiness.utils.SharedPreferencesUtils
 import com.yjhh.ppwbusiness.utils.TextStyleUtils
 
 
@@ -50,7 +51,7 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
 
 
     override fun onSuccess(model: OrderBean, flag: String) {
-        //  recyclerView2.adapter = OrderTaskAdapter(model.items)
+
     }
 
     override fun onsuccessShopAdmin(bean: ShopAdminBean) {
@@ -69,6 +70,16 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
 
         val stringYesOrder = "昨日订单量  ${bean.account.yesOrder}"
         tv_YOrder.text = TextStyleUtils.changeTextColor(stringYesOrder, 0, 5, Color.parseColor("#8C8C8C"))
+
+
+
+        tv_title.text = bean.shopName
+
+        sc_left.setcontent("${bean.preNum} 单")
+        sc_right.setcontent("${bean.preTotal} 单")
+
+
+
     }
 
     override fun onFault(errorMsg: String?) {
@@ -126,7 +137,7 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
 
     override fun initView() {
 
-        Main1Present(mActivity, this).ShopAdmin()
+        Main1Present(mActivity, this).shopAdminHome()
 
         arrayOf(tv_setting, tv_more, iv_scan).forEach {
             it.setOnClickListener(this)

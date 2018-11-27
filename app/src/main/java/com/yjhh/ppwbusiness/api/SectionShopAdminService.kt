@@ -10,10 +10,16 @@ interface SectionShopAdminService {
 
 
     @POST("shopAdmin/home")
-    fun shopAdmin(): Observable<ResponseBody>//
+    fun shopAdminHome(): Observable<ResponseBody>//
 
     @FormUrlEncoded
     @POST("shopAdmin")
-    fun shopAdmin111111111111(@FieldMap map: Map<String, String>): Observable<ResponseBody>//
+    fun shopAdmin(@FieldMap map: Map<String, String>): Observable<ResponseBody>//
+
+
+
+//    @FormUrlEncoded
+//    @POST("shopAdmin")
+//    fun shopAdmin(@FieldMap map: Map<String, String>): Observable<ResponseBody>//
 
 }

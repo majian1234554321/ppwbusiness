@@ -8,7 +8,7 @@ import android.util.AttributeSet
 import android.view.View
 import com.yjhh.ppwbusiness.R
 
-class SuperCircleView@JvmOverloads constructor(
+class SuperCircleView @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -19,20 +19,20 @@ class SuperCircleView@JvmOverloads constructor(
 ) {
 
 
-    var paint:Paint?=null
-    val outsideCircleRadius:Float
-    val outsideCircleColor:Int
-    val  outsideStrokeWidth:Float
+    var paint: Paint? = null
+    val outsideCircleRadius: Float
+    val outsideCircleColor: Int
+    val outsideStrokeWidth: Float
 
-    val insideCircleRadius:Float
-    val insideCircleColor:Int
-    val insideStrokeWidth:Float
+    val insideCircleRadius: Float
+    val insideCircleColor: Int
+    val insideStrokeWidth: Float
 
-    val CircleLTextSize:Float
-    val CircleSTextSize:Float
+    val CircleLTextSize: Float
+    val CircleSTextSize: Float
 
     init {
-         paint = Paint()
+        paint = Paint()
 
         val type = context.theme.obtainStyledAttributes(attributeSet, R.styleable.SuperCircleView, defStyleAttr, 0)
 
@@ -55,35 +55,46 @@ class SuperCircleView@JvmOverloads constructor(
 
     }
 
+    var content: String = ""
+
+    fun setcontent(content: String) {
+        this.content = content
+
+        invalidate()
+    }
 
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         paint?.reset()
         paint?.style = Paint.Style.STROKE
-        paint?.isAntiAlias= true
+        paint?.isAntiAlias = true
         paint?.strokeWidth = outsideStrokeWidth
-        paint?.color= outsideCircleColor
+        paint?.color = outsideCircleColor
         canvas?.drawCircle(outsideCircleRadius, outsideCircleRadius, outsideCircleRadius, paint)
 
 
         paint?.reset()
         paint?.style = Paint.Style.STROKE
-        paint?.isAntiAlias= true
+        paint?.isAntiAlias = true
         paint?.strokeWidth = insideStrokeWidth
-        paint?.color= insideCircleColor
+        paint?.color = insideCircleColor
         canvas?.drawCircle(outsideCircleRadius, outsideCircleRadius, insideCircleRadius, paint)
 
 
         paint?.reset()
         paint?.style = Paint.Style.STROKE
-        paint?.isAntiAlias= true
+        paint?.isAntiAlias = true
         paint?.color = Color.BLACK
-        paint?.textSize =CircleLTextSize
+        paint?.textSize = CircleLTextSize
 
 
-        canvas?.drawText(  "212%", outsideCircleRadius / 2, outsideCircleRadius+CircleSTextSize/2, paint)
-
+        canvas?.drawText(
+            content,
+            outsideCircleRadius / 2 + CircleSTextSize / 2,
+            outsideCircleRadius + CircleSTextSize / 2,
+            paint
+        )
 
 
     }

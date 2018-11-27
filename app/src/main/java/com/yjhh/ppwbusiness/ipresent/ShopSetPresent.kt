@@ -9,6 +9,7 @@ import com.yjhh.ppwbusiness.api.ApiServices
 import com.yjhh.ppwbusiness.api.ShopSetServices
 import com.yjhh.ppwbusiness.base.BasePresent
 import com.yjhh.ppwbusiness.base.ProcessObserver2
+import com.yjhh.ppwbusiness.bean.AllShopInfo
 
 import com.yjhh.ppwbusiness.iview.ShopSetView
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -69,6 +70,29 @@ class ShopSetPresent(var context: Context, var view: ShopSetView) : BasePresent(
     }
 
 
+    fun getAllInfo() {
+
+
+        toSubscribe2(ApiServices.getInstance()
+            .create(ShopSetServices::class.java)
+            .getAllInfo(), object : ProcessObserver2(context, true) {
+            override fun onFault(message: String) {
+                Log.i("getAllInfo", message)
+            }
+
+            override fun processValue(response: String?) {
+                Log.i("getAllInfo", response)
+
+               val model =  gson.fromJson<AllShopInfo>(response,AllShopInfo::class.java)
+
+                view.AllShopInfoSuccess(model)
+
+            }
+
+        }
+        )
+
+    }
 
 
 }

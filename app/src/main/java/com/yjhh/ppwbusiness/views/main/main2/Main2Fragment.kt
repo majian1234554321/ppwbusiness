@@ -7,6 +7,8 @@ import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.MyPagerAdapter
 import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.base.BaseMainFragment
+import com.yjhh.ppwbusiness.fragments.AccountFragment
+import com.yjhh.ppwbusiness.fragments.MainFragment
 import com.yjhh.ppwbusiness.views.product.Product2Fragment
 import com.yjhh.ppwbusiness.views.product.Product3Fragment
 import com.yjhh.ppwbusiness.views.product.ProductAllFragment
@@ -31,9 +33,13 @@ class Main2Fragment : BaseMainFragment() {
         fagments.add(Main2_2Fragment())
         fagments.add(Main2_3Fragment())
         // fagments.add(Product4Fragment())
-        title.setOnClickListener {
+        tv_to.setOnClickListener {
 
-            (preFragment as BaseMainFragment).start(ReservationOrderFragment())
+
+            (parentFragment as MainFragment).start(
+                ReservationOrderFragment()
+            )
+
         }
 
 

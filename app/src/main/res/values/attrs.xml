@@ -77,6 +77,14 @@
         <attr name="ievdrwableleft" format="reference"/>
     </declare-styleable>
 
+
+
+    <declare-styleable name="ItemEntryView2">
+        <attr name="ievtextColor2" format="color"/>
+        <attr name="ievtextValue2" format="string"/>
+    </declare-styleable>
+
+
     <declare-styleable name="lib_pub_ToggleButton">
         <attr name="lib_pub_tbtn_colorThumb" format="color" />
         <attr name="lib_pub_tbtn_colorTrackOpen" format="color" />

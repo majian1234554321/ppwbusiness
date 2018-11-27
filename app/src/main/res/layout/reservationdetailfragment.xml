@@ -1,35 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:background="@color/f8"
               android:layout_width="match_parent"
               android:orientation="vertical"
-              android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools">
+              android:layout_height="match_parent">
+
+
     <com.yjhh.ppwbusiness.views.cui.TitleBarView android:layout_width="match_parent"
                                                  app:textValue="预约详情"
                                                  app:textColor="@color/white"
                                                  android:layout_height="wrap_content"/>
 
 
-
-    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-        tools:text="121123"
-    />
-    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-              tools:text="121123"
-    />
-    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-              tools:text="121123"
-    />
-    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-              tools:text="121123"
-    />
-    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-              tools:text="121123"
-    />
-    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-              tools:text="121123"
+    <ImageView android:layout_width="60pt" android:layout_height="60pt"
+               android:layout_gravity="center"
+               android:src="@mipmap/ic_launcher"
+               android:layout_marginTop="30.5pt"
     />
 
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已过时"
+            android:layout_marginTop="10.6pt"
+            android:layout_marginBottom="25.5pt"
+            android:layout_gravity="center"
+            android:textColor="#FF333333"
+            android:textSize="17pt"
+    />
+
+
+    <LinearLayout
+            android:layout_marginTop="10pt"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:paddingLeft="24pt"
+            android:paddingRight="24pt"
+            android:layout_width="match_parent" android:layout_height="wrap_content">
+
+        <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                       app:ievtextValue2="商家名"
+                                                       android:layout_height="wrap_content"/>
+        <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                       app:ievtextValue2="时间"
+                                                       android:layout_height="wrap_content"/>
+        <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                       app:ievtextValue2="人数"
+                                                       android:layout_height="wrap_content"/>
+        <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                       app:ievtextValue2="联系方式"
+                                                       android:layout_height="wrap_content"/>
+        <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                       app:ievtextValue2="备注"
+                                                       android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="vertical"
+                  android:paddingLeft="24pt"
+                  android:paddingRight="24pt"
+                  android:layout_height="wrap_content">
+
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:text="用户主动取消"
+                  android:textColor="#FF666666"
+                  android:textSize="14pt"
+        />
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="取消原因：下错订单"
+                android:textColor="#FFFF552E"
+                android:textSize="12pt"
+        />
+    </LinearLayout>
 
 
 </LinearLayout>

@@ -142,25 +142,18 @@ class BusinessHoursFragment : BaseFragment() {
                 sb.append(CValue[options3])
 
                 if ("sTime" == flag) {
-                    list[position].sTime = sb.toString()
+                    list[position].begin = sb.toString()
                 } else {
-                    list[position].eTime = sb.toString()
+                    list[position].end = sb.toString()
                 }
 
 
                 (view as TextView).text = sb.toString()
 
 
-
-                val map = ArrayMap<String,String>()
-                map["begin"]="00:00"
-                map["begin"]="18:00"
-
-
-
-
-
-
+                val map = ArrayMap<String, String>()
+                map["begin"] = "00:00"
+                map["begin"] = "18:00"
 
 
             })

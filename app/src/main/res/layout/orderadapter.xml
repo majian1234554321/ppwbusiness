@@ -5,65 +5,141 @@
                 android:padding="@dimen/sp_12"
                 android:layout_height="wrap_content">
 
-    <ImageView android:layout_width="80dp"
+    <ImageView android:layout_width="40pt"
                android:id="@+id/iv_image"
                android:layout_marginRight="@dimen/sp_12"
                android:src="@mipmap/ic_launcher"
-               android:layout_height="80dp"/>
+               android:layout_height="40pt"/>
+
 
     <TextView android:layout_width="wrap_content"
-              tools:text="商品名称"
+              android:text="王**五"
+              android:paddingTop="14pt"
+              android:layout_below="@+id/iv_image"
+              android:textColor="#FF333333"
+              android:textSize="13pt"
               android:id="@+id/tv_name"
+              android:layout_height="wrap_content"/>
+
+
+    <TextView android:layout_width="wrap_content"
+
+
+              android:text="2018/11/11  13:12:20"
+              android:textColor="#FF333333"
+              android:textSize="15pt"
+              android:id="@+id/tv_1"
+              android:paddingBottom="9.5pt"
               android:layout_toRightOf="@+id/iv_image"
               android:layout_alignTop="@+id/iv_image"
               android:layout_height="wrap_content"/>
 
     <TextView android:layout_width="wrap_content"
-              tools:text="2018-11.11 23:23:59"
+              tools:text="已付款"
+              android:textColor="#FF29D25D"
+              android:textSize="15pt"
+              android:paddingBottom="9.5pt"
+              android:id="@+id/tv_2"
               android:layout_alignTop="@+id/iv_image"
               android:layout_alignParentRight="true"
               android:layout_height="wrap_content"/>
 
 
     <TextView android:layout_width="wrap_content"
-              tools:text="实付金额￥0.99"
-              android:id="@+id/tv_price"
-              android:layout_alignBottom="@+id/iv_image"
+              android:paddingBottom="5pt"
+              android:layout_below="@+id/tv_1"
+              android:id="@+id/tv_3"
+              android:gravity="center"
+              android:text="总价"
+              android:textColor="#FF666666"
+              android:textSize="13pt"
+
+
               android:layout_toRightOf="@+id/iv_image"
               android:layout_height="wrap_content"/>
 
     <TextView android:layout_width="wrap_content"
-              tools:text="已使用券总价无门槛减99元"
-              android:layout_alignBottom="@+id/iv_image"
-              android:layout_toRightOf="@+id/tv_price"
-              android:layout_height="wrap_content"/>
-
-    <TextView android:layout_width="wrap_content"
-              tools:text="已使用券总价无门槛减99元"
-              android:id="@+id/remark"
-              android:layout_marginTop="@dimen/spi_8"
-              android:layout_below="@+id/tv_price"
-              android:layout_toRightOf="@+id/iv_image"
+              android:text="¥99.99"
+              android:textColor="#FF000000"
+              android:textSize="13pt"
+              android:layout_alignParentRight="true"
+              android:id="@+id/tv_4"
+              android:layout_below="@+id/tv_1"
               android:layout_height="wrap_content"/>
 
 
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:layout_below="@+id/tv_name"
+              android:layout_below="@+id/tv_3"
               android:layout_toRightOf="@+id/iv_image"
               android:gravity="center"
-              android:id="@+id/tv_totalMoeny"
+              android:id="@+id/tv_5"
+              android:paddingBottom="5pt"
               android:layout_above="@+id/tv_price"
-              tools:text="总价         ￥0.99"
+              android:text="优惠券(无门槛减10元)"
+              android:textColor="#FF666666"
+              android:textSize="13pt"
     />
 
 
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:layout_below="@+id/tv_name"
+              android:layout_below="@+id/tv_3"
               android:layout_alignParentEnd="true"
               android:gravity="center"
-              android:layout_above="@+id/tv_price"
-              tools:text="已付款"
+              android:id="@+id/tv_6"
+              android:text="-¥10"
+              android:textColor="#FF000000"
+              android:textSize="13pt"
+
     />
 
+
+    <TextView android:layout_width="wrap_content"
+              android:paddingBottom="5pt"
+              android:id="@+id/tv_7"
+              android:text="不参与优惠"
+              android:textColor="#FF666666"
+              android:textSize="13pt"
+
+              android:layout_marginTop="@dimen/spi_8"
+              android:layout_below="@+id/tv_5"
+              android:layout_toRightOf="@+id/iv_image"
+              android:layout_height="wrap_content"/>
+    <TextView android:layout_width="wrap_content"
+
+
+              tools:text="-¥20"
+              android:textColor="#FF000000"
+              android:textSize="13pt"
+
+              android:id="@+id/tv_8"
+              android:layout_alignParentRight="true"
+              android:layout_marginTop="@dimen/spi_8"
+              android:layout_below="@+id/tv_5"
+
+              android:layout_height="wrap_content"/>
+
+
+    <TextView android:layout_width="wrap_content"
+
+              android:id="@+id/tv_9"
+              android:text="实付金额"
+              android:textColor="#FF666666"
+              android:textSize="13pt"
+              android:paddingBottom="16pt"
+              android:layout_marginTop="@dimen/spi_8"
+              android:layout_below="@+id/tv_7"
+              android:layout_toRightOf="@+id/iv_image"
+              android:layout_height="wrap_content"/>
+    <TextView android:layout_width="wrap_content"
+
+              android:id="@+id/tv_10"
+              tools:text="¥60.99"
+              android:textColor="#FFFF552E"
+              android:textSize="13pt"
+              android:layout_alignParentRight="true"
+              android:layout_marginTop="@dimen/spi_8"
+              android:layout_below="@+id/tv_7"
+
+              android:layout_height="wrap_content"/>
 
 </RelativeLayout>

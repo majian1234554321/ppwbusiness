@@ -51,7 +51,7 @@
               android:textColor="#FF999999"
               android:textSize="11pt"
               android:layout_toRightOf="@+id/iv_image"
-              android:text="月销量:9999 库存：99"
+              tools:text="月销量:9999 库存：99"
     />
 
 

@@ -16,10 +16,21 @@ import java.text.FieldPosition
 class ProductPresent(var context: Context, var view: ProductView) : BasePresent() {
     val map = ArrayMap<String, String>()
 
-    fun allproducts(categoryId: String, status: String, pageIndex: Int, pageSize: Int, flag: String) {
+    fun allproducts(
+        categoryId: String,
+        order: String,
+        orderType: String,
+        status: String,
+        pageIndex: Int,
+        pageSize: Int,
+        flag: String
+    ) {
 
         map.clear()
         map["categoryId"] = categoryId
+        map["order"] = order
+        map["orderType"] = orderType
+
         map["status"] = status
         map["pageIndex"] = pageIndex.toString()
         map["pageSize"] = pageSize.toString()
@@ -29,7 +40,7 @@ class ProductPresent(var context: Context, var view: ProductView) : BasePresent(
         toSubscribe2(ApiServices.getInstance().create(ProductService::class.java).allproducts(map),
             object : ProcessObserver2(context) {
                 override fun processValue(response: String?) {
-
+                    Log.i("allproducts", response)
                     val model = gson.fromJson<ProductBean>(response, ProductBean::class.java)
                     view.onSuccess(model, flag)
                 }
@@ -106,7 +117,8 @@ class ProductPresent(var context: Context, var view: ProductView) : BasePresent(
                     Log.i("editSaleStatus", response)
                     val model = ProductBean()
                     model.position = position
-                    view.onSuccess(model, flag)
+
+                    view.onSuccess(model,flag)
                 }
 
             })

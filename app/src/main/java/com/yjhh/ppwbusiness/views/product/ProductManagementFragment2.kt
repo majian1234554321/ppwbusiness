@@ -3,6 +3,7 @@ package com.yjhh.ppwbusiness.views.product
 import android.graphics.Color
 import android.support.v4.view.ViewPager
 import android.view.View
+import android.widget.Toast
 import com.flyco.tablayout.listener.OnTabSelectListener
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.MyPagerAdapter
@@ -36,15 +37,22 @@ class ProductManagementFragment2 : BaseFragment(), View.OnClickListener {
     var sortType = "时间向上"
     override fun getLayoutRes(): Int = R.layout.productmanagementfragment
 
+
+    var order = ""   //排序,0（0 时间排序 1价格排序）
+    var orderType = "" //排序方式，0(0升序 1倒叙)
+
+
     override fun initView() {
-
-
 
 
         arrayOf(tv_right, tv_sortNO, iv_back).forEach {
             it.setOnClickListener(this)
         }
 
+
+        val f1 = ProductAllFragment()
+        val f2 = Product2Fragment()
+        val f3 = Product3Fragment()
 
 
         tv_timeSort.setBackgroundResource(R.drawable.stroke_rb_leftselect)
@@ -53,6 +61,51 @@ class ProductManagementFragment2 : BaseFragment(), View.OnClickListener {
 
         tv_priceSort.setBackgroundResource(R.drawable.stroke_rb_rightunselect)
         tv_priceSort.setTextColor(Color.parseColor("#333333"))
+
+
+        val fagments = ArrayList<BaseFragment>()
+
+        fagments.add(f1)
+        fagments.add(f2)
+        fagments.add(f3)
+        // fagments.add(Product4Fragment())
+
+        mViewPager.offscreenPageLimit = 3
+        mViewPager.adapter = MyPagerAdapter(childFragmentManager, fagments, mTitles)
+        mTabLayout.setViewPager(mViewPager)
+
+        mTabLayout.setOnTabSelectListener(object : OnTabSelectListener {
+            override fun onTabSelect(position: Int) {
+                mViewPager.currentItem = position
+            }
+
+            override fun onTabReselect(position: Int) {
+                if (position == 0) {
+                    f1.sortType(order, orderType)
+                } else if (position == 1) {
+                    //f2.sortType(order, orderType)
+                } else {
+                    //f3.sortType(order, orderType)
+                }
+            }
+        })
+
+        mViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+
+            }
+
+            override fun onPageSelected(position: Int) {
+                mTabLayout.currentTab = position
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+
+            }
+        })
+
+
+
 
         rg.setOnCheckedChangeListener { group, checkedId ->
 
@@ -72,9 +125,27 @@ class ProductManagementFragment2 : BaseFragment(), View.OnClickListener {
 
                         sortType = "时间向上"
 
+                        Toast.makeText(mActivity, sortType, Toast.LENGTH_SHORT).show()
+
+                        order = "0"   //排序,0（0 时间排序 1价格排序）
+                        orderType = "0" //排序方式，0(0升序 1倒叙)
+
                     } else {
                         tv_timeSort.text = "时间排序 ↓"
                         sortType = "时间向下"
+                        Toast.makeText(mActivity, sortType, Toast.LENGTH_SHORT).show()
+                        order = "0"   //排序,0（0 时间排序 1价格排序）
+                        orderType = "1" //排序方式，0(0升序 1倒叙)
+                    }
+
+
+
+                    if (mViewPager.currentItem == 0) {
+                        f1.sortType(order, orderType)
+                    } else if (mViewPager.currentItem == 1) {
+                        //f2.sortType(order, orderType)
+                    } else {
+                        //f3.sortType(order, orderType)
                     }
 
 
@@ -90,10 +161,25 @@ class ProductManagementFragment2 : BaseFragment(), View.OnClickListener {
 
                     if (tv_priceSort.text.toString() == "价格排序 ↓") {
                         tv_priceSort.text = "价格排序 ↑"
+                        Toast.makeText(mActivity, tv_priceSort.text, Toast.LENGTH_SHORT).show()
+
+                        order = "1"   //排序,0（0 时间排序 1价格排序）
+                        orderType = "0" //排序方式，0(0升序 1倒叙)
+
                     } else {
                         tv_priceSort.text = "价格排序 ↓"
-                    }
+                        Toast.makeText(mActivity, tv_priceSort.text, Toast.LENGTH_SHORT).show()
 
+                        order = "1"   //排序,0（0 时间排序 1价格排序）
+                        orderType = "1" //排序方式，0(0升序 1倒叙)
+                    }
+                    if (mViewPager.currentItem == 0) {
+                        f1.sortType(order, orderType)
+                    } else if (mViewPager.currentItem == 1) {
+                        //f2.sortType(order, orderType)
+                    } else {
+                        //f3.sortType(order, orderType)
+                    }
 
                 }
 
@@ -103,44 +189,6 @@ class ProductManagementFragment2 : BaseFragment(), View.OnClickListener {
             }
 
         }
-
-
-        val fagments = ArrayList<BaseFragment>()
-
-        fagments.add(ProductAllFragment())
-        fagments.add(Product2Fragment())
-        fagments.add(Product3Fragment())
-        // fagments.add(Product4Fragment())
-
-        mViewPager.offscreenPageLimit = 3
-        mViewPager.adapter = MyPagerAdapter(childFragmentManager, fagments, mTitles)
-        mTabLayout.setViewPager(mViewPager)
-
-        mTabLayout.setOnTabSelectListener(object : OnTabSelectListener {
-            override fun onTabSelect(position: Int) {
-                mViewPager.currentItem = position
-            }
-
-            override fun onTabReselect(position: Int) {
-                if (position == 0) {
-
-                }
-            }
-        })
-
-        mViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-
-            }
-
-            override fun onPageSelected(position: Int) {
-                mTabLayout.currentTab = position
-            }
-
-            override fun onPageScrollStateChanged(state: Int) {
-
-            }
-        })
 
 
     }

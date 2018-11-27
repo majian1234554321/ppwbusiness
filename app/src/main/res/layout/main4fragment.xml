@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
                 android:background="@color/f8"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -37,15 +37,34 @@
                         app:civ_border_color="@color/colorPrimary"
                         app:civ_border_width="2dp"/>
 
-                <TextView android:layout_width="match_parent"
+                <TextView android:layout_width="wrap_content"
                           android:id="@+id/tv_name"
                           android:layout_alignTop="@+id/profile_image"
                           android:textColor="#FFF3DAAF"
+                          android:textSize="16pt"
                           android:layout_toRightOf="@+id/profile_image"
                           android:paddingLeft="@dimen/spi_12"
-                          android:text="未登录"
-                          android:textSize="16pt"
+                          tools:text="未登录"
                           android:layout_height="22.5pt"/>
+
+
+                <TextView
+
+                        android:layout_width="wrap_content"
+                        android:background="@drawable/stroke_frame_zthj"
+                        android:paddingTop="1.5pt"
+                        android:paddingBottom="1.5pt"
+                        android:paddingLeft="7.5pt"
+                        android:paddingRight="7.5pt"
+                        android:id="@+id/tv_status"
+                        android:text="营业中"
+                        android:gravity="center"
+                        android:layout_marginLeft="26pt"
+                        android:layout_alignParentRight="true"
+                        android:textColor="#FF454545"
+                        android:textSize="12pt"
+                        android:layout_height="wrap_content"/>
+
 
                 <TextView android:layout_width="match_parent"
                           android:id="@+id/tv_time"
@@ -74,6 +93,7 @@
                           android:textColor="#FFF3DAAF"
                           android:gravity="center_vertical"
                           android:textSize="10pt"
+                          android:id="@+id/tv_to"
                           android:drawablePadding="@dimen/spi_8"
                           android:drawableRight="@drawable/icon_arrright"
                           android:layout_alignParentRight="true"
