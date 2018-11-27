@@ -62,15 +62,9 @@ class ReservationOrderFragment : BaseFragment(), View.OnClickListener {
         mTabLayout.tabMode = TabLayout.MODE_SCROLLABLE
 
 
-        var dateList2 = ArrayList<String>()
 
-        for (i in 0 until 15) {
-
-            dateList2.add("qwqwqwqw")
-
-        }
         recyclerView.layoutManager = LinearLayoutManager(mActivity)
-        var mAdapter = ReservationOrderAdapter(mActivity, dateList2)
+        var mAdapter = ReservationOrderAdapter(mActivity, dateList)
 
         recyclerView.adapter = mAdapter
 

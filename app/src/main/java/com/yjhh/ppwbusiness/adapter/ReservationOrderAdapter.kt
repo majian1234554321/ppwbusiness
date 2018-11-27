@@ -15,30 +15,33 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.R.id.tv_count
+import com.yjhh.ppwbusiness.bean.DateBean
 import com.yjhh.ppwbusiness.utils.TextStyleUtils
 import com.yjhh.ppwbusiness.views.cui.ExpandLayout
 
-class ReservationOrderAdapter(var context: Context, data: List<String>) :
-    BaseQuickAdapter<String, BaseViewHolder>(R.layout.reservationorderadapter, data) {
+class ReservationOrderAdapter(var context: Context, data: List<DateBean>) :
+    BaseQuickAdapter<DateBean, BaseViewHolder>(R.layout.reservationorderadapter, data) {
 
     var list = ArrayList<Int>()
 
-    override fun convert(helper: BaseViewHolder?, item: String?) {
+    override fun convert(helper: BaseViewHolder?, item: DateBean?) {
         //
 
         val mExpandLayout = helper?.getView<ExpandLayout>(R.id.expandLayout)
+
+
+        if (data.get(helper?.adapterPosition!!).flag){
+            mExpandLayout?.collapse()
+        }else{
+            mExpandLayout?.expand()
+        }
 
         val text = "人数：5    预计还有 0 小时 59 分钟到点"
 
 
         helper?.getView<Button>(R.id.button)?.setOnClickListener {
-            if (mExpandLayout?.isExpand!! && list.contains(helper.adapterPosition)) {
-                mExpandLayout.collapse()
-                list.remove(helper.adapterPosition)
-            } else {
-                mExpandLayout.expand()
-                list.add(helper.adapterPosition)
-            }
+           mExpandLayout?.toggleExpand()
+            data.get(helper.adapterPosition).flag =!data.get(helper.adapterPosition).flag
 
         }
 

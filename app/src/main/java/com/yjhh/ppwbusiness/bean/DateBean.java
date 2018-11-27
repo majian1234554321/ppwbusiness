@@ -5,4 +5,5 @@ public class DateBean {
     public String YYMMDD;
     public String MMDD;
     public String timeStamp;
+    public boolean flag ;
 }
