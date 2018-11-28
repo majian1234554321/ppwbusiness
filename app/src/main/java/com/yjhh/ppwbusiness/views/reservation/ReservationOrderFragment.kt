@@ -232,7 +232,6 @@ class ReservationOrderFragment : BaseFragment(), View.OnClickListener, ReserveVi
         }, mRecyclerView)
     }
 
-
     private fun initRefreshLayout() {
         swipeLayout.setRefreshHeader(ClassicsHeader(context))
         swipeLayout.setOnRefreshListener { refreshLayout ->
@@ -240,12 +239,10 @@ class ReservationOrderFragment : BaseFragment(), View.OnClickListener, ReserveVi
         }
     }
 
-
     private fun refresh() {
         pageIndex = 0
         peresent?.reserves(status, date, pageIndex, pageSize, "refresh")
     }
-
 
     private fun loadMore() {
         pageIndex++

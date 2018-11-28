@@ -108,7 +108,6 @@ class ReservationBeforeFragment : BaseFragment(), ReserveView {
         mAdapter?.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
         mAdapter?.isFirstOnly(false)
         mAdapter = ReservationBeforeAdapter(lists)
-        mAdapter?.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
         mRecyclerView.adapter = mAdapter
 
         mAdapter?.setOnLoadMoreListener({
