@@ -50,7 +50,7 @@ class EvaluateManageAdapter(var context: Context, data: List<MultiItemEntity>) :
 
                 if (item.files != null) {
                     item.files.forEach {
-                        list.add(it.url)
+                        list.add(it.fileUrl)
                     }
 
                     val view = helper.getView<NineGridView>(R.id.nineGrid)

@@ -106,7 +106,7 @@ class EvaluateManageFragment : BaseFragment(), EvaluateView {
     private val mTabEntities = java.util.ArrayList<CustomTabEntity>()
     override fun getLayoutRes(): Int = R.layout.evaluatemanagefragment
 
-    var type = "0"
+    var type = "0"//类别，默认null（null/0全部 1好评 2中评 3差评）
     var startIndex = 0
     val pageSize = 15
     var isHasfile = "0"
@@ -147,6 +147,8 @@ class EvaluateManageFragment : BaseFragment(), EvaluateView {
                 Log.i("EvaluateManageFragment", position.toString())
 
                 type = position.toString()
+                startIndex = 0
+                swipeLayout.autoRefresh()
 
             }
 

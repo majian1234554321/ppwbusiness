@@ -65,8 +65,11 @@ class EvaluateDetailsFragment : BaseFragment() {
                     val url = ArrayList<String>()
 
                     val list1212 = bean.files
+
+
+
                     list1212.forEach {
-                        url.add(it.url.toString())
+                        url.add(it.fileUrl.toString())
                     }
 
 
@@ -75,8 +78,8 @@ class EvaluateDetailsFragment : BaseFragment() {
 
 
 
-                    tv_username?.setText(bean?.nickName)
-                    tv_content?.setText(bean?.content)
+                    tv_username?.text = bean?.nickName
+                    tv_content?.text = bean?.content
                     tv_time?.text = TimeUtil.stampToDate2(bean.time.toString())
 
                     id_ratingbar?.setStar(bean?.grade?.toFloat()!!)

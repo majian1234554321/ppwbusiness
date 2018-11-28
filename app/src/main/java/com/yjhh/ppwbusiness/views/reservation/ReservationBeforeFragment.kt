@@ -5,11 +5,13 @@ import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.yjhh.ppwbusiness.R
+import com.yjhh.ppwbusiness.adapter.EvaluateManageAdapter
 import com.yjhh.ppwbusiness.adapter.ReservationBeforeAdapter
 import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.bean.ReservationBean
 import com.yjhh.ppwbusiness.ipresent.ReservePresent
 import com.yjhh.ppwbusiness.iview.ReserveView
+import com.yjhh.ppwbusiness.views.cui.TabEntity
 
 import kotlinx.android.synthetic.main.reservationbeforefragment.*
 
@@ -19,8 +21,12 @@ class ReservationBeforeFragment : BaseFragment(), ReserveView {
             mAdapter?.setNewData(model.items)
             swipeLayout.finishRefresh()
         } else {
-            mAdapter?.addData(model.items)
-            mAdapter?.loadMoreComplete()
+            if (model.items.size<pageSize){
+                mAdapter?.loadMoreEnd()
+            }else{
+                mAdapter?.addData(model.items)
+                mAdapter?.loadMoreComplete()
+            }
         }
     }
 
@@ -43,10 +49,8 @@ class ReservationBeforeFragment : BaseFragment(), ReserveView {
 
         peresent = ReservePresent(mActivity, this)
 
-        swipeLayout.setRefreshHeader(ClassicsHeader(context))
-        initAdapter()
         initRefreshLayout()
-
+        initAdapter()
         swipeLayout.autoRefresh()
 
         mAdapter?.setOnItemClickListener { adapter, view, position ->
@@ -100,19 +104,23 @@ class ReservationBeforeFragment : BaseFragment(), ReserveView {
     }
 
     private fun initAdapter() {
+        mRecyclerView.layoutManager = LinearLayoutManager(mActivity)
+        mAdapter?.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
+        mAdapter?.isFirstOnly(false)
+        mAdapter = ReservationBeforeAdapter(lists)
+        mAdapter?.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
+        mRecyclerView.adapter = mAdapter
+
         mAdapter?.setOnLoadMoreListener({
             loadMore()
         }, mRecyclerView)
 
-        mRecyclerView.layoutManager = LinearLayoutManager(mActivity)
-        mAdapter = ReservationBeforeAdapter(lists)
-        mAdapter?.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
-        mAdapter?.isFirstOnly(false)
-        mRecyclerView.adapter = mAdapter
+        mAdapter?.disableLoadMoreIfNotFullPage(mRecyclerView)
     }
 
 
     private fun initRefreshLayout() {
+        swipeLayout.setRefreshHeader(ClassicsHeader(context))
         swipeLayout.setOnRefreshListener { refreshLayout ->
             refresh()
         }

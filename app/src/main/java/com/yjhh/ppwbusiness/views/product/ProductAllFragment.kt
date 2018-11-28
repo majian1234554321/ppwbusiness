@@ -203,7 +203,7 @@ class ProductAllFragment : BaseFragment(), ProductView {
 
 
     private fun loadMore() {
-        Toast.makeText(context, "onload", Toast.LENGTH_SHORT).show()
+
         startindex++
         present.allproducts(categoryId, order, orderType, status, startindex, pageSize, "load")
 

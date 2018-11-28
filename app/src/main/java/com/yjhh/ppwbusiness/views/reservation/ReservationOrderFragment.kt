@@ -6,7 +6,10 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.yjhh.ppwbusiness.R
+import com.yjhh.ppwbusiness.adapter.ReservationBeforeAdapter
 import com.yjhh.ppwbusiness.adapter.ReservationOrderAdapter
 import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.bean.DateBean
@@ -24,12 +27,25 @@ class ReservationOrderFragment : BaseFragment(), View.OnClickListener, ReserveVi
         when (flag) {
             "refresh" -> {
                 mAdapter?.setNewData(model.items)
+                swipeLayout.finishRefresh()
             }
 
             "accept" -> {
                 Toast.makeText(mActivity, "接受订单成功", Toast.LENGTH_LONG).show()
                 mAdapter?.data!![model.positions].status = 1
                 mAdapter?.notifyDataSetChanged()
+            }
+
+
+            "load" -> {
+
+                if (model.items.size < pageSize) {
+                    mAdapter?.loadMoreEnd()
+                } else {
+                    mAdapter?.addData(model.items)
+                    mAdapter?.loadMoreComplete()
+                }
+
             }
 
 
@@ -63,8 +79,11 @@ class ReservationOrderFragment : BaseFragment(), View.OnClickListener, ReserveVi
     var status = ""
     var peresent: ReservePresent? = null
     var mAdapter: ReservationOrderAdapter? = null
-
+    val dateList = ArrayList<DateBean>()
     var lists = ArrayList<ReservationBean.ItemsBean>()
+
+    var date: String? = null
+
     override fun getLayoutRes(): Int = R.layout.reservationorderfragment
 
 
@@ -79,7 +98,6 @@ class ReservationOrderFragment : BaseFragment(), View.OnClickListener, ReserveVi
                 it.setOnClickListener(this)
             }
 
-        val dateList = ArrayList<DateBean>()
 
         for (i in 0 until 15) {
             val bean = DateBean()
@@ -93,30 +111,34 @@ class ReservationOrderFragment : BaseFragment(), View.OnClickListener, ReserveVi
         val bean = DateBean()
         bean.MMDD = "即将到时"
         dateList.add(0, bean)
-
-
         dateList.forEach {
 
             mTabLayout.addTab(mTabLayout.newTab().setText(it.MMDD))
         }
-
         mTabLayout.tabMode = TabLayout.MODE_SCROLLABLE
+        mTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabReselected(p0: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabUnselected(p0: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabSelected(p0: TabLayout.Tab?) {
+                if (p0 != null) {
+                    date = dateList[p0.position].YYMMDD
+
+                    refresh()
+                }
+            }
+
+        })
 
 
-        peresent?.reserves(status, dateList[2].YYMMDD, pageIndex, pageSize, "refresh")
-
-        recyclerView.layoutManager = LinearLayoutManager(mActivity)
-        mAdapter = ReservationOrderAdapter(mActivity, lists)
-
-        recyclerView.adapter = mAdapter
-
-
-
-
-
-
-
-
+        initRefreshLayout()
+        initAdapter()
+        swipeLayout.autoRefresh()
 
         mAdapter?.setOnItemClickListener { adapter, view, position ->
 
@@ -168,8 +190,6 @@ class ReservationOrderFragment : BaseFragment(), View.OnClickListener, ReserveVi
 
 
         }
-
-
         mAdapter?.setOnItemChildClickListener { adapter, view, position ->
             when (view.id) {
                 R.id.mb_cancel -> {
@@ -199,6 +219,40 @@ class ReservationOrderFragment : BaseFragment(), View.OnClickListener, ReserveVi
 
 
     }
+
+
+    private fun initAdapter() {
+        mRecyclerView.layoutManager = LinearLayoutManager(mActivity)
+        mAdapter = ReservationOrderAdapter(mActivity, lists)
+        mRecyclerView.adapter = mAdapter
+        mAdapter?.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
+        mAdapter?.isFirstOnly(false)
+        mAdapter?.setOnLoadMoreListener({
+            loadMore()
+        }, mRecyclerView)
+    }
+
+
+    private fun initRefreshLayout() {
+        swipeLayout.setRefreshHeader(ClassicsHeader(context))
+        swipeLayout.setOnRefreshListener { refreshLayout ->
+            refresh()
+        }
+    }
+
+
+    private fun refresh() {
+        pageIndex = 0
+        peresent?.reserves(status, date, pageIndex, pageSize, "refresh")
+    }
+
+
+    private fun loadMore() {
+        pageIndex++
+        peresent?.reserves(status, date, pageIndex, pageSize, "load")
+
+    }
+
 
     override fun onFragmentResult(requestCode: Int, resultCode: Int, data: Bundle?) {
         super.onFragmentResult(requestCode, resultCode, data)

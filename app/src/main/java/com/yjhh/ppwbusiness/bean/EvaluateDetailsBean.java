@@ -42,6 +42,6 @@ public class EvaluateDetailsBean {
         public boolean ifDoc;
         public boolean ifImage;
         public boolean ifMedia;
-        public String url;
+        public String fileUrl;
     }
 }

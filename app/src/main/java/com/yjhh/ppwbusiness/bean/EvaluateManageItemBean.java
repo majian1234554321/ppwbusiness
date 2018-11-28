@@ -47,6 +47,7 @@ public class EvaluateManageItemBean extends AbstractExpandableItem<SubCommentsBe
         public boolean ifImage;
         public boolean ifMedia;
         public String url;
+        public String fileUrl;
     }
 
 

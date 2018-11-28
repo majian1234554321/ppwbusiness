@@ -6,8 +6,7 @@ import android.view.View
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.base.BaseFragment
 import kotlinx.android.synthetic.main.photofragment.*
-import android.view.ViewGroup
-import com.yjhh.ppwbusiness.utils.GlideImageLoader
+
 import com.yjhh.ppwbusiness.views.cui.GlideLoader
 
 
