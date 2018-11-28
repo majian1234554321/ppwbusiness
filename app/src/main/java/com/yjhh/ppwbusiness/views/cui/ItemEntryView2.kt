@@ -10,11 +10,7 @@ import android.view.View
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.yjhh.ppwbusiness.R
-import com.yjhh.ppwbusiness.R.attr.*
-import com.yjhh.ppwbusiness.utils.Uiutils
-
-
-import kotlinx.android.synthetic.main.itementryview.view.*
+import kotlinx.android.synthetic.main.itementryview2.view.*
 
 
 class ItemEntryView2 @JvmOverloads constructor(
@@ -28,11 +24,11 @@ class ItemEntryView2 @JvmOverloads constructor(
 ) {
 
     fun setTextContent(name: String) {
-        tv_content.text = name
+        tv_right.text = name
     }
 
     fun getTextContent(): String {
-        return tv_content.text.toString()
+        return tv_right.text.toString()
     }
 
 
@@ -49,7 +45,7 @@ class ItemEntryView2 @JvmOverloads constructor(
         val view = View.inflate(context, R.layout.itementryview2, this)
         val tv_left = view.findViewById<TextView>(R.id.tv_left)
         tv_left.text = textValue
-       // tv_left.setTextColor(textColor)
+
 
 
 

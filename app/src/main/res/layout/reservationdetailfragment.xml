@@ -10,75 +10,159 @@
     <com.yjhh.ppwbusiness.views.cui.TitleBarView android:layout_width="match_parent"
                                                  app:textValue="预约详情"
                                                  app:textColor="@color/white"
+                                                 app:imageDis="true"
+                                                 android:id="@+id/tbv_title"
+                                                 app:imageSrc="@drawable/icon_phone2"
                                                  android:layout_height="wrap_content"/>
 
 
-    <ImageView android:layout_width="60pt" android:layout_height="60pt"
-               android:layout_gravity="center"
-               android:src="@mipmap/ic_launcher"
-               android:layout_marginTop="30.5pt"
-    />
-
-
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="已过时"
-            android:layout_marginTop="10.6pt"
-            android:layout_marginBottom="25.5pt"
-            android:layout_gravity="center"
-            android:textColor="#FF333333"
-            android:textSize="17pt"
-    />
-
-
     <LinearLayout
-            android:layout_marginTop="10pt"
             android:background="@color/white"
             android:orientation="vertical"
-            android:paddingLeft="24pt"
-            android:paddingRight="24pt"
+            android:paddingBottom="23.5pt"
             android:layout_width="match_parent" android:layout_height="wrap_content">
-
-        <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
-                                                       app:ievtextValue2="商家名"
-                                                       android:layout_height="wrap_content"/>
-        <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
-                                                       app:ievtextValue2="时间"
-                                                       android:layout_height="wrap_content"/>
-        <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
-                                                       app:ievtextValue2="人数"
-                                                       android:layout_height="wrap_content"/>
-        <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
-                                                       app:ievtextValue2="联系方式"
-                                                       android:layout_height="wrap_content"/>
-        <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
-                                                       app:ievtextValue2="备注"
-                                                       android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-
-
-    <LinearLayout android:layout_width="match_parent"
-                  android:orientation="vertical"
-                  android:paddingLeft="24pt"
-                  android:paddingRight="24pt"
-                  android:layout_height="wrap_content">
-
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                  android:text="用户主动取消"
-                  android:textColor="#FF666666"
-                  android:textSize="14pt"
+        <ImageView android:layout_width="60pt" android:layout_height="60pt"
+                   android:layout_gravity="center"
+                   android:id="@+id/iv_image"
+                   android:src="@mipmap/ic_launcher"
+                   android:layout_marginTop="30.5pt"
         />
+
 
         <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="取消原因：下错订单"
-                android:textColor="#FFFF552E"
-                android:textSize="12pt"
+                android:text="已过时"
+                android:id="@+id/tv_status"
+                android:layout_marginTop="10.6pt"
+                android:layout_marginBottom="25.5pt"
+                android:layout_gravity="center"
+                android:textColor="#FF333333"
+                android:textSize="17pt"
         />
+
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="已过时"
+                android:id="@+id/tv_tips"
+                android:layout_marginTop="10.6pt"
+                android:layout_marginBottom="25.5pt"
+                android:layout_gravity="center"
+                android:textColor="#FF999999"
+                android:textSize="11pt"
+        />
+
+
+        <LinearLayout android:layout_width="wrap_content"
+                      android:orientation="horizontal"
+                      android:id="@+id/ll_control"
+                      android:layout_gravity="center"
+                      android:layout_height="wrap_content">
+
+            <android.support.design.button.MaterialButton
+                    android:layout_width="95pt" android:layout_height="wrap_content"
+                    android:text="取消预约"
+                    android:padding="6pt"
+                    android:id="@+id/mb_cancel"
+                    android:textColor="#FFFF552E"
+                    android:textSize="13pt"
+                    app:strokeWidth="1dp"
+                    app:cornerRadius="0dp"
+                    app:strokeColor="#FFFF552E"
+                    app:rippleColor="#FFFF552E"
+                    app:backgroundTint="@color/white"
+                    android:layout_marginRight="15pt"
+            />
+
+            <android.support.design.button.MaterialButton
+                    android:layout_width="95pt"
+
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15pt"
+                    android:text="接受预约"
+                    android:padding="6pt"
+                    app:cornerRadius="0dp"
+                    app:strokeColor="#FF54B36D"
+                    app:backgroundTint="@color/white"
+                    app:strokeWidth="1dp"
+                    android:textColor="#FF54B36D"
+                    android:textSize="13pt"
+            />
+
+        </LinearLayout>
+
+
     </LinearLayout>
+
+    <View android:layout_width="match_parent" android:layout_height="10pt"
+          android:id="@+id/viewLine"
+    />
+
+    <FrameLayout android:layout_width="match_parent"
+                 android:background="@color/white"
+                 android:layout_height="wrap_content"
+    >
+
+
+        <LinearLayout
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:id="@+id/ll_info"
+                android:paddingLeft="24pt"
+                android:paddingRight="24pt"
+                android:layout_width="match_parent" android:layout_height="wrap_content">
+
+            <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                           app:ievtextValue2="商家名"
+                                                           android:id="@+id/iev_1"
+                                                           android:layout_height="wrap_content"/>
+            <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                           app:ievtextValue2="时间" android:id="@+id/iev_2"
+                                                           android:layout_height="wrap_content"/>
+            <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                           app:ievtextValue2="人数"
+                                                           android:id="@+id/iev_3"
+                                                           android:layout_height="wrap_content"/>
+            <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                           app:ievtextValue2="联系方式"
+                                                           android:id="@+id/iev_4"
+                                                           android:layout_height="wrap_content"/>
+            <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                           app:ievtextValue2="备注"
+                                                           android:id="@+id/iev_5"
+                                                           android:layout_height="wrap_content"/>
+
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:id="@+id/ll_cancel"
+                          android:visibility="gone"
+                          android:orientation="vertical"
+                          android:layout_height="wrap_content">
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:text="用户主动取消"
+                          android:paddingTop="12.5pt"
+                          android:paddingBottom="9.5pt"
+                          android:textColor="#FF666666"
+                          android:textSize="14pt"
+                />
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="取消原因：下错订单"
+                        android:textColor="#FFFF552E"
+                        android:textSize="12pt"
+                />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+    </FrameLayout>
 
 
 </LinearLayout>

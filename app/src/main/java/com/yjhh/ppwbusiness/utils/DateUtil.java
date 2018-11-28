@@ -1,8 +1,10 @@
 package com.yjhh.ppwbusiness.utils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by TL20160309 on 2016/11/14.
@@ -36,7 +38,51 @@ public class DateUtil {
     }
 
 
-    public static String getFetureDate(int past, String regx) {
+    public static String getFetureDate(int past, String regx) throws ParseException {
+        SimpleDateFormat format;
+        SimpleDateFormat format2;
+        String result;
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR) + past);
+        Date today = calendar.getTime();
+
+        if ("MD".equals(regx)) {
+
+
+            format2 = new SimpleDateFormat("yyyy-MM-dd");
+            result = format2.format(today);
+            if (IsToday(result)) {
+                return "今天";
+            }
+
+            if (IsTomorrowday(result)) {
+                return "明天";
+            }
+
+            format = new SimpleDateFormat("MM-dd");
+
+            result = format.format(today);
+
+
+        } else {
+            format = new SimpleDateFormat("yyyy-MM-dd");
+            result = format.format(today);
+            if (IsToday(result)) {
+                return "今天";
+            }
+
+            if (IsTomorrowday(result)) {
+                return "明天";
+            }
+
+        }
+
+
+        return result;
+    }
+
+
+    public static String getFetureDate2(int past, String regx) throws ParseException {
         SimpleDateFormat format;
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR) + past);
@@ -73,6 +119,49 @@ public class DateUtil {
 
         return weekDays[w];
 
+    }
+
+
+    public static boolean IsToday(String day) throws ParseException {
+        Calendar pre = Calendar.getInstance();
+        Date predate = new Date(System.currentTimeMillis());
+        pre.setTime(predate);
+
+        Calendar cal = Calendar.getInstance();
+        Date date = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA).parse(day);
+        cal.setTime(date);
+
+        if (cal.get(Calendar.YEAR) == (pre.get(Calendar.YEAR))) {
+            int diffDay = cal.get(Calendar.DAY_OF_YEAR)
+                    - pre.get(Calendar.DAY_OF_YEAR);
+
+            if (diffDay == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public static boolean IsTomorrowday(String day) throws ParseException {
+
+        Calendar pre = Calendar.getInstance();
+        Date predate = new Date(System.currentTimeMillis());
+        pre.setTime(predate);
+
+        Calendar cal = Calendar.getInstance();
+        Date date = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA).parse(day);
+        cal.setTime(date);
+
+        if (cal.get(Calendar.YEAR) == (pre.get(Calendar.YEAR))) {
+            int diffDay = cal.get(Calendar.DAY_OF_YEAR)
+                    - pre.get(Calendar.DAY_OF_YEAR);
+
+            if (diffDay == 1) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

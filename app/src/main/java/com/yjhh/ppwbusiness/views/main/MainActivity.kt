@@ -84,7 +84,7 @@ class MainActivity : BaseActivity(), OnButtonClickListener, OnDownloadListener {
                     if (model.ifCover == 1) {//是否强制覆盖(0否 1是)
                         startUpdate3()
                     } else {
-
+                        //startUpdate3()
                     }
 
 
@@ -140,7 +140,7 @@ class MainActivity : BaseActivity(), OnButtonClickListener, OnDownloadListener {
             //设置是否显示通知栏进度
             .setShowNotification(true)
             //设置强制更新
-            .setForcedUpgrade(false)
+            .setForcedUpgrade(true)
             //设置对话框按钮的点击监听
             .setButtonClickListener(this)
             //设置下载过程的监听

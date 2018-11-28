@@ -40,6 +40,7 @@
         <attr name="textValue" format="string"/>
         <attr name="textSize" format="dimension"/>
         <attr name="imageSrc" format="reference"/>
+        <attr name="imageDis" format="boolean"/>
         <attr name="titleBarBackground" format="color"/>
     </declare-styleable>
 

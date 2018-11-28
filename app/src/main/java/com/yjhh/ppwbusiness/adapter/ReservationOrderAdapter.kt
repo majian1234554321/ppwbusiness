@@ -15,80 +15,77 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.R.id.tv_count
+import com.yjhh.ppwbusiness.R.id.tv_status
 import com.yjhh.ppwbusiness.bean.DateBean
+import com.yjhh.ppwbusiness.bean.ReservationBean
 import com.yjhh.ppwbusiness.utils.TextStyleUtils
+import com.yjhh.ppwbusiness.utils.TimeUtil
 import com.yjhh.ppwbusiness.views.cui.ExpandLayout
+import java.lang.StringBuilder
 
-class ReservationOrderAdapter(var context: Context, data: List<DateBean>) :
-    BaseQuickAdapter<DateBean, BaseViewHolder>(R.layout.reservationorderadapter, data) {
+class ReservationOrderAdapter(var context: Context, data: List<ReservationBean.ItemsBean>) :
+    BaseQuickAdapter<ReservationBean.ItemsBean, BaseViewHolder>(R.layout.reservationorderadapter, data) {
 
     var list = ArrayList<Int>()
 
-    override fun convert(helper: BaseViewHolder?, item: DateBean?) {
-        //
 
-        val mExpandLayout = helper?.getView<ExpandLayout>(R.id.expandLayout)
+    override fun convert(helper: BaseViewHolder?, item: ReservationBean.ItemsBean?) {
 
 
-        if (data.get(helper?.adapterPosition!!).flag){
-            mExpandLayout?.collapse()
-        }else{
-            mExpandLayout?.expand()
+        val times = TimeUtil.secondToTime(item?.timeTotal!!)
+
+
+        val sb = StringBuilder()
+        sb.append(" 人数：${item?.userCount} 预计还有 ")
+
+        if (times.split("$")[0].toLong() > 0) {
+            sb.append(times.split("$")[0]).append(" 天 ")
         }
 
-        val text = "人数：5    预计还有 0 小时 59 分钟到点"
+        if (times.split("$")[1].toLong() >= 0) {
+            sb.append(times.split("$")[1]).append(" 小时 ")
+        }
 
-
-        helper?.getView<Button>(R.id.button)?.setOnClickListener {
-           mExpandLayout?.toggleExpand()
-            data.get(helper.adapterPosition).flag =!data.get(helper.adapterPosition).flag
-
+        if (times.split("$")[2].toLong() >= 0) {
+            sb.append(times.split("$")[2]).append(" 分钟到店")
         }
 
 
 
-        text.split(" ")
+        helper?.setText(R.id.tv_count, TextStyleUtils.stytle(sb.toString(), context))
 
-        val textString = SpannableString(text)
+        helper?.setText(R.id.tv_phone, item.userMobile)
 
+        helper?.setText(R.id.tv_name, item?.userName)
 
-        textString.setSpan(
-            ForegroundColorSpan(ContextCompat.getColor(context, R.color.all_3)),
-            0,
-            5,
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
+        helper?.addOnClickListener(R.id.mb_cancel)?.addOnClickListener(R.id.mb_accept)
 
 
-        textString.setSpan(
-            ForegroundColorSpan(ContextCompat.getColor(context, R.color.sjred)),
-            text.indexOf("有") + 1,
-            text.indexOf("小"),
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
+        when (item.status) {
+            0 -> {
+                helper?.setVisible(R.id.mb_cancel, true)
+                helper?.setVisible(R.id.mb_accept, true)
+                helper?.setVisible(R.id.tv_status, false)
+                helper?.setText(R.id.tv_status, "")
+            }
+
+            1 -> {
+                helper?.setVisible(R.id.mb_cancel, false)
+                helper?.setVisible(R.id.mb_accept, false)
+                helper?.setVisible(R.id.tv_status, true)
+                helper?.setTextColor(R.id.tv_status, Color.parseColor("#54B36D"))
+                helper?.setText(R.id.tv_status, item.statusText)
+            }
 
 
-        textString.setSpan(
-            ForegroundColorSpan(ContextCompat.getColor(context, R.color.sjred)),
-            text.indexOf("时") + 1,
-            text.indexOf("分"),
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-
-
-
-        textString.setSpan(
-            AbsoluteSizeSpan(25, true),
-            text.indexOf("有") + 1,
-            text.indexOf("小"),
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        textString.setSpan(
-            AbsoluteSizeSpan(25, true),
-            text.indexOf("时") + 1,
-            text.indexOf("分"),
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
+            else -> {
+                helper?.setVisible(R.id.mb_cancel, false)
+                helper?.setVisible(R.id.mb_accept, false)
+                helper?.setVisible(R.id.tv_status, true)
+                helper?.setTextColor(R.id.tv_status, Color.parseColor("#B5B5B5"))
+                helper?.setText(R.id.tv_status, item.statusText)
+            }
+        }
 
 
     }

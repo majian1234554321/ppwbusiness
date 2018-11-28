@@ -26,6 +26,7 @@ public class AllShopInfo {
     public String content;
     public CurrBean curr;
     public String logoUrl;
+    public String name;
     public String mobile;
     public int openStatus;
     public String openStatusText;

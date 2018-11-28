@@ -1,41 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent" android:layout_height="wrap_content"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:background="@color/white"
+                android:layout_marginTop="10pt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 >
 
-    <TextView android:layout_width="match_parent"
-              android:textColor="#FF333333"
-              android:textSize="14pt"
-              android:id="@+id/tv_time"
-              android:background="@color/f8"
-              android:paddingLeft="12pt"
-              android:paddingBottom="9pt"
-
-              android:paddingTop="9pt"
-              tools:text="2018/11/10"
-              android:layout_height="wrap_content"/>
 
     <TextView android:layout_width="wrap_content"
               android:textColor="#FF333333"
               android:textSize="14pt"
               android:id="@+id/tv_name"
-              android:background="@color/f8"
+
               android:paddingLeft="12pt"
               android:layout_below="@+id/tv_time"
               android:paddingBottom="9pt"
 
               android:paddingTop="9pt"
-              tools:text="2018/11/10"
+              tools:text="201212"
               android:layout_height="wrap_content"/>
 
 
     <TextView android:layout_width="wrap_content"
               android:textColor="#FF2C85FF"
               android:textSize="14pt"
+              android:drawableRight="@drawable/icon_uncallphone"
+              android:drawablePadding="8pt"
               android:id="@+id/tv_phone"
               android:layout_alignParentRight="true"
-              android:background="@color/f8"
+
               android:paddingRight="12pt"
               android:paddingBottom="9pt"
               android:layout_below="@+id/tv_time"
@@ -50,7 +45,7 @@
               android:textSize="14pt"
               android:id="@+id/tv_count"
 
-              android:background="@color/f8"
+
               android:paddingLeft="12pt"
               android:paddingBottom="9pt"
               android:layout_below="@+id/tv_name"
@@ -68,59 +63,71 @@
             android:background="#FFE6E6E6"
     />
 
-    <TextView android:layout_width="wrap_content"
-              android:textColor="#B5B5B5"
-              android:textSize="14pt"
-              android:id="@+id/tv_status"
 
-              android:background="@color/f8"
-              android:paddingLeft="12pt"
-              android:paddingBottom="9pt"
-              android:layout_below="@+id/view"
-              android:paddingTop="9pt"
-              tools:text="2018/11/10"
-              android:layout_height="wrap_content"/>
+    <RelativeLayout android:layout_width="wrap_content"
+                    android:paddingLeft="12pt"
+                    android:paddingBottom="12pt"
+                    android:paddingTop="12pt"
+                    android:id="@+id/ll_control"
+                    android:layout_below="@+id/view"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content">
 
-    <TextView android:layout_width="wrap_content"
+        <android.support.design.button.MaterialButton
+                android:layout_width="95pt" android:layout_height="wrap_content"
+                android:text="取消预约"
+                android:padding="6pt"
+                android:id="@+id/mb_cancel"
+                android:textColor="#FFFF552E"
+                android:textSize="13pt"
+                app:strokeWidth="1dp"
+                app:cornerRadius="0dp"
+                app:strokeColor="#FFFF552E"
+                app:rippleColor="#FFFF552E"
+                app:backgroundTint="@color/white"
+                android:layout_marginRight="15pt"
+        />
 
+        <android.support.design.button.MaterialButton
+                android:layout_width="95pt"
+                android:layout_toRightOf="@+id/mb_cancel"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15pt"
+                android:text="接受预约"
+                android:padding="6pt"
+                android:id="@+id/mb_accept"
+                app:cornerRadius="0dp"
+                app:rippleColor="#FF54B36D"
+                app:strokeColor="#FF54B36D"
+                app:backgroundTint="@color/white"
+                app:strokeWidth="1dp"
+                android:textColor="#FF54B36D"
+                android:textSize="13pt"
+        />
 
-              android:layout_alignParentRight="true"
-              android:background="@color/f8"
-              android:paddingRight="12pt"
-              android:paddingBottom="9pt"
-              android:layout_below="@+id/view"
-              android:paddingTop="9pt"
-              tools:text="查看详情"
-              android:textColor="#FFB5B5B5"
-              android:textSize="12pt"
-              android:layout_height="wrap_content"/>
+        <TextView android:layout_width="wrap_content"
+                  android:id="@+id/tv_status"
+                  android:layout_height="wrap_content"
+                  android:layout_centerVertical="true"
+                  android:textSize="13pt"
+                  android:text="12121212"
+        />
 
-
-    <Button
-            android:id="@+id/button"
-            android:layout_below="@+id/tv_status"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:background="#32CD32"
-            android:text="点击展开/收缩"/>
-
-    <com.yjhh.ppwbusiness.views.cui.ExpandLayout
-            android:id="@+id/expandLayout"
-            android:layout_below="@+id/button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFFF00"
-            android:clickable="true">
 
         <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="15dp"
-                android:text="这里是可收缩布局内部"/>
+                android:text="查看详情 "
+                android:paddingRight="12pt"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:drawablePadding="7.5pt"
+                android:drawableRight="@drawable/icon_jiantou3"
+                android:textColor="#FFC8AF85"
+                android:textSize="12pt"
+        />
 
-    </com.yjhh.ppwbusiness.views.cui.ExpandLayout>
+    </RelativeLayout>
 
 
 </RelativeLayout>

@@ -1,6 +1,7 @@
 package com.yjhh.ppwbusiness.adapter
 
 import android.content.Context
+import android.opengl.Visibility
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
@@ -38,6 +39,7 @@ class ProductAdd(var context: Context, var lists: List<String>) : RecyclerView.A
                 R.drawable.ic_upload,
                 0
             )
+            holder.itemView.iv_zhutu.visibility= View.GONE
             holder.itemView.iv_delete.visibility = View.GONE
 
             holder.itemView.setOnClickListener { v -> mOnItemClickListener?.onRecycleViewItemClick(v, adapterPosition,false) }
@@ -51,6 +53,12 @@ class ProductAdd(var context: Context, var lists: List<String>) : RecyclerView.A
                 0
             )
             holder.itemView.iv_delete.visibility = View.VISIBLE
+            if (adapterPosition==0){
+                holder.itemView.iv_zhutu.visibility= View.VISIBLE
+            }else{
+                holder.itemView.iv_zhutu.visibility= View.GONE
+            }
+
 
 
             holder.itemView.iv_delete.setOnClickListener { v ->

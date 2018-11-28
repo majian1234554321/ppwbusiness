@@ -59,11 +59,13 @@ class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetVie
 
     override fun AllShopInfoSuccess(model: AllShopInfo) {
 
-        // tv_name.setText(model.status)
+        tv_name.text = model.name
         tv_shopTel.setText(model.mobile)
         tv_shopAddress.setText(model.address)
         tv_shopDesc.setText(model.content)
 
+
+        tv_editOpen.isOpen = model.openStatus != 1
 
         if (model.times.size > 0) {
 
@@ -94,15 +96,19 @@ class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetVie
         )
 
 
+
+
+
     }
 
     override fun onFault(errorMsg: String?) {
 
-        Toast.makeText(this, "设置店铺信息成功", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "设置店铺信息失败", Toast.LENGTH_LONG).show()
     }
 
     override fun onSuccess() {
-        Toast.makeText(this, "设置店铺信息失败", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "设置店铺信息成功", Toast.LENGTH_LONG).show()
+        finish()
     }
 
 

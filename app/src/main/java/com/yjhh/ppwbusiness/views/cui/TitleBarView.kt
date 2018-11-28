@@ -33,6 +33,11 @@ class TitleBarView @JvmOverloads constructor(
         tv_title.text = name
     }
 
+    var onClickListener: OnRightClickListion? = null
+
+    fun setOnRightClickListener(onClickListener: OnRightClickListion) {
+        this.onClickListener = onClickListener
+    }
 
     init {
 
@@ -47,6 +52,11 @@ class TitleBarView @JvmOverloads constructor(
             R.styleable.TitleBarView_titleBarBackground,
             ContextCompat.getColor(context, R.color.colorPrimary)
         )
+
+
+        val imageSrc = type.getResourceId(R.styleable.TitleBarView_imageSrc, R.drawable.icon_place)
+
+        val imageDis = type.getBoolean(R.styleable.TitleBarView_imageDis, false)
 
         type.recycle()
 
@@ -63,10 +73,18 @@ class TitleBarView @JvmOverloads constructor(
         val rl_background = view.findViewById<Toolbar>(R.id.rl_background)
 
         rl_background.setBackgroundColor(titleBarBackground)
+        // iv_right.setImageResource(imageSrc)
+
+        if (imageDis) {
+            iv_right.visibility = View.VISIBLE
+            iv_right.setBackgroundResource(imageSrc)
+        } else {
+            iv_right.visibility = View.GONE
+        }
 
 
         iv_right.setOnClickListener {
-
+            onClickListener?.setOnRightClick()
         }
 
 
@@ -77,5 +95,9 @@ class TitleBarView @JvmOverloads constructor(
 
     }
 
+
+    interface OnRightClickListion {
+        fun setOnRightClick()
+    }
 
 }

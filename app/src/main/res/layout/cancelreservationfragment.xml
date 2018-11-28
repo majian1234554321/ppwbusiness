@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+              android:orientation="vertical"
+              android:layout_height="match_parent">
+
+    <com.yjhh.ppwbusiness.views.cui.TitleBarView android:layout_width="match_parent"
+                                                 app:textValue="取消预约"
+                                                 app:textColor="@color/white"
+                                                 android:layout_height="wrap_content"/>
+
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:paddingLeft="24pt"
+            android:paddingTop="10pt"
+            android:paddingBottom="23pt"
+            android:layout_height="wrap_content"
+            android:text="选择取消原因（必填）"
+            android:textColor="#FF666666"
+            android:textSize="13pt"
+    />
+
+    <RadioGroup android:layout_width="match_parent"
+                android:paddingLeft="24pt"
+                android:id="@+id/rg"
+
+                android:paddingRight="24pt"
+                android:layout_height="wrap_content">
+        <RadioButton android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:button="@null"
+                     android:textColor="@color/selector_textcolor_2c85ff"
+                     android:id="@+id/rb1"
+                     android:checked="true"
+
+                     android:textSize="13pt"
+                     android:text="当前预订已满,请谅解"
+        />
+
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_marginTop="10.5pt"
+                android:layout_marginBottom="10.5pt"
+                android:background="#D7D7D7"
+                android:layout_height="0.5pt"
+        />
+
+        <RadioButton android:layout_width="match_parent"
+                     android:button="@null"
+                     android:id="@+id/rb2"
+
+                     android:textColor="@color/selector_textcolor_2c85ff"
+
+                     android:textSize="13pt"
+                     android:layout_height="wrap_content"
+                     android:text="临时打烊，请谅解"
+        />
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_marginTop="10.5pt"
+                android:layout_marginBottom="10.5pt"
+                android:background="#D7D7D7"
+                android:layout_height="0.5pt"
+        />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="18.5pt"
+
+                android:text="其他原因（选填）"
+                android:layout_marginBottom="12pt"
+                android:textColor="#FF3F3F3F"
+                android:textSize="13pt"
+        />
+
+        <EditText android:layout_width="match_parent"
+                  android:gravity="left|top"
+                  android:padding="8pt"
+                  android:hint="限80个字"
+                  android:id="@+id/tv_cause"
+                  android:textSize="12pt"
+                  android:background="@drawable/stroke_frame_cd"
+                  android:layout_height="105pt"/>
+
+
+        <android.support.design.button.MaterialButton
+                android:layout_width="182pt" android:layout_height="wrap_content"
+                android:text="确认取消"
+                android:padding="6pt"
+                android:id="@+id/mb_cancel"
+                android:gravity="center"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/zthj"
+                android:layout_gravity="center"
+                android:textSize="18pt"
+                android:layout_marginBottom="23.5pt"
+                android:layout_marginTop="34pt"
+        />
+
+    </RadioGroup>
+
+
+</LinearLayout>

@@ -78,8 +78,6 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
         sc_left.setcontent("${bean.preNum} 单")
         sc_right.setcontent("${bean.preTotal} 单")
 
-
-
     }
 
     override fun onFault(errorMsg: String?) {

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
+                android:background="@color/white"
+                android:layout_marginBottom="10pt"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
 >
 
@@ -8,7 +10,7 @@
               android:textColor="#FF333333"
               android:textSize="14pt"
               android:id="@+id/tv_time"
-              android:background="@color/f8"
+              android:background="@color/e6"
               android:paddingLeft="12pt"
               android:paddingBottom="9pt"
 
@@ -20,7 +22,7 @@
               android:textColor="#FF333333"
               android:textSize="14pt"
               android:id="@+id/tv_name"
-              android:background="@color/f8"
+
               android:paddingLeft="12pt"
               android:layout_below="@+id/tv_time"
               android:paddingBottom="9pt"
@@ -34,8 +36,10 @@
               android:textColor="#FF2C85FF"
               android:textSize="14pt"
               android:id="@+id/tv_phone"
+              android:drawablePadding="8pt"
+              android:drawableRight="@drawable/icon_uncallphone"
               android:layout_alignParentRight="true"
-              android:background="@color/f8"
+
               android:paddingRight="12pt"
               android:paddingBottom="9pt"
               android:layout_below="@+id/tv_time"
@@ -49,7 +53,7 @@
               android:textSize="14pt"
               android:id="@+id/tv_count"
 
-              android:background="@color/f8"
+
               android:paddingLeft="12pt"
               android:paddingBottom="9pt"
               android:layout_below="@+id/tv_name"
@@ -72,7 +76,7 @@
               android:textSize="14pt"
               android:id="@+id/tv_status"
 
-              android:background="@color/f8"
+
               android:paddingLeft="12pt"
               android:paddingBottom="9pt"
               android:layout_below="@+id/view"
@@ -82,16 +86,16 @@
 
     <TextView android:layout_width="wrap_content"
 
-
               android:layout_alignParentRight="true"
-              android:background="@color/f8"
               android:paddingRight="12pt"
               android:paddingBottom="9pt"
               android:layout_below="@+id/view"
               android:paddingTop="9pt"
-              tools:text="查看详情"
+              android:text="查看详情"
+              android:drawablePadding="8pt"
               android:textColor="#FFB5B5B5"
               android:textSize="12pt"
+              android:drawableRight="@drawable/icon_arrow_right_gray"
               android:layout_height="wrap_content"/>
 
 </RelativeLayout>
