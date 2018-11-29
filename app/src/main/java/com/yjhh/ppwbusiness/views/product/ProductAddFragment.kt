@@ -25,7 +25,7 @@ import android.view.View
 import android.widget.Toast
 import com.google.gson.Gson
 import com.tbruyelle.rxpermissions2.RxPermissions
-import com.uuzuche.lib_zxing.activity.CaptureActivity
+
 import com.yjhh.ppwbusiness.R
 
 import com.yjhh.ppwbusiness.adapter.ProductAdd

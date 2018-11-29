@@ -117,7 +117,6 @@ class ReservationBeforeFragment : BaseFragment(), ReserveView {
         mAdapter?.disableLoadMoreIfNotFullPage(mRecyclerView)
     }
 
-
     private fun initRefreshLayout() {
         swipeLayout.setRefreshHeader(ClassicsHeader(context))
         swipeLayout.setOnRefreshListener { refreshLayout ->
@@ -125,12 +124,10 @@ class ReservationBeforeFragment : BaseFragment(), ReserveView {
         }
     }
 
-
     private fun refresh() {
         pageIndex = 0
         peresent?.reserves(status, "", pageIndex, pageSize, "refresh")
     }
-
 
     private fun loadMore() {
         pageIndex++

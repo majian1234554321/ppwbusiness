@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:background="@color/white"
+              android:orientation="vertical" android:layout_height="match_parent">
+    <com.yjhh.ppwbusiness.views.cui.TitleBarView android:layout_width="match_parent"
+                                                 app:textValue="确认核销"
+                                                 app:textColor="@color/white"
+                                                 android:layout_height="wrap_content"/>
+
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:layout_marginTop="20pt"
+                    android:layout_height="wrap_content">
+
+        <TextView android:layout_width="wrap_content"
+                  android:text="*"
+                  android:gravity="center"
+                  android:id="@+id/tv_X"
+                  android:paddingLeft="12pt"
+                  android:textSize="14pt"
+                  android:layout_centerVertical="true"
+                  android:textColor="#FF552E"
+                  android:layout_height="wrap_content"/>
+
+        <TextView android:layout_width="wrap_content"
+                  android:text="上传核销凭据"
+
+                  android:paddingLeft="24pt"
+                  android:layout_centerVertical="true"
+                  android:textColor="#FF666666"
+                  android:textSize="14pt"
+                  android:layout_height="wrap_content"
+
+        />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
+                                            android:id="@+id/recyclerView"
+                                            android:paddingLeft="24pt"
+                                            android:paddingRight="24pt"
+                                            android:layout_height="wrap_content"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="7.5pt"
+            android:paddingLeft="24pt"
+            android:text="注：上传凭据严格按照公司要求"
+            android:textColor="#FF999999"
+            android:textSize="11pt"
+    />
+
+    <TextView android:layout_width="wrap_content"
+              android:text="备注"
+              android:paddingTop="20pt"
+              android:paddingLeft="24pt"
+              android:layout_centerVertical="true"
+              android:textColor="#FF666666"
+              android:textSize="14pt"
+              android:paddingBottom="8pt"
+              android:layout_height="wrap_content"
+
+    />
+
+    <EditText android:layout_width="match_parent"
+              android:layout_marginLeft="24pt"
+              android:padding="9pt"
+              android:layout_marginRight="24pt"
+              android:layout_height="125pt"
+              android:gravity="left|top"
+              android:layout_marginTop="6pt"
+              android:hint="限200字以内"
+              android:background="@drawable/stroke_frame_cd"
+              android:textColor="#FF333333"
+              android:textSize="12pt"
+
+    />
+
+
+    <android.support.design.button.MaterialButton android:layout_width="200pt"
+                                                  android:padding="6pt"
+                                                  android:id="@+id/mb_commit"
+                                                  android:textSize="14pt"
+                                                  android:layout_marginTop="26pt"
+                                                  android:layout_gravity="center"
+                                                  android:text="确认核销"
+                                                  android:layout_height="wrap_content"/>
+
+
+</LinearLayout>

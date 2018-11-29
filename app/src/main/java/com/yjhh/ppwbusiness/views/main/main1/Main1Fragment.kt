@@ -4,16 +4,10 @@ package com.yjhh.ppwbusiness.views.main.main1
 import android.Manifest
 import android.content.Intent
 import android.graphics.Color
-import android.media.Image
-import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.text.SpannableString
 import android.view.View
-import com.flyco.tablayout.listener.OnTabSelectListener
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.Main1Adapter
-import com.yjhh.ppwbusiness.adapter.OrderTaskAdapter
 
 
 import com.yjhh.ppwbusiness.base.BaseMainFragment
@@ -27,24 +21,24 @@ import com.yjhh.ppwbusiness.ipresent.OrderPresent
 import com.yjhh.ppwbusiness.iview.Main1View
 import com.yjhh.ppwbusiness.iview.OrderView
 import com.yjhh.ppwbusiness.utils.RecyclerGridSpace
-import com.yjhh.ppwbusiness.views.cui.GridRecyclerItemDecoration
-import com.yjhh.ppwbusiness.views.cui.SpaceItemDecoration
 import com.yjhh.ppwbusiness.views.evaluate.EvaluateManageFragment
-import com.yjhh.ppwbusiness.views.main.main2.Main2Fragment
-import com.yjhh.ppwbusiness.views.merchant.BusinessHoursFragment
 import com.yjhh.ppwbusiness.views.merchant.MerchantSettingActivity
 import com.yjhh.ppwbusiness.views.product.ProductManagementFragment
 import com.yjhh.ppwbusiness.views.product.ProductManagementFragment2
 import com.yjhh.ppwbusiness.views.reconciliation.ReconciliationFragment
 
 import kotlinx.android.synthetic.main.main1fragment.*
-import android.text.Spanned
-import android.text.style.AbsoluteSizeSpan
 import android.widget.Toast
+import com.azhon.appupdate.utils.Constant
+
 import com.tbruyelle.rxpermissions2.RxPermissions
-import com.uuzuche.lib_zxing.activity.CaptureActivity
-import com.yjhh.ppwbusiness.utils.SharedPreferencesUtils
+import com.uuzuche.lib_zxing.activity.CodeUtils
+import com.yjhh.ppwbusiness.base.BaseActivity.REQUEST_CODE
+
+
+import com.yjhh.ppwbusiness.views.CaptureActivity2
 import com.yjhh.ppwbusiness.utils.TextStyleUtils
+import com.yjhh.ppwbusiness.views.writeoff.WriteOffFragment
 
 
 class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, OrderView {
@@ -100,11 +94,19 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
             R.id.iv_scan -> {
 
 
+                //  (parentFragment as MainFragment).startBrotherFragment(WriteOffFragment())
+                // (parentFragment as MainFragment).startBrotherFragment(CancellationBeforeFragment())
+
+
                 RxPermissions(this)
                     .request(Manifest.permission.CAMERA)
                     .subscribe {
                         if (it) {
-                            val intent = Intent(context, CaptureActivity::class.java)
+                            val intent = Intent(context, CaptureActivity2::class.java)
+
+
+
+
                             this@Main1Fragment.startActivityForResult(intent, 10086)
                         } else {
                             Toast.makeText(mActivity, "请前往设置中心开启照相机权限", Toast.LENGTH_SHORT).show()
@@ -208,16 +210,23 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
 
         when (requestCode) {
             10086 -> {
-                if (data != null) {
+                //处理扫描结果（在界面上显示）
+                if (null != data) {
+                    val bundle = data.extras ?: return
+                    if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                        val result = bundle.getString(CodeUtils.RESULT_STRING)
+                        Toast.makeText(mActivity, "解析结果:" + result!!, Toast.LENGTH_LONG).show()
+                        (parentFragment as MainFragment).startBrotherFragment(WriteOffFragment())
 
-                    val content = data?.getStringExtra("result_string")
-
-
-                    Toast.makeText(mActivity, content, Toast.LENGTH_SHORT).show()
+                    } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                        Toast.makeText(mActivity, "解析二维码失败", Toast.LENGTH_LONG).show()
+                    }
                 }
-            }
 
+
+            }
         }
+
     }
 
 

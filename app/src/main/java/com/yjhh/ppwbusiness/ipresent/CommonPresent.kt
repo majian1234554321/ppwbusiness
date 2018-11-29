@@ -18,6 +18,9 @@ import java.io.File
 import java.lang.StringBuilder
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
+import com.yjhh.ppwbusiness.bean.VersionBean
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 
 class CommonPresent(var context: Context, var view: CommonView) : BasePresent() {
@@ -83,4 +86,34 @@ class CommonPresent(var context: Context, var view: CommonView) : BasePresent() 
 
 
     }
+
+
+
+
+    fun checkVersion(){
+        ApiServices.getInstance()
+            .create(CommonService::class.java)
+            .version()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : ProcessObserver2(context) {
+                override fun processValue(response: String?) {
+                    Log.i("MainActivity", response)
+
+                   view.onSuccess(response)
+
+
+                }
+
+                override fun onFault(message: String) {
+                    Log.i("MainActivity", message)
+
+                }
+
+            })
+
+    }
+
+
+
 }

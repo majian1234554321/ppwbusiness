@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:background="@color/white"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+
+    <com.yjhh.ppwbusiness.views.cui.TitleBarView android:layout_width="match_parent"
+                                                 app:textValue="核销门店"
+                                                 android:id="@+id/tbv_title"
+                                                 app:textColor="@color/white"
+                                                 android:layout_height="wrap_content"/>
+
+    <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:paddingLeft="16pt"
+              android:drawablePadding="12pt"
+              android:id="@+id/et_search"
+              android:layout_marginTop="9pt"
+              android:hint="请输入核销门店名称"
+              android:textColor="#FFB5B5B5"
+              android:gravity="center_vertical"
+              android:paddingTop="7pt"
+              android:drawableLeft="@drawable/icon_search"
+              android:layout_marginLeft="25pt"
+              android:layout_marginRight="25pt"
+              android:paddingBottom="7pt"
+              android:textSize="14pt"
+              android:background="@drawable/solid_frame_f4"
+              android:paddingRight="25pt"
+    />
+
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout android:layout_width="match_parent"
+                                                       android:id="@+id/swipeLayout"
+                                                       android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
+                                                android:id="@+id/mRecyclerView"
+                                                android:paddingLeft="25pt"
+                                                android:paddingRight="25pt"
+
+                                                android:layout_height="match_parent"/>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+</LinearLayout>

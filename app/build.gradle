@@ -136,5 +136,7 @@ dependencies {
     //PushSDK
     implementation 'com.umeng.sdk:push:4.2.0'
     implementation(name: 'arclayout-release', ext: 'aar')
+    // implementation(name: 'zxinglibrary-release', ext: 'aar')
+    // implementation project(':zxinglibrary')
     implementation project(':lib-zxing')
 }

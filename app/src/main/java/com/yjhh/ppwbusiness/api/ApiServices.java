@@ -48,13 +48,13 @@ public class ApiServices {
                                 .header("userAgent", "PPW_App")
                                 .header("X-Requested-With", "XMLHttpRequest")
                                 .header("PPW-TERMINAL", "1") //（0 用户端 1商户端)
-                                .header("PPW-APP-VERSION", String.valueOf(APKVersionCodeUtils.getVersionCode(BaseApplication.context)))
+                                .header("PPW-APP-VERSION", String.valueOf(APKVersionCodeUtils.INSTANCE.getVersionCode(BaseApplication.context)))
                                 //.header("PPW-SIGN", "XMLHttpRequest")
                                 .header("PPW-TIMESTAMP", String.valueOf((int) (System.currentTimeMillis() / 1000)))
                                 .header("PPW-API-VERSION", "1.0")
-                                .header("PPW-MARKET-ID", APKVersionCodeUtils.getChannelName(BaseApplication.context))
+                                .header("PPW-MARKET-ID", APKVersionCodeUtils.INSTANCE.getChannelName(BaseApplication.context))
 
-                                .header("PPW-DEVICE-ID", APKVersionCodeUtils.getChannelName(BaseApplication.context))
+                                .header("PPW-DEVICE-ID", APKVersionCodeUtils.INSTANCE.getChannelName(BaseApplication.context))
 
                                 .header("JSESSIONID", String.valueOf(SharedPreferencesUtils.getParam(BaseApplication.context, "sessionId", "-1")))
                                 .method(original.method(), original.body())

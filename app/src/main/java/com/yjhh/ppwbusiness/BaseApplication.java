@@ -15,6 +15,8 @@ import com.google.gson.Gson;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.message.*;
 import com.umeng.message.entity.UMessage;
+
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 import com.yjhh.ppwbusiness.push.UmengNotificationService;
 import com.yjhh.ppwbusiness.utils.SharedPreferencesUtils;
 import com.yjhh.ppwbusiness.views.merchant.MerchantSettingActivity;
@@ -48,7 +50,7 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         //  MultiDex.install(getIns());
-
+        ZXingLibrary.initDisplayOpinion(this);
         configUnits();
 
         AutoSizeConfig.getInstance()

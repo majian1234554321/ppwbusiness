@@ -172,7 +172,8 @@ public class CodeUtils {
         Matrix matrix = new Matrix();
         float scaleFactor = Math.min(w * 1.0f / 5 / logo.getWidth(), h * 1.0f / 5 /logo.getHeight());
         matrix.postScale(scaleFactor,scaleFactor);
-        return Bitmap.createBitmap(logo, 0, 0, logo.getWidth(),   logo.getHeight(), matrix, true);
+        Bitmap result = Bitmap.createBitmap(logo, 0, 0, logo.getWidth(),   logo.getHeight(), matrix, true);
+        return result;
     }
 
     /**
@@ -180,9 +181,9 @@ public class CodeUtils {
      */
     public interface AnalyzeCallback{
 
-        void onAnalyzeSuccess(Bitmap mBitmap, String result);
+        public void onAnalyzeSuccess(Bitmap mBitmap, String result);
 
-        void onAnalyzeFailed();
+        public void onAnalyzeFailed();
     }
 
 

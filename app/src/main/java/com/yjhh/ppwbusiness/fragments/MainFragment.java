@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Toast;
 import com.yjhh.ppwbusiness.R;
 import com.yjhh.ppwbusiness.views.cui.BottomBar;
 import com.yjhh.ppwbusiness.views.cui.BottomBarTab;
@@ -15,6 +16,7 @@ import com.yjhh.ppwbusiness.views.main.main2.Main2Fragment;
 import com.yjhh.ppwbusiness.views.main.main3.Main3Fragment;
 
 import com.yjhh.ppwbusiness.views.main.main4.Main4Fragment;
+import com.yjhh.ppwbusiness.views.writeoff.WriteOffFragment;
 import me.yokeyword.fragmentation.SupportFragment;
 
 public class MainFragment extends SupportFragment {
@@ -108,7 +110,7 @@ public class MainFragment extends SupportFragment {
                 BottomBarTab tab = mBottomBar.getItem(FIRST);
 
                 if (position == FIRST) {
-                   // tab.s(R.drawable.mian1_unselect);
+                    // tab.s(R.drawable.mian1_unselect);
                 }
 
 
@@ -122,9 +124,19 @@ public class MainFragment extends SupportFragment {
     @Override
     public void onFragmentResult(int requestCode, int resultCode, Bundle data) {
         super.onFragmentResult(requestCode, resultCode, data);
-        if (requestCode == REQ_MSG && resultCode == RESULT_OK) {
+
+
+        if (requestCode == 10086 && resultCode == RESULT_OK) {
+
+
+            String content = data.getString("result_string");
+
+           startBrotherFragment(new WriteOffFragment());
+            Toast.makeText(_mActivity, content, Toast.LENGTH_SHORT).show();
+
 
         }
+
     }
 
     /**

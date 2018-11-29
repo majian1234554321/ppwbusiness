@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+              android:orientation="vertical"
+              android:layout_height="match_parent">
+    <com.yjhh.ppwbusiness.views.cui.TitleBarView android:layout_width="match_parent"
+                                                 app:textValue="核销明细"
+                                                 app:textColor="@color/white"
+                                                 android:layout_height="wrap_content"/>
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="vertical"
+                  android:paddingLeft="12pt"
+                  android:paddingRight="12pt"
+                  android:layout_height="wrap_content">
+        <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                       android:id="@+id/iev1"
+                                                       app:ievtextValue2="实际金额（元）"
+                                                       android:layout_height="wrap_content"/>
+        <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                       android:id="@+id/iev2"
+                                                       app:ievtextValue2="卡券类型"
+                                                       android:layout_height="wrap_content"/>
+        <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                       android:id="@+id/iev3"
+                                                       app:ievtextValue2="应付（元）"
+                                                       android:layout_height="wrap_content"/>
+
+        <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                       android:id="@+id/iev4"
+                                                       app:ievtextValue2="核销券码"
+                                                       android:layout_height="wrap_content"/>
+
+        <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                       android:id="@+id/iev5"
+                                                       app:ievtextValue2="核销日期"
+                                                       android:layout_height="wrap_content"/>
+        <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                       android:id="@+id/iev6"
+                                                       app:ievtextValue2="核销人员"
+                                                       android:layout_height="wrap_content"/>
+        <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                       android:id="@+id/iev7"
+                                                       app:ievtextValue2="核销门店"
+                                                       android:layout_height="wrap_content"/>
+        <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                       android:id="@+id/iev8"
+                                                       app:ievtextValue2="持券用户"
+                                                       android:layout_height="wrap_content"/>
+        <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                       android:id="@+id/iev9"
+                                                       app:ievtextValue2="有效日期"
+                                                       android:layout_height="wrap_content"/>
+
+        <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                       android:id="@+id/iev10"
+                                                       app:ievtextValue2="备注"
+                                                       android:layout_height="wrap_content"/>
+
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:paddingBottom="12.5pt"
+                  android:paddingTop="12.5pt"
+                  android:text="核销凭据"
+                  android:id="@+id/tv_left"
+                  android:textColor="#FF666666"
+                  android:textSize="14pt"
+        />
+
+        <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
+                                                android:id="@+id/recyclerView"
+                                                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

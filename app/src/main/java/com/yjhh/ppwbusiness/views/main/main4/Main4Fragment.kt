@@ -5,32 +5,81 @@ import android.content.Intent
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
-import com.alibaba.android.arouter.launcher.ARouter
+import com.azhon.appupdate.listener.OnDownloadListener
 
-import com.baidu.mapsdkplatform.comapi.map.MessageCenter
-import com.google.gson.JsonObject
+import com.google.gson.Gson
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.api.ApiServices
-import com.yjhh.ppwbusiness.api.CommonService
 import com.yjhh.ppwbusiness.api.SectionUselessService
-import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.base.BaseMainFragment
 import com.yjhh.ppwbusiness.base.ProcessObserver2
 import com.yjhh.ppwbusiness.bean.LoginBean
+import com.yjhh.ppwbusiness.bean.VersionBean
 import com.yjhh.ppwbusiness.fragments.*
-import com.yjhh.ppwbusiness.utils.ImageLoaderUtils
-import com.yjhh.ppwbusiness.utils.LogUtils
-import com.yjhh.ppwbusiness.utils.RxBus
-import com.yjhh.ppwbusiness.utils.SharedPreferencesUtils
+import com.yjhh.ppwbusiness.ipresent.CommonPresent
+import com.yjhh.ppwbusiness.iview.CommonView
+import com.yjhh.ppwbusiness.utils.*
+import com.yjhh.ppwbusiness.views.cui.AppUpdateFragment
 import com.yjhh.ppwbusiness.views.login.LoginActivity
 import com.yjhh.ppwbusiness.views.merchant.MerchantSettingActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.main4fragment.*
 import org.json.JSONObject
+import java.io.File
+import java.lang.Exception
 
 
-class Main4Fragment : BaseMainFragment(), View.OnClickListener {
+class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView {
+
+    var dialog: AppUpdateFragment? = null
+
+
+    internal var onDownloadListener: OnDownloadListener = object : OnDownloadListener {
+        override fun start() {
+
+        }
+
+        override fun downloading(max: Int, progress: Int) {
+
+        }
+
+        override fun done(apk: File) {
+
+        }
+
+        override fun error(e: Exception) {
+
+        }
+    }
+
+
+    override fun onSuccess(value: String?) {
+
+
+        val model = Gson().fromJson<VersionBean>(value, VersionBean::class.java)
+
+        dialog = if (model.ifCover == 1) {//是否强制覆盖(0否 1是)
+            AppUpdateFragment(true)
+        } else {
+            AppUpdateFragment(false)
+        }
+        dialog?.show(childFragmentManager, "TAG")
+
+        dialog?.setOnAppUpdate(object : AppUpdateFragment.AppUpdateListener {
+            override fun onAppUpdate() {
+                APKVersionCodeUtils.startUpdate(mActivity, onDownloadListener)
+            }
+
+        })
+
+
+    }
+
+    override fun onFault(errorMsg: String?) {
+
+    }
+
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.profile_image -> {
@@ -62,8 +111,6 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener {
                 (parentFragment as MainFragment).startBrotherFragment(
                     MessageSetFragment()
                 )
-
-                // start(   MessageSetFragment())
             }
 
 
@@ -84,22 +131,21 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener {
 
 
             R.id.iev_account -> {
-
                 (parentFragment as MainFragment).startBrotherFragment(
                     AccountFragment()
                 )
-
             }
 
             R.id.iev_updateVersion -> {
 
-
+                CommonPresent(mActivity, this).checkVersion()
             }
             R.id.tv_to -> {
                 startActivity(Intent(mActivity, MerchantSettingActivity::class.java))
             }
 
             R.id.tv_status -> {
+
 
             }
 
