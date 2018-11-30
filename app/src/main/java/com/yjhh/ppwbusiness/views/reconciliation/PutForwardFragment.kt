@@ -1,6 +1,6 @@
 package com.yjhh.ppwbusiness.views.reconciliation
 
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.PutForwardAdapter
 import com.yjhh.ppwbusiness.base.BaseFragment
@@ -29,7 +29,7 @@ class PutForwardFragment : BaseFragment() {
         }
 
 
-        recyclerView.layoutManager = LinearLayoutManager(mActivity)
+        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(mActivity)
 
         recyclerView.adapter = PutForwardAdapter(list)
 

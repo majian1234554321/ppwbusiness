@@ -1,7 +1,7 @@
 package com.yjhh.ppwbusiness.views.merchant
 
 import android.app.AlertDialog
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.ArrayMap
 import android.view.Gravity
 import android.view.View
@@ -48,7 +48,7 @@ class BusinessHoursFragment : BaseFragment() {
 
 
 
-        recyclerView.layoutManager = LinearLayoutManager(mActivity)
+        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(mActivity)
 
         mAdapter = BusinessHoursAdapter(list)
 

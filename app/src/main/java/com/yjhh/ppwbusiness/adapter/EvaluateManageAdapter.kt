@@ -39,7 +39,7 @@ class EvaluateManageAdapter(var context: Context, data: List<MultiItemEntity>) :
         //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
 
 
-        Log.i("EvaluateManageAdapter", helper?.itemViewType.toString())
+
 
         when (helper?.itemViewType) {
             TYPE_LEVEL_0 -> {

@@ -1,6 +1,6 @@
 package com.yjhh.ppwbusiness.imodel
 
-import android.support.v4.util.ArrayMap
+import androidx.collection.ArrayMap
 import com.yjhh.ppwbusiness.api.ApiServices
 import com.yjhh.ppwbusiness.api.LoginService
 import com.yjhh.ppwbusiness.api.SectionUserService
@@ -15,7 +15,7 @@ class PasswordModel {
      * type:1登录 2注册 21 重置密码
      */
 
-    val map = ArrayMap<String, String>()
+    val map = androidx.collection.ArrayMap<String, String>()
 
     fun sendSms(type: String, phone: String): Observable<ResponseBody> {
         map.clear()

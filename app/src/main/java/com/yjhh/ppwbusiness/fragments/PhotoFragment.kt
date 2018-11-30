@@ -1,7 +1,7 @@
 package com.yjhh.ppwbusiness.fragments
 
 import android.annotation.SuppressLint
-import android.support.v4.view.PagerAdapter
+import androidx.viewpager.widget.PagerAdapter
 import android.view.View
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.base.BaseFragment

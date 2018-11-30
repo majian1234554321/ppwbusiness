@@ -1,6 +1,6 @@
 package com.yjhh.ppwbusiness.views.product
 
-import android.support.v4.view.ViewPager
+import androidx.viewpager.widget.ViewPager
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener
 import com.yjhh.ppwbusiness.R
@@ -46,7 +46,7 @@ class ProductManagementFragment : BaseFragment() {
             }
         })
 
-        mViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        mViewPager.addOnPageChangeListener(object : androidx.viewpager.widget.ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
 
             }

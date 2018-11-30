@@ -33,7 +33,7 @@ public class ExpandableItemAdapter extends BaseMultiItemQuickAdapter<MultiItemEn
     @Override
     protected void convert(final BaseViewHolder holder, final MultiItemEntity item) {
 
-        Log.i("EvaluateManageAdapter",holder.getItemViewType()+"");
+        Log.i("EvaluateManageAdapter", holder.getItemViewType() + "");
 
         switch (holder.getItemViewType()) {
             case TYPE_LEVEL_0:

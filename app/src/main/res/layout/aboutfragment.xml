@@ -24,7 +24,7 @@
                   android:drawablePadding="7pt"
                   android:textSize="17pt"
                   android:layout_marginBottom="5pt"
-                  android:drawableTop="@mipmap/ic_launcher_round"
+                  android:drawableTop="@mipmap/ic_launcher"
                   android:text="拍拍味"
         />
 

@@ -1,7 +1,7 @@
 package com.yjhh.ppwbusiness.views.reconciliation
 
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.yjhh.ppwbusiness.R
@@ -23,7 +23,12 @@ class Reconciliation1Fragment : BaseFragment() {
     override fun initView() {
 
 
-        mRecyclerView.addItemDecoration(DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL))
+        mRecyclerView.addItemDecoration(
+            androidx.recyclerview.widget.DividerItemDecoration(
+                mActivity,
+                androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
+            )
+        )
         val list = ArrayList<String>()
 
         list.add("A")
@@ -34,7 +39,7 @@ class Reconciliation1Fragment : BaseFragment() {
         list.add("A")
         mAdapter = ReconciliationAdapter(list)
         // sectionCouponPresent = SectionUselessPresent(context, this)
-        mRecyclerView.layoutManager = LinearLayoutManager(context)
+        mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
 
         initAdapter()
         //  swipeLayout.autoRefresh()

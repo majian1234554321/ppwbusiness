@@ -1,9 +1,7 @@
 package com.yjhh.ppwbusiness.utils;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;

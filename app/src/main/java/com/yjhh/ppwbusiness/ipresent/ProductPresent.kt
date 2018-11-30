@@ -1,7 +1,7 @@
 package com.yjhh.ppwbusiness.ipresent
 
 import android.content.Context
-import android.support.v4.util.ArrayMap
+import androidx.collection.ArrayMap
 
 import android.util.Log
 import com.yjhh.ppwbusiness.api.ApiServices
@@ -14,7 +14,7 @@ import com.yjhh.ppwbusiness.iview.ProductView
 import java.text.FieldPosition
 
 class ProductPresent(var context: Context, var view: ProductView) : BasePresent() {
-    val map = ArrayMap<String, String>()
+    val map = androidx.collection.ArrayMap<String, String>()
 
     fun allproducts(
         categoryId: String,

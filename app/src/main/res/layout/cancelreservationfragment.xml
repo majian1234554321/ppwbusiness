@@ -86,7 +86,7 @@
                   android:layout_height="105pt"/>
 
 
-        <android.support.design.button.MaterialButton
+        <com.google.android.material.button.MaterialButton
                 android:layout_width="182pt" android:layout_height="wrap_content"
                 android:text="确认取消"
                 android:padding="6pt"

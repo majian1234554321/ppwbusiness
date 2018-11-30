@@ -2,7 +2,7 @@ package com.yjhh.ppwbusiness.views.reservation
 
 import android.Manifest
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.AbsoluteSizeSpan

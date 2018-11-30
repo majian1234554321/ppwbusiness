@@ -1,7 +1,7 @@
 package com.yjhh.ppwbusiness.ipresent
 
 import android.content.Context
-import android.support.v4.util.ArrayMap
+import androidx.collection.ArrayMap
 import android.util.Log
 import com.yjhh.ppwbusiness.api.ApiServices
 import com.yjhh.ppwbusiness.api.SectionEvluateService
@@ -16,7 +16,7 @@ class EvaluatePresent(var context: Context, var view: EvaluateView) : BasePresen
 
     fun allcomments(type: String, isHasfile: String, startIndex: Int, pageSize: Int, flag: String) {
 
-        val map = ArrayMap<String, String>()
+        val map = androidx.collection.ArrayMap<String, String>()
         map["type"] = type//类别，默认null（null/0全部 1好评 2中评 3差评）
         map["isHasfile"] = isHasfile//是否包含附件，默认null（null/0 全部 1包含附件）
         map["pageIndex"] = startIndex.toString()

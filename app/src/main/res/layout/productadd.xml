@@ -59,11 +59,11 @@
         />
 
 
-        <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
-                                                android:id="@+id/recyclerView"
-                                                android:paddingLeft="24dp"
-                                                android:background="@color/white"
-                                                android:layout_height="wrap_content"/>
+        <androidx.recyclerview.widget.RecyclerView android:layout_width="match_parent"
+                                                   android:id="@+id/recyclerView"
+                                                   android:paddingLeft="24dp"
+                                                   android:background="@color/white"
+                                                   android:layout_height="wrap_content"/>
 
 
         <com.yjhh.ppwbusiness.views.cui.ItemEntryView android:layout_width="match_parent"
@@ -181,7 +181,7 @@
     </LinearLayout>
 
 
-    <android.support.design.button.MaterialButton
+    <com.google.android.material.button.MaterialButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/bt_add"

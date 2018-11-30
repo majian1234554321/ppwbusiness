@@ -1,9 +1,9 @@
 package com.yjhh.ppwbusiness.fragments
 
 import android.graphics.Color
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import android.widget.TextView
 import com.yjhh.ppwbusiness.R
@@ -23,7 +23,7 @@ class GameRecordFragment : BaseFragment() {
     var mAdapter: GameRecordAdapter? = null
     override fun initView() {
 
-        recyclerView.layoutManager = LinearLayoutManager(mActivity)
+        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(mActivity)
 
         val list = ArrayList<String>()
 

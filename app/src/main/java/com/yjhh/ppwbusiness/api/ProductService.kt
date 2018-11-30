@@ -1,6 +1,6 @@
 package com.yjhh.ppwbusiness.api
 
-import android.support.v4.util.ArrayMap
+import androidx.collection.ArrayMap
 import com.yjhh.ppwbusiness.bean.SETime
 import com.yjhh.ppwbusiness.bean.SubmitProductInfoModel
 import io.reactivex.Observable
@@ -39,7 +39,7 @@ interface ProductService {
 
     @FormUrlEncoded
     @POST("shopAdmin/editSaleStatus")
-    fun editSaleStatus(@FieldMap map: ArrayMap<String, String>): Observable<ResponseBody>
+    fun editSaleStatus(@FieldMap map: androidx.collection.ArrayMap<String, String>): Observable<ResponseBody>
 
 
 

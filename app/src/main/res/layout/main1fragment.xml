@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v4.widget.NestedScrollView
+<androidx.core.widget.NestedScrollView
 
         xmlns:android="http://schemas.android.com/apk/res/android"
 
@@ -153,14 +153,14 @@
             </LinearLayout>
 
         </com.github.florent37.arclayout.ArcLayout>
-        <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
-                                                android:id="@+id/recyclerView"
-                                                android:layout_marginTop="-25pt"
-                                                android:background="@color/white"
-                                                android:layout_below="@+id/arc"
-                                                android:layout_height="wrap_content">
+        <androidx.recyclerview.widget.RecyclerView android:layout_width="match_parent"
+                                                   android:id="@+id/recyclerView"
+                                                   android:layout_marginTop="-25pt"
+                                                   android:background="@color/white"
+                                                   android:layout_below="@+id/arc"
+                                                   android:layout_height="wrap_content">
 
-        </android.support.v7.widget.RecyclerView>
+        </androidx.recyclerview.widget.RecyclerView>
 
         <View android:layout_width="match_parent"
               android:layout_below="@+id/recyclerView"
@@ -279,4 +279,4 @@
 
     </RelativeLayout>
 
-</android.support.v4.widget.NestedScrollView>
+</androidx.core.widget.NestedScrollView>

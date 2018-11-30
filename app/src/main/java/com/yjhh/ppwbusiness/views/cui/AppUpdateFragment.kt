@@ -7,8 +7,8 @@ import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.support.design.button.MaterialButton
-import android.support.v4.app.DialogFragment
+import com.google.android.material.button.MaterialButton
+import androidx.fragment.app.DialogFragment
 import android.view.*
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -18,7 +18,7 @@ import me.jessyan.autosize.internal.CustomAdapt
 
 
 @SuppressLint("ValidFragment")
-class AppUpdateFragment(var flag: Boolean) : DialogFragment(), CustomAdapt {
+class AppUpdateFragment(var flag: Boolean) : androidx.fragment.app.DialogFragment(), CustomAdapt {
 
 
     override fun isBaseOnWidth(): Boolean {

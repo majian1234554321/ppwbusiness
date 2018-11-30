@@ -1,6 +1,6 @@
 package com.yjhh.ppwbusiness.views.reservation
 
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
@@ -104,7 +104,7 @@ class ReservationBeforeFragment : BaseFragment(), ReserveView {
     }
 
     private fun initAdapter() {
-        mRecyclerView.layoutManager = LinearLayoutManager(mActivity)
+        mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(mActivity)
         mAdapter?.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
         mAdapter?.isFirstOnly(false)
         mAdapter = ReservationBeforeAdapter(lists)

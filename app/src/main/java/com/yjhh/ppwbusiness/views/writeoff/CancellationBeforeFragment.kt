@@ -1,7 +1,7 @@
 package com.yjhh.ppwbusiness.views.writeoff
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.yjhh.ppwbusiness.R
@@ -38,7 +38,7 @@ class CancellationBeforeFragment : BaseFragment() {
     }
 
     private fun initAdapter() {
-        mRecyclerView.layoutManager = LinearLayoutManager(mActivity)
+        mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(mActivity)
         mAdapter?.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
         mAdapter?.isFirstOnly(false)
         mAdapter = CancellationAdapter(lists)

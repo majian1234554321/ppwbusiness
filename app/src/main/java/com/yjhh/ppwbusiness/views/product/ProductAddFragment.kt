@@ -15,10 +15,10 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.provider.Settings
-import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.FileProvider
-import android.support.v7.widget.GridLayoutManager
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
@@ -133,7 +133,7 @@ class ProductAddFragment : BaseFragment(), CommonView {
 
 
         recyclerView.addItemDecoration(GridRecyclerItemDecoration(40))
-        recyclerView.layoutManager = GridLayoutManager(mActivity, 3)
+        recyclerView.layoutManager = androidx.recyclerview.widget.GridLayoutManager(mActivity, 3)
         mAdapter = ProductAdd(mActivity, lists)
         recyclerView.adapter = mAdapter
 

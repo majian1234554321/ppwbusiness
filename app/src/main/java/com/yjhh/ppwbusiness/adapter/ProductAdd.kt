@@ -2,7 +2,7 @@ package com.yjhh.ppwbusiness.adapter
 
 import android.content.Context
 import android.opengl.Visibility
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.chad.library.adapter.base.BaseViewHolder
@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.images.view.*
 
 import com.yjhh.ppwbusiness.utils.ImageLoaderUtils
 
-class ProductAdd(var context: Context, var lists: List<String>) : RecyclerView.Adapter<ProductAdd.ViewHolder>() {
+class ProductAdd(var context: Context, var lists: List<String>) : androidx.recyclerview.widget.RecyclerView.Adapter<ProductAdd.ViewHolder>() {
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
         val view = View.inflate(context, R.layout.images, null)
         return ViewHolder(view)
@@ -28,6 +28,7 @@ class ProductAdd(var context: Context, var lists: List<String>) : RecyclerView.A
     }
 
     override fun onBindViewHolder(holder: ViewHolder, adapterPosition: Int) {
+
 
 
         if (holder.adapterPosition == lists.size) {
@@ -48,8 +49,8 @@ class ProductAdd(var context: Context, var lists: List<String>) : RecyclerView.A
                 BaseApplication.context,
                 holder.itemView.iv,
                 lists[adapterPosition],
-                R.mipmap.ic_launcher_round,
-                R.mipmap.ic_launcher_round,
+                R.drawable.icon_place,
+                R.drawable.icon_place,
                 0
             )
             holder.itemView.iv_delete.visibility = View.VISIBLE

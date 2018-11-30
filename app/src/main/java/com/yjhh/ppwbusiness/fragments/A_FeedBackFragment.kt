@@ -8,8 +8,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.util.ArrayMap
 import android.util.Log
@@ -135,7 +135,7 @@ class A_FeedBackFragment : BaseFragment(), View.OnClickListener, CommonView {
 
         lists.add("EMPTY")
         listsId.add("EMPTY")
-        recyclerView.layoutManager = GridLayoutManager(context, 3)
+        recyclerView.layoutManager = androidx.recyclerview.widget.GridLayoutManager(context, 3)
 
         mAdapter = PhotoAdapter(lists)
 

@@ -1,6 +1,6 @@
 package com.yjhh.ppwbusiness.views.reconciliation
 
-import android.support.v4.view.ViewPager
+import androidx.viewpager.widget.ViewPager
 import com.flyco.tablayout.listener.OnTabSelectListener
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.MyPagerAdapter
@@ -47,7 +47,7 @@ class ReconciliationFragment : BaseFragment() {
             }
         })
 
-        mViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        mViewPager.addOnPageChangeListener(object : androidx.viewpager.widget.ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
 
             }

@@ -1,6 +1,6 @@
 package com.yjhh.ppwbusiness.api
 
-import android.support.v4.util.ArrayMap
+import androidx.collection.ArrayMap
 import com.yjhh.ppwbusiness.bean.BusinessHoursBean
 import com.yjhh.ppwbusiness.bean.SETime
 import com.yjhh.ppwbusiness.bean.SubmitShopAdminConfigModel
@@ -22,7 +22,7 @@ interface ShopSetServices {
 
     @Headers("Content-Type: application/json", "Accept: application/json")//需要添加头
     @POST("shopAdmin/editConfig")
-    fun editConfig(@Body map: ArrayMap<String, String>): Observable<ResponseBody>
+    fun editConfig(@Body map: androidx.collection.ArrayMap<String, String>): Observable<ResponseBody>
 
 
     @FormUrlEncoded

@@ -8,9 +8,9 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
-import android.support.v4.app.ActivityCompat.startActivityForResult
-import android.support.v4.app.Fragment
-import android.support.v4.content.FileProvider
+import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.fragment.app.Fragment
+import androidx.core.content.FileProvider
 import android.util.Log
 import com.yjhh.ppwbusiness.BaseApplication.context
 import com.yjhh.ppwbusiness.R
@@ -25,7 +25,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 object PhotoUtils {
-    fun selectPhoto(fragment: Fragment,  max:Int, code: Int) {
+    fun selectPhoto(fragment: androidx.fragment.app.Fragment, max:Int, code: Int) {
 
 //        Matisse.from(fragment)
 //            .choose(MimeType.ofAll(), false)
@@ -68,7 +68,7 @@ object PhotoUtils {
     }
 
 
-    fun takePhote(fragment: Fragment, mActivity: Activity, code: Int): String? {
+    fun takePhote(fragment: androidx.fragment.app.Fragment, mActivity: Activity, code: Int): String? {
 
 
         var mPublicPhotoPath: String? = null

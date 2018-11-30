@@ -1,6 +1,6 @@
 package com.yjhh.ppwbusiness.fragments
 
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
@@ -59,7 +59,7 @@ class MessageCenter2Fragment : BaseFragment(), MyMessageView {
         mRecyclerView.addItemDecoration(SpaceItemDecoration(30))
         mAdapter = MyMessageFragmentAdapter(list)
         sectionCouponPresent = SectionUselessPresent(context, this)
-        mRecyclerView.layoutManager = LinearLayoutManager(context)
+        mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
         swipeLayout.setRefreshHeader(ClassicsHeader(context))
         initAdapter()
         initRefreshLayout()

@@ -1,6 +1,6 @@
 package com.yjhh.ppwbusiness.fragments
 
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.ActivityCenterAdapter
 import com.yjhh.ppwbusiness.base.BaseFragment
@@ -15,7 +15,7 @@ class ActivityCenterFragment : BaseFragment() {
     override fun initView() {
 
 
-        mRecyclerView.layoutManager = LinearLayoutManager(mActivity)
+        mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(mActivity)
         mRecyclerView.addItemDecoration(SpaceItemDecoration(30, "bottom"))
 
 

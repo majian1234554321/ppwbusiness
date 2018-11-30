@@ -1,7 +1,7 @@
 package com.yjhh.ppwbusiness.views.evaluate
 
 import android.graphics.Color
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -120,7 +120,7 @@ class EvaluateManageFragment : BaseFragment(), EvaluateView {
     override fun initView() {
 
         present = EvaluatePresent(mActivity, this)
-        recyclerView.layoutManager = LinearLayoutManager(activity)
+        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
         swipeLayout.setRefreshHeader(ClassicsHeader(context))
 
         mAdapter = EvaluateManageAdapter(mActivity, list)

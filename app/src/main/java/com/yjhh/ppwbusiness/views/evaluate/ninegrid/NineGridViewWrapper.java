@@ -6,14 +6,13 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.support.v4.view.ViewCompat;
+import androidx.core.view.ViewCompat;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
-import android.widget.ImageView;
 
-public class NineGridViewWrapper extends android.support.v7.widget.AppCompatImageView {
+public class NineGridViewWrapper extends androidx.appcompat.widget.AppCompatImageView {
 
     private int moreNum = 0;              //显示更多的数量
     private int maskColor = 0x88000000;   //默认的遮盖颜色

@@ -8,7 +8,7 @@
     <ImageView android:layout_width="40pt"
                android:id="@+id/iv_image"
                android:layout_marginRight="@dimen/sp_12"
-               android:src="@mipmap/ic_launcher"
+               android:src="@drawable/icon_place"
                android:layout_height="40pt"/>
 
 

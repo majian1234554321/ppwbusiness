@@ -1,8 +1,8 @@
 package com.yjhh.ppwbusiness.views.reservation
 
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v7.widget.LinearLayoutManager
+import com.google.android.material.tabs.TabLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -222,7 +222,7 @@ class ReservationOrderFragment : BaseFragment(), View.OnClickListener, ReserveVi
 
 
     private fun initAdapter() {
-        mRecyclerView.layoutManager = LinearLayoutManager(mActivity)
+        mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(mActivity)
         mAdapter = ReservationOrderAdapter(mActivity, lists)
         mRecyclerView.adapter = mAdapter
         mAdapter?.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)

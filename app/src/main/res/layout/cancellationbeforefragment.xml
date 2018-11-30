@@ -14,12 +14,12 @@
                                                        android:id="@+id/swipeLayout"
                                                        android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
-                                                android:id="@+id/mRecyclerView"
-                                                android:paddingLeft="25pt"
-                                                android:paddingRight="25pt"
+        <androidx.recyclerview.widget.RecyclerView android:layout_width="match_parent"
+                                                   android:id="@+id/mRecyclerView"
+                                                   android:paddingLeft="25pt"
+                                                   android:paddingRight="25pt"
 
-                                                android:layout_height="match_parent"/>
+                                                   android:layout_height="match_parent"/>
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 

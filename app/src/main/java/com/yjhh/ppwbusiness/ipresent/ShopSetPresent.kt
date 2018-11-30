@@ -1,7 +1,7 @@
 package com.yjhh.ppwbusiness.ipresent
 
 import android.content.Context
-import android.support.v4.util.ArrayMap
+import androidx.collection.ArrayMap
 
 import android.util.Log
 import android.widget.Toast
@@ -16,7 +16,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class ShopSetPresent(var context: Context, var view: ShopSetView) : BasePresent() {
-    val maps = ArrayMap<String, String>()
+    val maps = androidx.collection.ArrayMap<String, String>()
     fun editConfig(address: String, content: String, mobile: String, status: String) {
 
         maps.clear()

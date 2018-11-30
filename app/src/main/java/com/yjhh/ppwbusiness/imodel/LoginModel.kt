@@ -1,6 +1,6 @@
 package com.yjhh.ppwbusiness.imodel
 
-import android.support.v4.util.ArrayMap
+import androidx.collection.ArrayMap
 import com.yjhh.ppwbusiness.api.ApiServices
 import com.yjhh.ppwbusiness.api.LoginService
 import com.yjhh.ppwbusiness.base.BaseResponse
@@ -14,7 +14,7 @@ class LoginModel {
 
     fun login(username: String, password: String, identity: String): Observable<ResponseBody> {
 
-        val map = ArrayMap<String, String>()
+        val map = androidx.collection.ArrayMap<String, String>()
         with(map) {
             put("account", username)
             put("password", password)

@@ -5,7 +5,7 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
-import android.support.v7.widget.GridLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import android.widget.Toast
 import com.azhon.appupdate.utils.PermissionUtil.requestPermission
 import com.google.gson.Gson
@@ -58,7 +58,7 @@ class ConfirmCancellationFragment : BaseFragment(), CommonView {
     override fun initView() {
 
         present = CommonPresent(mActivity, this)
-        recyclerView.layoutManager = GridLayoutManager(mActivity, 4)
+        recyclerView.layoutManager = androidx.recyclerview.widget.GridLayoutManager(mActivity, 4)
         recyclerView.addItemDecoration(GridRecyclerItemDecoration(40))
 
         mAdapter = ProductAdd(mActivity, lists)

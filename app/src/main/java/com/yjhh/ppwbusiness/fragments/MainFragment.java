@@ -1,8 +1,8 @@
 package com.yjhh.ppwbusiness.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +13,6 @@ import com.yjhh.ppwbusiness.views.cui.BottomBar;
 import com.yjhh.ppwbusiness.views.cui.BottomBarTab;
 import com.yjhh.ppwbusiness.views.main.main1.Main1Fragment;
 import com.yjhh.ppwbusiness.views.main.main2.Main2Fragment;
-import com.yjhh.ppwbusiness.views.main.main3.Main3Fragment;
 
 import com.yjhh.ppwbusiness.views.main.main4.Main4Fragment;
 import com.yjhh.ppwbusiness.views.writeoff.WriteOffFragment;

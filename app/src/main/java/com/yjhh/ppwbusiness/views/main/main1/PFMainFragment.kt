@@ -1,11 +1,11 @@
 package com.yjhh.ppwbusiness.views.main.main1
 
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.PFMainAdapter
 import com.yjhh.ppwbusiness.base.BaseFragment
 import kotlinx.android.synthetic.main.pfmainfragment.*
-import android.support.v7.widget.DividerItemDecoration
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.yjhh.ppwbusiness.R.id.recyclerView
 
 
@@ -16,7 +16,7 @@ class PFMainFragment:BaseFragment(){
 
     override fun initView() {
        // sRefreshLayout
-        recyclerView.layoutManager = LinearLayoutManager(mActivity)
+        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(mActivity)
        val  list =   ArrayList<String>()
         list.add("A")
         list.add("A")
@@ -26,7 +26,12 @@ class PFMainFragment:BaseFragment(){
         list.add("A")
         list.add("A")
 
-        recyclerView.addItemDecoration(DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL))
+        recyclerView.addItemDecoration(
+            androidx.recyclerview.widget.DividerItemDecoration(
+                mActivity,
+                androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
+            )
+        )
 
         recyclerView.adapter = PFMainAdapter(list)
 

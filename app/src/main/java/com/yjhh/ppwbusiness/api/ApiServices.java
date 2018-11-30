@@ -1,7 +1,7 @@
 package com.yjhh.ppwbusiness.api;
 
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import android.webkit.WebSettings;
 import com.yjhh.ppwbusiness.BaseApplication;

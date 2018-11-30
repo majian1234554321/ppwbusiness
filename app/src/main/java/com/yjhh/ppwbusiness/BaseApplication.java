@@ -2,30 +2,18 @@ package com.yjhh.ppwbusiness;
 
 import android.app.Activity;
 import android.app.Application;
-import android.app.Notification;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Handler;
-import android.support.multidex.MultiDex;
+import androidx.multidex.MultiDex;
 import android.util.Log;
 
-import android.widget.RemoteViews;
-import android.widget.Toast;
-import com.google.gson.Gson;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.message.*;
-import com.umeng.message.entity.UMessage;
 
 import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 import com.yjhh.ppwbusiness.push.UmengNotificationService;
-import com.yjhh.ppwbusiness.utils.SharedPreferencesUtils;
-import com.yjhh.ppwbusiness.views.merchant.MerchantSettingActivity;
 import me.jessyan.autosize.AutoSizeConfig;
 import me.jessyan.autosize.onAdaptListener;
 import me.jessyan.autosize.unit.Subunits;
-import me.jessyan.autosize.utils.LogUtils;
-
-import java.util.Locale;
 
 
 public class BaseApplication extends Application {

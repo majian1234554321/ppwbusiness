@@ -1,6 +1,6 @@
 package com.yjhh.ppwbusiness.views.writeoff
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.base.BaseActivity

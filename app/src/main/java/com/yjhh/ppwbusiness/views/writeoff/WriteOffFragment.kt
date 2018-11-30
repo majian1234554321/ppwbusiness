@@ -2,7 +2,7 @@ package com.yjhh.ppwbusiness.views.writeoff
 
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import android.view.View
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.base.BaseFragment

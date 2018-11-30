@@ -14,7 +14,7 @@ android {
         versionName "1.0"
         flavorDimensions "default"
         multiDexEnabled true
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         ndk {
             //设置支持的SO库架构
@@ -72,15 +72,15 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     //Android Support
-    api "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
-    api "com.android.support:design:$rootProject.supportLibraryVersion"
-    api "com.android.support:support-v4:$rootProject.supportLibraryVersion"
-    implementation 'com.android.support.constraint:constraint-layout:2.0.0-alpha2'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'com.google.android.material:material:1.1.0-alpha01'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     //配合Rxjava 使用
     api 'io.reactivex.rxjava2:rxandroid:2.1.0'
     api 'io.reactivex.rxjava2:rxjava:2.2.2'
@@ -99,7 +99,7 @@ dependencies {
     kapt 'com.alibaba:arouter-compiler:1.2.1'
     //图片加载库
     api 'com.github.bumptech.glide:glide:4.8.0'
-    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'androidx.multidex:multidex:2.0.0'
     api 'com.jakewharton.rxbinding2:rxbinding:2.1.1'
     api 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.0.0'
     api 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0'
@@ -122,8 +122,8 @@ dependencies {
     api 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.1.6'
     api 'com.hyman:flowlayout-lib:1.1.2'
     //  implementation  "com.github.yalantis:ucrop:2.2.2"
-    api 'android.arch.persistence.room:runtime:1.1.1'
-    kapt 'android.arch.persistence.room:compiler:1.1.1'
+    api 'androidx.room:room-runtime:2.1.0-alpha02'
+    kapt 'androidx.room:room-compiler:2.1.0-alpha02'
     //  implementation 'com.github.arcadefire:nice-spinner:1.3.4'
     implementation files('libs/BaiduLBS_Android.jar')
     api 'com.dsiner.lib:xrv:1.1.2'

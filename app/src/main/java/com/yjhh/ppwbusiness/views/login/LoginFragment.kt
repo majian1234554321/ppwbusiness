@@ -1,6 +1,6 @@
 package com.yjhh.ppwbusiness.views.login
 
-import android.arch.lifecycle.Transformations.map
+import androidx.lifecycle.Transformations.map
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType

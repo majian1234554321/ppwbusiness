@@ -2,13 +2,14 @@ package com.yjhh.ppwbusiness.views.evaluate
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.support.v4.util.ArrayMap
-import android.support.v7.widget.LinearLayoutManager
+import androidx.collection.ArrayMap
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import android.widget.TextView
 import com.google.gson.Gson
 import com.yjhh.ppwbusiness.R
+import com.yjhh.ppwbusiness.R.id.recyclerView
 import com.yjhh.ppwbusiness.R.layout.item
 import com.yjhh.ppwbusiness.adapter.EvaluateDetailsAdapter
 import com.yjhh.ppwbusiness.api.ApiServices
@@ -37,11 +38,11 @@ class EvaluateDetailsFragment : BaseFragment() {
     override fun initView() {
 
 
-        recyclerView.layoutManager = LinearLayoutManager(mActivity)
+        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(mActivity)
         addHeadView()
         recyclerView.adapter = EvaluateDetailsAdapter(list)
 
-        val map = ArrayMap<String, String>()
+        val map = androidx.collection.ArrayMap<String, String>()
 
       val  id  =  arguments?.getString("id")
 
@@ -100,7 +101,7 @@ class EvaluateDetailsFragment : BaseFragment() {
 
         mAdapter = EvaluateDetailsAdapter(list)
         addHeadView()
-        recyclerView.layoutManager = LinearLayoutManager(mActivity)
+        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(mActivity)
         recyclerView.adapter = mAdapter
 
 

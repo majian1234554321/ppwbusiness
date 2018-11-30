@@ -11,14 +11,14 @@
                                                  app:textColor="@color/white"
                                                  android:layout_height="wrap_content"/>
 
-    <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
-                                            android:id="@+id/recyclerView"
+    <androidx.recyclerview.widget.RecyclerView android:layout_width="match_parent"
+                                               android:id="@+id/recyclerView"
 
-                                            android:background="@color/all_e"
+                                               android:background="@color/all_e"
 
-                                            android:layout_below="@+id/tbv_title"
-                                            android:layout_above="@+id/rl_send"
-                                            android:layout_height="match_parent"/>
+                                               android:layout_below="@+id/tbv_title"
+                                               android:layout_above="@+id/rl_send"
+                                               android:layout_height="match_parent"/>
 
 
     <RelativeLayout android:layout_width="match_parent"

@@ -34,8 +34,8 @@ class PhotoAdapter(data: List<String>) : BaseQuickAdapter<String, BaseViewHolder
                 BaseApplication.context,
                 iv,
                 item,
-                R.mipmap.ic_launcher_round,
-                R.mipmap.ic_launcher_round,
+                R.drawable.icon_place,
+                R.drawable.icon_place,
                 0
             )
             iv_delete.visibility = View.VISIBLE

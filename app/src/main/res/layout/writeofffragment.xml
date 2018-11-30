@@ -308,13 +308,13 @@
                                                    android:layout_height="wrap_content"/>
 
 
-    <android.support.design.button.MaterialButton android:layout_width="182pt"
-                                                  android:text="下一步"
-                                                  android:id="@+id/mb_next"
-                                                  app:backgroundTint="@color/zthj"
-                                                  android:layout_gravity="center"
-                                                  android:layout_marginTop="23.5pt"
-                                                  android:layout_height="wrap_content"/>
+    <com.google.android.material.button.MaterialButton android:layout_width="182pt"
+                                                       android:text="下一步"
+                                                       android:id="@+id/mb_next"
+                                                       app:backgroundTint="@color/zthj"
+                                                       android:layout_gravity="center"
+                                                       android:layout_marginTop="23.5pt"
+                                                       android:layout_height="wrap_content"/>
 
 
 </LinearLayout>

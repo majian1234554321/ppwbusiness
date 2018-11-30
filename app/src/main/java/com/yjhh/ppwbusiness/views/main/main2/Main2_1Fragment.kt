@@ -2,14 +2,16 @@ package com.yjhh.ppwbusiness.views.main.main2
 
 
 import android.os.Bundle
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.ArrayMap
 import android.util.Log
 import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.yjhh.ppwbusiness.R
+import com.yjhh.ppwbusiness.R.id.mRecyclerView
+import com.yjhh.ppwbusiness.R.id.swipeLayout
 import com.yjhh.ppwbusiness.adapter.OrderAdapter
 import com.yjhh.ppwbusiness.adapter.ProductAdapter
 import com.yjhh.ppwbusiness.api.ApiServices
@@ -25,17 +27,12 @@ import com.yjhh.ppwbusiness.views.cui.SpaceItemDecoration
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.main2_1fragment.*
+
+
 import java.util.ArrayList
 
 
 class Main2_1Fragment : BaseFragment(), OrderView {
-
-
-
-
-
-
-
 
 
     override fun onSuccess(model: OrderBean, flag: String) {
@@ -59,7 +56,6 @@ class Main2_1Fragment : BaseFragment(), OrderView {
     }
 
 
-
     var startindex = 0
     val pageSize = 15
     val status = "0"//状态，默认null（null/0 全部 1未付款 3已付款 4已完成）
@@ -75,11 +71,15 @@ class Main2_1Fragment : BaseFragment(), OrderView {
     override fun initView() {
 
 
-
-        mRecyclerView.addItemDecoration(DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL))
+        mRecyclerView.addItemDecoration(
+            androidx.recyclerview.widget.DividerItemDecoration(
+                mActivity,
+                androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
+            )
+        )
         mAdapter = OrderAdapter(list)
         present = OrderPresent(context, this)
-        mRecyclerView.layoutManager = LinearLayoutManager(context)
+        mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
 
         swipeLayout.setRefreshHeader(ClassicsHeader(context))
         initAdapter()
@@ -94,7 +94,6 @@ class Main2_1Fragment : BaseFragment(), OrderView {
 
 
     private fun initAdapter() {
-
         mAdapter.setOnLoadMoreListener({
             loadMore()
         }, mRecyclerView)

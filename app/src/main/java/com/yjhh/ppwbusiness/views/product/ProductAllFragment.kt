@@ -2,8 +2,8 @@ package com.yjhh.ppwbusiness.views.product
 
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import android.widget.RelativeLayout
@@ -113,7 +113,7 @@ class ProductAllFragment : BaseFragment(), ProductView {
         mAdapter = ProductAdapter(list)
 
         present = ProductPresent(context, this)
-        mRecyclerView.layoutManager = LinearLayoutManager(context)
+        mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
         swipeLayout.setRefreshHeader(ClassicsHeader(context))
         initAdapter()
         initRefreshLayout()

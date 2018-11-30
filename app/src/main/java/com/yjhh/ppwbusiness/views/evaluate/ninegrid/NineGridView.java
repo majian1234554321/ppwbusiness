@@ -3,7 +3,7 @@ package com.yjhh.ppwbusiness.views.evaluate.ninegrid;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import com.yjhh.ppwbusiness.R;
 import com.yjhh.ppwbusiness.utils.GlideImageLoader;
-import com.yjhh.ppwbusiness.utils.ImageLoaderUtils;
 
 import java.util.ArrayList;
 import java.util.List;

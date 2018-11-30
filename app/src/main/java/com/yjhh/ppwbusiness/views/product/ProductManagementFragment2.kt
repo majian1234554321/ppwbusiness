@@ -1,7 +1,7 @@
 package com.yjhh.ppwbusiness.views.product
 
 import android.graphics.Color
-import android.support.v4.view.ViewPager
+import androidx.viewpager.widget.ViewPager
 import android.view.View
 import android.widget.Toast
 import com.flyco.tablayout.listener.OnTabSelectListener
@@ -90,7 +90,7 @@ class ProductManagementFragment2 : BaseFragment(), View.OnClickListener {
             }
         })
 
-        mViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        mViewPager.addOnPageChangeListener(object : androidx.viewpager.widget.ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
 
             }

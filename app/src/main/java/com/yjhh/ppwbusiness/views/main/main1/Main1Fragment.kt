@@ -4,7 +4,7 @@ package com.yjhh.ppwbusiness.views.main.main1
 import android.Manifest
 import android.content.Intent
 import android.graphics.Color
-import android.support.v7.widget.GridLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import android.view.View
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.Main1Adapter
@@ -150,7 +150,7 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
 
         }
 
-        recyclerView.layoutManager = GridLayoutManager(mActivity, 3)
+        recyclerView.layoutManager = androidx.recyclerview.widget.GridLayoutManager(mActivity, 3)
         val mAdapter = Main1Adapter(lists)
         recyclerView.adapter = mAdapter
         recyclerView.addItemDecoration(RecyclerGridSpace(3, Color.parseColor("#ECECEC")))
