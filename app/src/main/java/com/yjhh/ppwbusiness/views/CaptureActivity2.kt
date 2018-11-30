@@ -13,39 +13,40 @@ import com.uuzuche.lib_zxing.activity.CodeUtils
 import com.yjhh.ppwbusiness.base.BaseActivity
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.views.cui.CustomPopWindow
+import com.yjhh.ppwbusiness.views.writeoff.CancellationBeforeActivity
+
 import kotlinx.android.synthetic.main.activity_capture2.*
 
 class CaptureActivity2 : BaseActivity(), View.OnClickListener {
 
     var mCustomPopWindow: CustomPopWindow? = null
 
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.iv_back -> {
-                finish()
-            }
-            R.id.tv_save -> {
+    override fun onClick(v: View?) = when (v?.id) {
+        R.id.iv_back -> {
+            finish()
+        }
+        R.id.tv_save -> {
 
 
-                val contentView = LayoutInflater.from(this).inflate(R.layout.pop_layout, null)
-                contentView.findViewById<TextView>(R.id.tv)
-                    .setOnClickListener {
-                        Toast.makeText(this@CaptureActivity2, "121212", Toast.LENGTH_LONG).show()
-                        mCustomPopWindow?.dissmiss()
-                    }
+            val contentView = LayoutInflater.from(this).inflate(R.layout.pop_layout, null)
+            contentView.findViewById<TextView>(R.id.tv)
+                .setOnClickListener {
+                   startActivity(Intent(this@CaptureActivity2, CancellationBeforeActivity::class.java))
 
-                mCustomPopWindow = CustomPopWindow.PopupWindowBuilder(this)
-                    .setView(contentView)
-                    .setFocusable(true)//是否获取焦点，默认为ture
-                    .setOutsideTouchable(true)//是否PopupWindow 以外触摸dissmiss
-                    .create()
-                    .showAsDropDown(v, 20, 10);
+                    mCustomPopWindow?.dissmiss()
+                }
+
+            mCustomPopWindow = CustomPopWindow.PopupWindowBuilder(this)
+                .setView(contentView)
+                .setFocusable(true)//是否获取焦点，默认为ture
+                .setOutsideTouchable(true)//是否PopupWindow 以外触摸dissmiss
+                .create()
+                .showAsDropDown(v, -160, 10);
 
 
-            }
+        }
 
-            else -> {
-            }
+        else -> {
         }
     }
 

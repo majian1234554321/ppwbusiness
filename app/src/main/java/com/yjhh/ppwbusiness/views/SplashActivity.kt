@@ -66,7 +66,7 @@ class SplashActivity : AppCompatActivity() {
     protected fun setStatusBar() {
 
         val decorView = window.decorView
-        decorView.setBackgroundResource(R.mipmap.timg)
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0及以上
 

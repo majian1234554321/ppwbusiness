@@ -70,4 +70,16 @@ class CancellationBeforeFragment : BaseFragment() {
     }
 
 
+    companion object {
+        fun newInstance(): CancellationBeforeFragment {
+
+            val args = Bundle()
+
+            val fragment = CancellationBeforeFragment()
+            fragment.arguments = args
+            return fragment
+        }
+    }
+
+
 }
