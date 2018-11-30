@@ -1,6 +1,7 @@
 package com.yjhh.ppwbusiness.views.cui;
 
 import android.graphics.Rect;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
@@ -31,7 +32,7 @@ public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
      * @param state   The current state of RecyclerView.
      */
     @Override
-    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+    public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
         outRect.left = mSpace;
         outRect.right = mSpace;

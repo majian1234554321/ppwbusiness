@@ -12,4 +12,7 @@
     <string name="rmb_price_double">%1$.2f</string>
     <string name="rmb_price_double2">¥ %1$.2f</string>
 
+
+    <string name="_rmb_price_double">-¥ %1$.2f</string>
+
 </resources>

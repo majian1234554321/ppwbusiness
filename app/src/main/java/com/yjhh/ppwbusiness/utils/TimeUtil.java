@@ -3,6 +3,7 @@ package com.yjhh.ppwbusiness.utils;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * King on 2016/12/6.
@@ -27,7 +28,18 @@ public class TimeUtil {
 
         String res;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        long lt = new Long(s);
+        long lt = Long.valueOf(s);
+        Date date = new Date(lt * 1000);
+        res = simpleDateFormat.format(date);
+        return res;
+    }
+
+
+    public static String stampToDate(String s, String stytle) {
+
+        String res;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(stytle, Locale.CHINA);
+        long lt = Long.valueOf(s);
         Date date = new Date(lt * 1000);
         res = simpleDateFormat.format(date);
         return res;
@@ -45,8 +57,6 @@ public class TimeUtil {
         res = String.valueOf(ts);
         return res;
     }
-
-
 
 
     public static String secondToTime(long second) {

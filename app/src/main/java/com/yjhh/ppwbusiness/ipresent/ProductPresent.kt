@@ -118,7 +118,7 @@ class ProductPresent(var context: Context, var view: ProductView) : BasePresent(
                     val model = ProductBean()
                     model.position = position
 
-                    view.onSuccess(model,flag)
+                    view.onSuccess(model, flag)
                 }
 
             })

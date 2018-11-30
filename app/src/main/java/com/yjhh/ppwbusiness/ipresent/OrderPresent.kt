@@ -18,13 +18,14 @@ class OrderPresent(var context: Context, var view: OrderView) : BasePresent() {
     fun orders(status: String, pageIndex: Int, pageSize: Int, flag: String) {
         toSubscribe2(mode.orders(status, pageIndex, pageSize), object : ProcessObserver2(context) {
             override fun processValue(response: String?) {
-
+                Log.i("allorders", response)
                 val model = gson.fromJson<OrderBean>(response, OrderBean::class.java)
                 view.onSuccess(model, flag)
 
             }
 
             override fun onFault(message: String) {
+                Log.i("allorders", message)
                 view.onFault(message)
             }
 

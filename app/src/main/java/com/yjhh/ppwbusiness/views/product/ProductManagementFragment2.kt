@@ -80,12 +80,10 @@ class ProductManagementFragment2 : BaseFragment(), View.OnClickListener {
             }
 
             override fun onTabReselect(position: Int) {
-                if (position == 0) {
-                    f1.sortType(order, orderType)
-                } else if (position == 1) {
-                    //f2.sortType(order, orderType)
-                } else {
-                    //f3.sortType(order, orderType)
+                when (position) {
+                    0 -> f1.sortType(order, orderType)
+                    1 -> f2.sortType(order, orderType)
+                    else -> f3.sortType(order, orderType)
                 }
             }
         })
@@ -125,7 +123,7 @@ class ProductManagementFragment2 : BaseFragment(), View.OnClickListener {
 
                         sortType = "时间向上"
 
-                        Toast.makeText(mActivity, sortType, Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(mActivity, sortType, Toast.LENGTH_SHORT).show()
 
                         order = "0"   //排序,0（0 时间排序 1价格排序）
                         orderType = "0" //排序方式，0(0升序 1倒叙)
@@ -133,7 +131,7 @@ class ProductManagementFragment2 : BaseFragment(), View.OnClickListener {
                     } else {
                         tv_timeSort.text = "时间排序 ↓"
                         sortType = "时间向下"
-                        Toast.makeText(mActivity, sortType, Toast.LENGTH_SHORT).show()
+                        // Toast.makeText(mActivity, sortType, Toast.LENGTH_SHORT).show()
                         order = "0"   //排序,0（0 时间排序 1价格排序）
                         orderType = "1" //排序方式，0(0升序 1倒叙)
                     }

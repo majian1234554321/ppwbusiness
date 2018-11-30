@@ -47,8 +47,6 @@ android {
 
     /*配置渠道*/
 
-
-
     productFlavors {
 
         company {

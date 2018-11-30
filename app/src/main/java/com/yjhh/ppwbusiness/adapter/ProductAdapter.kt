@@ -38,6 +38,8 @@ class ProductAdapter(list: List<ProductBean.ItemsBean>) :
 
                     1 -> {
                         "下架商品"
+
+
                     }
 
                     2 -> {
@@ -48,6 +50,9 @@ class ProductAdapter(list: List<ProductBean.ItemsBean>) :
                     }
                 }
             )
+
+
+            setVisible(R.id.iv_image2, item?.status == 1)
 
 
             addOnClickListener(R.id.tv_delete)

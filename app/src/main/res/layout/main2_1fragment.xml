@@ -2,8 +2,10 @@
 <com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                                    android:layout_width="match_parent"
                                                    android:id="@+id/swipeLayout"
+                                                   android:background="@color/f8"
                                                    android:layout_height="match_parent">
     <androidx.recyclerview.widget.RecyclerView android:layout_width="match_parent"
+                                               android:paddingTop="10pt"
                                                android:id="@+id/mRecyclerView"
                                                android:layout_height="wrap_content">
 

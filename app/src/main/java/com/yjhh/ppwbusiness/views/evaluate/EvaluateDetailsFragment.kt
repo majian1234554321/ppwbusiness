@@ -28,7 +28,6 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.evaluatedetailsfragment.*
 
 
-
 class EvaluateDetailsFragment : BaseFragment() {
     override fun getLayoutRes(): Int = R.layout.evaluatedetailsfragment
 
@@ -44,7 +43,7 @@ class EvaluateDetailsFragment : BaseFragment() {
 
         val map = androidx.collection.ArrayMap<String, String>()
 
-      val  id  =  arguments?.getString("id")
+        val id = arguments?.getString("id")
 
         map["id"] = id.toString()//类别，默认null（null/0全部 1好评 2中评 3差评）
 
@@ -70,7 +69,7 @@ class EvaluateDetailsFragment : BaseFragment() {
 
 
                     list1212.forEach {
-                        url.add(it.fileUrl.toString())
+                        url.add(it.fileUrl)
                     }
 
 
@@ -134,7 +133,6 @@ class EvaluateDetailsFragment : BaseFragment() {
             return fragment
         }
     }
-
 
 
 }

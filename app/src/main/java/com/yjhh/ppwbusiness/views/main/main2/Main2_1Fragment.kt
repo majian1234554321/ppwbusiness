@@ -34,34 +34,34 @@ import java.util.ArrayList
 
 class Main2_1Fragment : BaseFragment(), OrderView {
 
-
     override fun onSuccess(model: OrderBean, flag: String) {
         if ("refresh" == flag) {
             mAdapter.setNewData(model.items)
             swipeLayout.finishRefresh()
 
         } else {
-            mAdapter.addData(model.items)
-            mAdapter.loadMoreComplete()
+            if (pageSize > model.items.size) {
+                mAdapter.loadMoreEnd()
+            } else {
+                mAdapter.addData(model.items)
+                mAdapter.loadMoreComplete()
+            }
+
         }
     }
 
     override fun onFault(errorMsg: String?) {
-
+        swipeLayout.finishRefresh()
     }
-
 
     override fun onLazyInitView(savedInstanceState: Bundle?) {
         swipeLayout.autoRefresh()
     }
 
-
     var startindex = 0
     val pageSize = 15
-    val status = "0"//状态，默认null（null/0 全部 1未付款 3已付款 4已完成）
-
-    var list = ArrayList<OrderBean.ItemsBeanX>()
-
+    val status = ""//状态，默认null（null/0 全部 1未付款 3已付款 4已完成）
+    var list = ArrayList<OrderBean.ItemsBean>()
     lateinit var mAdapter: OrderAdapter
 
     override fun getLayoutRes(): Int = R.layout.main2_1fragment
@@ -77,11 +77,9 @@ class Main2_1Fragment : BaseFragment(), OrderView {
                 androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
             )
         )
-        mAdapter = OrderAdapter(list)
-        present = OrderPresent(context, this)
-        mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
 
-        swipeLayout.setRefreshHeader(ClassicsHeader(context))
+        present = OrderPresent(context, this)
+
         initAdapter()
         initRefreshLayout()
 
@@ -92,13 +90,12 @@ class Main2_1Fragment : BaseFragment(), OrderView {
         }
     }
 
-
     private fun initAdapter() {
+        mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
+        mAdapter = OrderAdapter(list)
         mAdapter.setOnLoadMoreListener({
             loadMore()
         }, mRecyclerView)
-
-
         mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
         mAdapter.isFirstOnly(false)
         mRecyclerView.adapter = mAdapter
@@ -106,13 +103,12 @@ class Main2_1Fragment : BaseFragment(), OrderView {
 
     }
 
-
     private fun initRefreshLayout() {
+        swipeLayout.setRefreshHeader(ClassicsHeader(context))
         swipeLayout.setOnRefreshListener { refreshLayout ->
             refresh()
         }
     }
-
 
     private fun refresh() {
         startindex = 0
@@ -120,9 +116,7 @@ class Main2_1Fragment : BaseFragment(), OrderView {
 
     }
 
-
     private fun loadMore() {
-        Toast.makeText(context, "onload", Toast.LENGTH_SHORT).show()
         startindex++
         present?.orders(status, startindex, pageSize, "load")
 

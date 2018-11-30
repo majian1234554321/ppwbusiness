@@ -6,54 +6,52 @@ public class OrderBean {
 
 
 
-    public int pageCount;
+
     public int recordCount;
-    public List<ItemsBeanX> items;
+    public List<ItemsBean> items;
 
+    public static class ItemsBean {
 
-
-    public static class ItemsBeanX {
-
-
+        public String avatarUrl;
+        public String couponDisplayText;
         public int createdTime;
-        public int finishTime;
+        public double disMoney;
         public int id;
-        public int moeny;
+        public int ifShowUnDisMoney;
+        public int ifUseCoupon;
+        public double money;
+        public String nickName;
         public String orderNo;
-        public String remark;
-        public ShopInfoBean shopInfo;
-        public double totalMoeny;
-        public List<ItemsBean> items;
+        public int payFlag;
+        public String payTypeText;
+        public int shopId;
+        public String shopLogoUrl;
+        public String shopName;
+        public int status;
+        public String statusDisplayText;
+        public String statusText;
+        public double totalMoney;
+        public double unDisMoney;
+        public int userId;
+        public int payType;
+        public List<LogsBean> logs;
 
-        public static class ShopInfoBean {
+        public static class LogsBean {
+            /**
+             * createdTime : 1543508643
+             * id : 1007
+             * orderId : 1014
+             * status : 1
+             * statusText : 待付款
+             * title : 订单已创建
+             */
 
-            public String content;
-            public int openStatus;
-            public String openStatusText;
+            public int createdTime;
+            public int id;
+            public int orderId;
             public int status;
             public String statusText;
-        }
-
-        public static class ItemsBean {
-
-
-            public int id;
-            public String logoUrl;
-            public String name;
-            public List<ImagesBean> images;
-
-            public static class ImagesBean {
-
-
-                public boolean ifDoc;
-                public boolean ifImage;
-                public boolean ifMedia;
-                public String url;
-            }
+            public String title;
         }
     }
-
-
-
-
 }

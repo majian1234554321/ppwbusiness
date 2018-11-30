@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
             android:layout_below="@+id/rl_title"
             android:id="@+id/logo"
-            android:src="@mipmap/ic_launcher"
+            app:civ_border_color="@color/cd"
+            app:civ_border_width="1px"
+            android:src="@drawable/icon_place"
             android:layout_marginTop="24dp"
             android:layout_width="61.95pt"
             android:layout_centerHorizontal="true"

@@ -38,12 +38,13 @@ class ProductAllFragment : BaseFragment(), ProductView {
     val categoryId = ""
     var status = ""//状态，默认null(null全部（不含已删除） 0 上架中 1已下架 3已删除)
     var startindex = 0
-    val pageSize = 10
-
+    val pageSize = 15
+    lateinit var mAdapter: ProductAdapter
+    lateinit var present: ProductPresent
 
     var order = ""   //排序,0（0 时间排序 1价格排序）
     var orderType = "" //排序方式，0(0升序 1倒叙)
-
+    var list = ArrayList<ProductBean.ItemsBean>()
 
     override fun onSuccess(result: ProductBean?, flag: String) {
 
@@ -61,8 +62,13 @@ class ProductAllFragment : BaseFragment(), ProductView {
             }
 
             "load" -> {
-                mAdapter.addData(result?.items!!)
-                mAdapter.loadMoreComplete()
+                if (result?.items != null && result?.items.size < pageSize) {
+                    mAdapter.loadMoreEnd()
+                } else {
+                    mAdapter.addData(result?.items!!)
+                    mAdapter.loadMoreComplete()
+                }
+
             }
 
             "UNSELL" -> {
@@ -90,41 +96,28 @@ class ProductAllFragment : BaseFragment(), ProductView {
 
     }
 
-
-    var list = ArrayList<ProductBean.ItemsBean>()
-
-    lateinit var mAdapter: ProductAdapter
-
-
-    lateinit var present: ProductPresent
-
-
     override fun onFragmentResult(requestCode: Int, resultCode: Int, data: Bundle?) {
         super.onFragmentResult(requestCode, resultCode, data)
         Toast.makeText(mActivity, "0000", Toast.LENGTH_SHORT).show()
     }
 
-
     override fun getLayoutRes(): Int = R.layout.productallfragment
 
     override fun initView() {
 
-        mRecyclerView.addItemDecoration(SpaceItemDecoration(30))
+        mRecyclerView.addItemDecoration(SpaceItemDecoration(30, "bottom"))
         mAdapter = ProductAdapter(list)
-
         present = ProductPresent(context, this)
+
         mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
-        swipeLayout.setRefreshHeader(ClassicsHeader(context))
+
         initAdapter()
         initRefreshLayout()
         swipeLayout.autoRefresh()
 
-
         mAdapter.setOnItemClickListener { adapter, view, position ->
 
         }
-
-
         mAdapter.setOnItemChildClickListener { adapter, view, position ->
             when (view.id) {
                 R.id.tv_delete -> {
@@ -187,13 +180,12 @@ class ProductAllFragment : BaseFragment(), ProductView {
 
     }
 
-
     private fun initRefreshLayout() {
+        swipeLayout.setRefreshHeader(ClassicsHeader(context))
         swipeLayout.setOnRefreshListener { refreshLayout ->
             refresh()
         }
     }
-
 
     private fun refresh() {
         startindex = 0
@@ -201,14 +193,12 @@ class ProductAllFragment : BaseFragment(), ProductView {
 
     }
 
-
     private fun loadMore() {
 
         startindex++
         present.allproducts(categoryId, order, orderType, status, startindex, pageSize, "load")
 
     }
-
 
     public fun sortType(order: String, orderType: String) {
         this.order = order

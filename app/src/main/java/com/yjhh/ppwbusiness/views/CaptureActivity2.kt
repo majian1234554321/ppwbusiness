@@ -27,7 +27,6 @@ class CaptureActivity2 : BaseActivity(), View.OnClickListener {
         }
         R.id.tv_save -> {
 
-
             val contentView = LayoutInflater.from(this).inflate(R.layout.pop_layout, null)
             contentView.findViewById<TextView>(R.id.tv)
                 .setOnClickListener {
@@ -41,7 +40,7 @@ class CaptureActivity2 : BaseActivity(), View.OnClickListener {
                 .setFocusable(true)//是否获取焦点，默认为ture
                 .setOutsideTouchable(true)//是否PopupWindow 以外触摸dissmiss
                 .create()
-                .showAsDropDown(v, -160, 10);
+                .showAsDropDown(v, -160, 10)
 
 
         }
