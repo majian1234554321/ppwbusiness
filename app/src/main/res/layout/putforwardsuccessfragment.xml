@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:gravity="center_horizontal"
+
+              android:background="@color/f8"
               android:orientation="vertical" android:layout_width="match_parent"
               android:layout_height="match_parent">
 
@@ -11,59 +12,121 @@
                                                  android:layout_height="wrap_content"/>
 
 
-    <ImageView android:layout_width="60dp" android:layout_height="60dp"
-               android:layout_margin="@dimen/spi_16"
-               android:src="@mipmap/ic_launcher"
+    <LinearLayout android:layout_width="match_parent"
+                  android:background="@color/white"
+                  android:paddingBottom="16pt"
+                  android:gravity="center_horizontal"
+                  android:orientation="vertical"
+                  android:layout_height="wrap_content">
+        <ImageView android:layout_width="115pt" android:layout_height="79pt"
+                   android:layout_marginTop="30.5pt"
+                   android:layout_marginBottom="20.5pt"
+                   android:src="@drawable/icon_success"
 
-    />
+        />
 
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="余额提现到微信"
-    />
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:layout_marginTop="@dimen/spi_12"
-              android:text="99.99"
-    />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
 
-    <View android:layout_width="match_parent" android:layout_height="1dp"
-          android:layout_marginTop="@dimen/spi_16"
-          android:layout_marginBottom="@dimen/spi_16"
-          android:background="@color/all_e"
-    />
+                  android:text="余额提现到微信"
+                  android:textColor="#FF333333"
+                  android:textSize="17pt"
+        />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:layout_marginTop="5.5pt"
+                  android:textColor="#FF552E"
+                  android:textSize="17pt"
+                  android:text="99.99"
+        />
+    </LinearLayout>
+
+
+
 
     <LinearLayout android:layout_width="match_parent"
-                  android:layout_marginLeft="60dp"
-                  android:layout_marginRight="40dp"
+                  android:paddingLeft="24pt"
+                  android:layout_marginTop="10pt"
+                  android:background="@color/white"
+                  android:paddingRight="24pt"
                   android:orientation="vertical" android:layout_height="wrap_content">
 
 
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                   android:text="当前状态        申请成功"
                   android:id="@+id/tv_1"
-                  android:layout_marginBottom="@dimen/spi_8"
+
+                  android:paddingTop="12pt"
+                  android:paddingBottom="12pt"
+                  android:textColor="#FF333333"
+                  android:textSize="14pt"
+        />
+        <View
+                android:layout_width="327pt"
+                android:layout_gravity="center"
+                android:layout_height="0.5pt"
+                android:background="#FFE6E6E6"
         />
         <TextView android:layout_width="match_parent"
                   android:id="@+id/tv_2"
-                  android:layout_marginBottom="@dimen/spi_8" android:layout_height="wrap_content"
+                  android:paddingTop="12pt"
+                  android:paddingBottom="12pt"
+                  android:textColor="#FF333333"
+                  android:textSize="14pt" android:layout_height="wrap_content"
                   android:text="申请时间        2018-01-01 01:01:01"
+        />
+        <View
+                android:layout_width="327pt"
+                android:layout_gravity="center"
+                android:layout_height="0.5pt"
+                android:background="#FFE6E6E6"
         />
         <TextView android:layout_width="match_parent"
                   android:id="@+id/tv_3"
-                  android:layout_marginBottom="@dimen/spi_8" android:layout_height="wrap_content"
+                  android:paddingTop="12pt"
+                  android:paddingBottom="12pt"
+                  android:textColor="#FF333333"
+                  android:textSize="14pt" android:layout_height="wrap_content"
                   android:text="到账时间        具体到账时间以第三方服务为准"
+        />
+        <View
+                android:layout_width="327pt"
+                android:layout_gravity="center"
+                android:layout_height="0.5pt"
+                android:background="#FFE6E6E6"
         />
         <TextView android:layout_width="match_parent"
                   android:id="@+id/tv_4"
-                  android:layout_marginBottom="@dimen/spi_8" android:layout_height="wrap_content"
+                  android:paddingTop="12pt"
+                  android:paddingBottom="12pt"
+                  android:textColor="#FF333333"
+                  android:textSize="14pt" android:layout_height="wrap_content"
                   android:text="提现金额        99.99"
+        />
+        <View
+                android:layout_width="327pt"
+                android:layout_gravity="center"
+                android:layout_height="0.5pt"
+                android:background="#FFE6E6E6"
         />
         <TextView android:layout_width="match_parent"
                   android:id="@+id/tv_5"
-                  android:layout_marginBottom="@dimen/spi_8" android:layout_height="wrap_content"
+                  android:paddingTop="12pt"
+                  android:paddingBottom="12pt"
+                  android:textColor="#FF333333"
+                  android:textSize="14pt" android:layout_height="wrap_content"
                   android:text="资金去处        微信"
+        />
+        <View
+                android:layout_width="327pt"
+                android:layout_gravity="center"
+                android:layout_height="0.5pt"
+                android:background="#FFE6E6E6"
         />
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                   android:id="@+id/tv_6"
+                  android:paddingTop="12pt"
+                  android:paddingBottom="12pt"
+                  android:textColor="#FF333333"
+                  android:textSize="14pt"
                   android:text="提现单号        100000000"
         />
 

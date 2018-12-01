@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:paddingBottom="12.5pt"
+              android:paddingTop="12.5pt"
+              android:text="商家名"
+              android:id="@+id/tv_left"
+              android:textColor="#FF666666"
+              android:textSize="14pt"
+    />
+
+
+    <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:paddingBottom="12.5pt"
+              android:paddingTop="12.5pt"
+              android:id="@+id/tv_right"
+              android:gravity="right"
+              android:background="@null"
+              android:textColorHint="#999999"
+              android:textColor="#FF333333"
+              android:textSize="14pt"
+              android:layout_alignParentRight="true"
+    />
+
+    <View
+            android:layout_below="@+id/tv_left"
+            android:layout_width="match_parent"
+            android:layout_height="0.5pt"
+            android:background="#FFE6E6E6"
+    />
+
+</RelativeLayout>

@@ -7,14 +7,22 @@ public class ShopAdminBean {
 
     /**
      * account : {"blance":154,"order":88,"today":543,"yesOrder":20}
-     * functions : [{"code":"pro-mgr","name":"商品管理","orderBy":100,"url":"apps:/shop/product"},{"code":"report-mgr","name":"报表","orderBy":200,"url":"http://www.baidu.com"}]
-     * shopName : 哇哈哈
+     * functions : [{"code":"shop-mgr","name":"店铺管理","url":"apps://shop/index"},{"code":"pro-mgr","name":"商品管理","url":"apps://shop/product"},{"code":"comment-mgr","name":"评价管理","url":"apps://comment/index"},{"code":"activity-mgr","name":"活动中心","url":"apps://activity/index"},{"code":"report-mgr","name":"对账报表","url":"apps://shop/report"},{"code":"report-mgr","name":"网页跳转测试","url":"http://www.bhyjhh.com"}]
+     * openStatus : 0
+     * openStatusText : 营业中
+     * preNum : 0
+     * preTotal : 0
+     * shopName : 休息休息
+     * status : 1
      */
 
     public AccountBean account;
+    public int openStatus;
+    public String openStatusText;
+    public int preNum;
+    public int preTotal;
     public String shopName;
-    public String preNum;
-    public String preTotal;
+    public int status;
     public List<FunctionsBean> functions;
 
     public static class AccountBean {
@@ -28,21 +36,18 @@ public class ShopAdminBean {
         public double blance;
         public int order;
         public double today;
-        public double yesToday;
         public int yesOrder;
     }
 
     public static class FunctionsBean {
         /**
-         * code : pro-mgr
-         * name : 商品管理
-         * orderBy : 100
-         * url : apps:/shop/product
+         * code : shop-mgr
+         * name : 店铺管理
+         * url : apps://shop/index
          */
 
         public String code;
         public String name;
-        public int orderBy;
         public String url;
     }
 }

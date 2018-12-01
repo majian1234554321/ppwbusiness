@@ -30,6 +30,7 @@ import com.yjhh.ppwbusiness.views.reconciliation.ReconciliationFragment
 import kotlinx.android.synthetic.main.main1fragment.*
 import android.widget.Toast
 import com.azhon.appupdate.utils.Constant
+import com.scwang.smartrefresh.layout.header.ClassicsHeader
 
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.uuzuche.lib_zxing.activity.CodeUtils
@@ -38,6 +39,8 @@ import com.yjhh.ppwbusiness.base.BaseActivity.REQUEST_CODE
 
 import com.yjhh.ppwbusiness.views.CaptureActivity2
 import com.yjhh.ppwbusiness.utils.TextStyleUtils
+import com.yjhh.ppwbusiness.views.cui.PPWHeader
+import com.yjhh.ppwbusiness.views.cui.PPWHeader2
 import com.yjhh.ppwbusiness.views.writeoff.WriteOffFragment
 
 
@@ -94,8 +97,7 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
             R.id.iv_scan -> {
 
 
-                //  (parentFragment as MainFragment).startBrotherFragment(WriteOffFragment())
-                // (parentFragment as MainFragment).startBrotherFragment(CancellationBeforeFragment())
+
 
 
                 RxPermissions(this)
@@ -142,6 +144,12 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
         arrayOf(tv_setting, tv_more, iv_scan).forEach {
             it.setOnClickListener(this)
         }
+
+
+       // swipeLayout.setRefreshHeader(ClassicsHeader(mActivity))
+
+        swipeLayout.setRefreshHeader(PPWHeader2(mActivity))
+
 
         val lists = ArrayList<Main1Bean>()
 
@@ -197,7 +205,7 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
 
 
 
-        OrderPresent(mActivity, this).orderTask("")
+      //  OrderPresent(mActivity, this).orderTask("")
 
 
     }

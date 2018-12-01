@@ -82,6 +82,9 @@
     <declare-styleable name="ItemEntryView2">
         <attr name="ievtextColor2" format="color"/>
         <attr name="ievtextValue2" format="string"/>
+        <attr name="ievtexthint" format="string"/>
+        <attr name="ievrighttextValue" format="string"/>
+        <attr name="ievRightTextColor" format="color"/>
     </declare-styleable>
 
 

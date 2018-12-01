@@ -36,6 +36,7 @@ class ShopSetPresent(var context: Context, var view: ShopSetView) : BasePresent(
                 Log.i("ShopSetPresent", response)
 
                 view.onSuccess()
+                Toast.makeText(context, "设置店铺信息成功", Toast.LENGTH_LONG).show()
             }
 
             override fun onFault(message: String) {
@@ -61,7 +62,8 @@ class ShopSetPresent(var context: Context, var view: ShopSetView) : BasePresent(
             }
 
             override fun processValue(response: String?) {
-                Toast.makeText(context, if (status == "0") "开始营业" else "打烊", Toast.LENGTH_LONG).show()
+                view.onSuccess()
+               // Toast.makeText(context, if (status == "0") "营业中" else "打烊", Toast.LENGTH_LONG).show()
             }
 
         }
@@ -83,7 +85,7 @@ class ShopSetPresent(var context: Context, var view: ShopSetView) : BasePresent(
             override fun processValue(response: String?) {
                 Log.i("getAllInfo", response)
 
-               val model =  gson.fromJson<AllShopInfo>(response,AllShopInfo::class.java)
+                val model = gson.fromJson<AllShopInfo>(response, AllShopInfo::class.java)
 
                 view.AllShopInfoSuccess(model)
 

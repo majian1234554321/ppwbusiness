@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:background="@color/f8"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <com.yjhh.ppwbusiness.views.cui.TitleBarView android:layout_width="match_parent"
+                                                 app:textValue="账户绑定"
+                                                 app:textColor="@color/white"
+                                                 android:layout_height="wrap_content"/>
+
+    <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                   app:ievtextValue2="微信"
+                                                   android:id="@+id/iev1"
+                                                   android:layout_marginTop="10pt"
+                                                   android:background="@color/white"
+                                                   android:paddingLeft="12pt"
+                                                   app:ievRightTextColor="#2C85FF"
+                                                   android:paddingRight="12pt"
+                                                   app:ievtextColor2="#FF171717"
+                                                   android:layout_height="wrap_content"/>
+
+    <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                   app:ievtextValue2="支付宝"
+                                                   android:id="@+id/iev2"
+                                                   app:ievRightTextColor="#2C85FF"
+                                                   android:layout_marginTop="10pt"
+                                                   android:background="@color/white"
+                                                   android:paddingLeft="12pt"
+                                                   android:paddingRight="12pt"
+                                                   app:ievtextColor2="#FF171717"
+                                                   android:layout_height="wrap_content"/>
+
+    <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                   app:ievtextValue2="收款人"
+                                                   android:id="@+id/iev2_1"
+                                                   app:ievRightTextColor="@color/all_3"
+                                                   android:background="@color/white"
+                                                   android:paddingLeft="12pt"
+                                                   android:paddingRight="12pt"
+                                                   app:ievtextColor2="@color/all_6"
+                                                   android:layout_height="wrap_content"/>
+
+    <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                   app:ievtextValue2="收款账号"
+                                                   android:id="@+id/iev2_2"
+                                                   app:ievRightTextColor="@color/all_3"
+
+                                                   android:background="@color/white"
+                                                   android:paddingLeft="12pt"
+                                                   android:paddingRight="12pt"
+                                                   app:ievtextColor2="@color/all_6"
+                                                   android:layout_height="wrap_content"/>
+
+
+    <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                   app:ievtextValue2="银行卡"
+                                                   android:id="@+id/iev3"
+                                                   app:ievRightTextColor="#2C85FF"
+                                                   android:layout_marginTop="10pt"
+                                                   android:background="@color/white"
+                                                   android:paddingLeft="12pt"
+                                                   android:paddingRight="12pt"
+                                                   app:ievtextColor2="#FF171717"
+                                                   android:layout_height="wrap_content"/>
+    <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                   app:ievtextValue2="卡号"
+                                                   android:id="@+id/iev3_1"
+                                                   app:ievRightTextColor="@color/all_3"
+                                                   android:background="@color/white"
+                                                   android:paddingLeft="12pt"
+                                                   android:paddingRight="12pt"
+                                                   app:ievtextColor2="@color/all_6"
+                                                   android:layout_height="wrap_content"/>
+    <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                   app:ievtextValue2="开户人姓名"
+                                                   android:id="@+id/iev3_2"
+                                                   app:ievRightTextColor="@color/all_3"
+
+                                                   android:background="@color/white"
+                                                   android:paddingLeft="12pt"
+                                                   android:paddingRight="12pt"
+                                                   app:ievtextColor2="@color/all_6"
+                                                   android:layout_height="wrap_content"/>
+    <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                   app:ievtextValue2="开户预留手机号"
+                                                   android:id="@+id/iev3_3"
+                                                   app:ievRightTextColor="@color/all_3"
+                                                   android:background="@color/white"
+                                                   android:paddingLeft="12pt"
+                                                   android:paddingRight="12pt"
+                                                   app:ievtextColor2="@color/all_6"
+                                                   android:layout_height="wrap_content"/>
+
+</LinearLayout>

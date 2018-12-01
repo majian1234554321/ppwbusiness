@@ -67,7 +67,7 @@ class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetVie
 
         tv_editOpen.isOpen = model.openStatus != 1
 
-        if (model.times.size > 0) {
+        if (model.times!=null&&model.times.size > 0) {
 
             listHours.clear()
 
@@ -96,9 +96,6 @@ class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetVie
         )
 
 
-
-
-
     }
 
     override fun onFault(errorMsg: String?) {
@@ -107,7 +104,7 @@ class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetVie
     }
 
     override fun onSuccess() {
-        Toast.makeText(this, "设置店铺信息成功", Toast.LENGTH_LONG).show()
+
         finish()
     }
 

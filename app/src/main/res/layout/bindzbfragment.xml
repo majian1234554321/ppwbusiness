@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <com.yjhh.ppwbusiness.views.cui.TitleBarView android:layout_width="match_parent"
+                                                 android:id="@+id/tbv_title"
+                                                 app:textValue="绑定银行卡"
+                                                 app:textColor="@color/white"
+                                                 android:layout_height="wrap_content"/>
+
+
+    <TextView
+            android:layout_width="match_parent"
+            android:paddingLeft="24pt"
+            android:paddingTop="24pt"
+            android:id="@+id/tv_type"
+            android:paddingBottom="15.5pt"
+            android:layout_height="wrap_content"
+            android:text="银行卡"
+            android:textColor="#FF333333"
+            android:textSize="17pt"
+    />
+
+    <com.yjhh.ppwbusiness.views.cui.ItemEntryViewEditText android:layout_width="match_parent"
+                                                          android:id="@+id/iev1"
+                                                          app:ievtextValue2="卡号"
+                                                          android:paddingLeft="24pt"
+                                                          app:ievtexthint="未填写"
+                                                          android:paddingRight="24pt"
+                                                          app:ievtextColor2="#FF666666"
+                                                          android:layout_height="wrap_content"/>
+    <com.yjhh.ppwbusiness.views.cui.ItemEntryViewEditText
+            android:layout_width="match_parent"
+            android:id="@+id/iev2"
+            app:ievtextValue2="卡号"
+            android:paddingLeft="24pt"
+            app:ievtexthint="未填写"
+            android:paddingRight="24pt"
+            app:ievtextColor2="#FF666666"
+            android:layout_height="wrap_content"/>
+    <com.yjhh.ppwbusiness.views.cui.ItemEntryViewEditText android:layout_width="match_parent"
+                                                          android:id="@+id/iev3"
+                                                          app:ievtextValue2="卡号"
+                                                          app:ievtexthint="未填写"
+                                                          android:paddingLeft="24pt"
+                                                          android:paddingRight="24pt"
+                                                          app:ievtextColor2="#FF666666"
+                                                          android:layout_height="wrap_content"/>
+
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="24pt"
+            android:paddingTop="4pt"
+            android:text="注：请如实填写正确信息"
+            android:textColor="#FFC5AC81"
+            android:textSize="11pt"
+    />
+
+
+    <com.google.android.material.button.MaterialButton
+            android:layout_marginTop="50pt"
+            android:layout_width="182pt"
+            android:padding="4.5pt"
+            app:backgroundTint="@color/zthj"
+            android:text="确认绑定"
+            android:textSize="18pt"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>

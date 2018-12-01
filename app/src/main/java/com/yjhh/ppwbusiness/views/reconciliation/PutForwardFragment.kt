@@ -29,6 +29,11 @@ class PutForwardFragment : BaseFragment() {
         }
 
 
+
+        rb_wechat.setOnClickListener {
+            start(BindListFragment())
+        }
+
         recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(mActivity)
 
         recyclerView.adapter = PutForwardAdapter(list)

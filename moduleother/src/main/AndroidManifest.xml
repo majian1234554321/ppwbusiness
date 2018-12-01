@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.ppw.moduleother">
+
+    <application>
+        <activity android:name=".views.Main4OtherActivity">
+        </activity>
+    </application>
+
+</manifest>

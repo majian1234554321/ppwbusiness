@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:background="@color/f8"
+                android:layout_centerInParent="true"
+                android:layout_height="100pt">
+
+    <pl.droidsonroids.gif.GifImageView android:layout_width="70pt" android:layout_height="70pt"
+               android:id="@+id/iv_image"
+               android:layout_centerInParent="true"
+               android:text="121212"
+    />
+
+</RelativeLayout>

@@ -71,7 +71,7 @@ class Reconciliation1Fragment : BaseFragment() {
 
 
     private fun loadMore() {
-        Toast.makeText(context, "onload", Toast.LENGTH_SHORT).show()
+
         startindex++
         //  sectionCouponPresent.usermessage(status, share, startindex, pageSize, "load")
 

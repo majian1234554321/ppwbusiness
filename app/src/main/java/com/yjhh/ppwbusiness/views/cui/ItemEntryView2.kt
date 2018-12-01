@@ -32,32 +32,38 @@ class ItemEntryView2 @JvmOverloads constructor(
     }
 
 
+    fun setLeftContent(value: String) {
+        tv_left.text = value
+    }
+
+
     init {
 
 
         val type = context.theme.obtainStyledAttributes(attributeSet, R.styleable.ItemEntryView2, defStyleAttr, 0)
         val textValue = type.getString(R.styleable.ItemEntryView2_ievtextValue2)
-        val textColor =
-            type.getColor(R.styleable.ItemEntryView2_ievtextColor2, ContextCompat.getColor(context, R.color.colorPrimary))
+        val ievLeftTextColor =
+            type.getColor(
+                R.styleable.ItemEntryView2_ievtextColor2,
+                ContextCompat.getColor(context, R.color.colorPrimary)
+            )
+
+
+        val ievRightTextColor =
+            type.getColor(
+                R.styleable.ItemEntryView2_ievRightTextColor,
+                ContextCompat.getColor(context, R.color.colorPrimary)
+            )
+
 
         type.recycle()
 
         val view = View.inflate(context, R.layout.itementryview2, this)
-        val tv_left = view.findViewById<TextView>(R.id.tv_left)
+
         tv_left.text = textValue
+        tv_left.setTextColor(ievLeftTextColor)
 
-
-
-
-
-
-
-
-
-
-
-
-
+        tv_right.setTextColor(ievRightTextColor)
 
 
     }

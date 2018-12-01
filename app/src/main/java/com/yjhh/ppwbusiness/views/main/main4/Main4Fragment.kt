@@ -13,24 +13,69 @@ import com.yjhh.ppwbusiness.api.ApiServices
 import com.yjhh.ppwbusiness.api.SectionUselessService
 import com.yjhh.ppwbusiness.base.BaseMainFragment
 import com.yjhh.ppwbusiness.base.ProcessObserver2
-import com.yjhh.ppwbusiness.bean.LoginBean
-import com.yjhh.ppwbusiness.bean.VersionBean
+import com.yjhh.ppwbusiness.bean.*
 import com.yjhh.ppwbusiness.fragments.*
 import com.yjhh.ppwbusiness.ipresent.CommonPresent
+import com.yjhh.ppwbusiness.ipresent.Main1Present
+import com.yjhh.ppwbusiness.ipresent.ShopSetPresent
 import com.yjhh.ppwbusiness.iview.CommonView
+import com.yjhh.ppwbusiness.iview.Main1View
+import com.yjhh.ppwbusiness.iview.ShopSetView
 import com.yjhh.ppwbusiness.utils.*
 import com.yjhh.ppwbusiness.views.cui.AppUpdateFragment
 import com.yjhh.ppwbusiness.views.login.LoginActivity
 import com.yjhh.ppwbusiness.views.merchant.MerchantSettingActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+
 import kotlinx.android.synthetic.main.main4fragment.*
 import org.json.JSONObject
 import java.io.File
 import java.lang.Exception
+import java.lang.StringBuilder
 
 
-class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView {
+class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, ShopSetView {
+
+
+    override fun onSuccess() {
+
+    }
+
+    override fun AllShopInfoSuccess(model: AllShopInfo) {
+        if (model.openStatus == 0) {
+            tv_status.text = "营业中"
+            typeStatus = "0"
+        } else {
+            tv_status.text = "休息中"
+            typeStatus = "1"
+        }
+
+
+
+        if (model.times!=null&&model.times.size > 0) {
+
+
+
+
+            val sb = StringBuilder()
+            model.times.forEach {
+                sb.append(it.begin)
+                    .append(" - ")
+                    .append(it.end)
+                    .append("   ")
+
+
+
+
+
+            }
+            tv_time.text = sb.toString()
+        }
+
+
+        tv_address.text = model.address
+    }
 
     var dialog: AppUpdateFragment? = null
 
@@ -147,6 +192,13 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView {
             R.id.tv_status -> {
 
 
+                if (tv_status.text.toString() == "休息中") {
+                    ShopSetPresent(mActivity, this)?.editOpen("0")
+                } else {
+                    ShopSetPresent(mActivity, this)?.editOpen("1")
+                }
+                if (tv_status.text.toString() == "休息中") tv_status.text = "营业中" else tv_status.text = "休息中"
+
             }
 
             else -> {
@@ -154,6 +206,8 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView {
         }
     }
 
+
+    var typeStatus = "0"     //店铺状态(0正常营业，1打烊/休息)
 
     override fun getLayoutRes(): Int = R.layout.main4fragment
 
@@ -183,6 +237,11 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView {
                 tv_name.text = "未登录"
             }
         }
+
+
+
+        ShopSetPresent(mActivity, this)
+            .getAllInfo()
 
 
         /*******************************获取当前账户*************************************/

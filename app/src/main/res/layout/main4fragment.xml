@@ -66,13 +66,28 @@
                         android:layout_height="wrap_content"/>
 
 
+                <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1pt"
+                        android:id="@+id/view"
+                        android:layout_marginLeft="7.5pt"
+                        android:paddingRight="7.5pt"
+                        android:layout_marginTop="5.5pt"
+
+                        android:layout_toRightOf="@+id/profile_image"
+                        android:layout_below="@+id/tv_name"
+                        android:background="#585858"
+                />
+
                 <TextView android:layout_width="match_parent"
                           android:id="@+id/tv_time"
-                          android:layout_below="@+id/tv_name"
-                          android:layout_marginTop="14pt"
+                          android:layout_below="@+id/view"
+                          android:layout_marginTop="12pt"
+                          android:drawableLeft="@drawable/icon_time"
+                          android:drawablePadding="8pt"
                           android:layout_toRightOf="@+id/profile_image"
                           android:paddingLeft="@dimen/spi_12"
-                          android:text="123123132"
+                          android:text="未设置"
                           android:textColor="#FFE2E2E2"
                           android:textSize="12pt"
                           android:layout_height="16.5pt"/>
@@ -82,9 +97,11 @@
                           android:layout_below="@+id/tv_time"
                           android:textColor="#FFE2E2E2"
                           android:layout_marginTop="9pt"
+                          android:drawableLeft="@drawable/icon_address"
+                          android:drawablePadding="8pt"
                           android:layout_toRightOf="@+id/profile_image"
                           android:paddingLeft="@dimen/spi_12"
-                          android:text="未登录21212121212"
+                          tools:text="未登录21212121212"
                           android:textSize="12pt"
                           android:layout_height="wrap_content"/>
 

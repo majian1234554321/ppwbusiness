@@ -14,9 +14,7 @@ class ActivityCenterAdapter(data: List<ActivityCenterBean>) :
             ActivityCenterBean.IMG -> helper.setText(R.id.tv_No, item?.content)
         }
 
-
     }
-
 
     init {
         addItemType(ActivityCenterBean.TEXT, R.layout.item_text_view)
