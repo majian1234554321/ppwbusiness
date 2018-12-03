@@ -10,7 +10,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.scwang.smartrefresh.layout.header.ClassicsHeader
+
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.MyMessageFragmentAdapter
 import com.yjhh.ppwbusiness.adapter.ProductAdapter
@@ -21,6 +21,7 @@ import com.yjhh.ppwbusiness.fragments.MessageDetailFragment
 import com.yjhh.ppwbusiness.ipresent.ProductPresent
 import com.yjhh.ppwbusiness.ipresent.SectionUselessPresent
 import com.yjhh.ppwbusiness.iview.ProductView
+import com.yjhh.ppwbusiness.views.cui.PPWHeader2
 import com.yjhh.ppwbusiness.views.cui.SpaceItemDecoration
 import com.yjhh.ppwbusiness.views.product.twoview.BaseViewAdapter
 import com.yjhh.ppwbusiness.views.product.twoview.BindData
@@ -181,7 +182,7 @@ class ProductAllFragment : BaseFragment(), ProductView {
     }
 
     private fun initRefreshLayout() {
-        swipeLayout.setRefreshHeader(ClassicsHeader(context))
+        swipeLayout.setRefreshHeader(PPWHeader2(context))
         swipeLayout.setOnRefreshListener { refreshLayout ->
             refresh()
         }

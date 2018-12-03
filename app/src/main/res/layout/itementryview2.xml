@@ -18,7 +18,7 @@
               android:paddingTop="12.5pt"
               android:id="@+id/tv_right"
 
-              android:text="海底捞火锅(光谷世界城店)"
+
               android:textColor="#FF333333"
               android:textSize="14pt"
               android:layout_alignParentRight="true"

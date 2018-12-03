@@ -2,18 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
+              android:background="@color/white"
+              android:layout_marginTop="10pt"
+
               android:orientation="vertical" android:layout_height="wrap_content">
 
     <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
                                                    android:id="@+id/iev1"
+                                                   android:paddingLeft="12pt"
+                                                   android:paddingRight="12pt"
+                                                   android:background="@color/white"
                                                    app:ievtextValue2="核销日期"
                                                    android:layout_height="wrap_content"/>
     <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
                                                    android:id="@+id/iev2"
+                                                   android:paddingLeft="12pt"
+                                                   android:background="@color/white"
+                                                   android:paddingRight="12pt"
                                                    app:ievtextValue2="持券用户"
                                                    android:layout_height="wrap_content"/>
     <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
                                                    android:id="@+id/iev3"
+                                                   android:paddingLeft="12pt"
+                                                   android:background="@color/white"
+                                                   android:paddingRight="12pt"
                                                    app:ievtextValue2="核销门店"
                                                    android:layout_height="wrap_content"/>
 
@@ -21,8 +33,11 @@
             android:layout_width="wrap_content"
             android:layout_gravity="right"
             android:paddingTop="9.5pt"
+            android:layout_marginRight="12pt"
             android:paddingBottom="9.5pt"
             android:layout_height="wrap_content"
+            android:drawableRight="@drawable/icon_right_bule"
+            android:drawablePadding="8pt"
             android:text="查看详情"
             android:textColor="#FF2C85FF"
             android:textSize="12pt"

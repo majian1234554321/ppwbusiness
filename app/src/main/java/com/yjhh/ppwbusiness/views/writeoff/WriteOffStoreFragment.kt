@@ -1,48 +1,75 @@
 package com.yjhh.ppwbusiness.views.writeoff
 
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.google.gson.Gson
 import com.jakewharton.rxbinding2.widget.RxTextView
-import com.scwang.smartrefresh.layout.header.ClassicsHeader
+
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.WriteOffStoreAdapter
 import com.yjhh.ppwbusiness.base.BaseFragment
+import com.yjhh.ppwbusiness.bean.WriteOffStoreBean
+import com.yjhh.ppwbusiness.ipresent.CancellationPresent
 
 import com.yjhh.ppwbusiness.ipresent.ReservePresent
+import com.yjhh.ppwbusiness.iview.CancellationView
+import com.yjhh.ppwbusiness.utils.CommItemDecoration
+import com.yjhh.ppwbusiness.views.cui.PPWHeader2
+import com.yjhh.ppwbusiness.views.cui.SpaceItemDecoration
 import kotlinx.android.synthetic.main.writeoffstorefragment.*
 
-class WriteOffStoreFragment : BaseFragment() {
+class WriteOffStoreFragment : BaseFragment(), CancellationView {
+    override fun onSuccessCancellation(response: String?, flag: String?) {
+        //
+
+        var gson = Gson()
+
+        val model = gson.fromJson<WriteOffStoreBean>(response, WriteOffStoreBean::class.java)
+
+        if (model.item != null && model.item.isNotEmpty()) {
+            mAdapter?.setNewData(model.item)
+        }
+
+
+    }
+
+    override fun onFault(errorMsg: String?) {
+
+    }
+
     override fun getLayoutRes(): Int = R.layout.writeoffstorefragment
 
 
     val pageSize = 15
     var pageIndex = 0
     var status = "-1" //null全部 -1 历史 0 申请 1已接受 2用户取消 3商户取消 4已过时
-    var peresent: ReservePresent? = null
+    var peresent: CancellationPresent? = null
     var mAdapter: WriteOffStoreAdapter? = null
-    var lists = ArrayList<String>()
+    var lists = ArrayList<WriteOffStoreBean.ItemBean>()
 
     override fun initView() {
 
-        for (i in 1..9) {
-            lists.add("A")
-        }
+
+        peresent = CancellationPresent(mActivity, this)
+        peresent?.shopList("123")
 
         //initRefreshLayout()
         initAdapter()
+        swipeLayout.setEnableRefresh(false)
         //  swipeLayout.autoRefresh()
 
 
-        mAdapter?.setOnItemClickListener { adapter, view, position ->
-            val bundle = Bundle()
-            bundle.putString("ids", lists[position])
-
-            setFragmentResult(RESULT_OK, bundle)
-
-            mActivity.onBackPressed()
-
-        }
+//        mAdapter?.setOnItemClickListener { adapter, view, position ->
+//            val bundle = Bundle()
+//            bundle.putString("ids", lists[position])
+//
+//            setFragmentResult(RESULT_OK, bundle)
+//
+//            mActivity.onBackPressed()
+//
+//        }
 
 
         val dis = RxTextView.textChanges(et_search).subscribe {
@@ -54,21 +81,18 @@ class WriteOffStoreFragment : BaseFragment() {
 
 
     private fun initAdapter() {
+
+
         mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(mActivity)
         mAdapter?.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
         mAdapter?.isFirstOnly(false)
         mAdapter = WriteOffStoreAdapter(lists)
         mRecyclerView.adapter = mAdapter
 
-        mAdapter?.setOnLoadMoreListener({
-            loadMore()
-        }, mRecyclerView)
-
-        mAdapter?.disableLoadMoreIfNotFullPage(mRecyclerView)
     }
-
+/*
     private fun initRefreshLayout() {
-        swipeLayout.setRefreshHeader(ClassicsHeader(context))
+        swipeLayout.setRefreshHeader(PPWHeader2(context))
         swipeLayout.setOnRefreshListener { refreshLayout ->
             refresh()
         }
@@ -84,6 +108,6 @@ class WriteOffStoreFragment : BaseFragment() {
         peresent?.reserves(status, "", pageIndex, pageSize, "load")
 
     }
-
+*/
 
 }

@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
               android:orientation="vertical"
@@ -7,314 +9,334 @@
               android:layout_height="match_parent">
 
     <com.yjhh.ppwbusiness.views.cui.TitleBarView android:layout_width="match_parent"
-                                                 app:textValue="核销明细"
+                                                 app:textValue="卡券核销"
                                                  app:textColor="@color/white"
                                                  android:layout_height="wrap_content"/>
 
 
-    <RelativeLayout android:layout_width="match_parent"
-                    android:background="@color/white"
-                    android:layout_height="wrap_content">
+    <androidx.core.widget.NestedScrollView android:layout_width="match_parent"
+                                           android:layout_height="match_parent">
 
-        <RelativeLayout android:layout_width="match_parent"
-                        android:layout_gravity="center"
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="vertical"
+                      android:layout_height="wrap_content">
+            <RelativeLayout android:layout_width="match_parent"
+                            android:background="@color/white"
+                            android:layout_height="wrap_content">
+
+                <RelativeLayout android:layout_width="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="24pt"
+                                android:layout_marginRight="24pt"
+                                android:layout_marginTop="14pt"
+                                android:background="@drawable/icon_writeoff"
+                                android:layout_height="123pt">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                              android:text="拍拍味 | "
+                              android:paddingLeft="19.5pt"
+                              android:paddingTop="12pt"
+                              android:paddingRight="12pt"
+                              android:id="@+id/tv_cardLogo"
+                              android:textColor="#66333333"
+                              android:textSize="14pt"
+                    />
+
+
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                              android:layout_toRightOf="@+id/tv_cardLogo"
+                              android:paddingTop="12pt"
+                              android:id="@+id/tv_cardName"
+                              android:text="至尊医美折扣券"
+                              android:textColor="#FF333333"
+                              android:textSize="14pt"
+                    />
+
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="32pt"
+                            android:paddingBottom="8pt"
+                            android:textSize="20pt"
+                            android:id="@+id/tv_cardPrice"
+                            android:text="1212"
+                            android:textColor="#FFFFFFFF"
+                            android:textStyle="bold"
+
+                    />
+
+
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                              android:text="券码"
+                              android:layout_alignParentBottom="true"
+                              android:paddingLeft="19.5pt"
+                              android:id="@+id/tv_No"
+                              android:paddingTop="12pt"
+                              android:paddingBottom="8pt"
+                              android:textColor="#FF333333"
+                              android:textSize="14pt"
+                    />
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="24pt"
+                            android:id="@+id/tv_canUse"
+                            android:paddingBottom="8pt"
+                            android:text="限1000元以上使用"
+                            android:textColor="#FFFFFFFF"
+                            android:textSize="12pt"
+                    />
+
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:background="@color/white"
+                          android:paddingRight="26pt"
+                          android:paddingTop="24pt"
+                          android:orientation="vertical"
+            >
+                <RelativeLayout android:layout_width="match_parent"
+
+                                android:background="@color/white"
+
+                                android:layout_height="wrap_content">
+
+                    <TextView android:layout_width="wrap_content"
+                              android:text="*"
+                              android:id="@+id/tv_X"
+                              android:paddingLeft="12pt"
+                              android:textSize="14pt"
+                              android:layout_centerVertical="true"
+                              android:textColor="#FF552E"
+                              android:layout_height="wrap_content"/>
+
+                    <TextView android:layout_width="wrap_content"
+                              android:text="实际金额"
+                              android:paddingLeft="24pt"
+                              android:layout_centerVertical="true"
+                              android:textColor="#FF666666"
+                              android:textSize="14pt"
+                              android:layout_height="wrap_content"
+
+                    />
+
+
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_alignParentRight="true"
+                              android:text="( 元 )"
+                              android:id="@+id/tv_Y"
+                              android:layout_marginBottom="8pt"
+                              android:layout_centerVertical="true"
+                              android:textColor="#FF666666"
+                              android:textSize="14pt"
+                              android:layout_height="wrap_content"
+
+                    />
+
+
+                    <EditText android:layout_width="wrap_content"
+                              android:hint="请输入金额"
+                              android:paddingRight="8pt"
+                              android:id="@+id/et_totleprice"
+                              android:layout_centerVertical="true"
+                              android:layout_toLeftOf="@+id/tv_Y"
+                              android:paddingTop="6pt"
+                              android:inputType="number"
+                              android:layout_gravity="right"
+                              android:textColor="#FF333333"
+                              android:textSize="13pt"
+                              android:background="@null"
+                              android:layout_height="wrap_content"/>
+
+
+                </RelativeLayout>
+
+                <View
+                        android:layout_gravity="right"
+                        android:layout_alignParentRight="true"
+                        android:background="@color/cd"
+                        android:layout_width="127pt"
+                        android:layout_height="1pt"
+                />
+
+                <TextView
+                        android:layout_marginTop="17pt"
                         android:layout_marginLeft="24pt"
-                        android:layout_marginRight="24pt"
-                        android:layout_marginTop="14pt"
-                        android:background="@drawable/icon_writeoff"
-                        android:layout_height="123pt">
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                      android:text="拍拍味 | "
-                      android:paddingLeft="19.5pt"
-                      android:paddingTop="12pt"
-                      android:paddingRight="12pt"
-                      android:id="@+id/tv_cardLogo"
-                      android:textColor="#66333333"
-                      android:textSize="14pt"
-            />
+                        android:id="@+id/tv_count_tips"
+                        android:layout_width="match_parent"
+                        android:text="已满5000，享受5折优惠"
+                        android:textColor="#FFF3DAAF"
+                        android:textSize="14pt"
+                        android:gravity="center"
+
+                        android:layout_marginBottom="6pt"
+                        android:layout_height="40pt"
+                        android:background="#FF454545"
+                />
+
+                <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="输入不参与优惠金额"
+                          android:layout_gravity="right"
+                          android:gravity="center_vertical"
+
+                          android:textColor="#FF888888"
+                          android:textSize="12pt"
+                />
 
 
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                      android:layout_toRightOf="@+id/tv_cardLogo"
-                      android:paddingTop="12pt"
-                      android:text="至尊医美折扣券"
-                      android:textColor="#FF333333"
-                      android:textSize="14pt"
-            />
+                <EditText android:layout_width="wrap_content"
+
+                          android:hint="请确认无误后输入"
+                          android:paddingTop="6pt"
+                        android:id="@+id/discountNoPrice"
+                          android:layout_gravity="right"
+                          android:textColor="#FF333333"
+                          android:textSize="13pt"
+                          android:background="@null"
+                          android:layout_height="wrap_content"/>
+                <View
+                        android:layout_marginTop="3dp"
+                        android:layout_gravity="right"
+
+                        android:background="@color/cd"
+                        android:layout_width="127pt"
+                        android:layout_marginBottom="23.5pt"
+                        android:layout_height="1pt"
+                />
+
+            </LinearLayout>
 
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_height="wrap_content"
-                    android:paddingRight="32pt"
-                    android:paddingBottom="8pt"
-                    android:textSize="20pt"
-                    android:id="@+id/tv_cardPrice"
-                    android:text="1212"
-                    android:textColor="#FFFFFFFF"
-                    android:textStyle="bold"
+            <RelativeLayout android:layout_width="match_parent"
+                            android:paddingRight="24pt"
 
-            />
+                            android:paddingBottom="8.5pt"
+                            android:background="@color/white"
+                            android:layout_height="wrap_content">
 
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20pt"
+                        android:layout_alignParentRight="true"
+                        android:text="( 元 )"
+                        android:id="@+id/tv_YY"
+                        android:textColor="#FF333333"
+                        android:textSize="14pt"
+                />
 
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                      android:text="券码"
-                      android:layout_alignParentBottom="true"
-                      android:paddingLeft="19.5pt"
-                      android:id="@+id/tv_No"
-                      android:paddingTop="12pt"
-                      android:paddingBottom="8pt"
-                      android:textColor="#FF333333"
-                      android:textSize="14pt"
-            />
+                <TextView
+                        android:layout_width="111pt"
+                        android:gravity="center"
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_height="wrap_content"
-                    android:paddingRight="24pt"
-                    android:paddingBottom="8pt"
-                    android:text="限1000元以上使用"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="12pt"
-            />
+                        android:layout_height="20pt"
+                        android:layout_toLeftOf="@+id/tv_YY"
+                        android:text="212123233"
+                        android:id="@+id/tv_finalprice"
+                        android:textColor="#FF333333"
+                        android:textSize="14pt"
+                />
 
 
-        </RelativeLayout>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20pt"
+                        android:layout_toLeftOf="@+id/tv_finalprice"
+                        android:text="应付"
+                        android:textStyle="bold"
+                        android:textColor="#FF333333"
+                        android:textSize="14pt"
+                />
 
 
-    </RelativeLayout>
+            </RelativeLayout>
 
 
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:background="@color/white"
-                  android:paddingRight="26pt"
-                  android:paddingTop="24pt"
-                  android:orientation="vertical"
-    >
-        <RelativeLayout android:layout_width="match_parent"
-
-                        android:background="@color/white"
-
-                        android:layout_height="wrap_content">
-
-            <TextView android:layout_width="wrap_content"
-                      android:text="*"
-                      android:id="@+id/tv_X"
-                      android:paddingLeft="12pt"
-                      android:textSize="14pt"
-                      android:layout_centerVertical="true"
-                      android:textColor="#FF552E"
-                      android:layout_height="wrap_content"/>
-
-            <TextView android:layout_width="wrap_content"
-                      android:text="实际金额"
-                      android:paddingLeft="24pt"
-                      android:layout_centerVertical="true"
-                      android:textColor="#FF666666"
-                      android:textSize="14pt"
-                      android:layout_height="wrap_content"
-
-            />
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="10pt"
+                            android:background="@color/white"
+                            android:layout_marginBottom="10pt"
+                            android:paddingRight="20pt"
+                            android:layout_height="wrap_content">
 
 
-            <TextView android:layout_width="wrap_content"
-                      android:layout_alignParentRight="true"
-                      android:text="( 元 )"
-                      android:id="@+id/tv_Y"
-                      android:layout_marginBottom="8pt"
-                      android:layout_centerVertical="true"
-                      android:textColor="#FF666666"
-                      android:textSize="14pt"
-                      android:layout_height="wrap_content"
+                <TextView android:layout_width="wrap_content"
+                          android:text="*"
+                          android:id="@+id/tv_XX"
+                          android:paddingLeft="12pt"
+                          android:textSize="14pt"
+                          android:layout_centerVertical="true"
+                          android:textColor="#FF552E"
+                          android:layout_height="wrap_content"/>
 
-            />
-
-
-            <EditText android:layout_width="wrap_content"
-                      android:hint="请输入金额"
-                      android:paddingRight="8pt"
-
-                      android:layout_centerVertical="true"
-                      android:layout_toLeftOf="@+id/tv_Y"
-                      android:paddingTop="6pt"
-                      android:layout_gravity="right"
-                      android:textColor="#FF333333"
-                      android:textSize="13pt"
-                      android:background="@null"
-                      android:layout_height="wrap_content"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:paddingBottom="12.5pt"
+                          android:paddingTop="12.5pt"
+                          android:paddingLeft="24pt"
+                          android:text="商家名"
+                          android:id="@+id/tv_left"
+                          android:textColor="#FF666666"
+                          android:textSize="14pt"
+                />
 
 
-        </RelativeLayout>
-
-        <View
-                android:layout_gravity="right"
-                android:layout_alignParentRight="true"
-                android:background="@color/cd"
-                android:layout_width="127pt"
-                android:layout_height="1pt"
-        />
-
-        <TextView
-                android:layout_marginTop="17pt"
-                android:layout_marginLeft="24pt"
-                android:layout_width="match_parent"
-                android:text="已满5000，享受5折优惠"
-                android:textColor="#FFF3DAAF"
-                android:textSize="14pt"
-                android:gravity="center"
-
-                android:layout_marginBottom="6pt"
-                android:layout_height="40pt"
-                android:background="#FF454545"
-        />
-
-        <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:text="输入不参与优惠金额"
-                  android:layout_gravity="right"
-                  android:gravity="center_vertical"
-
-                  android:textColor="#FF888888"
-                  android:textSize="12pt"
-        />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:paddingBottom="12.5pt"
+                          android:paddingTop="12.5pt"
+                          android:id="@+id/tv_select"
+                          android:hint="选择核销门店"
+                          android:textColor="#FF333333"
+                          android:textSize="14pt"
+                          android:layout_alignParentRight="true"
+                />
 
 
-        <EditText android:layout_width="wrap_content"
-                  android:text="1000.00"
-                  android:paddingTop="6pt"
-
-                  android:layout_gravity="right"
-                  android:textColor="#FF333333"
-                  android:textSize="13pt"
-                  android:background="@null"
-                  android:layout_height="wrap_content"/>
-        <View
-                android:layout_marginTop="3dp"
-                android:layout_gravity="right"
-
-                android:background="@color/cd"
-                android:layout_width="127pt"
-                android:layout_marginBottom="23.5pt"
-                android:layout_height="1pt"
-        />
-
-    </LinearLayout>
+            </RelativeLayout>
 
 
-    <RelativeLayout android:layout_width="match_parent"
-                    android:paddingRight="24pt"
-
-                    android:paddingBottom="8.5pt"
-                    android:background="@color/white"
-                    android:layout_height="wrap_content">
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="20pt"
-                android:layout_alignParentRight="true"
-                android:text="( 元 )"
-                android:id="@+id/tv_YY"
-                android:textColor="#FF333333"
-                android:textSize="14pt"
-        />
-
-        <TextView
-                android:layout_width="111pt"
-                android:gravity="center"
-                android:layout_height="20pt"
-                android:layout_toLeftOf="@+id/tv_YY"
-                android:text="212123233"
-                android:id="@+id/tv_price"
-                android:textColor="#FF333333"
-                android:textSize="14pt"
-        />
+            <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                           app:ievtextValue2="持券用户"
+                                                           android:background="@color/white"
+                                                           android:paddingLeft="24pt"
+                                                           android:paddingRight="20pt"
+                                                           android:id="@+id/iev1"
+                                                           android:layout_height="wrap_content"/>
 
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="20pt"
-                android:layout_toLeftOf="@+id/tv_price"
-                android:text="应付"
-                android:textStyle="bold"
-                android:textColor="#FF333333"
-                android:textSize="14pt"
-        />
+            <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
+                                                           app:ievtextValue2="有效日期"
+                                                           android:background="@color/white"
+                                                           android:paddingLeft="24pt"
+
+                                                           android:id="@+id/iev2"
+                                                           android:paddingRight="20pt"
+                                                           android:layout_height="wrap_content"/>
 
 
-    </RelativeLayout>
+            <com.google.android.material.button.MaterialButton android:layout_width="182pt"
+                                                               android:text="下一步"
+                                                               android:id="@+id/mb_next"
+                                                               app:backgroundTint="@color/zthj"
+                                                               android:layout_gravity="center"
+                                                               android:layout_marginTop="23.5pt"
+                                                               android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="10pt"
-                    android:background="@color/white"
-                    android:layout_marginBottom="10pt"
-                    android:paddingRight="20pt"
-                    android:layout_height="wrap_content">
-
-
-        <TextView android:layout_width="wrap_content"
-                  android:text="*"
-                  android:id="@+id/tv_XX"
-                  android:paddingLeft="12pt"
-                  android:textSize="14pt"
-                  android:layout_centerVertical="true"
-                  android:textColor="#FF552E"
-                  android:layout_height="wrap_content"/>
-
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:paddingBottom="12.5pt"
-                  android:paddingTop="12.5pt"
-                  android:paddingLeft="24pt"
-                  android:text="商家名"
-                  android:id="@+id/tv_left"
-                  android:textColor="#FF666666"
-                  android:textSize="14pt"
-        />
-
-
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:paddingBottom="12.5pt"
-                  android:paddingTop="12.5pt"
-                  android:id="@+id/tv_select"
-                  android:hint="选择核销门店"
-                  android:textColor="#FF333333"
-                  android:textSize="14pt"
-                  android:layout_alignParentRight="true"
-        />
-
-
-    </RelativeLayout>
-
-
-    <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
-                                                   app:ievtextValue2="持券用户"
-                                                   android:background="@color/white"
-                                                   android:paddingLeft="24pt"
-                                                   android:paddingRight="20pt"
-                                                   android:layout_height="wrap_content"/>
-
-
-    <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
-                                                   app:ievtextValue2="有效日期"
-                                                   android:background="@color/white"
-                                                   android:paddingLeft="24pt"
-
-                                                   android:paddingRight="20pt"
-                                                   android:layout_height="wrap_content"/>
-
-
-    <com.google.android.material.button.MaterialButton android:layout_width="182pt"
-                                                       android:text="下一步"
-                                                       android:id="@+id/mb_next"
-                                                       app:backgroundTint="@color/zthj"
-                                                       android:layout_gravity="center"
-                                                       android:layout_marginTop="23.5pt"
-                                                       android:layout_height="wrap_content"/>
 
 
 </LinearLayout>

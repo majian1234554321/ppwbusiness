@@ -1,5 +1,7 @@
 package com.yjhh.ppwbusiness.utils;
 
+import android.text.TextUtils;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,6 +17,11 @@ public class TimeUtil {
      * 将时间戳转换为时间
      */
     public static String stampToDate(String s) {
+
+        if (TextUtils.isEmpty(s)){
+            return "";
+        }
+
         String res;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         long lt = new Long(s);
@@ -25,7 +32,9 @@ public class TimeUtil {
 
 
     public static String stampToDate2(String s) {
-
+        if (TextUtils.isEmpty(s)){
+            return "";
+        }
         String res;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         long lt = Long.valueOf(s);
@@ -36,7 +45,9 @@ public class TimeUtil {
 
 
     public static String stampToDate(String s, String stytle) {
-
+        if (TextUtils.isEmpty(s)){
+            return "";
+        }
         String res;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(stytle, Locale.CHINA);
         long lt = Long.valueOf(s);
@@ -50,6 +61,9 @@ public class TimeUtil {
      * 将时间转换为时间戳
      */
     public static String dateToStamp(String s) throws ParseException {
+        if (TextUtils.isEmpty(s)){
+            return "";
+        }
         String res;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = simpleDateFormat.parse(s);
@@ -60,6 +74,7 @@ public class TimeUtil {
 
 
     public static String secondToTime(long second) {
+
         long days = second / 86400;//转换天数
         second = second % 86400;//剩余秒数
         long hours = second / 3600;//转换小时数

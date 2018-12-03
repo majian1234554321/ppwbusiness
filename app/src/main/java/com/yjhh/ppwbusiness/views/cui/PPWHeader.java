@@ -1,28 +1,44 @@
 package com.yjhh.ppwbusiness.views.cui;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshInternal;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.RefreshState;
+import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.internal.InternalAbstract;
 import com.scwang.smartrefresh.layout.internal.InternalClassics;
 import com.scwang.smartrefresh.layout.util.DensityUtil;
 import com.yjhh.ppwbusiness.R;
 
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+
 
 public class PPWHeader extends InternalClassics<PPWHeader> implements RefreshHeader {
 
-    private ImageView imageView;
+    private IImageView imageView;
+    private AnimatorSet animSet;
+
+    private View view;
+    private SportView sview;
+    private RelativeLayout rl;
+
 
     public PPWHeader(Context context) {
         this(context, null);
@@ -34,18 +50,22 @@ public class PPWHeader extends InternalClassics<PPWHeader> implements RefreshHea
 
     public PPWHeader(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        final ViewGroup thisGroup = this;
+        view = View.inflate(context, R.layout.ppwheader1, null);
 
-        View view  = View.inflate(context, R.layout.ppwheader, this);
 
-        final View thisView = this;
-        final View arrowView = mArrowView;
-      //  final View updateView = mLastUpdateText;
-        final View progressView = mProgressView;
-        final ViewGroup centerLayout = mCenterLayout;
-        final DensityUtil density = new DensityUtil();
+        thisGroup.addView(view, MATCH_PARENT, WRAP_CONTENT);
 
+        mSpinnerStyle = SpinnerStyle.FixedBehind;
+        sview = view.findViewById(R.id.sview);
 
         imageView = view.findViewById(R.id.iv_image);
+        rl = findViewById(R.id.rl);
+
+
+        // imageView.setImageResource(R.drawable.logo);
+        // centerLayout.addView(view,60,60);
+
 
     }
 
@@ -54,12 +74,15 @@ public class PPWHeader extends InternalClassics<PPWHeader> implements RefreshHea
     protected Animation mAnimation;
     protected RefreshState mState;
 
+    public float s = 0f;
+    public float e = 0f;
+
     @Override
     public void onReleased(@NonNull RefreshLayout layout, int height, int maxDragHeight) {
         isRefreshing = true;
         // final View thisView = this;
         // thisView.startAnimation(mAnimation);
-        Log.i("PPWHeader","onReleased");
+        Log.i("PPWHeader", "onReleased");
     }
 
     @Override
@@ -67,10 +90,83 @@ public class PPWHeader extends InternalClassics<PPWHeader> implements RefreshHea
         //  final View thisView = this;
         isRefreshing = false;
         //thisView.clearAnimation();
-        Log.i("PPWHeader","onFinish");
+        Log.i("PPWHeader", "onFinish");
         return 0;
     }
 
+
+    @Override
+    public void onMoving(boolean isDragging, float percent, int offset, int height, int maxDragHeight) {
+
+
+        // Log.i("PPWHeader", "offset" + offset + "height" + height);
+
+        if (offset > height) {
+            RelativeLayout.LayoutParams Params = (RelativeLayout.LayoutParams) sview.getLayoutParams();
+            Params.height = offset;
+            Params.width = offset;
+            sview.setLayoutParams(Params);
+        }
+
+
+//        ObjectAnimator animatorY = ObjectAnimator.ofFloat(
+//                    imageView, "scaleY", percent);
+
+//        if (percent > 1f) {
+//
+//
+//
+//            ObjectAnimator animatorX = ObjectAnimator.ofFloat(
+//                    sview, "scaleX", height);
+//
+//            animatorX.start();
+//
+//            animSet = new AnimatorSet();
+//            animSet.play(animatorX);
+//            animSet.setDuration(500);
+//            animSet.start();
+//
+//
+//
+//
+//            ObjectAnimator animatory = ObjectAnimator.ofFloat(
+//                    sview, "TranslationY", s, offset);
+//
+//            s = height - sview.getHeight();
+//            animatory.start();
+//
+//        }
+
+
+        if (mState == RefreshState.PullDownToRefresh || mState == RefreshState.RefreshReleased) {
+
+            ObjectAnimator animatory = ObjectAnimator.ofFloat(
+                    sview, "TranslationY", s, offset);
+            s = height - sview.getHeight();
+            animatory.start();
+
+
+        }
+
+
+        if (mState == RefreshState.Refreshing) {
+
+//
+//            ObjectAnimator animatorY = ObjectAnimator.ofFloat(
+//                    imageView, "scaleY", percent);
+//
+//            animSet = new AnimatorSet();
+//            animSet.play(animatorX).with(animatorY);
+//            animSet.setDuration(500);
+//            animSet.start();
+        }
+
+
+        if (mState == RefreshState.RefreshReleased) {
+
+        }
+
+    }
 
     @Override
     public void onStateChanged(@NonNull RefreshLayout refreshLayout, @NonNull RefreshState oldState, @NonNull RefreshState newState) {
@@ -78,24 +174,28 @@ public class PPWHeader extends InternalClassics<PPWHeader> implements RefreshHea
         mState = newState;
         switch (newState) {
             case None:
-
+                Log.i("PPWHeader", "None");
+                s = 0;
                 break;
             case PullDownToRefresh:
-                Log.i("PPWHeader","PullDownToRefresh");
-                imageView.setImageResource(R.drawable.icon_ppw);
+
+
+                Log.i("PPWHeader", "PullDownToRefresh");
+                // imageView.setImageResource(R.drawable.icon_ppwwz);
                 break;
             case PullDownCanceled:
-                Log.i("PPWHeader","PullDownCanceled");
+                // Log.i("PPWHeader", "PullDownCanceled");
                 break;
             case ReleaseToRefresh:
-                Log.i("PPWHeader","ReleaseToRefresh");
+                Log.i("PPWHeader", "ReleaseToRefresh");
+                // animSet.cancel();
                 break;
             case Refreshing:
-                Log.i("PPWHeader","Refreshing");
-                imageView.setImageResource(R.drawable.icon_ppwwz);
+                // Log.i("PPWHeader", "Refreshing");
+                // imageView.setImageResource(R.drawable.icon_ppwwz);
                 break;
             case RefreshFinish:
-                Log.i("PPWHeader","RefreshFinish");
+                // Log.i("PPWHeader", "RefreshFinish");
                 break;
         }
     }

@@ -30,7 +30,7 @@ import com.yjhh.ppwbusiness.views.reconciliation.ReconciliationFragment
 import kotlinx.android.synthetic.main.main1fragment.*
 import android.widget.Toast
 import com.azhon.appupdate.utils.Constant
-import com.scwang.smartrefresh.layout.header.ClassicsHeader
+
 
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.uuzuche.lib_zxing.activity.CodeUtils
@@ -97,8 +97,12 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
             R.id.iv_scan -> {
 
 
+                (parentFragment as MainFragment).startBrotherFragment(
+                    WriteOffFragment.newInstance("123")
+                )
 
 
+/*
 
                 RxPermissions(this)
                     .request(Manifest.permission.CAMERA)
@@ -106,14 +110,12 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
                         if (it) {
                             val intent = Intent(context, CaptureActivity2::class.java)
 
-
-
-
                             this@Main1Fragment.startActivityForResult(intent, 10086)
                         } else {
                             Toast.makeText(mActivity, "请前往设置中心开启照相机权限", Toast.LENGTH_SHORT).show()
                         }
                     }
+*/
 
 
             }
@@ -146,9 +148,9 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
         }
 
 
-       // swipeLayout.setRefreshHeader(ClassicsHeader(mActivity))
+        // swipeLayout.setRefreshHeader(PPWHeader2(mActivity))
 
-        swipeLayout.setRefreshHeader(PPWHeader2(mActivity))
+        swipeLayout.setRefreshHeader(PPWHeader(mActivity))
 
 
         val lists = ArrayList<Main1Bean>()
@@ -203,9 +205,7 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
         }
 
 
-
-
-      //  OrderPresent(mActivity, this).orderTask("")
+        //  OrderPresent(mActivity, this).orderTask("")
 
 
     }

@@ -12,12 +12,22 @@ import com.uuzuche.lib_zxing.activity.CaptureFragment
 import com.uuzuche.lib_zxing.activity.CodeUtils
 import com.yjhh.ppwbusiness.base.BaseActivity
 import com.yjhh.ppwbusiness.R
+import com.yjhh.ppwbusiness.ipresent.CancellationPresent
+import com.yjhh.ppwbusiness.iview.CancellationView
 import com.yjhh.ppwbusiness.views.cui.CustomPopWindow
 import com.yjhh.ppwbusiness.views.writeoff.CancellationBeforeActivity
 
 import kotlinx.android.synthetic.main.activity_capture2.*
+import java.util.*
 
-class CaptureActivity2 : BaseActivity(), View.OnClickListener {
+class CaptureActivity2 : BaseActivity(), View.OnClickListener,CancellationView {
+    override fun onSuccessCancellation(response: String?,flag: String?) {
+
+    }
+
+    override fun onFault(errorMsg: String?) {
+
+    }
 
     var mCustomPopWindow: CustomPopWindow? = null
 
@@ -84,6 +94,13 @@ class CaptureActivity2 : BaseActivity(), View.OnClickListener {
                 isOpen = false
             }
         }
+
+
+
+
+
+        CancellationPresent(this,this).qrCode("1212")
+
     }
 
     /**

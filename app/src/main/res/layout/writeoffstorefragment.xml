@@ -18,6 +18,7 @@
               android:drawablePadding="12pt"
               android:id="@+id/et_search"
               android:layout_marginTop="9pt"
+              android:layout_marginBottom="9pt"
               android:hint="请输入核销门店名称"
               android:textColor="#FFB5B5B5"
               android:gravity="center_vertical"

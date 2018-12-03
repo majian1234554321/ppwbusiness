@@ -8,7 +8,7 @@ import android.util.ArrayMap
 import android.util.Log
 import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.scwang.smartrefresh.layout.header.ClassicsHeader
+
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.R.id.mRecyclerView
 import com.yjhh.ppwbusiness.R.id.swipeLayout
@@ -23,6 +23,7 @@ import com.yjhh.ppwbusiness.fragments.MessageDetailFragment
 import com.yjhh.ppwbusiness.ipresent.OrderPresent
 import com.yjhh.ppwbusiness.ipresent.SectionUselessPresent
 import com.yjhh.ppwbusiness.iview.OrderView
+import com.yjhh.ppwbusiness.views.cui.PPWHeader2
 import com.yjhh.ppwbusiness.views.cui.SpaceItemDecoration
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -104,7 +105,7 @@ class Main2_1Fragment : BaseFragment(), OrderView {
     }
 
     private fun initRefreshLayout() {
-        swipeLayout.setRefreshHeader(ClassicsHeader(context))
+        swipeLayout.setRefreshHeader(PPWHeader2(context))
         swipeLayout.setOnRefreshListener { refreshLayout ->
             refresh()
         }

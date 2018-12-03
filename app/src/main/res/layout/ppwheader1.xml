@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:background="@color/f8"
+                android:layout_height="wrap_content">
+
+
+    <View android:layout_width="match_parent" android:layout_height="10pt"/>
+
+    <com.yjhh.ppwbusiness.views.cui.IImageView android:layout_width="80pt" android:layout_height="80pt"
+                                               android:id="@+id/iv_image"
+
+                                               android:layout_gravity="center"
+                                               android:src="@drawable/icon_ppw"
+                                               android:text="121212"
+    />
+    <View android:layout_width="match_parent" android:layout_height="10pt"/>
+
+
+    <RelativeLayout android:layout_width="40pt"
+                    android:id="@+id/rl"
+                    android:layout_marginLeft="30pt"
+                    android:layout_marginTop="25pt" android:layout_height="40pt">
+
+        <com.yjhh.ppwbusiness.views.cui.SportView android:layout_width="40pt"
+                                                  android:id="@+id/sview"
+                                                  android:layout_gravity="center"
+
+                                                  android:layout_alignParentTop="true"
+
+
+                                                  android:layout_height="40pt"
+        />
+    </RelativeLayout>
+
+
+</RelativeLayout>

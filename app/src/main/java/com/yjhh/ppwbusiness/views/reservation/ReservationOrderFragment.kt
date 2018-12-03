@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.scwang.smartrefresh.layout.header.ClassicsHeader
+
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.ReservationBeforeAdapter
 import com.yjhh.ppwbusiness.adapter.ReservationOrderAdapter
@@ -18,6 +18,7 @@ import com.yjhh.ppwbusiness.ipresent.ReservePresent
 import com.yjhh.ppwbusiness.iview.ReserveView
 import com.yjhh.ppwbusiness.utils.DateUtil
 import com.yjhh.ppwbusiness.utils.TimeUtil
+import com.yjhh.ppwbusiness.views.cui.PPWHeader2
 import kotlinx.android.synthetic.main.reservationorderfragment.*
 
 class ReservationOrderFragment : BaseFragment(), View.OnClickListener, ReserveView {
@@ -38,11 +39,11 @@ class ReservationOrderFragment : BaseFragment(), View.OnClickListener, ReserveVi
 
 
             "load" -> {
-
+                mAdapter?.addData(model.items)
                 if (model.items.size < pageSize) {
                     mAdapter?.loadMoreEnd()
                 } else {
-                    mAdapter?.addData(model.items)
+
                     mAdapter?.loadMoreComplete()
                 }
 
@@ -233,7 +234,7 @@ class ReservationOrderFragment : BaseFragment(), View.OnClickListener, ReserveVi
     }
 
     private fun initRefreshLayout() {
-        swipeLayout.setRefreshHeader(ClassicsHeader(context))
+        swipeLayout.setRefreshHeader(PPWHeader2(context))
         swipeLayout.setOnRefreshListener { refreshLayout ->
             refresh()
         }

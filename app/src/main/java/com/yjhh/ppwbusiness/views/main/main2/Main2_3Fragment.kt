@@ -4,13 +4,14 @@ package com.yjhh.ppwbusiness.views.main.main2
 import android.os.Bundle
 import android.util.Log
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.scwang.smartrefresh.layout.header.ClassicsHeader
+
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.OrderAdapter
 import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.bean.OrderBean
 import com.yjhh.ppwbusiness.ipresent.OrderPresent
 import com.yjhh.ppwbusiness.iview.OrderView
+import com.yjhh.ppwbusiness.views.cui.PPWHeader2
 import kotlinx.android.synthetic.main.main2_1fragment.*
 import java.util.ArrayList
 
@@ -86,7 +87,7 @@ class Main2_3Fragment : BaseFragment(), OrderView {
     }
 
     private fun initRefreshLayout() {
-        swipeLayout.setRefreshHeader(ClassicsHeader(context))
+        swipeLayout.setRefreshHeader(PPWHeader2(context))
         swipeLayout.setOnRefreshListener { refreshLayout ->
             refresh()
         }

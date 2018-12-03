@@ -9,7 +9,7 @@ import com.chad.library.adapter.base.entity.MultiItemEntity
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener
 import com.google.gson.Gson
-import com.scwang.smartrefresh.layout.header.ClassicsHeader
+
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.EvaluateManageAdapter
 import com.yjhh.ppwbusiness.base.BaseFragment
@@ -18,6 +18,7 @@ import com.yjhh.ppwbusiness.bean.EvaluateManageItemBean
 import com.yjhh.ppwbusiness.bean.SubCommentsBean
 import com.yjhh.ppwbusiness.ipresent.EvaluatePresent
 import com.yjhh.ppwbusiness.iview.EvaluateView
+import com.yjhh.ppwbusiness.views.cui.PPWHeader2
 import com.yjhh.ppwbusiness.views.cui.TabEntity
 import kotlinx.android.synthetic.main.evaluatemanagefragment.*
 
@@ -121,7 +122,7 @@ class EvaluateManageFragment : BaseFragment(), EvaluateView {
 
         present = EvaluatePresent(mActivity, this)
         recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
-        swipeLayout.setRefreshHeader(ClassicsHeader(context))
+        swipeLayout.setRefreshHeader(PPWHeader2(context))
 
         mAdapter = EvaluateManageAdapter(mActivity, list)
 

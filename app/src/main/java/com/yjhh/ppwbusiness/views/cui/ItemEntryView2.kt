@@ -23,7 +23,7 @@ class ItemEntryView2 @JvmOverloads constructor(
     defStyleAttr
 ) {
 
-    fun setTextContent(name: String) {
+    fun setTextContent(name: String?) {
         tv_right.text = name
     }
 
