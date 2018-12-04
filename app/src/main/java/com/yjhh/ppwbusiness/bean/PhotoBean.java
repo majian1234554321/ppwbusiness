@@ -22,13 +22,15 @@ public class PhotoBean {
 
         public String beforeName;
         public String contentType;
-        public String ext;
+        public String fileExt;
         public String fileName;
-        public String id;
-        public String md5;
-        public String path;
+        public String fileId;
+        public String fileMd5;
+        public String filePath;
         public String postName;
-        public int size;
+        public long fileSize;
         public String sizeText;
+
+        public String fileUrl;
     }
 }

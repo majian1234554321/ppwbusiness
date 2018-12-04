@@ -69,6 +69,7 @@
     <EditText android:layout_width="match_parent"
               android:layout_marginLeft="24pt"
               android:padding="9pt"
+              android:id="@+id/tv_remark"
               android:layout_marginRight="24pt"
               android:layout_height="125pt"
               android:gravity="left|top"

@@ -8,6 +8,7 @@ import com.yjhh.ppwbusiness.api.CancellationService
 import com.yjhh.ppwbusiness.base.BasePresent
 import com.yjhh.ppwbusiness.base.ProcessObserver2
 import com.yjhh.ppwbusiness.bean.CancelationBeforeBean
+import com.yjhh.ppwbusiness.bean.SubmitReviewCouponModel
 import com.yjhh.ppwbusiness.iview.CancellationView
 import java.lang.StringBuilder
 
@@ -102,6 +103,41 @@ class CancellationPresent(var context: Context, var view: CancellationView) : Ba
                 Log.i("CancellationPresent", sb.toString())
 
                 view.onSuccessCancellation(sb.toString(), "")
+            }
+
+            override fun onFault(message: String) {
+                Log.i("CancellationPresent", message)
+            }
+
+        })
+
+    }
+
+
+    fun review(
+        id: String?,
+        realMoney: String?,
+        shopId: String?,
+        unDisMoney: String?,
+        fileIds: List<String>,
+        remark: String
+    ) {
+        val model = SubmitReviewCouponModel()
+
+        model.id = id
+        model.realMoney = realMoney
+        model.shopId = shopId
+        model.unDisMoney = unDisMoney
+        model.fileIds = fileIds
+        model.remark = remark
+
+        toSubscribe2(ApiServices.getInstance()
+            .create(CancellationService::class.java)
+            .review(model), object : ProcessObserver2(context) {
+            override fun processValue(response: String?) {
+
+
+                view.onSuccessCancellation("", "")
             }
 
             override fun onFault(message: String) {

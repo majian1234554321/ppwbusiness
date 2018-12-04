@@ -1,5 +1,6 @@
 package com.yjhh.ppwbusiness.api
 
+import com.yjhh.ppwbusiness.bean.SubmitReviewCouponModel
 import io.reactivex.Observable
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
@@ -28,7 +29,9 @@ interface CancellationService {
 
 
 
-   // shopAdminCoupon/review
 
 
+    @Headers("Content-Type: application/json", "Accept: application/json")//需要添加头
+    @POST("shopAdminCoupon/review")
+    fun review(@Body map: SubmitReviewCouponModel): Observable<ResponseBody>
 }

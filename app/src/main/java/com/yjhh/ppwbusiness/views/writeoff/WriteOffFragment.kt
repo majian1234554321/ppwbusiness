@@ -1,11 +1,14 @@
 package com.yjhh.ppwbusiness.views.writeoff
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.core.content.ContextCompat
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat.getColor
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.base.BaseFragment
@@ -29,10 +32,13 @@ class WriteOffFragment : BaseFragment(), View.OnClickListener, CancellationView 
 
     var totleprice = 0f
 
-    var finalPayPrice = 0f
+    var discount = "0"
 
 
-    var useRange: String? = null
+    var useRange: String? = "0"
+    var types: String? = "0"
+    var ids: String? = "0"
+    var shopid: String? = null
 
     override fun onSuccessCancellation(response: String?, flag: String?) {
 
@@ -48,11 +54,12 @@ class WriteOffFragment : BaseFragment(), View.OnClickListener, CancellationView 
             tv_No.text = TextStyleUtils.changeTextColor(textNo, 0, 2, Color.parseColor("#99333333"))
 
 
-            //  类型（0满减（面值）1 抵扣（折扣百分比））
-
-
-            model.value;
             tv_count_tips.text = "未满${model.useRange},不享受优惠"
+
+            types = model.type
+
+            discount = model.value
+
             if ("0" == model.type) {
                 val textprice = "¥ ${model.value}"
                 tv_cardPrice.text = TextStyleUtils.changeTextAa(textprice, 0, 1, 10)
@@ -84,7 +91,19 @@ class WriteOffFragment : BaseFragment(), View.OnClickListener, CancellationView 
             }
             else -> {
 
-                start(ConfirmCancellationFragment())
+                if (!TextUtils.isEmpty(shopid) && !TextUtils.isEmpty(et_totleprice.text.toString())) {
+                        start(
+                            ConfirmCancellationFragment.newInstance(
+                                ids,
+                                et_totleprice.text.toString(),
+                                shopid,
+                                discountNoPrice.text.toString()
+                            )
+                        )
+                    } else {
+                    Toast.makeText(mActivity, "请选择核销门店", Toast.LENGTH_SHORT).show()
+                }
+
 
             }
         }
@@ -93,6 +112,7 @@ class WriteOffFragment : BaseFragment(), View.OnClickListener, CancellationView 
     override fun getLayoutRes(): Int = R.layout.writeofffragment
 
 
+    @SuppressLint("SetTextI18n")
     override fun initView() {
 
 
@@ -106,37 +126,97 @@ class WriteOffFragment : BaseFragment(), View.OnClickListener, CancellationView 
         CancellationPresent(mActivity, this).detail(ids)
 
 
-        val ob1 = RxTextView.textChanges(et_totleprice)
+        /*   val dis2 = Observable.combineLatest(ob1, ob2,
+               BiFunction<CharSequence, CharSequence, String> { t1, t2 ->
+                   if (!TextUtils.isEmpty(t1) && !TextUtils.isEmpty(t2)) {
+                       //calculation(t1.toString(),t2.toString(),)
+                   } else if (!TextUtils.isEmpty(t1) && TextUtils.isEmpty(t2)) {
+                       et_totleprice.visibility= View.VISIBLE
+                       discountNoPrice.visibility = View.GONE
 
-        val ob2 = RxTextView.textChanges(discountNoPrice)
+                   } else  {
+                       et_totleprice.visibility= View.GONE
+
+                   }
 
 
-        val dis2 = Observable.combineLatest(ob1, ob2,
-            BiFunction<CharSequence, CharSequence, String> { t1, t2 ->
-                if (!TextUtils.isEmpty(t1) && !TextUtils.isEmpty(t2)) {
-                    Observable.just("1")
-                } else {
-                    if (!TextUtils.isEmpty(t1)) {
+                   "1"
+               })*/
 
+
+        val dis1 = RxTextView.textChanges(et_totleprice).subscribe {
+            if (!TextUtils.isEmpty(it)) {
+
+                if (it.toString().toFloat() >= useRange?.toFloat()!!) {
+                    ll.visibility = View.VISIBLE
+                    tv_count_tips.text = "已满$useRange,享受优惠"
+                    tv_count_tips.setBackgroundColor(Color.parseColor("#454545"))
+                    tv_count_tips.setTextColor(getColor(mActivity, R.color.zthj))
+
+
+                    if (!TextUtils.isEmpty(discountNoPrice.text.toString())) {
+                        tv_finalprice.text =
+                                calculation(it.toString(), discountNoPrice.text.toString(), types, discount).toString()
+                    } else {
+                        tv_finalprice.text = calculation(it.toString(), "0", types, discount).toString()
                     }
-                }
 
-
-                "1"
-            })
-
-
-        val dis = RxTextView.textChanges(et_totleprice)
-            .flatMap {
-                if (!TextUtils.isEmpty(it)) {
-                    discountNoPrice.visibility = View.VISIBLE
-                    Observable.just(it)
 
                 } else {
-                    discountNoPrice.visibility = View.GONE
-                    Observable.just(0)
+                    tv_count_tips.setBackgroundColor(Color.GRAY)
+                    tv_count_tips.setTextColor(Color.parseColor("#F3DAAF"))
+                    tv_count_tips.text = "未满$useRange,不享受优惠"
+                    ll.visibility = View.GONE
+
+                    tv_finalprice.text = calculation(it.toString(), "0", types, "0").toString()
+
                 }
+
+            } else {
+                tv_count_tips.setBackgroundColor(Color.GRAY)
+                tv_count_tips.setTextColor(Color.parseColor("#F3DAAF"))
+                tv_count_tips.text = "未满$useRange,不享受优惠"
+
+                ll.visibility = View.GONE
+                tv_finalprice.text = ""
+
+
             }
+        }
+
+
+        val dis2 = RxTextView.textChanges(discountNoPrice).subscribe {
+            if (!TextUtils.isEmpty(it)) {
+
+
+                if (!TextUtils.isEmpty(et_totleprice.text.toString())) {
+                    tv_finalprice.text =
+                            calculation(
+                                et_totleprice.text.toString(),
+                                discountNoPrice.text.toString(),
+                                types,
+                                discount
+                            ).toString()
+                } else {
+                    tv_finalprice.text = ""
+
+                }
+
+
+            } else {
+                if (!TextUtils.isEmpty(et_totleprice.text.toString())) {
+                    tv_finalprice.text =
+                            calculation(
+                                et_totleprice.text.toString(),
+                                "0",
+                                types,
+                                "0"
+                            ).toString()
+                }
+
+            }
+        }
+
 
     }
 
@@ -146,9 +226,12 @@ class WriteOffFragment : BaseFragment(), View.OnClickListener, CancellationView 
         if (requestCode == 10086) {
 
 
+            val name = data?.getString("name")
             val ids = data?.getString("ids")
-            if (ids != null) {
-                tv_select.text = ids
+            if (name != null) {
+                tv_select.text = name
+
+                shopid = ids
             }
 
 
@@ -162,8 +245,13 @@ class WriteOffFragment : BaseFragment(), View.OnClickListener, CancellationView 
 
         var price = 0f
 
-        if ("折扣" == flag) {
-            price = (totleprice.toFloat() - discountNoPrice.toFloat()) * discountValue.toFloat()
+        if ("1" == flag) {   //  类型（0满减（面值）1 抵扣（折扣百分比））
+            if ("0" == discountValue) {  //“0” 不打折扣
+                price = (totleprice.toFloat() - discountNoPrice.toFloat())
+            } else {
+                price = (totleprice.toFloat() - discountNoPrice.toFloat()) * discountValue.toFloat()
+            }
+
         } else {
             price = totleprice.toFloat() - discountNoPrice.toFloat() - discountValue.toFloat()
         }

@@ -22,6 +22,7 @@ public class WriteOffStoreBean {
         public String content;
         public String logoUrl;
         public String name;
+        public String id;
         public int openStatus;
         public String openStatusText;
         public int status;

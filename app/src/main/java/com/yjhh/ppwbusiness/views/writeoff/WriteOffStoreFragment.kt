@@ -29,6 +29,9 @@ class WriteOffStoreFragment : BaseFragment(), CancellationView {
         val model = gson.fromJson<WriteOffStoreBean>(response, WriteOffStoreBean::class.java)
 
         if (model.item != null && model.item.isNotEmpty()) {
+
+            lists.clear()
+            lists.addAll(model.item)
             mAdapter?.setNewData(model.item)
         }
 
@@ -61,15 +64,16 @@ class WriteOffStoreFragment : BaseFragment(), CancellationView {
         //  swipeLayout.autoRefresh()
 
 
-//        mAdapter?.setOnItemClickListener { adapter, view, position ->
-//            val bundle = Bundle()
-//            bundle.putString("ids", lists[position])
-//
-//            setFragmentResult(RESULT_OK, bundle)
-//
-//            mActivity.onBackPressed()
-//
-//        }
+        mAdapter?.setOnItemClickListener { adapter, view, position ->
+            val bundle = Bundle()
+            bundle.putString("name", lists[position].name)
+            bundle.putString("ids", lists[position].id)
+
+            setFragmentResult(RESULT_OK, bundle)
+
+            mActivity.onBackPressed()
+
+        }
 
 
         val dis = RxTextView.textChanges(et_search).subscribe {

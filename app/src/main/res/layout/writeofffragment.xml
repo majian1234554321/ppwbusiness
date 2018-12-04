@@ -183,38 +183,43 @@
 
                         android:layout_marginBottom="6pt"
                         android:layout_height="40pt"
-                        android:background="#FF454545"
+
                 />
+
 
                 <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content"
                           android:text="输入不参与优惠金额"
                           android:layout_gravity="right"
                           android:gravity="center_vertical"
-
+                          android:id="@+id/checkbox"
                           android:textColor="#FF888888"
                           android:textSize="12pt"
                 />
+                <LinearLayout android:layout_width="match_parent"
+                              android:orientation="vertical"
+                              android:id="@+id/ll"
+                              android:layout_height="wrap_content">
+                    <EditText android:layout_width="wrap_content"
 
+                              android:hint="请确认无误后输入"
+                              android:paddingTop="6pt"
+                              android:id="@+id/discountNoPrice"
+                              android:layout_gravity="right"
+                              android:textColor="#FF333333"
+                              android:textSize="13pt"
+                              android:background="@null"
+                              android:layout_height="wrap_content"/>
+                    <View
+                            android:layout_marginTop="3dp"
+                            android:layout_gravity="right"
 
-                <EditText android:layout_width="wrap_content"
+                            android:background="@color/cd"
+                            android:layout_width="127pt"
+                            android:layout_marginBottom="23.5pt"
+                            android:layout_height="1pt"
+                    />
+                </LinearLayout>
 
-                          android:hint="请确认无误后输入"
-                          android:paddingTop="6pt"
-                        android:id="@+id/discountNoPrice"
-                          android:layout_gravity="right"
-                          android:textColor="#FF333333"
-                          android:textSize="13pt"
-                          android:background="@null"
-                          android:layout_height="wrap_content"/>
-                <View
-                        android:layout_marginTop="3dp"
-                        android:layout_gravity="right"
-
-                        android:background="@color/cd"
-                        android:layout_width="127pt"
-                        android:layout_marginBottom="23.5pt"
-                        android:layout_height="1pt"
-                />
 
             </LinearLayout>
 
@@ -242,7 +247,7 @@
 
                         android:layout_height="20pt"
                         android:layout_toLeftOf="@+id/tv_YY"
-                        android:text="212123233"
+
                         android:id="@+id/tv_finalprice"
                         android:textColor="#FF333333"
                         android:textSize="14pt"
@@ -335,8 +340,6 @@
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-
 
 
 </LinearLayout>

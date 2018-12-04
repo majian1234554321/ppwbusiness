@@ -5,6 +5,7 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
+import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
 import android.widget.Toast
 import com.azhon.appupdate.utils.PermissionUtil.requestPermission
@@ -18,7 +19,9 @@ import com.yjhh.ppwbusiness.bean.PhotoBean
 import com.yjhh.ppwbusiness.fragments.PhotoFragment
 import com.yjhh.ppwbusiness.interfaces.OnRecycleViewItemChildClickListener
 import com.yjhh.ppwbusiness.interfaces.OnRecycleViewItemClickListener
+import com.yjhh.ppwbusiness.ipresent.CancellationPresent
 import com.yjhh.ppwbusiness.ipresent.CommonPresent
+import com.yjhh.ppwbusiness.iview.CancellationView
 import com.yjhh.ppwbusiness.iview.CommonView
 import com.yjhh.ppwbusiness.utils.PhotoUtils
 import com.yjhh.ppwbusiness.views.cui.AbsSheetDialog
@@ -31,7 +34,11 @@ import kotlinx.android.synthetic.main.confirmcancellationfragment.*
 import java.io.File
 import java.util.*
 
-class ConfirmCancellationFragment : BaseFragment(), CommonView {
+class ConfirmCancellationFragment : BaseFragment(), CommonView, CancellationView {
+    override fun onSuccessCancellation(response: String?, flag: String?) {
+        Toast.makeText(mActivity, "核销凭据上传成功", Toast.LENGTH_SHORT).show()
+        mActivity.onBackPressed()
+    }
 
 
     override fun onSuccess(value: String?) {
@@ -40,7 +47,7 @@ class ConfirmCancellationFragment : BaseFragment(), CommonView {
 
 
         model.item.forEach {
-            listsId.add(it.id)
+            listsId.add(it.fileId)
         }
     }
 
@@ -55,16 +62,49 @@ class ConfirmCancellationFragment : BaseFragment(), CommonView {
     var mAdapter: ProductAdd? = null
     var present: CommonPresent? = null
 
+
+    companion object {
+        fun newInstance(
+            ids: String?,
+            realMoney: String?,
+            shopId: String?,
+            unDisMoney: String?
+        ): ConfirmCancellationFragment {
+            val fragment = ConfirmCancellationFragment()
+            val bundle = Bundle()
+
+            bundle.putString("ids", ids)
+            bundle.putString("realMoney", realMoney)
+            bundle.putString("shopId", shopId)
+            bundle.putString("unDisMoney", unDisMoney)
+
+            fragment.arguments = bundle
+            return fragment
+        }
+    }
+
+
     override fun initView() {
 
         present = CommonPresent(mActivity, this)
         recyclerView.layoutManager = androidx.recyclerview.widget.GridLayoutManager(mActivity, 4)
-        recyclerView.addItemDecoration(GridRecyclerItemDecoration(40))
 
-        mAdapter = ProductAdd(mActivity, lists)
+        mAdapter = ProductAdd(mActivity, lists, Int.MAX_VALUE)
         recyclerView.adapter = mAdapter
 
-        mb_commit.setOnClickListener { }
+        val id = arguments?.getString("ids")
+        val realMoney = arguments?.getString("realMoney")
+        val shopId = arguments?.getString("shopId")
+        val unDisMoney = arguments?.getString("unDisMoney")
+
+
+        mb_commit.setOnClickListener {
+
+
+            CancellationPresent(mActivity, this)
+                .review(id, realMoney, shopId, unDisMoney, listsId, tv_remark.text.toString())
+
+        }
 
         mAdapter?.setOnItemClickListener(OnRecycleViewItemClickListener { view, position, flag ->
             if (flag) {
@@ -147,7 +187,7 @@ class ConfirmCancellationFragment : BaseFragment(), CommonView {
                 )
                 .subscribe {
                     if (it) {
-                        PhotoUtils.selectPhoto(this@ConfirmCancellationFragment, 3 - lists.size, 10085)
+                        PhotoUtils.selectPhoto(this@ConfirmCancellationFragment, Int.MAX_VALUE, 10085)
                     } else {
                         Toast.makeText(mActivity, "请前往设置中心开启照相机权限", Toast.LENGTH_SHORT).show()
                     }

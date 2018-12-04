@@ -16,19 +16,28 @@ import kotlinx.android.synthetic.main.images.view.*
 
 import com.yjhh.ppwbusiness.utils.ImageLoaderUtils
 
-class ProductAdd(var context: Context, var lists: List<String>) : androidx.recyclerview.widget.RecyclerView.Adapter<ProductAdd.ViewHolder>() {
+class ProductAdd(var context: Context, var lists: List<String>) :
+    androidx.recyclerview.widget.RecyclerView.Adapter<ProductAdd.ViewHolder>() {
+
+    public var maxValue = 3
+
+
+    constructor(context: Context, lists: List<String>, maxValue: Int) : this(context, lists) {
+        this.maxValue = maxValue
+    }
+
+
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
         val view = View.inflate(context, R.layout.images, null)
         return ViewHolder(view)
     }
 
     override fun getItemCount(): Int = when {
-        lists.size >= 3 -> 3
+        lists.size >= maxValue -> maxValue
         else -> 1 + lists.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, adapterPosition: Int) {
-
 
 
         if (holder.adapterPosition == lists.size) {
@@ -40,10 +49,16 @@ class ProductAdd(var context: Context, var lists: List<String>) : androidx.recyc
                 R.drawable.ic_upload,
                 0
             )
-            holder.itemView.iv_zhutu.visibility= View.GONE
+            holder.itemView.iv_zhutu.visibility = View.GONE
             holder.itemView.iv_delete.visibility = View.GONE
 
-            holder.itemView.setOnClickListener { v -> mOnItemClickListener?.onRecycleViewItemClick(v, adapterPosition,false) }
+            holder.itemView.setOnClickListener { v ->
+                mOnItemClickListener?.onRecycleViewItemClick(
+                    v,
+                    adapterPosition,
+                    false
+                )
+            }
         } else {
             ImageLoaderUtils.load(
                 BaseApplication.context,
@@ -54,10 +69,10 @@ class ProductAdd(var context: Context, var lists: List<String>) : androidx.recyc
                 0
             )
             holder.itemView.iv_delete.visibility = View.VISIBLE
-            if (adapterPosition==0){
-                holder.itemView.iv_zhutu.visibility= View.VISIBLE
-            }else{
-                holder.itemView.iv_zhutu.visibility= View.GONE
+            if (adapterPosition == 0) {
+                holder.itemView.iv_zhutu.visibility = View.VISIBLE
+            } else {
+                holder.itemView.iv_zhutu.visibility = View.GONE
             }
 
 
@@ -65,10 +80,14 @@ class ProductAdd(var context: Context, var lists: List<String>) : androidx.recyc
             holder.itemView.iv_delete.setOnClickListener { v ->
                 mOnItemChildClickListener?.onItemChildClick(v, adapterPosition)
             }
-            holder.itemView.setOnClickListener { v -> mOnItemClickListener?.onRecycleViewItemClick(v, adapterPosition,true) }
+            holder.itemView.setOnClickListener { v ->
+                mOnItemClickListener?.onRecycleViewItemClick(
+                    v,
+                    adapterPosition,
+                    true
+                )
+            }
         }
-
-
 
 
     }

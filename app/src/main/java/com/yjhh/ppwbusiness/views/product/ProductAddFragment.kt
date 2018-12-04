@@ -75,7 +75,7 @@ class ProductAddFragment : BaseFragment(), CommonView {
 
 
         model.item.forEach {
-            listsId.add(it.id)
+            listsId.add(it.fileId)
         }
     }
 

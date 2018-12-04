@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:background="@color/f8"
-                android:layout_height="wrap_content">
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:background="@color/f8"
+              android:layout_height="wrap_content">
 
 
-    <View android:layout_width="match_parent" android:layout_height="10pt"/>
-
-    <pl.droidsonroids.gif.GifImageView android:layout_width="80pt" android:layout_height="80pt"
+    <pl.droidsonroids.gif.GifImageView android:layout_width="60pt" android:layout_height="60pt"
                                        android:id="@+id/iv_image"
-android:layout_gravity="center"
-                                      android:layout_centerInParent="true"
+                                       android:layout_gravity="center"
+                                       android:layout_centerInParent="true"
 
                                        android:text="121212"
     />
-    <View android:layout_width="match_parent" android:layout_height="10pt"/>
 
 
     <TextView android:layout_width="match_parent"
@@ -24,14 +21,14 @@ android:layout_gravity="center"
               android:gravity="center"
               android:id="@+id/tv_tips"
               android:layout_height="wrap_content"/>
-  <!--  <com.yjhh.ppwbusiness.views.cui.SportView android:layout_width="40pt"
-                                              android:id="@+id/sview"
+    <!--  <com.yjhh.ppwbusiness.views.cui.SportView android:layout_width="40pt"
+                                                android:id="@+id/sview"
 
-                                              android:layout_marginRight="0pt"
-                                              android:layout_height="40pt"
+                                                android:layout_marginRight="0pt"
+                                                android:layout_height="40pt"
 
 
-    />-->
+      />-->
 
 
 </LinearLayout>
