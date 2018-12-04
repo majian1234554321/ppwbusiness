@@ -133,13 +133,9 @@ class WriteOffFragment : BaseFragment(), View.OnClickListener, CancellationView 
                    } else if (!TextUtils.isEmpty(t1) && TextUtils.isEmpty(t2)) {
                        et_totleprice.visibility= View.VISIBLE
                        discountNoPrice.visibility = View.GONE
-
                    } else  {
                        et_totleprice.visibility= View.GONE
-
                    }
-
-
                    "1"
                })*/
 
@@ -163,7 +159,7 @@ class WriteOffFragment : BaseFragment(), View.OnClickListener, CancellationView 
 
 
                 } else {
-                    tv_count_tips.setBackgroundColor(Color.GRAY)
+                    tv_count_tips.setBackgroundColor(Color.parseColor("#f8f8f8"))
                     tv_count_tips.setTextColor(Color.parseColor("#F3DAAF"))
                     tv_count_tips.text = "未满$useRange,不享受优惠"
                     ll.visibility = View.GONE
@@ -173,7 +169,7 @@ class WriteOffFragment : BaseFragment(), View.OnClickListener, CancellationView 
                 }
 
             } else {
-                tv_count_tips.setBackgroundColor(Color.GRAY)
+                tv_count_tips.setBackgroundColor(Color.parseColor("#f8f8f8"))
                 tv_count_tips.setTextColor(Color.parseColor("#F3DAAF"))
                 tv_count_tips.text = "未满$useRange,不享受优惠"
 
@@ -187,8 +183,6 @@ class WriteOffFragment : BaseFragment(), View.OnClickListener, CancellationView 
 
         val dis2 = RxTextView.textChanges(discountNoPrice).subscribe {
             if (!TextUtils.isEmpty(it)) {
-
-
                 if (!TextUtils.isEmpty(et_totleprice.text.toString())) {
                     tv_finalprice.text =
                             calculation(
@@ -217,6 +211,8 @@ class WriteOffFragment : BaseFragment(), View.OnClickListener, CancellationView 
             }
         }
 
+        compositeDisposable.add(dis1)
+        compositeDisposable.add(dis2)
 
     }
 

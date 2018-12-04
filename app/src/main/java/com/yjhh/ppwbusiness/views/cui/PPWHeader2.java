@@ -93,7 +93,7 @@ public class PPWHeader2 extends InternalClassics<PPWHeader2> implements RefreshH
         //  ObjectAnimator scaleYAnimator = ObjectAnimator.ofFloat(imageView, "scaleY", 1f, 2f, 1f);
 
 
-        imageView.scrollTo(0, 30);
+
 
 
         // AnimatorSet set = new AnimatorSet();

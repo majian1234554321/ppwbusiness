@@ -1,6 +1,7 @@
 package com.yjhh.ppwbusiness.views.writeoff
 
 import android.os.Bundle
+import android.text.TextUtils
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -30,8 +31,11 @@ class WriteOffStoreFragment : BaseFragment(), CancellationView {
 
         if (model.item != null && model.item.isNotEmpty()) {
 
-            lists.clear()
-            lists.addAll(model.item)
+            listsAll.clear()
+
+            listsAll.addAll(model.item)
+
+            listSelect.addAll(model.item)
             mAdapter?.setNewData(model.item)
         }
 
@@ -50,7 +54,9 @@ class WriteOffStoreFragment : BaseFragment(), CancellationView {
     var status = "-1" //null全部 -1 历史 0 申请 1已接受 2用户取消 3商户取消 4已过时
     var peresent: CancellationPresent? = null
     var mAdapter: WriteOffStoreAdapter? = null
-    var lists = ArrayList<WriteOffStoreBean.ItemBean>()
+
+    var listsAll = ArrayList<WriteOffStoreBean.ItemBean>()
+    var listSelect = ArrayList<WriteOffStoreBean.ItemBean>()
 
     override fun initView() {
 
@@ -66,8 +72,8 @@ class WriteOffStoreFragment : BaseFragment(), CancellationView {
 
         mAdapter?.setOnItemClickListener { adapter, view, position ->
             val bundle = Bundle()
-            bundle.putString("name", lists[position].name)
-            bundle.putString("ids", lists[position].id)
+            bundle.putString("name", listSelect[position].name)
+            bundle.putString("ids", listSelect[position].id)
 
             setFragmentResult(RESULT_OK, bundle)
 
@@ -78,7 +84,24 @@ class WriteOffStoreFragment : BaseFragment(), CancellationView {
 
         val dis = RxTextView.textChanges(et_search).subscribe {
 
+            if (!TextUtils.isEmpty(it) && listsAll.size > 0) {
+                listSelect.clear()
+                for (list in listsAll) {
+                    if (list.name.contains(it)) {
+                        listSelect.add(list)
+                    }
+                }
+
+                mAdapter?.setNewData(listSelect)
+
+            } else {
+                listSelect.addAll(listsAll)
+                mAdapter?.setNewData(listSelect)
+            }
+
         }
+
+        compositeDisposable.addAll(dis)
 
 
     }
@@ -90,7 +113,7 @@ class WriteOffStoreFragment : BaseFragment(), CancellationView {
         mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(mActivity)
         mAdapter?.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
         mAdapter?.isFirstOnly(false)
-        mAdapter = WriteOffStoreAdapter(lists)
+        mAdapter = WriteOffStoreAdapter(listsAll)
         mRecyclerView.adapter = mAdapter
 
     }

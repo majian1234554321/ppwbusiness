@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -94,7 +95,10 @@ class ProductAllFragment : BaseFragment(), ProductView {
     }
 
     override fun onFault(errorMsg: String?) {
-
+        swipeLayout.finishRefresh()
+        val view = View.inflate(mActivity, R.layout.emptyview, null)
+        view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
+        mAdapter?.emptyView = view
     }
 
     override fun onFragmentResult(requestCode: Int, resultCode: Int, data: Bundle?) {

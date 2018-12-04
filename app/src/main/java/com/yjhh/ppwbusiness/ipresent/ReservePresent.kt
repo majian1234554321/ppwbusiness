@@ -100,6 +100,7 @@ class ReservePresent(var context: Context) : BasePresent() {
             .reserves(map), object : ProcessObserver2(context) {
             override fun onFault(message: String) {
                 Log.i("reserves", message)
+                ( view as ReserveView).onFault(message)
             }
 
             override fun processValue(response: String?) {

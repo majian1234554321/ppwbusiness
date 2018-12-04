@@ -1,6 +1,8 @@
 package com.yjhh.ppwbusiness.views.product
 
 import android.os.Bundle
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
 
@@ -74,7 +76,10 @@ class Product2Fragment :BaseFragment(), ProductView {
     }
 
     override fun onFault(errorMsg: String?) {
-
+        swipeLayout.finishRefresh()
+        val view = View.inflate(mActivity, R.layout.emptyview, null)
+        view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
+        mAdapter?.emptyView = view
     }
 
     override fun onFragmentResult(requestCode: Int, resultCode: Int, data: Bundle?) {

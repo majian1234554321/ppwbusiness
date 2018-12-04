@@ -1,6 +1,8 @@
 package com.yjhh.ppwbusiness.views.product
 
 import android.os.Bundle
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.yjhh.ppwbusiness.views.cui.PPWHeader2
@@ -16,7 +18,7 @@ import com.yjhh.ppwbusiness.views.cui.SpaceItemDecoration
 import kotlinx.android.synthetic.main.productallfragment.*
 import java.util.ArrayList
 
-class Product3Fragment :BaseFragment(), ProductView {
+class Product3Fragment : BaseFragment(), ProductView {
     val categoryId = ""
     var status = "1"//状态，默认null(null全部（不含已删除） 0 上架中 1已下架 3已删除)
     var startindex = 0
@@ -75,7 +77,10 @@ class Product3Fragment :BaseFragment(), ProductView {
     }
 
     override fun onFault(errorMsg: String?) {
-
+        swipeLayout.finishRefresh()
+        val view = View.inflate(mActivity, R.layout.emptyview, null)
+        view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
+        mAdapter?.emptyView = view
     }
 
     override fun onFragmentResult(requestCode: Int, resultCode: Int, data: Bundle?) {

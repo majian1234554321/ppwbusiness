@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <com.yjhh.ppwbusiness.views.cui.TitleBarView android:layout_width="match_parent"
+                                                 android:id="@+id/tbv_title"
+                                                 app:textValue="反馈详情"
+                                                 app:textColor="@color/white"
+                                                 android:layout_height="wrap_content"/>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="12pt"
+            android:text="标题"
+            android:paddingTop="21pt"
+            android:textColor="#FF666666"
+            android:textSize="15pt"
+            android:paddingBottom="6pt"
+    />
+
+
+    <TextView
+            android:layout_width="match_parent"
+            android:paddingLeft="27pt"
+            android:paddingRight="27pt"
+            android:id="@+id/tv_title"
+            android:layout_height="wrap_content"
+            android:text="无"
+            android:textColor="#FF333333"
+            android:textSize="15pt"
+    />
+
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="详细内容"
+            android:paddingBottom="5.5pt"
+            android:paddingLeft="12pt"
+            android:paddingTop="21pt"
+            android:textColor="#FF666666"
+            android:textSize="15pt"
+    />
+
+
+    <TextView
+            android:layout_width="match_parent"
+            android:paddingLeft="27pt"
+            android:paddingRight="12pt"
+            android:layout_height="120pt"
+            android:text="无"
+            android:id="@+id/tv_content"
+            android:textColor="#FF999999"
+            android:textSize="13pt"
+    />
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:id="@+id/recyclerView"
+            android:paddingLeft="12pt"
+            android:paddingRight="12pt"
+            android:layout_height="wrap_content"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_status"
+            android:padding="12pt"
+            android:layout_gravity="right"
+
+            android:text="已查阅"
+            android:textColor="#FF333333"
+            android:textSize="15pt"
+    />
+
+
+</LinearLayout>

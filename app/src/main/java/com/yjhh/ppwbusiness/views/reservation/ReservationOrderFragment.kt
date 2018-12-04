@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.google.android.material.tabs.TabLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -29,6 +30,12 @@ class ReservationOrderFragment : BaseFragment(), View.OnClickListener, ReserveVi
             "refresh" -> {
                 mAdapter?.setNewData(model.items)
                 swipeLayout.finishRefresh()
+
+
+                if (pageIndex==0&&model.items.isEmpty()){
+                    mAdapter?.setEmptyView(R.layout.emptyview, mRecyclerView.parent as ViewGroup)
+                }
+
             }
 
             "accept" -> {
@@ -56,7 +63,10 @@ class ReservationOrderFragment : BaseFragment(), View.OnClickListener, ReserveVi
     }
 
     override fun onFault(errorMsg: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        swipeLayout.finishRefresh()
+        if (pageIndex==0){
+            mAdapter?.setEmptyView(R.layout.emptyview, mRecyclerView.parent as ViewGroup)
+        }
     }
 
     override fun onClick(v: View?) {

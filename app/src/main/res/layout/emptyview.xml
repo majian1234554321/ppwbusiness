@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <ImageView android:layout_width="93.5pt"
+               android:layout_above="@+id/tv_tips"
+               android:id="@+id/iv_image"
+               android:layout_centerHorizontal="true"
+               android:layout_marginBottom="28pt"
+               android:background="@drawable/icon_nodata"
+               android:layout_height="135pt"/>
+
+
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:id="@+id/tv_tips"
+              android:text="当前无预约订单"
+              android:textColor="#FF333333"
+              android:gravity="center"
+              android:layout_centerInParent="true"
+              android:textSize="15pt"
+    />
+
+
+</RelativeLayout>
