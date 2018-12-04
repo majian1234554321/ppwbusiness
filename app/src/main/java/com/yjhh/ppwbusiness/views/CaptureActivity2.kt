@@ -20,8 +20,9 @@ import com.yjhh.ppwbusiness.views.writeoff.CancellationBeforeActivity
 import kotlinx.android.synthetic.main.activity_capture2.*
 import java.util.*
 
-class CaptureActivity2 : BaseActivity(), View.OnClickListener,CancellationView {
-    override fun onSuccessCancellation(response: String?,flag: String?) {
+class CaptureActivity2 : BaseActivity(), View.OnClickListener, CancellationView {
+
+    override fun onSuccessCancellation(response: String?, flag: String?) {
 
     }
 
@@ -40,7 +41,7 @@ class CaptureActivity2 : BaseActivity(), View.OnClickListener,CancellationView {
             val contentView = LayoutInflater.from(this).inflate(R.layout.pop_layout, null)
             contentView.findViewById<TextView>(R.id.tv)
                 .setOnClickListener {
-                   startActivity(Intent(this@CaptureActivity2, CancellationBeforeActivity::class.java))
+                    startActivity(Intent(this@CaptureActivity2, CancellationBeforeActivity::class.java))
 
                     mCustomPopWindow?.dissmiss()
                 }
@@ -54,11 +55,9 @@ class CaptureActivity2 : BaseActivity(), View.OnClickListener,CancellationView {
 
 
         }
-
         else -> {
         }
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,12 +67,9 @@ class CaptureActivity2 : BaseActivity(), View.OnClickListener,CancellationView {
         // 为二维码扫描界面设置定制化界面
         CodeUtils.setFragmentArgs(captureFragment, R.layout.my_camera)
         captureFragment.analyzeCallback = analyzeCallback
-
-
-
         supportFragmentManager.beginTransaction().replace(R.id.fl_my_container, captureFragment).commit()
-
         initView()
+
     }
 
     var isOpen = false
@@ -95,11 +91,7 @@ class CaptureActivity2 : BaseActivity(), View.OnClickListener,CancellationView {
             }
         }
 
-
-
-
-
-        CancellationPresent(this,this).qrCode("1212")
+        CancellationPresent(this, this).qrCode("1212")
 
     }
 

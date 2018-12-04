@@ -106,12 +106,12 @@ class EvaluateDetailsFragment : BaseFragment() {
 
     }
 
-
     var nineGridView: NineGridView? = null
     var tv_content: TextView? = null
     var tv_time: TextView? = null
     var tv_username: TextView? = null
     var id_ratingbar: RatingBar? = null
+
     private fun addHeadView() {
         val headView = View.inflate(mActivity, R.layout.evaluatedetailshead, null)
         nineGridView = headView.findViewById(R.id.nineGrid)
@@ -122,7 +122,6 @@ class EvaluateDetailsFragment : BaseFragment() {
 
         mAdapter?.addHeaderView(headView)
     }
-
 
     companion object {
         fun newInstance(id: String): EvaluateDetailsFragment {

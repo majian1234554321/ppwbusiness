@@ -85,9 +85,9 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
         when (v?.id) {
 
             R.id.tv_setting -> {
-                (parentFragment as MainFragment).startBrotherFragment(
-                    ProductManagementFragment()
-                )
+//                (parentFragment as MainFragment).startBrotherFragment(
+//                    ProductManagementFragment()
+//                )
             }
 
             R.id.tv_more -> {

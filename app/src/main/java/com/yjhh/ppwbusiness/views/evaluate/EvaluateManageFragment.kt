@@ -3,6 +3,8 @@ package com.yjhh.ppwbusiness.views.evaluate
 import android.graphics.Color
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.entity.MultiItemEntity
@@ -25,7 +27,14 @@ import kotlinx.android.synthetic.main.evaluatemanagefragment.*
 import java.util.*
 
 class EvaluateManageFragment : BaseFragment(), EvaluateView {
+
     override fun onFault(errorMsg: String?) {
+        swipeLayout.finishRefresh()
+        if (startIndex==0) {
+            val view = View.inflate(mActivity, R.layout.emptyview, null)
+            view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
+            mAdapter?.emptyView = view
+        }
 
     }
 
@@ -102,7 +111,6 @@ class EvaluateManageFragment : BaseFragment(), EvaluateView {
 
     }
 
-
     private val mTitles = arrayOf("全部评价", "好评", "中评", "差评")
     private val mTabEntities = java.util.ArrayList<CustomTabEntity>()
     override fun getLayoutRes(): Int = R.layout.evaluatemanagefragment
@@ -126,9 +134,6 @@ class EvaluateManageFragment : BaseFragment(), EvaluateView {
 
         mAdapter = EvaluateManageAdapter(mActivity, list)
 
-
-
-
         for (i in mTitles.indices) {
             mTabEntities.add(TabEntity(mTitles[i], R.mipmap.ic_launcher, R.mipmap.ic_launcher))
         }
@@ -136,12 +141,10 @@ class EvaluateManageFragment : BaseFragment(), EvaluateView {
         initRefreshLayout()
 
         initAdapter()
+
         swipeLayout.autoRefresh()
 
-
-
         mTabLayout_7.setTabData(mTabEntities)
-
 
         mTabLayout_7.setOnTabSelectListener(object : OnTabSelectListener {
             override fun onTabSelect(position: Int) {
@@ -159,11 +162,6 @@ class EvaluateManageFragment : BaseFragment(), EvaluateView {
 
         })
 
-
-
-
-
-
         checkbox.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
 
@@ -180,14 +178,6 @@ class EvaluateManageFragment : BaseFragment(), EvaluateView {
             }
         }
 
-
-
-
-
-
-
-
-
         mAdapter?.setOnItemClickListener { adapter, view, position ->
 
             if (list[position] is EvaluateManageItemBean) {
@@ -203,7 +193,6 @@ class EvaluateManageFragment : BaseFragment(), EvaluateView {
 
     }
 
-
     private fun initAdapter() {
         mAdapter?.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
 
@@ -217,20 +206,17 @@ class EvaluateManageFragment : BaseFragment(), EvaluateView {
 
     }
 
-
     private fun initRefreshLayout() {
         swipeLayout.setOnRefreshListener { refreshLayout ->
             refresh()
         }
     }
 
-
     private fun refresh() {
         startIndex = 0
 
         present?.allcomments(type, isHasfile, startIndex, pageSize, "refresh")
     }
-
 
     private fun loadMore() {
         // Toast.makeText(context, "onload", Toast.LENGTH_SHORT).show()
@@ -240,6 +226,5 @@ class EvaluateManageFragment : BaseFragment(), EvaluateView {
 
 
     }
-
 
 }

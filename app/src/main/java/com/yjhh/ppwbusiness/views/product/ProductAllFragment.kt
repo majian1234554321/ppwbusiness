@@ -96,9 +96,13 @@ class ProductAllFragment : BaseFragment(), ProductView {
 
     override fun onFault(errorMsg: String?) {
         swipeLayout.finishRefresh()
-        val view = View.inflate(mActivity, R.layout.emptyview, null)
-        view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
-        mAdapter?.emptyView = view
+
+        if (startindex == 0) {
+            val view = View.inflate(mActivity, R.layout.emptyview, null)
+            view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
+            mAdapter?.emptyView = view
+        }
+
     }
 
     override fun onFragmentResult(requestCode: Int, resultCode: Int, data: Bundle?) {

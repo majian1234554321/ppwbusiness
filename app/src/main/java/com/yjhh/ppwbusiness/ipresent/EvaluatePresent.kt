@@ -30,13 +30,12 @@ class EvaluatePresent(var context: Context, var view: EvaluateView) : BasePresen
             .subscribe(object : ProcessObserver2(context) {
                 override fun onFault(message: String) {
                     Log.i("EvaluateManageFragment", message)
+                    view.onFault(message)
                 }
 
                 override fun processValue(response: String?) {
                     Log.i("EvaluateManageFragment", response)
-
                     view.onSuccess(response, flag)
-
 
                 }
             })
