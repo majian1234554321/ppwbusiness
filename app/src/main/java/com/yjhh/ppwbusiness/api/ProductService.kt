@@ -11,8 +11,8 @@ interface ProductService {
 
 
     @Headers("Content-Type: application/json", "Accept: application/json")//需要添加头
-    @POST("shopAdmin/editProducts")
-    fun editProducts(@Body a : Array<SubmitProductInfoModel> ): Observable<ResponseBody>
+    @POST("shopAdminProduct/save")
+    fun editProducts(@Body a : SubmitProductInfoModel ): Observable<ResponseBody>
 
 
 
@@ -23,7 +23,7 @@ interface ProductService {
 
 
     @FormUrlEncoded
-    @POST("shopAdmin/products")
+    @POST("shopAdminProduct")
     fun allproducts(@FieldMap map: Map<String, String>): Observable<ResponseBody>//
 
 
@@ -31,14 +31,14 @@ interface ProductService {
 
 
     @FormUrlEncoded
-    @POST("shopAdmin/delProduct")
+    @POST("shopAdminProduct/del")
     fun delProduct(@FieldMap map: Map<String, String>): Observable<ResponseBody>//
 
 
 
 
     @FormUrlEncoded
-    @POST("shopAdmin/editSaleStatus")
+    @POST("shopAdminProduct/editStatus")
     fun editSaleStatus(@FieldMap map: androidx.collection.ArrayMap<String, String>): Observable<ResponseBody>
 
 

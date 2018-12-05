@@ -52,7 +52,7 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
     }
 
     override fun onsuccessShopAdmin(bean: ShopAdminBean) {
-
+        swipeLayout.finishRefresh()
         val stringToday = mActivity.getString(
             R.string.rmb_price_double,
             bean.account.today
@@ -78,7 +78,7 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
     }
 
     override fun onFault(errorMsg: String?) {
-
+        swipeLayout.finishRefresh()
     }
 
     override fun onClick(v: View?) {
@@ -150,8 +150,10 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
 
         // swipeLayout.setRefreshHeader(PPWHeader2(mActivity))
 
-        swipeLayout.setRefreshHeader(PPWHeader(mActivity))
-
+        swipeLayout.setRefreshHeader(PPWHeader2(mActivity))
+        swipeLayout.setOnRefreshListener { refreshLayout ->
+            Main1Present(mActivity, this).shopAdminHome()
+        }
 
         val lists = ArrayList<Main1Bean>()
 

@@ -44,14 +44,21 @@ public class ProductBean implements Serializable {
          */
 
         public String describe;
-        public int id;
+        public String id;
+        public String itemId;
+
+        public int saleStatus;
         public boolean ifBuy;
         public boolean ifCollect;
         public boolean ifMerRec;
         public boolean ifPlatRec;
         public boolean ifRead;
         public String name;
+        public String logoUrl;
         public double price;
-        public int status;
+
+
+        public List<PhotoBean.ItemBean> images;
+
     }
 }

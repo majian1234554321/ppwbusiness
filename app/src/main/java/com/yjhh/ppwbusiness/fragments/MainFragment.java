@@ -23,8 +23,8 @@ public class MainFragment extends SupportFragment {
 
     public static final int FIRST = 0;
     public static final int SECOND = 1;
-    // public static final int THIRD = 2;
-    public static final int FOURTH = 2;
+     public static final int THIRD = 2;
+    //public static final int FOURTH = 2;
 
     private SupportFragment[] mFragments = new SupportFragment[3];
 
@@ -56,13 +56,13 @@ public class MainFragment extends SupportFragment {
             mFragments[FIRST] = new Main1Fragment();
             mFragments[SECOND] = new Main2Fragment();
             // mFragments[THIRD] = new Main3Fragment();
-            mFragments[FOURTH] = new Main4Fragment();
+            mFragments[THIRD] = new Main4Fragment();
 
             loadMultipleRootFragment(R.id.fl_tab_container, FIRST,
                     mFragments[FIRST],
                     mFragments[SECOND],
                     //  mFragments[THIRD],
-                    mFragments[FOURTH]);
+                    mFragments[THIRD]);
         } else {
             // 这里库已经做了Fragment恢复,所有不需要额外的处理了, 不会出现重叠问题
 
@@ -70,7 +70,7 @@ public class MainFragment extends SupportFragment {
             mFragments[FIRST] = firstFragment;
             mFragments[SECOND] = findChildFragment(Main2Fragment.class);
             //  mFragments[THIRD] = findChildFragment(Main3Fragment.class);
-            mFragments[FOURTH] = findChildFragment(Main4Fragment.class);
+            mFragments[THIRD] = findChildFragment(Main4Fragment.class);
         }
     }
 

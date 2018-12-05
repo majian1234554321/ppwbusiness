@@ -6,15 +6,16 @@ import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.bean.MyMessageBean
 
 
+class EmployeeAdapter(var data: ArrayList<String>) :
+    BaseQuickAdapter<String, BaseViewHolder>(R.layout.employeeadapter, data) {
+    override fun convert(helper: BaseViewHolder?, item: String?) {
 
-class EmployeeAdapter(var data: ArrayList<MyMessageBean.ItemsBean>) :
-    BaseQuickAdapter<MyMessageBean.ItemsBean, BaseViewHolder>(R.layout.mymessagefragmentadapter,data) {
-    override fun convert(helper: BaseViewHolder?, item: MyMessageBean.ItemsBean?) {
+
+    }
 
 
-        helper?.setText(R.id.tv1,item?.title)
-        helper?.setText(R.id.tv2,item?.content)
-
+    override fun getItemCount(): Int {
+        return if (data.size > 5) 5 else data.size
     }
 
 

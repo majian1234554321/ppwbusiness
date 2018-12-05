@@ -13,12 +13,12 @@ interface SectionEvluateService {
     fun shopAdmin(): Observable<ResponseBody>//
 
     @FormUrlEncoded
-    @POST("shopAdmin/comments")
+    @POST("shopAdminComment")
     fun allcomments(@FieldMap map: Map<String, String>): Observable<ResponseBody>//
 
 
     @FormUrlEncoded
-    @POST("shopAdmin/comment")
+    @POST("shopAdminComment/detail")
     fun comment(@FieldMap map: Map<String, String>): Observable<ResponseBody>//
 
 

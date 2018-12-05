@@ -54,9 +54,10 @@ class ProductPresent(var context: Context, var view: ProductView) : BasePresent(
     }
 
 
-    fun delProduct(id: String, position: Int, flag: String) {
+    fun delProduct(id: String,itemId:String , position: Int, flag: String) {
         map.clear()
         map["id"] = id
+        map["itemId"] = itemId
 
         toSubscribe2(ApiServices.getInstance().create(ProductService::class.java).delProduct(map),
             object : ProcessObserver2(context) {
@@ -80,6 +81,7 @@ class ProductPresent(var context: Context, var view: ProductView) : BasePresent(
 
 
         map["ids"] = ids
+
         map["status"] = status//上架状态(0上架 1下架)
 
         toSubscribe2(
@@ -98,10 +100,11 @@ class ProductPresent(var context: Context, var view: ProductView) : BasePresent(
     }
 
 
-    fun editSaleStatus(id: String, status: String, position: Int, flag: String) {
+    fun editSaleStatus(id: String, itemId:String,status: String, position: Int, flag: String) {
 
 
         map["id"] = id
+        map["itemId"] = itemId
         map["status"] = status//上架状态(0上架 1下架)
 
         toSubscribe2(

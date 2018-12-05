@@ -59,6 +59,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
+
 import kotlinx.android.synthetic.main.productadd.*
 import java.io.File
 import java.lang.StringBuilder
@@ -127,6 +128,19 @@ class ProductAddFragment : BaseFragment(), CommonView {
             et_name.setText(objectValue.name)
             et_price.setText(objectValue.price.toString())
             et_desc.setText(objectValue.describe)
+
+
+            toggle.isOpen = objectValue.saleStatus != 1
+
+            objectValue.images.forEach {
+                listsId.add(it.fileId)
+                lists.add(it.fileUrl)
+            }
+
+
+
+
+
             bt_add.text = "编辑完成"
         }
 
@@ -169,8 +183,17 @@ class ProductAddFragment : BaseFragment(), CommonView {
                 !TextUtils.isEmpty(et_price.text.toString())
             ) {
                 val aa = SubmitProductInfoModel()
+                if (!TextUtils.isEmpty(objectValue.id)) {
+                    aa.id = objectValue.id
+                    aa.itemId = objectValue.itemId
+
+                }
                 aa.name = et_name.text.toString()
-                aa.status = "0"
+                aa.saleStatus = if (toggle.isOpen) {
+                    "0"
+                } else {
+                    "1"
+                }
                 aa.describe = et_desc.text.toString()
                 aa.price = et_price.text.toString()
 
@@ -180,10 +203,10 @@ class ProductAddFragment : BaseFragment(), CommonView {
                 aa.imageIds = arrayimageIds
 
 
-                val s = arrayOf(aa)
+
                 ApiServices.getInstance()
                     .create(ProductService::class.java)
-                    .editProducts(s)
+                    .editProducts(aa)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(object : ProcessObserver2(mActivity) {

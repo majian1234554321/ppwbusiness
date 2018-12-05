@@ -75,14 +75,14 @@ class ProductAllFragment : BaseFragment(), ProductView {
 
             "UNSELL" -> {
                 Toast.makeText(mActivity, "商品下架成功", Toast.LENGTH_SHORT).show()
-                mAdapter.getItem(result?.position!!)?.status = 1
+                mAdapter.getItem(result?.position!!)?.saleStatus = 1
                 mAdapter.notifyDataSetChanged()
             }
 
             "SELL" -> {
                 Toast.makeText(mActivity, "商品上架成功", Toast.LENGTH_SHORT).show()
 
-                mAdapter.getItem(result?.position!!)?.status = 0
+                mAdapter.getItem(result?.position!!)?.saleStatus = 0
 
                 mAdapter.notifyDataSetChanged()
             }
@@ -126,13 +126,18 @@ class ProductAllFragment : BaseFragment(), ProductView {
 
         mAdapter.setOnItemClickListener { adapter, view, position ->
 
+
+
         }
         mAdapter.setOnItemChildClickListener { adapter, view, position ->
             when (view.id) {
                 R.id.tv_delete -> {
 
                     present.delProduct(
-                        (adapter.data[position] as ProductBean.ItemsBean).id.toString(),
+                        (adapter.data[position] as ProductBean.ItemsBean).id,
+                        (adapter.data[position] as ProductBean.ItemsBean).itemId,
+
+
                         position,
                         "DELETE"
                     )
@@ -143,9 +148,10 @@ class ProductAllFragment : BaseFragment(), ProductView {
 
 
                     //	上下架状态(0上 1下)
-                    if ((adapter.data[position] as ProductBean.ItemsBean).status == 0) {
+                    if ((adapter.data[position] as ProductBean.ItemsBean).saleStatus == 0) {
                         present.editSaleStatus(
                             (adapter.data[position] as ProductBean.ItemsBean).id.toString(),
+                            (adapter.data[position] as ProductBean.ItemsBean).itemId,
                             "1",
                             position,
                             "UNSELL"
@@ -153,6 +159,7 @@ class ProductAllFragment : BaseFragment(), ProductView {
                     } else {
                         present.editSaleStatus(
                             (adapter.data[position] as ProductBean.ItemsBean).id.toString(),
+                            (adapter.data[position] as ProductBean.ItemsBean).itemId,
                             "0",
                             position,
                             "SELL"

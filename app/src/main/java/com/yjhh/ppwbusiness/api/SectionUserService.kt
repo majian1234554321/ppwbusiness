@@ -45,9 +45,9 @@ interface SectionUserService {
     @POST("user/setAvatar")
     fun setAvatar(@FieldMap map: Map<String, String>): Observable<ResponseBody>//设置用户头像
 
-
-    @POST("user")
-    fun getUserinfo(): Observable<ResponseBody>//获取用户信息
+    @FormUrlEncoded
+    @POST("shopAdminUser/del")
+    fun del(@FieldMap map: Map<String, String>): Observable<ResponseBody>//获取用户信息
 
 
     @FormUrlEncoded
@@ -60,13 +60,13 @@ interface SectionUserService {
     fun setNickName(@FieldMap map: Map<String, String>): Observable<ResponseBody>//设置用户昵称
 
     @FormUrlEncoded
-    @POST("user/setBirthday")
-    fun setBirthday(@FieldMap map: Map<String, String>): Observable<ResponseBody>//设置生日
+    @POST("shopAdminUser/save")
+    fun save(@FieldMap map: Map<String, String>): Observable<ResponseBody>
 
 
     @FormUrlEncoded
-    @POST("user/setMobile")
-    fun setMobile(@FieldMap map: Map<String, String>): Observable<ResponseBody>//设置生日
+    @POST("shopAdminUser")
+    fun shopAdminUser(@FieldMap map: Map<String, String>): Observable<ResponseBody>
 
 
 }

@@ -1,69 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <RelativeLayout android:layout_width="match_parent" android:layout_height="48dp">
-        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                   android:layout_centerVertical="true"
-                   android:src="@drawable/icon_back"
-                   android:id="@+id/iv_back"
-        />
-        <TextView android:layout_width="wrap_content"
-                  android:layout_centerInParent="true"
-                  android:text="店员添加"
-                  android:layout_height="wrap_content"/>
-        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                   android:layout_centerVertical="true"
-                   android:src="@drawable/icon_back"
-                   android:layout_alignParentRight="true"
-                   android:id="@+id/iv_delete"
-        />
-
-    </RelativeLayout>
+    <com.yjhh.ppwbusiness.views.cui.TitleBarView android:layout_width="match_parent"
+                                                 android:id="@+id/tbv_title"
+                                                 app:textValue="店员添加"
+                                                 app:imageSrc="@drawable/icon_delete2"
+                                                 app:imageDis="true"
+                                                 app:textColor="@color/white"
+                                                 android:layout_height="wrap_content"/>
 
 
     <TextView android:layout_width="match_parent"
               android:text="店员姓名"
+              android:paddingLeft="30pt"
+              android:paddingTop="30pt"
+              android:paddingBottom="10pt"
+              android:textColor="#FF999999"
+              android:textSize="17pt"
+
               android:layout_height="wrap_content"/>
     <EditText android:layout_width="match_parent"
               android:background="@null"
-              android:textSize="@dimen/sp_14"
+              android:textSize="14pt"
+              android:id="@+id/tv_name"
+              android:hint="请输入名字"
+              android:layout_marginStart="30pt"
+              android:layout_gravity="center"
+              android:layout_marginEnd="30pt"
               android:layout_height="@dimen/dpi_40"/>
 
     <View android:layout_width="match_parent" android:layout_height="1dp"
           android:background="@color/all_e"
+          android:layout_marginStart="30pt"
+          android:layout_gravity="center"
+          android:layout_marginEnd="30pt"
     />
 
     <TextView android:layout_width="match_parent"
-              android:text="登录账号"
+              android:text="店员账号"
+              android:paddingLeft="30pt"
+              android:paddingTop="26.5pt"
+              android:paddingBottom="10pt"
+              android:textColor="#FF999999"
+              android:textSize="17pt"
               android:layout_height="wrap_content"/>
     <EditText android:layout_width="match_parent"
               android:background="@null"
               android:hint="请输入手机号"
-              android:textSize="@dimen/sp_14"
-              android:layout_height="@dimen/dpi_40"/>
-    <View android:layout_width="match_parent" android:layout_height="1dp"
-          android:background="@color/all_e"
-    />
-    <TextView android:layout_width="match_parent"
-              android:text="登录密码"
-              android:layout_height="wrap_content"/>
-    <EditText android:layout_width="match_parent"
-              android:background="@null"
-              android:textSize="@dimen/sp_14"
-              android:hint="请输入密码：格式为字母、数字组合"
-              android:layout_height="@dimen/dpi_40"/>
-    <View android:layout_width="match_parent" android:layout_height="1dp"
-          android:background="@color/all_e"
-    />
-    <TextView android:layout_width="180dp"
-              android:text="确认添加"
-              android:layout_marginTop="@dimen/dp_40"
-              android:padding="@dimen/sp_12"
+              android:id="@+id/tv_Phone"
+              android:textSize="14pt"
+              android:layout_marginStart="30pt"
               android:layout_gravity="center"
-              android:gravity="center"
-              android:layout_height="wrap_content"/>
+              android:layout_marginEnd="30pt"
+              android:layout_height="@dimen/dpi_40"/>
+    <View android:layout_width="match_parent" android:layout_height="1dp"
+          android:background="@color/all_e"
+          android:layout_marginStart="30pt"
+          android:layout_gravity="center"
+          android:layout_marginEnd="30pt"
+    />
+
+    <com.google.android.material.button.MaterialButton android:layout_width="182pt"
+                                                       android:text="确认添加"
+                                                       android:id="@+id/mb_commit"
+                                                       android:layout_marginTop="@dimen/dp_40"
+                                                       app:backgroundTint="@color/zthj"
+                                                       android:padding="@dimen/sp_12"
+                                                       android:layout_gravity="center"
+                                                       android:gravity="center"
+
+                                                       android:textColor="#FFFFFFFF"
+                                                       android:textSize="18pt"
+                                                       android:layout_height="wrap_content"/>
 
 </LinearLayout>

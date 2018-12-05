@@ -10,7 +10,7 @@ interface SectionOrderService {
 
 
     @FormUrlEncoded
-    @POST("shopAdmin/orders")
+    @POST("shopAdminOrders")
     fun orders(@FieldMap map: Map<String, String>): Observable<ResponseBody>//
 
 

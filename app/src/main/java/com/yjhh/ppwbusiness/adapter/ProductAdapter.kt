@@ -27,32 +27,36 @@ class ProductAdapter(list: List<ProductBean.ItemsBean>) :
             setText(R.id.tv_desc, item?.describe)
 
 
-            //ImageLoaderUtils.loadCircle(BaseApplication.context, getView<ImageView>(R.id.iv_image), item?.logoImageUrl)
+            ImageLoaderUtils.loadCircle(
+                BaseApplication.context,
+                getView<ImageView>(R.id.iv_image),
+                item?.logoUrl,
+                R.drawable.icon_place,
+                R.drawable.icon_place
+            )
 
 
             setText(
-                R.id.tv_stop, when (item?.status) {
+                R.id.tv_stop, when (item?.saleStatus) {
                     0 -> {
-                        "上架商品"
+                        "下架商品"
                     }
 
                     1 -> {
-                        "下架商品"
-
-
+                        "上架商品"
                     }
 
                     2 -> {
                         "售罄商品"
                     }
                     else -> {
-                        "未知${item?.status}"
+                        "未知${item?.saleStatus}"
                     }
                 }
             )
 
 
-            setVisible(R.id.iv_image2, item?.status == 1)
+            setVisible(R.id.iv_image2, item?.saleStatus == 1)
 
 
             addOnClickListener(R.id.tv_delete)

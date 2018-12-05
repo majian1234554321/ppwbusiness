@@ -8,12 +8,14 @@ public class SubmitProductInfoModel {
     public String describe;
     public String image;
 
+    public String itemId;
+    public String id;
     public String []  imageIds;
     public String name;
     public String orderBy;
     public String price;
 
-    public String status; //状态（0正常（上架） 1下架 2删除）
+    public String saleStatus; //状态（0正常（上架） 1下架 2删除）
 
 
 }

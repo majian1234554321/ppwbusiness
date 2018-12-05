@@ -138,6 +138,17 @@
 
 
         <com.yjhh.ppwbusiness.views.cui.ItemEntryView
+                android:id="@+id/iev_account"
+                app:ievtextValue="当前账户"
+                app:ievdrwableleft="@drawable/icon_zhanghu"
+                app:ievbackground="@color/white"
+                app:ievunderline="true"
+                app:ievtextpadding="@dimen/sp_12"
+                app:ievtextColor="@color/all_3"
+                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+
+        <com.yjhh.ppwbusiness.views.cui.ItemEntryView
                 android:id="@+id/iev_notice"
                 app:ievtextValue="提醒设置"
                 app:ievunderline="true"
@@ -154,13 +165,19 @@
                 android:id="@+id/iev_Management"
                 app:ievtextValue="店员管理"
                 app:ievbackground="@color/white"
-                app:ievtextColor="@color/all_9"
-                android:visibility="gone"
+                app:ievtextColor="@color/all_3"
+                app:ievdrwableleft="@drawable/icon_guanyu"
                 app:ievtextpadding="@dimen/sp_12"
-                app:ievunderline="true"
+
                 android:layout_width="match_parent" android:layout_height="wrap_content"
 
         />
+
+
+
+
+
+
 
 
         <com.yjhh.ppwbusiness.views.cui.ItemEntryView
@@ -169,24 +186,15 @@
                 app:ievdrwableleft="@drawable/icon_guanyu"
                 app:ievbackground="@color/white"
                 app:ievtextColor="@color/all_3"
+                android:layout_marginTop="10pt"
                 app:ievunderline="true"
                 app:ievtextpadding="@dimen/sp_12"
-                android:layout_width="match_parent" android:layout_height="wrap_content"/>
-
-
-        <com.yjhh.ppwbusiness.views.cui.ItemEntryView
-                android:id="@+id/iev_account"
-                app:ievtextValue="当前账户"
-                app:ievdrwableleft="@drawable/icon_zhanghu"
-                app:ievbackground="@color/white"
-                app:ievtextpadding="@dimen/sp_12"
-                app:ievtextColor="@color/all_3"
                 android:layout_width="match_parent" android:layout_height="wrap_content"/>
 
         <com.yjhh.ppwbusiness.views.cui.ItemEntryView
                 android:id="@+id/iev_updateVersion"
                 app:ievtextValue="版本更新"
-                android:layout_marginTop="10pt"
+
                 app:ievtextpadding="@dimen/sp_12"
                 app:ievdrwableleft="@drawable/icon_banben"
                 app:ievbackground="@color/white"

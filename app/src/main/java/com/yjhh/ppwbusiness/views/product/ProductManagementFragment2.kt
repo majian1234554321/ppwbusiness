@@ -141,9 +141,9 @@ class ProductManagementFragment2 : BaseFragment(), View.OnClickListener {
                     if (mViewPager.currentItem == 0) {
                         f1.sortType(order, orderType)
                     } else if (mViewPager.currentItem == 1) {
-                        //f2.sortType(order, orderType)
+                        f2.sortType(order, orderType)
                     } else {
-                        //f3.sortType(order, orderType)
+                        f3.sortType(order, orderType)
                     }
 
 
@@ -159,14 +159,14 @@ class ProductManagementFragment2 : BaseFragment(), View.OnClickListener {
 
                     if (tv_priceSort.text.toString() == "价格排序 ↓") {
                         tv_priceSort.text = "价格排序 ↑"
-                        Toast.makeText(mActivity, tv_priceSort.text, Toast.LENGTH_SHORT).show()
+
 
                         order = "1"   //排序,0（0 时间排序 1价格排序）
                         orderType = "0" //排序方式，0(0升序 1倒叙)
 
                     } else {
                         tv_priceSort.text = "价格排序 ↓"
-                        Toast.makeText(mActivity, tv_priceSort.text, Toast.LENGTH_SHORT).show()
+
 
                         order = "1"   //排序,0（0 时间排序 1价格排序）
                         orderType = "1" //排序方式，0(0升序 1倒叙)
@@ -174,9 +174,9 @@ class ProductManagementFragment2 : BaseFragment(), View.OnClickListener {
                     if (mViewPager.currentItem == 0) {
                         f1.sortType(order, orderType)
                     } else if (mViewPager.currentItem == 1) {
-                        //f2.sortType(order, orderType)
+                        f2.sortType(order, orderType)
                     } else {
-                        //f3.sortType(order, orderType)
+                        f3.sortType(order, orderType)
                     }
 
                 }

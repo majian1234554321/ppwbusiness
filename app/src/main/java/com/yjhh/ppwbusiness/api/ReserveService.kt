@@ -9,16 +9,16 @@ import retrofit2.http.POST
 interface ReserveService {
 
     @FormUrlEncoded
-    @POST("shopAdmin/acceptReserve")
+    @POST("shopAdminReserve/accept")
     fun acceptReserve(@FieldMap map: Map<String, String>): Observable<ResponseBody>//
 
 
     @FormUrlEncoded
-    @POST("shopAdmin/reserveDetail")
+    @POST("shopAdminReserve/detail")
     fun reserveDetail(@FieldMap map: Map<String, String>): Observable<ResponseBody>//
 
 
     @FormUrlEncoded
-    @POST("shopAdmin/reserves")
+    @POST("shopAdminReserve")
     fun reserves(@FieldMap map: Map<String, String>): Observable<ResponseBody>//
 }

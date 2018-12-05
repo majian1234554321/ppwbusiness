@@ -57,14 +57,14 @@ class Product3Fragment : BaseFragment(), ProductView {
 
             "UNSELL" -> {
                 Toast.makeText(mActivity, "商品下架成功", Toast.LENGTH_SHORT).show()
-                mAdapter.getItem(result?.position!!)?.status = 1
+                mAdapter.getItem(result?.position!!)?.saleStatus = 1
                 mAdapter.notifyDataSetChanged()
             }
 
             "SELL" -> {
                 Toast.makeText(mActivity, "商品上架成功", Toast.LENGTH_SHORT).show()
 
-                mAdapter.getItem(result?.position!!)?.status = 0
+                mAdapter.getItem(result?.position!!)?.saleStatus = 0
 
                 mAdapter.notifyDataSetChanged()
             }
@@ -78,9 +78,11 @@ class Product3Fragment : BaseFragment(), ProductView {
 
     override fun onFault(errorMsg: String?) {
         swipeLayout.finishRefresh()
-        val view = View.inflate(mActivity, R.layout.emptyview, null)
-        view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
-        mAdapter?.emptyView = view
+        if (startindex == 0) {
+            val view = View.inflate(mActivity, R.layout.emptyview, null)
+            view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
+            mAdapter?.emptyView = view
+        }
     }
 
     override fun onFragmentResult(requestCode: Int, resultCode: Int, data: Bundle?) {
@@ -111,6 +113,7 @@ class Product3Fragment : BaseFragment(), ProductView {
 
                     present.delProduct(
                         (adapter.data[position] as ProductBean.ItemsBean).id.toString(),
+                        (adapter.data[position] as ProductBean.ItemsBean).itemId,
                         position,
                         "DELETE"
                     )
@@ -121,9 +124,10 @@ class Product3Fragment : BaseFragment(), ProductView {
 
 
                     //	上下架状态(0上 1下)
-                    if ((adapter.data[position] as ProductBean.ItemsBean).status == 0) {
+                    if ((adapter.data[position] as ProductBean.ItemsBean).saleStatus == 0) {
                         present.editSaleStatus(
                             (adapter.data[position] as ProductBean.ItemsBean).id.toString(),
+                            (adapter.data[position] as ProductBean.ItemsBean).itemId,
                             "1",
                             position,
                             "UNSELL"
@@ -131,6 +135,7 @@ class Product3Fragment : BaseFragment(), ProductView {
                     } else {
                         present.editSaleStatus(
                             (adapter.data[position] as ProductBean.ItemsBean).id.toString(),
+                            (adapter.data[position] as ProductBean.ItemsBean).itemId,
                             "0",
                             position,
                             "SELL"

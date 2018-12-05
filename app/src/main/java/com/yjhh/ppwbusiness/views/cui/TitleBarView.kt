@@ -13,9 +13,11 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import com.yjhh.ppwbusiness.R
+import com.yjhh.ppwbusiness.R.id.iv_right
 
 
 import kotlinx.android.synthetic.main.titlebarview.view.*
+import java.nio.file.attribute.AclEntryFlag
 
 
 class TitleBarView @JvmOverloads constructor(
@@ -32,6 +34,15 @@ class TitleBarView @JvmOverloads constructor(
     fun setTitle(name: String) {
         tv_title.text = name
     }
+
+    fun setRightDisPlay(flag: Boolean){
+        iv_right.visibility = if (flag) {
+            View.VISIBLE
+        }else{
+            View.GONE
+        }
+    }
+
 
     var onClickListener: OnRightClickListion? = null
 
