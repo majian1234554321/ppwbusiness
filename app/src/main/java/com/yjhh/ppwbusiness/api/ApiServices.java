@@ -12,6 +12,7 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -34,6 +35,28 @@ public class ApiServices {
 
         // 添加公共参数拦截器
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+
+
+        HttpLoggingInterceptor logInterceptor = new HttpLoggingInterceptor();
+
+            //显示日志
+            logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        httpClient.addInterceptor(logInterceptor);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         httpClient.addInterceptor(
                 new Interceptor() {
                     @Override

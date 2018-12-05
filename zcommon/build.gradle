@@ -83,5 +83,6 @@ dependencies {
 
     api 'pl.droidsonroids.gif:android-gif-drawable:1.2.3'
 
-
+    api 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    api 'com.orhanobut:logger:2.1.1'
 }

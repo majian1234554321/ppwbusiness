@@ -30,11 +30,15 @@ import com.yjhh.ppwbusiness.views.reconciliation.ReconciliationFragment
 import kotlinx.android.synthetic.main.main1fragment.*
 import android.widget.Toast
 import com.azhon.appupdate.utils.Constant
+import com.google.gson.Gson
 
 
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.uuzuche.lib_zxing.activity.CodeUtils
 import com.yjhh.ppwbusiness.base.BaseActivity.REQUEST_CODE
+import com.yjhh.ppwbusiness.bean.QCodeBean
+import com.yjhh.ppwbusiness.ipresent.CancellationPresent
+import com.yjhh.ppwbusiness.iview.CancellationView
 
 
 import com.yjhh.ppwbusiness.views.CaptureActivity2
@@ -44,7 +48,7 @@ import com.yjhh.ppwbusiness.views.cui.PPWHeader2
 import com.yjhh.ppwbusiness.views.writeoff.WriteOffFragment
 
 
-class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, OrderView {
+class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, OrderView, CancellationView {
 
 
     override fun onSuccess(model: OrderBean, flag: String) {
@@ -97,13 +101,6 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
             R.id.iv_scan -> {
 
 
-                (parentFragment as MainFragment).startBrotherFragment(
-                    WriteOffFragment.newInstance("123")
-                )
-
-
-/*
-
                 RxPermissions(this)
                     .request(Manifest.permission.CAMERA)
                     .subscribe {
@@ -115,7 +112,6 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
                             Toast.makeText(mActivity, "请前往设置中心开启照相机权限", Toast.LENGTH_SHORT).show()
                         }
                     }
-*/
 
 
             }
@@ -213,6 +209,29 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
     }
 
 
+    override fun onSuccessCancellation(response: String?, flag: String?) {
+
+
+        val model = Gson().fromJson<QCodeBean>(response, QCodeBean::class.java)
+
+        if ("1" == model.type) { ////1.登录 2.核销
+
+            if (model.data != null) {
+
+
+                CancellationPresent(mActivity, this).qCodeLogin(model.data.split("code=")[1])
+            }
+
+        } else {
+            (parentFragment as MainFragment).startBrotherFragment(
+                WriteOffFragment.newInstance("123")
+            )
+        }
+
+
+    }
+
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -225,8 +244,11 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
                     val bundle = data.extras ?: return
                     if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
                         val result = bundle.getString(CodeUtils.RESULT_STRING)
-                        Toast.makeText(mActivity, "解析结果:" + result!!, Toast.LENGTH_LONG).show()
-                        (parentFragment as MainFragment).startBrotherFragment(WriteOffFragment())
+                        // Toast.makeText(mActivity, "解析结果:" + result!!, Toast.LENGTH_LONG).show()
+
+
+                        CancellationPresent(mActivity, this).qrCode(result)
+
 
                     } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
                         Toast.makeText(mActivity, "解析二维码失败", Toast.LENGTH_LONG).show()

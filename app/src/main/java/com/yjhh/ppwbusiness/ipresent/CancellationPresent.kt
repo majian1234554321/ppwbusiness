@@ -10,13 +10,15 @@ import com.yjhh.ppwbusiness.base.ProcessObserver2
 import com.yjhh.ppwbusiness.bean.CancelationBeforeBean
 import com.yjhh.ppwbusiness.bean.SubmitReviewCouponModel
 import com.yjhh.ppwbusiness.iview.CancellationView
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import java.lang.StringBuilder
 
 class CancellationPresent(var context: Context, var view: CancellationView) : BasePresent() {
 
     val map = ArrayMap<String, String>()
 
-    fun qrCode(code: String) {
+    fun qrCode(code: String?) {
 
         map.clear()
         map["code"] = code
@@ -26,10 +28,13 @@ class CancellationPresent(var context: Context, var view: CancellationView) : Ba
             .qrCode(map), object : ProcessObserver2(context) {
             override fun processValue(response: String?) {
                 Log.i("CancellationPresent", response)
+
+                view.onSuccessCancellation(response,"")
             }
 
             override fun onFault(message: String) {
                 Log.i("CancellationPresent", message)
+                view.onSuccessCancellation(message,"")
             }
 
         })
@@ -147,6 +152,34 @@ class CancellationPresent(var context: Context, var view: CancellationView) : Ba
         })
 
     }
+
+
+
+
+    fun qCodeLogin(value: String){
+        ApiServices.getInstance()
+            .create(CancellationService::class.java)
+            .qCodeLogin(value)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object :ProcessObserver2(context){
+                override fun processValue(response: String?) {
+                    Log.i("CancellationPresent", response)
+                }
+
+                override fun onFault(message: String) {
+                    Log.i("CancellationPresent", message)
+                }
+
+            })
+    }
+
+
+
+
+
+
+
 
 
 }

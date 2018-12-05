@@ -28,10 +28,13 @@ interface CancellationService {
     fun shopList(@FieldMap map: Map<String, String>): Observable<ResponseBody>
 
 
-
-
-
     @Headers("Content-Type: application/json", "Accept: application/json")//需要添加头
     @POST("shopAdminCoupon/review")
     fun review(@Body map: SubmitReviewCouponModel): Observable<ResponseBody>
+
+
+    @GET("shopAdmin/allow")
+    fun qCodeLogin(@Query("code") value: String): Observable<ResponseBody>
+
+
 }

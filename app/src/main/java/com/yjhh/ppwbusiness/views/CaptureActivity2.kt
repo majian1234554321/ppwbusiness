@@ -20,15 +20,9 @@ import com.yjhh.ppwbusiness.views.writeoff.CancellationBeforeActivity
 import kotlinx.android.synthetic.main.activity_capture2.*
 import java.util.*
 
-class CaptureActivity2 : BaseActivity(), View.OnClickListener, CancellationView {
+class CaptureActivity2 : BaseActivity(), View.OnClickListener {
 
-    override fun onSuccessCancellation(response: String?, flag: String?) {
 
-    }
-
-    override fun onFault(errorMsg: String?) {
-
-    }
 
     var mCustomPopWindow: CustomPopWindow? = null
 
@@ -62,13 +56,13 @@ class CaptureActivity2 : BaseActivity(), View.OnClickListener, CancellationView 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_capture2)
-
+        initView()
         val captureFragment = CaptureFragment()
         // 为二维码扫描界面设置定制化界面
         CodeUtils.setFragmentArgs(captureFragment, R.layout.my_camera)
         captureFragment.analyzeCallback = analyzeCallback
         supportFragmentManager.beginTransaction().replace(R.id.fl_my_container, captureFragment).commit()
-        initView()
+
 
     }
 
@@ -91,15 +85,20 @@ class CaptureActivity2 : BaseActivity(), View.OnClickListener, CancellationView 
             }
         }
 
-        CancellationPresent(this, this).qrCode("1212")
+
 
     }
 
     /**
      * 二维码解析回调函数
      */
-    internal var analyzeCallback: CodeUtils.AnalyzeCallback = object : CodeUtils.AnalyzeCallback {
+     var analyzeCallback: CodeUtils.AnalyzeCallback = object : CodeUtils.AnalyzeCallback {
         override fun onAnalyzeSuccess(mBitmap: Bitmap, result: String) {
+
+
+
+
+
             val resultIntent = Intent()
             val bundle = Bundle()
             bundle.putInt(CodeUtils.RESULT_TYPE, CodeUtils.RESULT_SUCCESS)
