@@ -29,6 +29,7 @@ import com.yjhh.ppwbusiness.views.reconciliation.ReconciliationFragment
 
 import kotlinx.android.synthetic.main.main1fragment.*
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.azhon.appupdate.utils.Constant
 import com.google.gson.Gson
 
@@ -45,6 +46,7 @@ import com.yjhh.ppwbusiness.views.CaptureActivity2
 import com.yjhh.ppwbusiness.utils.TextStyleUtils
 import com.yjhh.ppwbusiness.views.cui.PPWHeader
 import com.yjhh.ppwbusiness.views.cui.PPWHeader2
+import com.yjhh.ppwbusiness.views.reservation.ReservationOrderFragment
 import com.yjhh.ppwbusiness.views.writeoff.WriteOffFragment
 
 
@@ -94,6 +96,21 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
 //                )
             }
 
+            R.id.ll_A -> {
+                (parentFragment as MainFragment).startBrotherFragment(
+                    ReservationOrderFragment.newInstance(0)
+                )
+            }
+
+            R.id.ll_B -> {
+                (parentFragment as MainFragment).startBrotherFragment(
+                    ReservationOrderFragment.newInstance(1)
+                )
+            }
+
+
+
+
             R.id.tv_more -> {
                 (parentFragment as MainFragment).mBottomBar.setCurrentItem(1)
             }
@@ -139,14 +156,14 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
 
         Main1Present(mActivity, this).shopAdminHome()
 
-        arrayOf(tv_setting, tv_more, iv_scan).forEach {
+        arrayOf(tv_setting, tv_more, iv_scan,ll_A,ll_B).forEach {
             it.setOnClickListener(this)
         }
 
 
         // swipeLayout.setRefreshHeader(PPWHeader2(mActivity))
 
-        swipeLayout.setRefreshHeader(PPWHeader2(mActivity))
+        swipeLayout.setRefreshHeader(PPWHeader2(mActivity,ContextCompat.getColor(mActivity,R.color.colorPrimary)))
         swipeLayout.setOnRefreshListener { refreshLayout ->
             Main1Present(mActivity, this).shopAdminHome()
         }
@@ -218,11 +235,12 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
 
             if (model.data != null) {
 
-
                 CancellationPresent(mActivity, this).qCodeLogin(model.data.split("code=")[1])
+
             }
 
         } else {
+
             (parentFragment as MainFragment).startBrotherFragment(
                 WriteOffFragment.newInstance("123")
             )
@@ -234,8 +252,6 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
-
 
         when (requestCode) {
             10086 -> {

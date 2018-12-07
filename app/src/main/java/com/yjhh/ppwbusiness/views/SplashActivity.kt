@@ -9,6 +9,7 @@ import android.text.TextUtils
 import android.view.View
 import android.view.WindowManager
 import com.yjhh.ppwbusiness.R
+import com.yjhh.ppwbusiness.base.BaseActivity
 import com.yjhh.ppwbusiness.utils.ActivityCollector
 import com.yjhh.ppwbusiness.utils.LogUtils
 import com.yjhh.ppwbusiness.utils.RxCountDown
@@ -17,7 +18,7 @@ import com.yjhh.ppwbusiness.views.login.LoginActivity
 import com.yjhh.ppwbusiness.views.main.MainActivity
 import io.reactivex.observers.DisposableObserver
 
-class SplashActivity : AppCompatActivity() {
+class SplashActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setStatusBar()

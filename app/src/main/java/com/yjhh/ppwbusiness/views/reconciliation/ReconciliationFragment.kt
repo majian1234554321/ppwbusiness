@@ -1,10 +1,16 @@
 package com.yjhh.ppwbusiness.views.reconciliation
 
+import android.util.Log
 import androidx.viewpager.widget.ViewPager
 import com.flyco.tablayout.listener.OnTabSelectListener
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.MyPagerAdapter
+import com.yjhh.ppwbusiness.api.ApiServices
+import com.yjhh.ppwbusiness.api.ReconciliationService
 import com.yjhh.ppwbusiness.base.BaseFragment
+import com.yjhh.ppwbusiness.base.ProcessObserver2
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 import kotlinx.android.synthetic.main.reconciliationfragment.*
 
@@ -30,6 +36,9 @@ class ReconciliationFragment : BaseFragment() {
         fagments.add(Reconciliation2Fragment())
         fagments.add(Reconciliation3Fragment())
         // fagments.add(Product4Fragment())
+
+
+
 
 
         mViewPager.adapter = MyPagerAdapter(childFragmentManager, fagments, mTitles)

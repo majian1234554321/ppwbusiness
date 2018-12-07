@@ -7,18 +7,29 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.OrderAdapter
 import com.yjhh.ppwbusiness.adapter.ReconciliationAdapter
+import com.yjhh.ppwbusiness.adapter.ReservationOrderAdapter
 import com.yjhh.ppwbusiness.base.BaseFragment
+import com.yjhh.ppwbusiness.bean.DateBean
+import com.yjhh.ppwbusiness.bean.ReservationBean
 import com.yjhh.ppwbusiness.fragments.MessageDetailFragment
+import com.yjhh.ppwbusiness.ipresent.ReconciliationPresent
+import com.yjhh.ppwbusiness.ipresent.ReservePresent
+import com.yjhh.ppwbusiness.ipresent.SectionUselessPresent
 import kotlinx.android.synthetic.main.reconciliation1fragment.*
 
 class Reconciliation1Fragment : BaseFragment() {
     override fun getLayoutRes(): Int = R.layout.reconciliation1fragment
 
 
-    var startindex = 0;
+    val pageSize = 15
+    var pageIndex = 0
+
+    val type = ""////类型 null全部 1收入 2支出
+
 
     var mAdapter: ReconciliationAdapter? = null
     val lists = ArrayList<String>()
+    var present: ReconciliationPresent? = null
 
     override fun initView() {
 
@@ -38,18 +49,15 @@ class Reconciliation1Fragment : BaseFragment() {
         list.add("A")
         list.add("A")
         mAdapter = ReconciliationAdapter(list)
-        // sectionCouponPresent = SectionUselessPresent(context, this)
+        present = ReconciliationPresent(context)
         mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
 
         initAdapter()
-        //  swipeLayout.autoRefresh()
 
+        present?.logs(type, pageIndex, pageSize, "refresh")
 
         mAdapter?.setOnItemClickListener { adapter, view, position ->
 
-            (parentFragment as BaseFragment).start(
-                MessageDetailFragment()
-            )
 
         }
 
@@ -71,9 +79,8 @@ class Reconciliation1Fragment : BaseFragment() {
 
 
     private fun loadMore() {
-
-        startindex++
-        //  sectionCouponPresent.usermessage(status, share, startindex, pageSize, "load")
+        pageIndex++
+        present?.logs(type, pageIndex, pageSize, "load")
 
     }
 

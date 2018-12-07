@@ -166,18 +166,12 @@
                 app:ievtextValue="店员管理"
                 app:ievbackground="@color/white"
                 app:ievtextColor="@color/all_3"
-                app:ievdrwableleft="@drawable/icon_guanyu"
+                app:ievdrwableleft="@drawable/icon_dianpu"
                 app:ievtextpadding="@dimen/sp_12"
 
                 android:layout_width="match_parent" android:layout_height="wrap_content"
 
         />
-
-
-
-
-
-
 
 
         <com.yjhh.ppwbusiness.views.cui.ItemEntryView

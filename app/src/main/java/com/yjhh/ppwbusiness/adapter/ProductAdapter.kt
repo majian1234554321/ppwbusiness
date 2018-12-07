@@ -2,6 +2,7 @@ package com.yjhh.ppwbusiness.adapter
 
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
@@ -22,17 +23,18 @@ class ProductAdapter(list: List<ProductBean.ItemsBean>) :
         with(helper) {
 
             setText(R.id.right_dish_name, item?.name)
-            setText(R.id.tv_price, "￥ ${item?.price}")
+            setText(R.id.tv_price, BaseApplication.context.getString(R.string.rmb_price_double2,item?.price))
 
             setText(R.id.tv_desc, item?.describe)
 
 
-            ImageLoaderUtils.loadCircle(
+            ImageLoaderUtils.load(
                 BaseApplication.context,
                 getView<ImageView>(R.id.iv_image),
                 item?.logoUrl,
                 R.drawable.icon_place,
-                R.drawable.icon_place
+                R.drawable.icon_place,
+                0
             )
 
 

@@ -16,6 +16,7 @@ import com.yjhh.ppwbusiness.views.login.LoginFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.employeeadufragment.*
+import me.yokeyword.fragmentation.ISupportFragment
 
 class EmployeeADUFragment : BaseFragment(), View.OnClickListener {
     override fun onClick(v: View?) {
@@ -26,7 +27,7 @@ class EmployeeADUFragment : BaseFragment(), View.OnClickListener {
                 if (!TextUtils.isEmpty(tv_name.text.toString()) && !TextUtils.isEmpty(tv_Phone.text.toString()) && tv_Phone.text.toString().length == 11) {
 
                     val map = ArrayMap<String, String>()
-                    map.put("id", "")
+                    map.put("id", id)
                     map.put("name", tv_name.text.toString())
                     map.put("phone", tv_Phone.text.toString())
                     ApiServices.getInstance().create(SectionUserService::class.java)
@@ -37,6 +38,13 @@ class EmployeeADUFragment : BaseFragment(), View.OnClickListener {
                             override fun processValue(response: String?) {
 
                                 Log.i("EmployeeADUFragment", response)
+
+
+
+                                val bundle = Bundle()
+                                setFragmentResult(RESULT_OK,bundle)
+
+
                                 mActivity.onBackPressed()
                             }
 
@@ -61,14 +69,18 @@ class EmployeeADUFragment : BaseFragment(), View.OnClickListener {
 
     override fun getLayoutRes(): Int = R.layout.employeeadufragment
 
+    var id: String? = null
+
     override fun initView() {
 
         mb_commit.setOnClickListener(this)
 
         val type = arguments?.getString("type")
-        val id = arguments?.getString("id")
+        id = arguments?.getString("id")
         val phone = arguments?.getString("phone")
         val name = arguments?.getString("name")
+
+        val position = arguments?.getInt("position", -1)
 
         tv_name.setText(name)
         tv_Phone.setText(phone)
@@ -86,7 +98,11 @@ class EmployeeADUFragment : BaseFragment(), View.OnClickListener {
                     .subscribe(object : ProcessObserver2(mActivity) {
                         override fun processValue(response: String?) {
 
-                            Log.i("EmployeeADUFragment", response);
+                            Log.i("EmployeeADUFragment", response)
+
+                            val bundle = Bundle()
+                            setFragmentResult(RESULT_OK,bundle)
+
                             mActivity.onBackPressed()
                         }
 
@@ -115,13 +131,14 @@ class EmployeeADUFragment : BaseFragment(), View.OnClickListener {
 
 
     companion object {
-        fun newInstance(type: String?, id: String?, phone: String?, name: String): EmployeeADUFragment {
+        fun newInstance(type: String?, id: String?, phone: String?, name: String, position: Int): EmployeeADUFragment {
             val fragment = EmployeeADUFragment()
             val args = Bundle()
             args.putString("type", type)
             args.putString("id", id)
             args.putString("phone", phone)
             args.putString("name", name)
+            args.putInt("position", position)
 
             fragment.arguments = args
             return fragment

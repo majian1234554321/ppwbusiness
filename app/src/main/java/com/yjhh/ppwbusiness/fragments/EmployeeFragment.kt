@@ -1,15 +1,19 @@
 package com.yjhh.ppwbusiness.fragments
 
 import android.graphics.Color
+import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
+import android.text.TextUtils
 import android.text.style.AbsoluteSizeSpan
 import android.text.style.ForegroundColorSpan
 import android.util.Log
 
 import android.view.View
+import android.widget.Toast
 import androidx.collection.ArrayMap
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.EmployeeAdapter
 import com.yjhh.ppwbusiness.api.ApiServices
@@ -17,8 +21,12 @@ import com.yjhh.ppwbusiness.api.SectionUserService
 
 import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.base.ProcessObserver2
-import com.yjhh.ppwbusiness.utils.TextStyleUtils
+import com.yjhh.ppwbusiness.bean.AccountBean
+import com.yjhh.ppwbusiness.bean.EmployeeBean
+import com.yjhh.ppwbusiness.bean.ProductBean
+
 import com.yjhh.ppwbusiness.views.cui.TitleBarView
+import com.yjhh.ppwbusiness.views.product.ProductAddFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -41,12 +49,16 @@ class EmployeeFragment : BaseFragment(), View.OnClickListener {
     override fun getLayoutRes(): Int = R.layout.employeefragment
 
 
-    val lists = ArrayList<String>()
+    val lists = ArrayList<EmployeeBean>()
     var mAdapter: EmployeeAdapter? = null
     override fun initView() {
         tbv_title.setOnRightClickListener(object : TitleBarView.OnRightClickListion {
             override fun setOnRightClick() {
-                start(EmployeeADUFragment.newInstance("ADD", "", "", ""))
+                if (lists.size < 5) {
+                    startForResult(EmployeeADUFragment.newInstance("ADD", "", "", "", -1), 10086)
+                } else {
+                    Toast.makeText(_mActivity, "最多只能添加5位店员", Toast.LENGTH_SHORT).show()
+                }
             }
 
         })
@@ -62,10 +74,76 @@ class EmployeeFragment : BaseFragment(), View.OnClickListener {
         )
         tv_tips.text = spannableString
 
+        val model = arguments?.getSerializable("objectValue")
+        if (model != null) {
+            model as AccountBean
+            tv_name.text = model.roleName
+            tv_mobile.text = model.displayMobile
+            tbv_title.setRightDisPlay(model.role == 0)
+            mAdapter = EmployeeAdapter(lists, model.role == 0)
+        }
+
+
 
 
         initAdapter()
 
+        loadNetData()
+    }
+
+    private fun initAdapter() {
+
+
+        recyclerView.layoutManager = LinearLayoutManager(mActivity)
+
+
+
+        recyclerView.adapter = mAdapter
+
+        mAdapter?.setOnItemClickListener { adapter, view, position ->
+
+            if (lists.size < 5) {
+                startForResult(
+                    EmployeeADUFragment.newInstance(
+                        "DELETE",
+                        lists[position].id,
+                        lists[position].mobile,
+                        lists[position].name,
+                        position
+                    ), 10086
+                )
+            } else {
+                Toast.makeText(_mActivity, "最多只能添加5位店员", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
+    }
+
+    override fun onFragmentResult(requestCode: Int, resultCode: Int, data: Bundle?) {
+        super.onFragmentResult(requestCode, resultCode, data)
+
+        if (requestCode == 10086 && resultCode == RESULT_OK) {
+            loadNetData()
+        }
+
+
+    }
+
+
+    companion object {
+        fun newInstance(objectValue: AccountBean?): EmployeeFragment {
+            val fragment = EmployeeFragment()
+            val bundle = Bundle()
+
+            bundle.putSerializable("objectValue", objectValue)
+            fragment.arguments = bundle
+            return fragment
+        }
+    }
+
+
+    private fun loadNetData() {
         ApiServices.getInstance().create(
             SectionUserService::class.java
         ).shopAdminUser(ArrayMap<String, String>())
@@ -73,36 +151,28 @@ class EmployeeFragment : BaseFragment(), View.OnClickListener {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : ProcessObserver2(mActivity) {
                 override fun processValue(response: String?) {
-                    Log.i("TGA", response);
+                    if (!TextUtils.isEmpty("response")) {
+                        val model = Gson().fromJson<Array<EmployeeBean>>(response, Array<EmployeeBean>::class.java)
+                        lists.clear()
+                        lists.addAll(model.asList())
+
+
+
+                        mAdapter?.notifyDataSetChanged()
+
+                    } else {
+
+                    }
+
+                    Log.i("TGA", response)
                 }
 
                 override fun onFault(message: String) {
-                    Log.i("TGA", message);
+                    Log.i("TGA", message)
                 }
 
             })
-
-
     }
 
-    private fun initAdapter() {
-
-        for (i in 0..9) {
-            lists.add("AAAA")
-        }
-
-        recyclerView.layoutManager = LinearLayoutManager(mActivity)
-
-        mAdapter = EmployeeAdapter(lists)
-
-        recyclerView.adapter = mAdapter
-
-        mAdapter?.setOnItemClickListener { adapter, view, position ->
-
-            start(EmployeeADUFragment.newInstance("DELETE", "", "", ""))
-        }
-
-
-    }
 
 }

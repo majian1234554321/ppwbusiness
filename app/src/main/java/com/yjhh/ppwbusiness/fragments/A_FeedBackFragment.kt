@@ -27,6 +27,7 @@ import com.yjhh.ppwbusiness.base.BaseActivity.requestRuntimePermission
 import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.base.ProcessObserver2
 import com.yjhh.ppwbusiness.bean.PhotoBean
+import com.yjhh.ppwbusiness.bean.SubmitFeedbackModel
 import com.yjhh.ppwbusiness.interfaces.PermissionListener
 import com.yjhh.ppwbusiness.ipresent.CommonPresent
 import com.yjhh.ppwbusiness.iview.CommonView
@@ -67,31 +68,32 @@ class A_FeedBackFragment : BaseFragment(), View.OnClickListener, CommonView {
 
                 if (!TextUtils.isEmpty(et_1.text.toString()) && !TextUtils.isEmpty(et_5.text.toString())) {
 
-                    val map = ArrayMap<String, String>()
 
-                    map.put("cause", et_5.text.toString())
-                    map.put("contact", et_1.text.toString())
-                    map.put("name", et_3.text.toString())
-                    map.put("deviceId", "Android")
+                    val model = SubmitFeedbackModel()
 
+
+
+                    model.cause = et_5.text.toString()
+                    model.mobile = et_1.text.toString()
+                    model.name = et_3.text.toString()
+                    model.title = et_4.text.toString()
+                    model.email = et_2.text.toString()
 
                     if (listsId.contains("EMPTY")) {
                         listsId.remove("EMPTY")
                     }
 
-                    var sb = StringBuilder()
 
-                    listsId.forEach {
-                        sb.append(it).append(",")
-                    }
+                    val arrayimageIds = listsId.toArray(arrayOfNulls<String>(listsId.size))
+
+                    model.fileIds = arrayimageIds
 
 
-                    map.put("files", sb.toString())
 
 
                     ApiServices.getInstance()
                         .create(SectionUselessService::class.java)
-                        .feedback(map)
+                        .feedback(model)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(object : ProcessObserver2(mActivity) {
@@ -113,6 +115,11 @@ class A_FeedBackFragment : BaseFragment(), View.OnClickListener, CommonView {
 
 
             }
+
+            R.id.tv_see -> {
+                start(AllFeedBackFragment())
+            }
+
             else -> {
 
             }
@@ -242,7 +249,7 @@ class A_FeedBackFragment : BaseFragment(), View.OnClickListener, CommonView {
                     if ("photo" == string) {
                         mPublicPhotoPath = PhotoUtils.takePhote(this@A_FeedBackFragment, mActivity, 10084)
                     } else {
-                        PhotoUtils.selectPhoto(this@A_FeedBackFragment, 9-lists.size,10085)
+                        PhotoUtils.selectPhoto(this@A_FeedBackFragment, 9 - lists.size, 10085)
                     }
 
                     Log.i("requestRuntime", "onGranted")
@@ -264,7 +271,7 @@ class A_FeedBackFragment : BaseFragment(), View.OnClickListener, CommonView {
             if ("photo" == string) {
                 mPublicPhotoPath = PhotoUtils.takePhote(this@A_FeedBackFragment, mActivity, 10084)
             } else {
-                PhotoUtils.selectPhoto(this@A_FeedBackFragment, 9-lists.size,10085)
+                PhotoUtils.selectPhoto(this@A_FeedBackFragment, 9 - lists.size, 10085)
             }
 
         }
@@ -276,27 +283,26 @@ class A_FeedBackFragment : BaseFragment(), View.OnClickListener, CommonView {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == 10085 && resultCode == BaseActivity.RESULT_OK) {
-            val mSelected = Matisse.obtainResult(data)
-            Matisse.obtainResult(data)
+
             val list = Matisse.obtainPathResult(data)
-            Log.i("OnActivityResult ", list[0])
 
-            val file = File(list[0])
 
-            lists.add(0, file.path)
+            val listFiles = ArrayList<File>()
 
-            while (lists.size > 3) {
-                lists.removeAt(lists.lastIndex)
-
+            lists.addAll(list)
+            list.forEach {
+                val file = File(it)
+                listFiles.add(file)
             }
+            present?.UpLoadFiles(listFiles)
+
+            mAdapter?.notifyDataSetChanged()
 
 
 
 
 
-            mAdapter?.setNewData(lists)
 
-            present?.UpLoadFile(file)
 
 
         }

@@ -55,7 +55,7 @@ public class ProductBean implements Serializable {
         public boolean ifRead;
         public String name;
         public String logoUrl;
-        public double price;
+        public float price;
 
 
         public List<PhotoBean.ItemBean> images;

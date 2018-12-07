@@ -212,8 +212,6 @@ class ProductAddFragment : BaseFragment(), CommonView {
                     .subscribe(object : ProcessObserver2(mActivity) {
                         override fun processValue(response: String?) {
                             Log.i("ProductAddFragment", response)
-
-
                             if ("ADD" == type) {
                                 AlertDialogFactory.createFactory(mActivity).getAlertDialog(
                                     "添加商品成功",
@@ -303,7 +301,7 @@ class ProductAddFragment : BaseFragment(), CommonView {
                 .request(Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE)
                 .subscribe {
                     if (it) {
-                        PhotoUtils.takePhote(this@ProductAddFragment, mActivity, 10084)
+                        mPublicPhotoPath = PhotoUtils.takePhote(this@ProductAddFragment, mActivity, 10084)
                     } else {
                         Toast.makeText(mActivity, "请前往设置中心开启照相机权限", Toast.LENGTH_SHORT).show()
                     }
@@ -371,18 +369,26 @@ class ProductAddFragment : BaseFragment(), CommonView {
         //拍照
         if (requestCode == 10084 && resultCode == BaseActivity.RESULT_OK) {
             if (resultCode != Activity.RESULT_OK) return
-            val uri = Uri.parse(mPublicPhotoPath)
-            val path = uri.path
-            val file = File(path)
-            lists.add(file.path)
 
-            while (lists.size > 3) {
-                lists.removeAt(lists.lastIndex)
+            if (!TextUtils.isEmpty(mPublicPhotoPath)) {
+                val uri = Uri.parse(mPublicPhotoPath)
+                val path = uri.path
+                val file = File(path)
+                lists.add(file.path)
+                val listFiles = ArrayList<File>()
+
+                listFiles.add(file)
+                while (lists.size > 3) {
+                    lists.removeAt(lists.lastIndex)
+                }
+
+                mAdapter?.notifyDataSetChanged()
+
+                present?.UpLoadFiles(listFiles)
+            } else {
+
             }
 
-            mAdapter?.notifyDataSetChanged()
-
-            present?.UpLoadFile(file)
 
         }
 

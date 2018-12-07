@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:background="@color/f8"
                 android:layout_width="match_parent" android:layout_height="match_parent">
 
     <com.yjhh.ppwbusiness.views.cui.TitleBarView
@@ -72,13 +73,13 @@
                                                       app:ievunderline="true"
                                                       android:layout_height="wrap_content"/>
         <com.yjhh.ppwbusiness.views.cui.ItemEntryView android:layout_width="match_parent"
-                                                      android:id="@+id/iev_5"
-                                                      app:ievtextpadding="@dimen/sp_12"
-                                                      app:ievtextColor="@color/all_3"
-                                                      app:ievbackground="@color/white"
+                                                       android:id="@+id/iev_5"
 
-                                                      app:ievtextValue="服务热线"
-                                                      android:layout_height="wrap_content"/>
+                                                       app:ievtextpadding="@dimen/sp_12"
+                                                       app:ievtextColor="@color/all_3"
+                                                       app:ievbackground="@color/white"
+                                                       app:ievtextValue="服务热线"
+                                                       android:layout_height="wrap_content"/>
     </LinearLayout>
 
 

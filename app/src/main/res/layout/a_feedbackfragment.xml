@@ -58,6 +58,7 @@
             <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:background="@color/white"
                       android:hint="标题"
+
                       android:layout_marginBottom="@dimen/sp_12"
                       android:padding="12pt" android:textSize="14pt"
                       android:id="@+id/et_4"

@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
                 android:orientation="vertical"
+                android:background="@color/f8"
                 android:layout_height="match_parent">
 
     <LinearLayout android:layout_width="match_parent"
@@ -16,14 +17,16 @@
 
         <de.hdodenhof.circleimageview.CircleImageView android:layout_width="93pt" android:layout_height="93pt"
                                                       android:layout_gravity="center"
+                                                      android:id="@+id/iv_image"
                                                       android:layout_marginTop="19pt"
                                                       android:layout_marginBottom="10pt"
-                                                      android:src="@mipmap/ic_launcher"
+                                                      android:src="@drawable/icon_place"
         />
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                   android:layout_gravity="center"
                   android:text="管理员账户"
+
                   android:paddingLeft="12pt"
                   android:paddingRight="12pt"
                   android:id="@+id/tv_text"
@@ -48,7 +51,7 @@
               android:background="@color/e6"
               android:layout_marginLeft="12pt"
               android:layout_marginRight="12pt"
-              android:layout_height="1pt"/>
+              android:layout_height="1px"/>
 
 
         <LinearLayout android:layout_width="match_parent"
@@ -64,10 +67,14 @@
                                                           app:ievbackground="@color/white"
                                                           android:layout_height="wrap_content"/>
 
+
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="12pt"
+                    android:background="@color/f8"
+                    android:paddingTop="12pt"
+                    android:paddingBottom="8pt"
                     android:text="账户信息"
                     android:textColor="#FF999999"
                     android:textSize="12pt"
@@ -98,12 +105,24 @@
 
         </LinearLayout>
 
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12pt"
+                android:layout_marginTop="6.5pt"
+                android:layout_marginRight="12pt"
+                android:text="注：提现方式需向运营人员提出申请协助绑定/修改"
+                android:textColor="#FFC5AC81"
+                android:textSize="11pt"
+        />
+
+
         <com.google.android.material.button.MaterialButton android:layout_width="match_parent"
                                                            android:layout_gravity="bottom"
                                                            android:layout_marginBottom="20pt"
                                                            android:text="退出登录"
                                                            android:id="@+id/tv_loginOut"
-                                                           android:layout_marginTop="80pt"
+                                                           android:layout_marginTop="10pt"
                                                            android:gravity="center"
                                                            android:layout_marginLeft="12pt"
                                                            android:layout_marginRight="12pt"

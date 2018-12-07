@@ -34,6 +34,10 @@ class ItemEntryView @JvmOverloads constructor(
         return tv_content.text.toString()
     }
 
+    fun setArrow(){
+        iv_arrow.visibility= View.INVISIBLE
+    }
+
 
     init {
 

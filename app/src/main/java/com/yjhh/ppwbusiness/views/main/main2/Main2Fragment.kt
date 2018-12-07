@@ -37,7 +37,7 @@ class Main2Fragment : BaseMainFragment() {
 
 
             (parentFragment as MainFragment).start(
-                ReservationOrderFragment()
+                ReservationOrderFragment.newInstance(0)
             )
 
         }

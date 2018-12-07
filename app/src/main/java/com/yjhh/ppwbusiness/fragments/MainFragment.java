@@ -23,7 +23,7 @@ public class MainFragment extends SupportFragment {
 
     public static final int FIRST = 0;
     public static final int SECOND = 1;
-     public static final int THIRD = 2;
+    public static final int THIRD = 2;
     //public static final int FOURTH = 2;
 
     private SupportFragment[] mFragments = new SupportFragment[3];
@@ -92,8 +92,8 @@ public class MainFragment extends SupportFragment {
                 showHideFragment(mFragments[position], mFragments[prePosition]);
 
                 BottomBarTab tab = mBottomBar.getItem(FIRST);
-                if (position == FIRST) {
-
+                if (position == THIRD) {
+                    ((Main4Fragment) mFragments[THIRD]).change();
                 } else {
                     // tab.setUnreadCount(tab.getUnreadCount() + 1);
                 }
@@ -130,7 +130,7 @@ public class MainFragment extends SupportFragment {
 
             String content = data.getString("result_string");
 
-           startBrotherFragment(new WriteOffFragment());
+            startBrotherFragment(new WriteOffFragment());
             Toast.makeText(_mActivity, content, Toast.LENGTH_SHORT).show();
 
 

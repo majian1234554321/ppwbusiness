@@ -1,10 +1,9 @@
 package com.yjhh.ppwbusiness.api
 
+import com.yjhh.ppwbusiness.bean.SubmitFeedbackModel
 import io.reactivex.Observable
 import okhttp3.ResponseBody
-import retrofit2.http.FieldMap
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface SectionUselessService {
 
@@ -36,12 +35,12 @@ interface SectionUselessService {
     fun about(): Observable<ResponseBody>// 我的余额/积分
 
 
-    @FormUrlEncoded
+    @Headers("Content-Type: application/json", "Accept: application/json")//需要添加头
     @POST("about/feedback")
-    fun feedback(@FieldMap map: Map<String, String>): Observable<ResponseBody>// 资金记录/积分记录
+    fun feedback(@Body map: SubmitFeedbackModel): Observable<ResponseBody>
 
 
     @POST("shopAdmin/currInfo")
-    fun currInfo(): Observable<ResponseBody>// 资金记录/积分记录
+    fun currInfo(): Observable<ResponseBody>
 
 }

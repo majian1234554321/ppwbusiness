@@ -107,7 +107,7 @@
                           android:textSize="12pt"
                           android:layout_marginLeft="@dimen/sp_12"
                           android:layout_centerVertical="true"
-
+                          android:inputType="number"
                           android:layout_toRightOf="@+id/tv_price"
                           android:layout_gravity="center_vertical"
 

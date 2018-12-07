@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:background="@color/f8"
@@ -19,6 +20,7 @@
             android:layout_height="wrap_content"
             android:text="管理员"
             android:padding="12pt"
+
             android:layout_marginTop="10pt"
             android:textColor="#FF333333"
             android:textSize="19pt"
@@ -29,7 +31,9 @@
             android:layout_width="match_parent"
             android:background="@color/white"
             android:layout_height="wrap_content"
-            android:text="张三"
+
+            android:id="@+id/tv_name"
+            tools:text="张三"
             android:paddingLeft="24pt"
             android:textColor="#FF333333"
             android:textSize="14pt"
@@ -41,9 +45,10 @@
             android:layout_width="match_parent"
             android:background="@color/white"
             android:layout_height="wrap_content"
-            android:text="18888888888"
+            tools:text="18888888888"
             android:paddingTop="6pt"
             android:paddingBottom="6pt"
+            android:id="@+id/tv_mobile"
             android:paddingLeft="24pt"
             android:textColor="#FF999999"
             android:textSize="14pt"

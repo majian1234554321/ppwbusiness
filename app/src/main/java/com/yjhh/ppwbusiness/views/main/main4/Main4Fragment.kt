@@ -5,6 +5,7 @@ import android.content.Intent
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.azhon.appupdate.listener.OnDownloadListener
 
 import com.google.gson.Gson
@@ -39,7 +40,7 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
 
 
     override fun onSuccess() {
-
+        if (tv_status.text.toString() == "休息中") tv_status.text = "营业中" else tv_status.text = "休息中"
     }
 
     override fun AllShopInfoSuccess(model: AllShopInfo) {
@@ -52,10 +53,10 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
         }
 
 
+        tv_name.text = model.name
 
-        if (model.times!=null&&model.times.size > 0) {
 
-
+        if (model.times != null && model.times.size > 0) {
 
 
             val sb = StringBuilder()
@@ -64,9 +65,6 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
                     .append(" - ")
                     .append(it.end)
                     .append("   ")
-
-
-
 
 
             }
@@ -162,7 +160,7 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
             R.id.iev_Management -> {
 
                 (parentFragment as MainFragment).startBrotherFragment(
-                    EmployeeFragment()
+                    EmployeeFragment.newInstance(model)
                 )
 
             }
@@ -197,7 +195,7 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
                 } else {
                     ShopSetPresent(mActivity, this)?.editOpen("1")
                 }
-                if (tv_status.text.toString() == "休息中") tv_status.text = "营业中" else tv_status.text = "休息中"
+
 
             }
 
@@ -212,6 +210,8 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
     override fun getLayoutRes(): Int = R.layout.main4fragment
 
 
+    var model: AccountBean? = null
+
     override fun initView() {
         val arrayView = arrayOf(
             profile_image, tv_name, tv_to, tv_status
@@ -224,24 +224,22 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
 
 
         if (!TextUtils.isEmpty(SharedPreferencesUtils.getParam(context, "sessionId", "") as String)) {
-            tv_name.text = SharedPreferencesUtils.getParam(context, "nickName", "") as String
+            // tv_name.text = SharedPreferencesUtils.getParam(context, "nickName", "") as String
         } else {
-            tv_name.text = "未登录"
+            // tv_name.text = "未登录"
         }
 
         val dis = RxBus.default.toFlowable(LoginBean::class.java).subscribe {
             LogUtils.i("Main4Fragment", it.mobile)
             if (it.loginSuccess) {
-                tv_name.text = SharedPreferencesUtils.getParam(context, "nickName", "") as String
+                //  tv_name.text = SharedPreferencesUtils.getParam(context, "nickName", "") as String
             } else {
-                tv_name.text = "未登录"
+                //  tv_name.text = "未登录"
             }
         }
 
 
-
-        ShopSetPresent(mActivity, this)
-            .getAllInfo()
+        checkShopInfo()
 
 
         /*******************************获取当前账户*************************************/
@@ -255,12 +253,16 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
                 override fun processValue(response: String?) {
                     Log.i("AccountFragment", response)
 
-                    iev_account.setTextContent(JSONObject(response).optString("roleName"))
+                    model = Gson().fromJson<AccountBean>(response, AccountBean::class.java)
+
+
+
+                    iev_account.setTextContent("${model?.roleName}: ${model?.name}")
 
                     ImageLoaderUtils.loadCircle(
                         mActivity,
                         profile_image,
-                        JSONObject(response).optString("avatarUrl"),
+                        model?.avatarUrl,
                         R.drawable.icon_logoholder,
                         R.drawable.icon_logoholder
                     )
@@ -270,10 +272,25 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
 
                 override fun onFault(message: String) {
                     Log.i("AccountFragment", message)
+                    // Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+
                 }
 
             })
 
     }
+
+
+    fun checkShopInfo() {
+        ShopSetPresent(mActivity, this)
+            .getAllInfo()
+    }
+
+
+    fun change() {
+        ShopSetPresent(mActivity, this)
+            .getAllInfo()
+    }
+
 
 }

@@ -14,12 +14,14 @@ import com.yjhh.ppwbusiness.adapter.ReservationBeforeAdapter
 import com.yjhh.ppwbusiness.adapter.ReservationOrderAdapter
 import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.bean.DateBean
+import com.yjhh.ppwbusiness.bean.ProductBean
 import com.yjhh.ppwbusiness.bean.ReservationBean
 import com.yjhh.ppwbusiness.ipresent.ReservePresent
 import com.yjhh.ppwbusiness.iview.ReserveView
 import com.yjhh.ppwbusiness.utils.DateUtil
 import com.yjhh.ppwbusiness.utils.TimeUtil
 import com.yjhh.ppwbusiness.views.cui.PPWHeader2
+import com.yjhh.ppwbusiness.views.product.ProductAddFragment
 import kotlinx.android.synthetic.main.reservationorderfragment.*
 
 class ReservationOrderFragment : BaseFragment(), View.OnClickListener, ReserveView {
@@ -122,11 +124,16 @@ class ReservationOrderFragment : BaseFragment(), View.OnClickListener, ReserveVi
         val bean = DateBean()
         bean.MMDD = "即将到时"
         dateList.add(0, bean)
-        dateList.forEach {
 
+
+
+     val index =    arguments?.getInt("index",0)
+
+        dateList.forEach {
             mTabLayout.addTab(mTabLayout.newTab().setText(it.MMDD))
         }
         mTabLayout.tabMode = TabLayout.MODE_SCROLLABLE
+        index?.let { mTabLayout.getTabAt(it)?.select() };
         mTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(p0: TabLayout.Tab?) {
 
@@ -145,6 +152,7 @@ class ReservationOrderFragment : BaseFragment(), View.OnClickListener, ReserveVi
             }
 
         })
+
 
 
         initRefreshLayout()
@@ -277,4 +285,20 @@ class ReservationOrderFragment : BaseFragment(), View.OnClickListener, ReserveVi
         }
 
     }
+
+
+    companion object {
+        fun newInstance( index: Int?): ReservationOrderFragment {
+            val fragment = ReservationOrderFragment()
+            val bundle = Bundle()
+            index?.let { bundle.putInt("index", it) }
+
+            fragment.arguments = bundle
+            return fragment
+        }
+    }
+
+
+
+
 }

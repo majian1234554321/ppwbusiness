@@ -3,12 +3,14 @@ package com.yjhh.ppwbusiness.views.cui;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import com.scwang.smartrefresh.layout.api.RefreshHeader;
@@ -28,6 +30,14 @@ public class PPWHeader2 extends InternalClassics<PPWHeader2> implements RefreshH
         this(context, null);
     }
 
+    public int color;
+
+    public PPWHeader2(Context context, int color) {
+        this(context, null);
+        this.color = color;
+    }
+
+
     public PPWHeader2(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
@@ -43,6 +53,11 @@ public class PPWHeader2 extends InternalClassics<PPWHeader2> implements RefreshH
         final View progressView = mProgressView;
         final ViewGroup centerLayout = mCenterLayout;
         final DensityUtil density = new DensityUtil();
+        mCenterLayout.setBackgroundColor(color);
+
+        LinearLayout ll = view.findViewById(R.id.ll);
+
+        ll.setBackgroundColor(color);
 
 
         imageView = view.findViewById(R.id.iv_image);
@@ -91,9 +106,6 @@ public class PPWHeader2 extends InternalClassics<PPWHeader2> implements RefreshH
         //  ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(imageView, "scaleX", 1f, 2f, 1f);
         //沿y轴放大
         //  ObjectAnimator scaleYAnimator = ObjectAnimator.ofFloat(imageView, "scaleY", 1f, 2f, 1f);
-
-
-
 
 
         // AnimatorSet set = new AnimatorSet();

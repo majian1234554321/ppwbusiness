@@ -53,6 +53,8 @@ class AboutFragment : BaseFragment(), View.OnClickListener {
                     tv_introduce.text = jsonObject.optString("content")
 
                     iev_5.setTextContent(jsonObject.optString("tel"))
+
+                    iev_5.setArrow()
                 }
 
                 override fun onFault(message: String) {
