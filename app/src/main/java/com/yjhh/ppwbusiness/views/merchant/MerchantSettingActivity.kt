@@ -27,9 +27,7 @@ import com.yjhh.ppwbusiness.api.ApiServices
 import com.yjhh.ppwbusiness.api.ShopSetServices
 import com.yjhh.ppwbusiness.base.BaseActivity
 import com.yjhh.ppwbusiness.base.ProcessObserver2
-import com.yjhh.ppwbusiness.bean.AllShopInfo
-import com.yjhh.ppwbusiness.bean.BusinessHoursBean
-import com.yjhh.ppwbusiness.bean.LoginBean
+import com.yjhh.ppwbusiness.bean.*
 import com.yjhh.ppwbusiness.ipresent.ShopSetPresent
 import com.yjhh.ppwbusiness.iview.ShopSetView
 import com.yjhh.ppwbusiness.utils.Glide4Engine
@@ -52,10 +50,11 @@ import java.io.IOException
 import java.lang.StringBuilder
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.text.Typography.times
 
 class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetView {
 
-    var listHours = ArrayList<BusinessHoursBean>()
+    var listHours = ArrayList<ShopTimesModel>()
 
     override fun AllShopInfoSuccess(model: AllShopInfo) {
 
@@ -67,7 +66,7 @@ class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetVie
 
         tv_editOpen.isOpen = model.openStatus != 1
 
-        if (model.times!=null&&model.times.size > 0) {
+        if (model.times != null && model.times.size > 0) {
 
             listHours.clear()
 
@@ -81,7 +80,7 @@ class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetVie
 
 
 
-                listHours.add(BusinessHoursBean(it.begin, it.end))
+                listHours.add(ShopTimesModel(it.begin, it.end))
 
             }
             tv_time.text = sb.toString()
@@ -129,12 +128,13 @@ class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetVie
             R.id.tv_save -> {
 
                 if (!TextUtils.isEmpty(tv_shopTel.text.toString())) {
-                    present?.editConfig(
-                        tv_shopAddress.text.toString(),
-                        tv_shopDesc.text.toString(),
-                        tv_shopTel.text.toString(),
-                        typeStatus
-                    )
+                    val map = SubmitShopAdminConfigModel()
+                    map.address = tv_shopAddress.text.toString()
+                    map.content = tv_shopDesc.text.toString()
+                    map.mobile = tv_shopTel.text.toString()
+                    map.status = typeStatus
+                    map.times = listHours
+                    present?.editConfig(map)
                 } else {
                     Toast.makeText(this, "商家的联系电话不能为空", Toast.LENGTH_SHORT).show()
                 }
@@ -197,12 +197,13 @@ class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetVie
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == 10086) {
-            val timeList = data?.getParcelableArrayListExtra<BusinessHoursBean>("time")
+            val timeList = data?.getParcelableArrayListExtra<ShopTimesModel>("time")
             if (timeList != null) {
                 val sb = StringBuilder()
+                listHours.clear()
                 timeList.forEach {
 
-                    listHours.clear()
+
 
                     sb.append(it.begin)
                         .append(" - ")
@@ -211,7 +212,7 @@ class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetVie
 
 
 
-                    listHours.add(BusinessHoursBean(it.begin, it.end))
+                    listHours.add(ShopTimesModel(it.begin, it.end))
 
                 }
 

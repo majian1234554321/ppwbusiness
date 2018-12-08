@@ -20,8 +20,10 @@ import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.BusinessHoursAdapter
 import com.yjhh.ppwbusiness.api.ApiServices
 import com.yjhh.ppwbusiness.api.ShopSetServices
+import com.yjhh.ppwbusiness.base.ProcessObserver2
 import com.yjhh.ppwbusiness.bean.SETime
-import com.yjhh.ppwbusiness.bean.BusinessHoursBean
+
+import com.yjhh.ppwbusiness.bean.ShopTimesModel
 import com.yjhh.ppwbusiness.views.cui.AlertDialogFactory
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -37,21 +39,22 @@ class BusinessHoursActivity : AppCompatActivity(), View.OnClickListener {
 
             R.id.tv_save -> {
                 ApiServices.getInstance().create(ShopSetServices::class.java)
-                    .editTimes(list.toArray(arrayOfNulls<BusinessHoursBean>(list.size)))
+                    .editTimes(list.toArray(arrayOfNulls<ShopTimesModel>(list.size)))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(
-                        {
-                            Log.i("BusinessHoursActivity", it.string())
+                    .subscribe(object :ProcessObserver2(this@BusinessHoursActivity){
+                        override fun processValue(response: String?) {
                             val intent = Intent()
                             intent.putExtra("time", list)
                             setResult(RESULT_OK, intent)
                             finish()
-
-                        }, {
-                            Log.i("BusinessHoursActivity", it.toString())
                         }
-                    )
+
+                        override fun onFault(message: String) {
+                            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                        }
+
+                    })
             }
 
             else -> {
@@ -66,7 +69,7 @@ class BusinessHoursActivity : AppCompatActivity(), View.OnClickListener {
 
 
     var mAdapter: BusinessHoursAdapter? = null
-    val list = ArrayList<BusinessHoursBean>()
+    val list = ArrayList<ShopTimesModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,7 +81,7 @@ class BusinessHoursActivity : AppCompatActivity(), View.OnClickListener {
 
         getNoLinkData()
         list.clear()
-        val timeList = intent.getParcelableArrayListExtra<BusinessHoursBean>("time")
+        val timeList = intent.getParcelableArrayListExtra<ShopTimesModel>("time")
         list.addAll(timeList)
 
 
@@ -96,8 +99,10 @@ class BusinessHoursActivity : AppCompatActivity(), View.OnClickListener {
 
         tv_add.setOnClickListener {
             if (list.size < 3) {
-                list.add(BusinessHoursBean("14:00", "18:00"))
+                list.add(ShopTimesModel("14:00", "18:00"))
                 mAdapter?.setNewData(list)
+            } else {
+                Toast.makeText(this@BusinessHoursActivity, "营业时段最多添加3个", Toast.LENGTH_SHORT).show()
             }
 
         }

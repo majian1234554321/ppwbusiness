@@ -19,7 +19,7 @@ class ProductPresent(var context: Context, var view: ProductView) : BasePresent(
     fun allproducts(
         categoryId: String,
         order: String,
-        orderType: String,
+        desc: String,
         status: String,
         pageIndex: Int,
         pageSize: Int,
@@ -29,7 +29,8 @@ class ProductPresent(var context: Context, var view: ProductView) : BasePresent(
         map.clear()
         map["categoryId"] = categoryId
         map["order"] = order
-        map["orderType"] = orderType
+        map["desc"] = desc
+       // map["desc"] = desc
 
         map["status"] = status
         map["pageIndex"] = pageIndex.toString()

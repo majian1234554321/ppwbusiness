@@ -27,7 +27,10 @@ class MessageCenter2Fragment : BaseFragment(), MyMessageView {
     var status = "-1"//状态，默认null(null/-1 全部 0未生效 1 有效的 2已过期的/失效的)
     override fun onSuccess(main1bean: MyMessageBean, flag: String) {
         if ("refresh" == flag) {
-            swipeLayout.finishRefresh()
+            if (swipeLayout!=null) {
+                swipeLayout.finishRefresh()
+            }
+
             mAdapter.setNewData(main1bean.items as ArrayList<MyMessageBean.ItemsBean>)
 
         } else {

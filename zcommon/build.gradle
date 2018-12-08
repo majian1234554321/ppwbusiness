@@ -85,4 +85,6 @@ dependencies {
 
     api 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     api 'com.orhanobut:logger:2.1.1'
+
+    api 'top.zibin:Luban:1.1.8'
 }

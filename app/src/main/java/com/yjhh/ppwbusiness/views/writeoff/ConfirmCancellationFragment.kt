@@ -6,8 +6,10 @@ import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.TextUtils
 import androidx.recyclerview.widget.GridLayoutManager
 import android.widget.Toast
+import androidx.lifecycle.Transformations.map
 import com.azhon.appupdate.utils.PermissionUtil.requestPermission
 import com.google.gson.Gson
 import com.tbruyelle.rxpermissions2.RxPermissions
@@ -28,11 +30,22 @@ import com.yjhh.ppwbusiness.views.cui.AbsSheetDialog
 import com.yjhh.ppwbusiness.views.cui.AlertDialogFactory
 import com.yjhh.ppwbusiness.views.cui.BottomVerSheetDialog
 import com.yjhh.ppwbusiness.views.cui.GridRecyclerItemDecoration
+import com.yjhh.ppwbusiness.views.main.MainActivity
 import com.zhihu.matisse.Matisse
+import com.zhihu.matisse.internal.utils.PhotoMetadataUtils.getPath
+import io.reactivex.Flowable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.confirmcancellationfragment.*
+import top.zibin.luban.CompressionPredicate
+import top.zibin.luban.Luban
+import top.zibin.luban.OnCompressListener
 import java.io.File
 import java.util.*
+import java.util.function.BiConsumer
+import java.util.function.BiFunction
+import java.util.function.Function
 
 class ConfirmCancellationFragment : BaseFragment(), CommonView, CancellationView {
     override fun onSuccessCancellation(response: String?, flag: String?) {
@@ -48,11 +61,13 @@ class ConfirmCancellationFragment : BaseFragment(), CommonView, CancellationView
 
         model.item.forEach {
             listsId.add(it.fileId)
+            lists.add(it.fileUrl)
         }
+        mAdapter?.notifyDataSetChanged()
     }
 
     override fun onFault(errorMsg: String?) {
-
+        Toast.makeText(context, errorMsg, Toast.LENGTH_SHORT).show()
     }
 
     override fun getLayoutRes(): Int = R.layout.confirmcancellationfragment
@@ -119,6 +134,7 @@ class ConfirmCancellationFragment : BaseFragment(), CommonView, CancellationView
             lists.removeAt(position)
             listsId.removeAt(position)
             mAdapter?.notifyItemRemoved(position)
+            mAdapter?.notifyDataSetChanged()
         })
     }
 
@@ -171,7 +187,7 @@ class ConfirmCancellationFragment : BaseFragment(), CommonView, CancellationView
                 .request(Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE)
                 .subscribe {
                     if (it) {
-                        PhotoUtils.takePhote(this@ConfirmCancellationFragment, mActivity, 10084)
+                        mPublicPhotoPath = PhotoUtils.takePhote(this@ConfirmCancellationFragment, mActivity, 10084)
                     } else {
                         Toast.makeText(mActivity, "请前往设置中心开启照相机权限", Toast.LENGTH_SHORT).show()
                     }
@@ -209,17 +225,38 @@ class ConfirmCancellationFragment : BaseFragment(), CommonView, CancellationView
 
             val list = Matisse.obtainPathResult(data)
 
+            val listFiles = ArrayList<File?>()
+            Luban.with(mActivity)
+                .load(list)
+                .ignoreBy(100)
+                .filter { path -> !(TextUtils.isEmpty(path) || path?.toLowerCase()?.endsWith(".gif")!!) }
+                .setCompressListener(object : OnCompressListener {
+                    override fun onSuccess(file: File?) {
+                        listFiles.add(file)
+                    }
 
-            val listFiles = ArrayList<File>()
+                    override fun onError(e: Throwable?) {
 
-            lists.addAll(list)
-            list.forEach {
-                val file = File(it)
-                listFiles.add(file)
-            }
+                    }
+
+                    override fun onStart() {
+
+                    }
+
+                })
+
+                .launch();
+
+
+//            val dis = Flowable.just(list)
+//                .map( BiFunction<List<String>, List<File>> { t1->
+//
+//                })
+
+
+
+
             present?.UpLoadFiles(listFiles)
-
-            mAdapter?.notifyDataSetChanged()
 
 
         }
@@ -229,10 +266,9 @@ class ConfirmCancellationFragment : BaseFragment(), CommonView, CancellationView
             val uri = Uri.parse(mPublicPhotoPath)
             val path = uri.path
             val file = File(path)
-            lists.add(file.path)
-
-            mAdapter?.notifyDataSetChanged()
-            present?.UpLoadFile(file)
+            val listFiles = ArrayList<File>()
+            listFiles.add(file)
+            present?.UpLoadFiles(listFiles)
 
         }
 

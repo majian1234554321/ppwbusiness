@@ -39,6 +39,16 @@ class AccountFragment : BaseFragment(), View.OnClickListener {
                 start(SetNickNameFragment())
             }
 
+            R.id.iev_bank->{
+
+            }
+            R.id.iev_alipay->{
+
+            }
+            R.id.iev_wx->{
+
+            }
+
             else -> {
             }
         }
@@ -47,7 +57,7 @@ class AccountFragment : BaseFragment(), View.OnClickListener {
     override fun getLayoutRes(): Int = R.layout.accountfragment
 
     override fun initView() {
-        arrayOf(tv_loginOut, iev_reset, iev_nickName)
+        arrayOf(tv_loginOut, iev_reset, iev_nickName, iev_bank, iev_alipay, iev_wx)
             .forEach {
                 it.setOnClickListener(this)
             }
@@ -76,9 +86,6 @@ class AccountFragment : BaseFragment(), View.OnClickListener {
                     tv_text.text = if (model.role == 0) "管理员账户" else "员工账户"
 
 
-
-
-
                     iev_nickName.setTextContent(SharedPreferencesUtils.getParam(mActivity, "nickName", "").toString())
 
                     ImageLoaderUtils.loadCircle(
@@ -88,6 +95,43 @@ class AccountFragment : BaseFragment(), View.OnClickListener {
                         R.drawable.icon_logoholder,
                         R.drawable.icon_logoholder
                     )
+
+
+                    if (model.binds != null && model.binds.isNotEmpty()) {
+
+                        if (model.binds[0] != null) {
+                            if (model.binds[0].bindStatus == 1) {
+                                iev_bank.setTextContent(model.binds[0].text)
+                            } else {
+                                iev_bank.setTextContent("未绑定")
+                            }
+
+                        }
+
+
+                        if (model.binds[1] != null) {
+                            if (model.binds[1].bindStatus == 1) {
+                                iev_alipay.setTextContent(model.binds[1].text)
+                            } else {
+                                iev_alipay.setTextContent("未绑定")
+                            }
+
+                        }
+
+
+                        if (model.binds[2] != null) {
+                            if (model.binds[2].bindStatus == 1) {
+                                iev_wx.setTextContent(model.binds[2].text)
+                            } else {
+                                iev_wx.setTextContent("未绑定")
+                            }
+
+                        }
+
+
+
+
+                    }
 
 
                 }

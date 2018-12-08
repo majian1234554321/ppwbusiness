@@ -289,7 +289,7 @@ class A_FeedBackFragment : BaseFragment(), View.OnClickListener, CommonView {
 
             val listFiles = ArrayList<File>()
 
-            lists.addAll(list)
+            lists.addAll(0,list)
             list.forEach {
                 val file = File(it)
                 listFiles.add(file)

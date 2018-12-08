@@ -80,25 +80,30 @@
                     android:textSize="12pt"
             />
 
+
+
             <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
                                                            android:paddingLeft="24pt"
-                                                           android:paddingRight="12pt"
-                                                           android:id="@+id/iev_bank"
-                                                           app:ievtextValue2="银行卡"
+                                                           android:paddingRight="24pt"
+                                                           android:id="@+id/iev_wx"
+                                                           app:ievtextValue2="微信"
                                                            app:ievbackground="@color/white"
                                                            android:layout_height="wrap_content"/>
+
+
             <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
                                                            android:paddingLeft="24pt"
-                                                           android:paddingRight="12pt"
+                                                           android:paddingRight="24pt"
                                                            android:id="@+id/iev_alipay"
                                                            app:ievtextValue2="支付宝"
                                                            app:ievbackground="@color/white"
                                                            android:layout_height="wrap_content"/>
+
             <com.yjhh.ppwbusiness.views.cui.ItemEntryView2 android:layout_width="match_parent"
                                                            android:paddingLeft="24pt"
-                                                           android:paddingRight="12pt"
-                                                           android:id="@+id/iev_wx"
-                                                           app:ievtextValue2="微信"
+                                                           android:paddingRight="24pt"
+                                                           android:id="@+id/iev_bank"
+                                                           app:ievtextValue2="银行卡"
                                                            app:ievbackground="@color/white"
                                                            android:layout_height="wrap_content"/>
 

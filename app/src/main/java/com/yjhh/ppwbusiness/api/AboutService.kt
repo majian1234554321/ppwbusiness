@@ -18,4 +18,9 @@ interface AboutService {
     fun feedbackList(@FieldMap map: Map<String, String>): Observable<ResponseBody>// 资金记录/积分记录
 
 
+    @FormUrlEncoded
+    @POST("about/feedbackDetail")
+    fun feedbackDetail(@FieldMap map: Map<String, String>): Observable<ResponseBody>// 资金记录/积分记录
+
+
 }

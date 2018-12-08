@@ -53,7 +53,7 @@ class CommonPresent(var context: Context, var view: CommonView) : BasePresent() 
     }
 
 
-    fun UpLoadFiles(files: List<File>) {
+    fun UpLoadFiles(files: List<File?>) {
 
 
         val list = ArrayList<MultipartBody.Part>()
@@ -62,7 +62,7 @@ class CommonPresent(var context: Context, var view: CommonView) : BasePresent() 
         files.forEachIndexed { index, it ->
             run {
                 val requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), it)
-                val body = MultipartBody.Part.createFormData("multipartFile$index", it.name, requestFile)
+                val body = MultipartBody.Part.createFormData("multipartFile$index", it?.name, requestFile)
                 list.add(body)
             }
 

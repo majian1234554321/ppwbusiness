@@ -192,11 +192,13 @@
                       android:layout_marginTop="12pt"
                       android:layout_marginBottom="9pt"
                       android:textColor="#FF333333"
+
                       android:textSize="14pt"
             />
 
             <EditText android:layout_width="327pt" android:layout_height="39pt"
-
+                      android:paddingStart="12pt"
+                      android:textSize="12pt"
                       android:background="@drawable/stroke_frame_cd"
                       android:layout_gravity="center"
                       android:id="@+id/tv_shopTel"
@@ -217,8 +219,8 @@
                       android:background="@drawable/stroke_frame_cd"
                       android:layout_gravity="center"
                       android:layout_marginTop="12pt"
-
-
+                      android:textSize="12pt"
+                        android:paddingStart="12pt"
                       android:textColor="#FF333333"
                       android:id="@+id/tv_shopAddress"
                       android:padding="4dp"
@@ -243,7 +245,7 @@
                 <EditText android:layout_width="327pt" android:layout_height="125pt"
                           android:gravity="left|top"
 
-                          android:textSize="14pt"
+                          android:textSize="12pt"
                           android:hint="限80字内"
                           android:id="@+id/tv_shopDesc"
                           android:maxLength="80"

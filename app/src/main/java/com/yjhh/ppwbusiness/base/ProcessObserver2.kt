@@ -26,30 +26,27 @@ abstract class ProcessObserver2(var context: Context) : Observer<ResponseBody> {
     private var dialog: AlertDialog? = null
 
 
-
-
     object constructor {
         val gson = Gson()
     }
 
 
-
     override fun onSubscribe(d: Disposable) {
-        if (showProgress){
+        if (showProgress) {
 
         }
     }
 
 
-
     constructor(context: Context, showProgress: Boolean) : this(context) {
         this.showProgress = showProgress
-        dialog =  AlertDialogFactory.createFactory(context).getLoadingDialog("加载中...")
+        dialog = AlertDialogFactory.createFactory(context).getLoadingDialog("加载中...")
+        dialog?.setCancelable(false)
     }
 
     override fun onNext(t: ResponseBody) {
 
-
+        dismissProgressDialog()
         val response = t.string()
 
 

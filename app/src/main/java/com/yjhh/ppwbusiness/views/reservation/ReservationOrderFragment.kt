@@ -31,7 +31,10 @@ class ReservationOrderFragment : BaseFragment(), View.OnClickListener, ReserveVi
         when (flag) {
             "refresh" -> {
                 mAdapter?.setNewData(model.items)
-                swipeLayout.finishRefresh()
+                if(swipeLayout!=null){
+                    swipeLayout.finishRefresh()
+                }
+
 
 
                 if (pageIndex==0&&model.items.isEmpty()){
@@ -65,7 +68,9 @@ class ReservationOrderFragment : BaseFragment(), View.OnClickListener, ReserveVi
     }
 
     override fun onFault(errorMsg: String?) {
-        swipeLayout.finishRefresh()
+        if(swipeLayout!=null){
+            swipeLayout.finishRefresh()
+        }
         if (pageIndex==0){
             mAdapter?.setEmptyView(R.layout.emptyview, mRecyclerView.parent as ViewGroup)
         }
@@ -112,7 +117,7 @@ class ReservationOrderFragment : BaseFragment(), View.OnClickListener, ReserveVi
             }
 
 
-        for (i in 0 until 15) {
+        for (i in 0 until 30) {
             val bean = DateBean()
             bean.YYMMDD = DateUtil.getFetureDate2(i, "YMD")
             bean.week = DateUtil.dayForWeek(DateUtil.getFetureDate2(i, "YMD"))

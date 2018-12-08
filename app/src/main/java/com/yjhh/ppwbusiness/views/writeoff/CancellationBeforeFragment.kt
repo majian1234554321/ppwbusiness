@@ -69,9 +69,7 @@ class CancellationBeforeFragment : BaseFragment(), CancellationView {
         swipeLayout.autoRefresh()
 
         mAdapter?.setOnItemClickListener { adapter, view, position ->
-
             start(CancellationDetailsFragment.newInstance((adapter.data[position] as CancelationBeforeBean.ItemsBean).id))
-
         }
     }
 

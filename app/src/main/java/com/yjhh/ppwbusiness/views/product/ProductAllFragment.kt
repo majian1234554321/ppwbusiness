@@ -1,5 +1,6 @@
 package com.yjhh.ppwbusiness.views.product
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,10 +19,12 @@ import com.yjhh.ppwbusiness.adapter.ProductAdapter
 import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.bean.MyMessageBean
 import com.yjhh.ppwbusiness.bean.ProductBean
+import com.yjhh.ppwbusiness.bean.rxbean.RxUserInfo
 import com.yjhh.ppwbusiness.fragments.MessageDetailFragment
 import com.yjhh.ppwbusiness.ipresent.ProductPresent
 import com.yjhh.ppwbusiness.ipresent.SectionUselessPresent
 import com.yjhh.ppwbusiness.iview.ProductView
+import com.yjhh.ppwbusiness.utils.RxBus
 import com.yjhh.ppwbusiness.views.cui.PPWHeader2
 import com.yjhh.ppwbusiness.views.cui.SpaceItemDecoration
 import com.yjhh.ppwbusiness.views.product.twoview.BaseViewAdapter
@@ -44,8 +47,8 @@ class ProductAllFragment : BaseFragment(), ProductView {
     lateinit var mAdapter: ProductAdapter
     lateinit var present: ProductPresent
 
-    var order = ""   //排序,0（0 时间排序 1价格排序）
-    var orderType = "" //排序方式，0(0升序 1倒叙)
+    var order = "0"   //排序,0（0 时间排序 1价格排序）
+    var orderType = "1" //排序方式，0(0升序 1倒叙)
     var list = ArrayList<ProductBean.ItemsBean>()
 
     override fun onSuccess(result: ProductBean?, flag: String) {
@@ -124,8 +127,15 @@ class ProductAllFragment : BaseFragment(), ProductView {
         initRefreshLayout()
         swipeLayout.autoRefresh()
 
-        mAdapter.setOnItemClickListener { adapter, view, position ->
 
+        val dis = RxBus.default.toFlowable(Intent::class.java).subscribe {
+            if (it != null && "ProductAddFragment" == it.getStringExtra("TYPE")) {
+                swipeLayout.autoRefresh()
+            }
+        }
+
+
+        mAdapter.setOnItemClickListener { adapter, view, position ->
 
 
         }

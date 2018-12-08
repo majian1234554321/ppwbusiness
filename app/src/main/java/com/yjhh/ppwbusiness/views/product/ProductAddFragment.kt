@@ -47,6 +47,7 @@ import com.yjhh.ppwbusiness.ipresent.CommonPresent
 import com.yjhh.ppwbusiness.iview.CommonView
 import com.yjhh.ppwbusiness.utils.Glide4Engine
 import com.yjhh.ppwbusiness.utils.PhotoUtils
+import com.yjhh.ppwbusiness.utils.RxBus
 import com.yjhh.ppwbusiness.utils.TextStyleUtils
 import com.yjhh.ppwbusiness.views.cui.AbsSheetDialog
 import com.yjhh.ppwbusiness.views.cui.AlertDialogFactory
@@ -145,8 +146,7 @@ class ProductAddFragment : BaseFragment(), CommonView {
         }
 
 
-
-        recyclerView.addItemDecoration(GridRecyclerItemDecoration(40))
+        //recyclerView.addItemDecoration(GridRecyclerItemDecoration(20))
         recyclerView.layoutManager = androidx.recyclerview.widget.GridLayoutManager(mActivity, 3)
         mAdapter = ProductAdd(mActivity, lists)
         recyclerView.adapter = mAdapter
@@ -172,6 +172,7 @@ class ProductAddFragment : BaseFragment(), CommonView {
             lists.removeAt(position)
             listsId.removeAt(position)
             mAdapter?.notifyItemRemoved(position)
+            mAdapter?.notifyDataSetChanged()
         })
 
 
@@ -212,6 +213,13 @@ class ProductAddFragment : BaseFragment(), CommonView {
                     .subscribe(object : ProcessObserver2(mActivity) {
                         override fun processValue(response: String?) {
                             Log.i("ProductAddFragment", response)
+
+
+                            val intent = Intent()
+                            intent.putExtra("TYPE", "ProductAddFragment")
+                            RxBus.default.post(intent)
+
+
                             if ("ADD" == type) {
                                 AlertDialogFactory.createFactory(mActivity).getAlertDialog(
                                     "添加商品成功",
@@ -224,7 +232,6 @@ class ProductAddFragment : BaseFragment(), CommonView {
                                         et_desc.text.clear()
                                         lists.clear()
                                         listsId.clear()
-
                                         mAdapter?.notifyDataSetChanged()
                                     }, { dlg, v ->
                                         mActivity.onBackPressed()

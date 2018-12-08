@@ -245,11 +245,11 @@ class WriteOffFragment : BaseFragment(), View.OnClickListener, CancellationView 
             if ("0" == discountValue) {  //“0” 不打折扣
                 price = (totleprice.toFloat() - discountNoPrice.toFloat())
             } else {
-                price = (totleprice.toFloat() - discountNoPrice.toFloat()) * discountValue.toFloat()
+                price = (totleprice.toFloat() - discountNoPrice.toFloat()) * discountValue.toFloat()+discountNoPrice.toFloat()
             }
 
         } else {
-            price = totleprice.toFloat() - discountNoPrice.toFloat() - discountValue.toFloat()
+            price = totleprice.toFloat() - discountNoPrice.toFloat() - discountValue.toFloat()+discountNoPrice.toFloat()
         }
 
 

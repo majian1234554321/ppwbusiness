@@ -43,7 +43,7 @@
                android:textColor="@color/all_6"
                android:layout_alignParentRight="true"
               android:layout_centerVertical="true"
-               android:layout_marginRight="12pt"
+               android:layout_marginRight="21.5pt"
                android:id="@+id/tv_delete"
                android:layout_height="12pt"/>
 

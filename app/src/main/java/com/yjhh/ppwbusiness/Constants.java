@@ -3,7 +3,7 @@ package com.yjhh.ppwbusiness;
 public class Constants {
       public static String BASE_URL = "http://192.168.2.200:8080/api/";
 
-   // public static String BASE_URL = "http://192.168.2.202:8081/api/";
+   // public static String BASE_URL = "http://192.168.2.218:8081/api/";
     public static String LATITUDE = "30.562858";//经度
 
     public static String LONGITUDE = "114.350689";//维度

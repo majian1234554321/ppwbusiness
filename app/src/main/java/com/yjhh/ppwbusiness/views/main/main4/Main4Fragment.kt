@@ -293,4 +293,12 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
     }
 
 
+    override fun onResume() {
+        Log.i("Main4Fragment","Main4Fragment")
+        super.onResume()
+        ShopSetPresent(mActivity, this)
+            .getAllInfo()
+    }
+
+
 }

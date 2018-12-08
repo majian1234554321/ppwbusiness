@@ -10,6 +10,7 @@ import com.yjhh.ppwbusiness.api.ShopSetServices
 import com.yjhh.ppwbusiness.base.BasePresent
 import com.yjhh.ppwbusiness.base.ProcessObserver2
 import com.yjhh.ppwbusiness.bean.AllShopInfo
+import com.yjhh.ppwbusiness.bean.SubmitShopAdminConfigModel
 
 import com.yjhh.ppwbusiness.iview.ShopSetView
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -17,21 +18,11 @@ import io.reactivex.schedulers.Schedulers
 
 class ShopSetPresent(var context: Context, var view: ShopSetView) : BasePresent() {
     val maps = androidx.collection.ArrayMap<String, String>()
-    fun editConfig(address: String, content: String, mobile: String, status: String) {
-
-        maps.clear()
-
-        maps["address"] = address
-        maps["content"] = content
-        maps["mobile"] = mobile
-        maps["status"] = status
-
-
-
+    fun editConfig(map: SubmitShopAdminConfigModel) {
 
         toSubscribe2(ApiServices.getInstance()
             .create(ShopSetServices::class.java)
-            .editConfig(maps), object : ProcessObserver2(context) {
+            .editConfig(map), object : ProcessObserver2(context) {
             override fun processValue(response: String?) {
                 Log.i("ShopSetPresent", response)
 
@@ -63,7 +54,7 @@ class ShopSetPresent(var context: Context, var view: ShopSetView) : BasePresent(
 
             override fun processValue(response: String?) {
                 view.onSuccess()
-               // Toast.makeText(context, if (status == "0") "营业中" else "打烊", Toast.LENGTH_LONG).show()
+                // Toast.makeText(context, if (status == "0") "营业中" else "打烊", Toast.LENGTH_LONG).show()
             }
 
         }

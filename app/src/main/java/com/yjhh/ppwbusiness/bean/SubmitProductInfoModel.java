@@ -17,5 +17,6 @@ public class SubmitProductInfoModel {
 
     public String saleStatus; //状态（0正常（上架） 1下架 2删除）
 
+    public String status;
 
 }
