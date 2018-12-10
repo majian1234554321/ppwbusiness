@@ -39,8 +39,7 @@ interface SectionUselessService {
     @POST("about/feedback")
     fun feedback(@Body map: SubmitFeedbackModel): Observable<ResponseBody>
 
-
-    @POST("shopAdmin/currInfo")
+    @POST("shopAdmin/curr")
     fun currInfo(): Observable<ResponseBody>
 
 }

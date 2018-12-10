@@ -8,14 +8,20 @@ import android.widget.Toast
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.yjhh.ppwbusiness.BaseApplication
+import com.yjhh.ppwbusiness.Constants.MAX_COUNT_TIME
 import com.yjhh.ppwbusiness.R
+import com.yjhh.ppwbusiness.api.ApiServices
+import com.yjhh.ppwbusiness.api.ShopSetServices
 import com.yjhh.ppwbusiness.base.BaseFragment
+import com.yjhh.ppwbusiness.base.ProcessObserver2
 import com.yjhh.ppwbusiness.bean.LoginBean
 import com.yjhh.ppwbusiness.ipresent.PasswordPresent
 import com.yjhh.ppwbusiness.iview.PasswordView
 import com.yjhh.ppwbusiness.utils.RxBus
 import com.yjhh.ppwbusiness.utils.SharedPreferencesUtils
 import com.yjhh.ppwbusiness.views.main.MainActivity
+import com.yjhh.ppwbusiness.views.webview.BackViewActivity
+import com.yjhh.ppwbusiness.views.webview.BackViewFragment
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -67,7 +73,49 @@ class LoginSMSFragment : BaseFragment(), PasswordView, View.OnClickListener {
     }
 
     override fun onFault(errorMsg: String?) {
-        // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+
+        if ("01018" == errorMsg) {
+
+
+            ApiServices.getInstance()
+                .create(ShopSetServices::class.java)
+                .applyShop()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : ProcessObserver2(mActivity) {
+                    override fun processValue(response: String?) {
+                        Log.i("01018", response)
+
+                        if (response?.contains("\"")!!) {
+
+                            val intent = Intent(mActivity, BackViewActivity::class.java)
+                            intent.putExtra("url", response.replace("\"",""))
+                            startActivity(intent)
+                        } else {
+                            val intent = Intent(mActivity, BackViewActivity::class.java)
+                            intent.putExtra("url", response)
+                            startActivity(intent)
+                        }
+
+
+
+
+
+                    }
+
+                    override fun onFault(message: String) {
+                        Log.i("01018", message)
+                    }
+
+                })
+
+
+        } else {
+
+        }
+
+
     }
 
     override fun onSuccessSMS(value: String?) {

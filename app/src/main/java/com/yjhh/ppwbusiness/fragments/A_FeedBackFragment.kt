@@ -58,7 +58,7 @@ class A_FeedBackFragment : BaseFragment(), View.OnClickListener, CommonView {
     }
 
     override fun onFault(errorMsg: String?) {
-
+        Toast.makeText(mActivity, errorMsg, Toast.LENGTH_SHORT).show()
     }
 
     override fun onClick(v: View?) {
@@ -108,7 +108,6 @@ class A_FeedBackFragment : BaseFragment(), View.OnClickListener, CommonView {
 
                         })
 
-
                 } else {
                     Toast.makeText(mActivity, "联系方式和反馈内容不能为空", Toast.LENGTH_SHORT).show()
                 }
@@ -157,7 +156,10 @@ class A_FeedBackFragment : BaseFragment(), View.OnClickListener, CommonView {
                 photo()
 
             } else {
-                start(PhotoFragment(lists[position]))
+               // start(PhotoFragment(lists[position]))
+
+                val dialog = PhotoFragment(lists)
+                dialog?.show(childFragmentManager, "TAG")
             }
 
         }
@@ -289,7 +291,7 @@ class A_FeedBackFragment : BaseFragment(), View.OnClickListener, CommonView {
 
             val listFiles = ArrayList<File>()
 
-            lists.addAll(0,list)
+            lists.addAll(0, list)
             list.forEach {
                 val file = File(it)
                 listFiles.add(file)
@@ -297,12 +299,6 @@ class A_FeedBackFragment : BaseFragment(), View.OnClickListener, CommonView {
             present?.UpLoadFiles(listFiles)
 
             mAdapter?.notifyDataSetChanged()
-
-
-
-
-
-
 
 
         }

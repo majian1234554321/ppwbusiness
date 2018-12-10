@@ -249,7 +249,7 @@ class ReservationOrderFragment : BaseFragment(), View.OnClickListener, ReserveVi
         mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(mActivity)
         mAdapter = ReservationOrderAdapter(mActivity, lists)
         mRecyclerView.adapter = mAdapter
-        mAdapter?.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
+
         mAdapter?.isFirstOnly(false)
         mAdapter?.setOnLoadMoreListener({
             loadMore()

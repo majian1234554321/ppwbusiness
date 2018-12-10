@@ -1,39 +1,144 @@
 package com.yjhh.ppwbusiness.fragments
 
+import android.util.ArrayMap
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.ActivityCenterAdapter
+import com.yjhh.ppwbusiness.api.ActivityCenterService
+import com.yjhh.ppwbusiness.api.ApiServices
 import com.yjhh.ppwbusiness.base.BaseFragment
+import com.yjhh.ppwbusiness.base.ProcessObserver2
 import com.yjhh.ppwbusiness.bean.ActivityCenterBean
+import com.yjhh.ppwbusiness.bean.ActivityCenterBean2
+import com.yjhh.ppwbusiness.ipresent.ActivityCenterPrenent
+import com.yjhh.ppwbusiness.iview.ActivityCenterView
+import com.yjhh.ppwbusiness.views.cui.PPWHeader2
 import com.yjhh.ppwbusiness.views.cui.SpaceItemDecoration
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activitycenterfragment.*
 
-class ActivityCenterFragment : BaseFragment() {
+class ActivityCenterFragment : BaseFragment(), ActivityCenterView {
+    override fun onFault(errorMsg: String?) {
+        swipeLayout.finishRefresh()
+    }
+
+    override fun onSuccessView(response: String?, flag: String) {
+        Log.i("ActivityCenterFragment", response)
+        val model = Gson().fromJson<ActivityCenterBean2>(response, ActivityCenterBean2::class.java)
+
+        when (flag) {
+            "refresh" -> {
+                swipeLayout.finishRefresh()
+                list.clear()
+                listAll.clear()
+                model.items.forEach {
+                    if (it.status == 1) {
+                        list.add(ActivityCenterBean(1, it))
+                    } else {
+                        list.add(ActivityCenterBean(0, it))
+                    }
+
+                }
+                listAll.addAll(list)
+
+                mAdapter?.setNewData(listAll)
+
+            }
+            else -> {
+                if (model.items != null) {
+                    if (model.items.isNotEmpty() && model.items.size == pageSize) {
+                        mAdapter?.loadMoreComplete()
+                    } else {
+                        mAdapter?.loadMoreEnd()
+
+                    }
+
+                    list.clear()
+                    model.items.forEach {
+                        if (it.status == 1) {
+                            list.add(ActivityCenterBean(1, it))
+                        } else {
+                            list.add(ActivityCenterBean(0, it))
+                        }
+
+                    }
+                    listAll.addAll(list)
+
+                    mAdapter?.addData(list)
+                }
+            }
+        }
+
+
+    }
+
+    val pageSize = 15
+    var pageIndex = 0
+    var mAdapter: ActivityCenterAdapter? = null
+    val listAll = ArrayList<ActivityCenterBean>()
+
+    val list = ArrayList<ActivityCenterBean>()
+
+    var peresent: ActivityCenterPrenent? = null
+
     override fun getLayoutRes(): Int = R.layout.activitycenterfragment
-
-
     override fun initView() {
 
-
-        mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(mActivity)
-        mRecyclerView.addItemDecoration(SpaceItemDecoration(30, "bottom"))
+        peresent = ActivityCenterPrenent(mActivity, this)
 
 
-        val list = ArrayList<ActivityCenterBean>()
-        list.add(ActivityCenterBean(1, "1"))
-        list.add(ActivityCenterBean(0, "已结束"))
-        list.add(ActivityCenterBean(1, "1"))
-        list.add(ActivityCenterBean(1, "1"))
-        list.add(ActivityCenterBean(1, "1"))
-        list.add(ActivityCenterBean(1, "1"))
+//        list.add(ActivityCenterBean(1, "1"))
+//        list.add(ActivityCenterBean(0, "已结束"))
+//        list.add(ActivityCenterBean(1, "1"))
+//        list.add(ActivityCenterBean(1, "1"))
+//        list.add(ActivityCenterBean(1, "1"))
+//        list.add(ActivityCenterBean(1, "1"))
 
 
-        val mAdapter = ActivityCenterAdapter(list)
+        initRefreshLayout()
+        initAdapter()
+        swipeLayout.autoRefresh()
 
-        mRecyclerView.adapter = mAdapter
 
-        mAdapter.setOnItemClickListener { adapter, view, position ->
-            start(GameRecordFragment())
+
+        mAdapter?.setOnItemClickListener { adapter, view, position ->
+            start(GameRecordFragment.newInstance(listAll[position].content?.id))
         }
     }
+
+
+    private fun initAdapter() {
+        mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(mActivity)
+        mRecyclerView.addItemDecoration(SpaceItemDecoration(30, "bottom"))
+        mAdapter = ActivityCenterAdapter(listAll)
+        mRecyclerView.adapter = mAdapter
+
+        mAdapter?.isFirstOnly(false)
+        mAdapter?.setOnLoadMoreListener({
+            loadMore()
+        }, mRecyclerView)
+    }
+
+    private fun initRefreshLayout() {
+        swipeLayout.setRefreshHeader(PPWHeader2(context))
+        swipeLayout.setOnRefreshListener { refreshLayout ->
+            refresh()
+        }
+    }
+
+    private fun refresh() {
+        pageIndex = 0
+        peresent?.ShopAdminActivity(pageIndex, pageSize, "refresh")
+    }
+
+    private fun loadMore() {
+        pageIndex++
+        peresent?.ShopAdminActivity(pageIndex, pageSize, "load")
+
+    }
+
+
 }

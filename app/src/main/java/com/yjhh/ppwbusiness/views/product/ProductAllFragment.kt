@@ -21,6 +21,7 @@ import com.yjhh.ppwbusiness.bean.MyMessageBean
 import com.yjhh.ppwbusiness.bean.ProductBean
 import com.yjhh.ppwbusiness.bean.rxbean.RxUserInfo
 import com.yjhh.ppwbusiness.fragments.MessageDetailFragment
+import com.yjhh.ppwbusiness.fragments.PhotoFragment
 import com.yjhh.ppwbusiness.ipresent.ProductPresent
 import com.yjhh.ppwbusiness.ipresent.SectionUselessPresent
 import com.yjhh.ppwbusiness.iview.ProductView
@@ -184,7 +185,18 @@ class ProductAllFragment : BaseFragment(), ProductView {
                         ProductAddFragment.newInstance(adapter.data[position] as ProductBean.ItemsBean, "EDIT")
                     )
                 }
+
+                R.id.iv_image -> {
+
+                    val list = ArrayList<String>()
+                    list.add((adapter.data[position] as ProductBean.ItemsBean).logoUrl)
+
+                    val dialog = PhotoFragment(list)
+                    dialog?.show(childFragmentManager, "TAG")
+                }
+
                 else -> {
+
                 }
             }
         }
@@ -194,7 +206,7 @@ class ProductAllFragment : BaseFragment(), ProductView {
 
 
     private fun initAdapter() {
-        mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
+
 
         mRecyclerView.adapter = mAdapter
 

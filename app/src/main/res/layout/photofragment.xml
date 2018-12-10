@@ -1,18 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
-              android:layout_width="match_parent" android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:orientation="vertical"
+                android:background="#FFFFFF"
+                android:id="@+id/rl"
+                android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <com.yjhh.ppwbusiness.views.cui.TitleBarView android:layout_width="match_parent"
-                                                 android:id="@+id/tbv_title"
-                                                 app:textValue="图片预览"
-                                                 app:textColor="@color/white"
-                                                 android:layout_height="wrap_content"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="vertical"
 
-    <com.youth.banner.Banner
-            android:id="@+id/banner"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+                  android:layout_height="wrap_content">
 
-</LinearLayout>
+        <RelativeLayout android:layout_width="match_parent"
+                        android:visibility="gone"
+                        android:layout_height="48dp"
+
+        >
+
+            <TextView android:layout_width="wrap_content"
+                      android:text="1212"
+                      android:layout_centerInParent="true"
+                      android:textColor="#FF333333"
+                      android:textSize="22pt"
+                      android:id="@+id/tv_index"
+                      android:layout_height="wrap_content"/>
+
+            <ImageView android:layout_width="25pt" android:layout_height="25pt"
+                       android:id="@+id/iv_close"
+                       android:layout_alignParentRight="true"
+                       android:layout_centerInParent="true"
+                       android:layout_marginRight="16pt"
+                       android:src="@drawable/icon_close"
+            />
+
+        </RelativeLayout>
+
+        <com.youth.banner.Banner
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="375pt"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:text="121212"
+                  android:id="@+id/tv_tips"
+                  android:paddingLeft="24pt"
+                  android:paddingRight="24pt"
+                  android:paddingTop="8pt"
+                  android:maxLines="3"
+                  android:ellipsize="end"
+                  android:textColor="#FF333333"
+                  android:textSize="13pt"
+                  android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

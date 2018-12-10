@@ -81,17 +81,9 @@ class EmployeeFragment : BaseFragment(), View.OnClickListener {
             tv_mobile.text = model.displayMobile
             tbv_title.setRightDisPlay(model.role == 0)
             mAdapter = EmployeeAdapter(lists, model.role == 0)
+        } else {
+            mAdapter = EmployeeAdapter(lists, false)
         }
-
-
-
-
-        initAdapter()
-
-        loadNetData()
-    }
-
-    private fun initAdapter() {
 
 
         recyclerView.layoutManager = LinearLayoutManager(mActivity)
@@ -103,22 +95,36 @@ class EmployeeFragment : BaseFragment(), View.OnClickListener {
         mAdapter?.setOnItemClickListener { adapter, view, position ->
 
             if (lists.size < 5) {
-                startForResult(
-                    EmployeeADUFragment.newInstance(
-                        "DELETE",
-                        lists[position].id,
-                        lists[position].mobile,
-                        lists[position].name,
-                        position
-                    ), 10086
-                )
+
+                if (model != null) {
+                    model as AccountBean
+                    if (model.role == 0) {
+                        startForResult(
+                            EmployeeADUFragment.newInstance(
+                                "DELETE",
+                                lists[position].id,
+                                lists[position].mobile,
+                                lists[position].name,
+                                position
+                            ), 10086
+                        )
+                    }
+
+                } else {
+
+                }
+
+
             } else {
                 Toast.makeText(_mActivity, "最多只能添加5位店员", Toast.LENGTH_SHORT).show()
             }
         }
 
 
+
+        loadNetData()
     }
+
 
     override fun onFragmentResult(requestCode: Int, resultCode: Int, data: Bundle?) {
         super.onFragmentResult(requestCode, resultCode, data)
@@ -155,9 +161,7 @@ class EmployeeFragment : BaseFragment(), View.OnClickListener {
                         val model = Gson().fromJson<Array<EmployeeBean>>(response, Array<EmployeeBean>::class.java)
                         lists.clear()
                         lists.addAll(model.asList())
-
-
-
+                        mAdapter?.setNewData(lists)
                         mAdapter?.notifyDataSetChanged()
 
                     } else {

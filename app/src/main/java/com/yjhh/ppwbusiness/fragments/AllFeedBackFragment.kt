@@ -99,7 +99,7 @@ class AllFeedBackFragment : BaseFragment(), AboutView {
     private fun initAdapter() {
         mRecyclerView.addItemDecoration(DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL))
         mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(mActivity)
-        mAdapter?.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
+
         mAdapter?.isFirstOnly(false)
         mAdapter = AllFeedBackAdapter(lists)
         mRecyclerView.adapter = mAdapter

@@ -112,7 +112,7 @@ class ReservationBeforeFragment : BaseFragment(), ReserveView {
 
     private fun initAdapter() {
         mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(mActivity)
-        mAdapter?.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
+
         mAdapter?.isFirstOnly(false)
         mAdapter = ReservationBeforeAdapter(lists)
         mRecyclerView.adapter = mAdapter

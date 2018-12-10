@@ -4,13 +4,13 @@ import com.chad.library.adapter.base.entity.MultiItemEntity
 
 class ActivityCenterBean : MultiItemEntity {
 
-    constructor(itemType: Int, content: String) {
+    constructor(itemType: Int, content: ActivityCenterBean2.ItemsBean) {
         this.itemType = itemType
 
         this.content = content
     }
 
-    var content: String? = null
+    var content: ActivityCenterBean2.ItemsBean? = null
 
     override fun getItemType(): Int {
         return itemType

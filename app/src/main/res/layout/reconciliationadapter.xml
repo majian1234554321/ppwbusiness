@@ -32,7 +32,9 @@
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:layout_alignParentRight="true"
               android:layout_below="@+id/tv_paystatus"
-              android:text="已汇入"
+
+              android:id="@+id/tv_enfPrice"
+
               android:textColor="#FF666666"
               android:textSize="12pt"
     />
@@ -42,7 +44,7 @@
               android:layout_marginLeft="20pt"
               android:layout_height="wrap_content"
               android:layout_toRightOf="@+id/tv_time"
-              android:text="余额99.99"
+
               android:textColor="#FF999999"
               android:textSize="12pt"
     />

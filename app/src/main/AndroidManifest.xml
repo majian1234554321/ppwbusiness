@@ -33,7 +33,6 @@
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:networkSecurityConfig="@xml/network_security_config"
-
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <provider
@@ -81,8 +80,9 @@
                 android:name=".views.merchant.BusinessHoursActivity"
                 android:theme="@style/AppTheme2">
         </activity>
-        <activity android:name=".views.SplashActivity"
-                  android:theme="@style/SplashAppTheme">
+        <activity
+                android:name=".views.SplashActivity"
+                android:theme="@style/SplashAppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -102,6 +102,8 @@
         <activity android:name=".views.CaptureActivity2">
         </activity>
         <activity android:name=".views.writeoff.CancellationBeforeActivity">
+        </activity>
+        <activity android:name=".views.webview.BackViewActivity">
         </activity>
     </application>
 

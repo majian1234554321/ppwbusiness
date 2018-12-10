@@ -79,7 +79,7 @@ class CancellationBeforeFragment : BaseFragment(), CancellationView {
       //  mRecyclerView.addItemDecoration(SpaceItemDecoration(30, "bottom"))
 
         mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(mActivity)
-        mAdapter?.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
+
         mAdapter?.isFirstOnly(false)
         mAdapter = CancellationAdapter(lists)
         mRecyclerView.adapter = mAdapter

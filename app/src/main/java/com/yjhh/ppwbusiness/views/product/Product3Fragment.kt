@@ -160,7 +160,7 @@ class Product3Fragment : BaseFragment(), ProductView {
 
 
     private fun initAdapter() {
-        mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
+
 
         mRecyclerView.adapter = mAdapter
 

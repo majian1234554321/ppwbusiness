@@ -1,23 +1,63 @@
 package com.yjhh.ppwbusiness.views.reconciliation
 
+import android.view.View
+import android.widget.TextView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.google.gson.Gson
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.OrderAdapter
 import com.yjhh.ppwbusiness.adapter.ReconciliationAdapter
-import com.yjhh.ppwbusiness.adapter.ReservationOrderAdapter
+
 import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.bean.DateBean
-import com.yjhh.ppwbusiness.bean.ReservationBean
-import com.yjhh.ppwbusiness.fragments.MessageDetailFragment
-import com.yjhh.ppwbusiness.ipresent.ReconciliationPresent
-import com.yjhh.ppwbusiness.ipresent.ReservePresent
-import com.yjhh.ppwbusiness.ipresent.SectionUselessPresent
-import kotlinx.android.synthetic.main.reconciliation1fragment.*
+import com.yjhh.ppwbusiness.bean.ReconciliationItemBean
 
-class Reconciliation1Fragment : BaseFragment() {
+import com.yjhh.ppwbusiness.ipresent.WithDrawPresent
+import com.yjhh.ppwbusiness.iview.WithDrowView
+import kotlinx.android.synthetic.main.reconciliation1fragment.*
+import java.nio.file.attribute.AclEntryFlag
+
+class Reconciliation1Fragment : BaseFragment(), WithDrowView {
+    override fun onSuccessView(response: String?, flag: String) {
+
+
+        val model = Gson().fromJson<ReconciliationItemBean>(response, ReconciliationItemBean::class.java)
+
+
+
+        when (flag) {
+            "refresh" -> {
+                if (pageIndex == 0 && model.items.size == 0) {
+
+
+                    val view = View.inflate(mActivity, R.layout.emptyview, null)
+                    view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
+                    mAdapter?.emptyView = view
+
+
+                } else {
+                    mAdapter?.setNewData(model.items)
+                }
+            }
+            else -> {
+                if (pageSize > model.items.size) {
+                    mAdapter?.loadMoreEnd()
+                } else {
+                    mAdapter?.addData(model.items)
+                    mAdapter?.loadMoreComplete()
+                }
+            }
+        }
+
+    }
+
+    override fun onFault(errorMsg: String?) {
+
+    }
+
     override fun getLayoutRes(): Int = R.layout.reconciliation1fragment
 
 
@@ -28,11 +68,10 @@ class Reconciliation1Fragment : BaseFragment() {
 
 
     var mAdapter: ReconciliationAdapter? = null
-    val lists = ArrayList<String>()
-    var present: ReconciliationPresent? = null
+    val lists = ArrayList<ReconciliationItemBean.ItemsBean>()
+    var present: WithDrawPresent? = null
 
     override fun initView() {
-
 
         mRecyclerView.addItemDecoration(
             androidx.recyclerview.widget.DividerItemDecoration(
@@ -40,22 +79,10 @@ class Reconciliation1Fragment : BaseFragment() {
                 androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
             )
         )
-        val list = ArrayList<String>()
 
-        list.add("A")
-        list.add("A")
-        list.add("A")
-        list.add("A")
-        list.add("A")
-        list.add("A")
-        mAdapter = ReconciliationAdapter(list)
-        present = ReconciliationPresent(context)
-        mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
-
+        present = WithDrawPresent(mActivity, this)
+        present?.shopAdminWithdrawLogs(type, pageIndex, pageSize, "refresh")
         initAdapter()
-
-        present?.logs(type, pageIndex, pageSize, "refresh")
-
         mAdapter?.setOnItemClickListener { adapter, view, position ->
 
 
@@ -65,22 +92,18 @@ class Reconciliation1Fragment : BaseFragment() {
 
 
     private fun initAdapter() {
-
+        mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
+        mAdapter = ReconciliationAdapter(lists)
+        mRecyclerView.adapter = mAdapter
         mAdapter?.setOnLoadMoreListener({
             loadMore()
         }, mRecyclerView)
-        mAdapter?.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
-
-
-        mRecyclerView.adapter = mAdapter
-
-
     }
 
 
     private fun loadMore() {
         pageIndex++
-        present?.logs(type, pageIndex, pageSize, "load")
+        present?.shopAdminWithdrawLogs(type, pageIndex, pageSize, "load")
 
     }
 

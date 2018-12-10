@@ -158,7 +158,10 @@ class ProductAddFragment : BaseFragment(), CommonView {
 
         mAdapter?.setOnItemClickListener(OnRecycleViewItemClickListener { view, position, flag ->
             if (flag) {
-                start(PhotoFragment(lists[position]))
+               // start(PhotoFragment(lists[position]))
+
+                val dialog = PhotoFragment(lists)
+                dialog?.show(childFragmentManager, "TAG")
             } else {
                 photo()
             }

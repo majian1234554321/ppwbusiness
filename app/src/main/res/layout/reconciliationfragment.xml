@@ -50,6 +50,7 @@
                         <TextView android:layout_width="match_parent"
                                   android:text="100.00"
                                   android:textStyle="bold"
+                                  android:id="@+id/tv_in"
                                   android:gravity="center"
                                   android:textColor="#FF333333"
                                   android:textSize="30pt"
@@ -73,6 +74,7 @@
                                   android:text="100.00"
                                   android:textStyle="bold"
                                   android:gravity="center"
+                                  android:id="@+id/tv_out"
                                   android:textColor="#FF333333"
                                   android:textSize="30pt"
 
@@ -111,6 +113,7 @@
                     <TextView android:layout_width="wrap_content"
                               android:layout_alignParentBottom="true"
                               android:text="￥100.00"
+                              android:id="@+id/tv_price"
                               android:layout_centerVertical="true"
                               android:layout_toRightOf="@+id/tv_X"
                               android:textColor="#FFFF552E"
@@ -123,6 +126,8 @@
                               android:id="@+id/tv_forward"
                               android:layout_centerVertical="true"
                               android:text="提现"
+                              android:drawablePadding="@dimen/spi_8"
+                              android:drawableRight="@drawable/icon_right_bule"
                               android:textColor="#FF2C85FF"
                               android:textSize="14pt"
                               android:layout_alignParentRight="true"
@@ -169,6 +174,7 @@
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                               android:text="共88笔" android:textColor="#FF333333"
                               android:textSize="13pt"
+                              android:id="@+id/tv_inCount"
                               android:layout_centerInParent="true"
                               android:layout_weight="1"
 
@@ -177,6 +183,7 @@
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                               android:text="+999.00" android:textColor="#FF333333"
                               android:textSize="13pt"
+                              android:id="@+id/tv_inPrice"
                               android:layout_alignParentRight="true"
                               android:gravity="right"
                               android:layout_weight="2"
@@ -216,6 +223,7 @@
                               android:text="共88笔"
                               android:textColor="#FF333333"
                               android:textSize="13pt"
+                              android:id="@+id/tv_outCount"
                               android:layout_centerInParent="true"
                               android:layout_weight="1"
 
@@ -226,6 +234,7 @@
                               android:textColor="#FF333333"
                               android:textSize="13pt"
                               android:gravity="right"
+                              android:id="@+id/tv_outPrice"
                               android:layout_alignParentRight="true"
                               android:layout_weight="2"
 
@@ -235,16 +244,36 @@
                 </RelativeLayout>
 
 
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                          android:text="历史账单"
-                          android:textColor="#FF999999"
-                          android:textSize="13pt"
-                          android:background="#FFF8F8F8"
-                          android:paddingLeft="12pt"
-                          android:paddingRight="12pt"
-                          android:paddingTop="5.5pt"
-                          android:paddingBottom="5.5pt"
-                />
+                <RelativeLayout android:layout_width="match_parent"
+                                android:background="#FFF8F8F8"
+                                android:layout_height="wrap_content">
+
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                              android:text="历史账单"
+                              android:textColor="#FF999999"
+                              android:textSize="13pt"
+                              android:background="#FFF8F8F8"
+                              android:paddingLeft="12pt"
+                              android:paddingRight="12pt"
+                              android:paddingTop="5.5pt"
+                              android:paddingBottom="5.5pt"
+                    />
+
+
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                              android:text="展示近3个月记录"
+                              android:layout_alignParentRight="true"
+                              android:textColor="#FF999999"
+                              android:textSize="13pt"
+                              android:background="#FFF8F8F8"
+                              android:paddingLeft="12pt"
+                              android:paddingRight="12pt"
+                              android:paddingTop="5.5pt"
+                              android:paddingBottom="5.5pt"
+                    />
+
+
+                </RelativeLayout>
 
 
             </LinearLayout>
@@ -300,10 +329,12 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <androidx.viewpager.widget.ViewPager
+        <androidx.viewpager.widget.ViewPager
+                android:layout_width="match_parent"
+                android:id="@+id/mViewPager"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:layout_height="match_parent"/>
 
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:layout_width="match_parent"
-            android:id="@+id/mViewPager"
-            android:layout_height="match_parent"/>
+
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

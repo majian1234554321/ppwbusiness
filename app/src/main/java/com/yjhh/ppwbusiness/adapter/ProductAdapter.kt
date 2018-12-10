@@ -64,6 +64,7 @@ class ProductAdapter(list: List<ProductBean.ItemsBean>) :
             addOnClickListener(R.id.tv_delete)
                 .addOnClickListener(R.id.tv_stop)
                 .addOnClickListener(R.id.iv_edit)
+                .addOnClickListener(R.id.iv_image)
         }
 
 

@@ -12,26 +12,72 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.yjhh.ppwbusiness.R
+import com.yjhh.ppwbusiness.api.ApiServices
+import com.yjhh.ppwbusiness.api.ShopSetServices
 import com.yjhh.ppwbusiness.base.BaseFragment
+import com.yjhh.ppwbusiness.base.ProcessObserver2
 import com.yjhh.ppwbusiness.bean.LoginBean
+import com.yjhh.ppwbusiness.ipresent.CommonPresent
 import com.yjhh.ppwbusiness.ipresent.LoginPresent
+import com.yjhh.ppwbusiness.iview.CommonView
 import com.yjhh.ppwbusiness.iview.LoginView
 import com.yjhh.ppwbusiness.utils.RxBus
 import com.yjhh.ppwbusiness.utils.SharedPreferencesUtils
 import com.yjhh.ppwbusiness.views.main.MainActivity
+import com.yjhh.ppwbusiness.views.webview.BackViewActivity
+import com.yjhh.ppwbusiness.views.webview.BackViewFragment
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.loginfragment.*
 import org.json.JSONObject
 import java.util.concurrent.TimeUnit
 
-class LoginFragment : BaseFragment(), View.OnClickListener, LoginView {
+class LoginFragment : BaseFragment(), View.OnClickListener, LoginView,CommonView {
     override fun getLayoutRes(): Int = R.layout.loginfragment
 
 
     override fun onFault(errorMsg: String?) {
-      Toast.makeText(mActivity,errorMsg,Toast.LENGTH_SHORT).show()
+
+
+        if ("01018" == errorMsg) {
+
+
+            ApiServices.getInstance()
+                .create(ShopSetServices::class.java)
+                .applyShop()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : ProcessObserver2(mActivity) {
+                    override fun processValue(response: String?) {
+                        Log.i("01018", response)
+                        if (response?.contains("\"")!!) {
+
+                            val intent = Intent(mActivity, BackViewActivity::class.java)
+                            intent.putExtra("url", response.replace("\"", ""))
+                            startActivity(intent)
+                        } else {
+                            val intent = Intent(mActivity, BackViewActivity::class.java)
+                            intent.putExtra("url", response)
+                            startActivity(intent)
+                        }
+
+
+                    }
+
+                    override fun onFault(message: String) {
+                        Log.i("01018", message)
+                    }
+
+                })
+
+
+        } else {
+            Toast.makeText(mActivity, errorMsg, Toast.LENGTH_SHORT).show()
+        }
+
+
     }
 
     override fun onSuccess(result: String?) {
@@ -49,14 +95,13 @@ class LoginFragment : BaseFragment(), View.OnClickListener, LoginView {
 
         Toast.makeText(mActivity, "登录成功", Toast.LENGTH_SHORT).show()
 
-      //  RxBus.default.post(LoginBean(mobile, true))
+        //  RxBus.default.post(LoginBean(mobile, true))
 
         startActivity(Intent(mActivity, MainActivity::class.java))
         mActivity.finish()
     }
 
     val identity = ""//2商户
-
 
     override fun onClick(v: View?) {
         when (v?.id) {
@@ -87,6 +132,33 @@ class LoginFragment : BaseFragment(), View.OnClickListener, LoginView {
 
             }
 
+            R.id.tv_kaidian -> {
+                ApiServices.getInstance()
+                    .create(ShopSetServices::class.java)
+                    .applyShop()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(object : ProcessObserver2(mActivity) {
+                        override fun processValue(response: String?) {
+                            Log.i("01018", response)
+                            if (response?.contains("\"")!!) {
+                                val intent = Intent(mActivity, BackViewActivity::class.java)
+                                intent.putExtra("url", response.replace("\"", ""))
+                                startActivity(intent)
+                            } else {
+                                val intent = Intent(mActivity, BackViewActivity::class.java)
+                                intent.putExtra("url", response)
+                                startActivity(intent)
+                            }
+
+                        }
+
+                        override fun onFault(message: String) {
+                            Log.i("01018", message)
+                        }
+                    })
+            }
+
 
             else -> {
             }
@@ -96,7 +168,7 @@ class LoginFragment : BaseFragment(), View.OnClickListener, LoginView {
     override fun initView() {
 
 
-
+        CommonPresent(mActivity,this)
 
 
         val disposable1 = RxView.clicks(btn_login)
@@ -119,17 +191,12 @@ class LoginFragment : BaseFragment(), View.OnClickListener, LoginView {
             )
 
 
-        val view = arrayOf(iv_show_pwd, forget_password, loginSMS)
+        val view = arrayOf(iv_show_pwd, forget_password, loginSMS, tv_kaidian)
 
 
         view.forEach {
             it.setOnClickListener(this)
         }
-
-
-
-
-
 
 
 
@@ -147,7 +214,6 @@ class LoginFragment : BaseFragment(), View.OnClickListener, LoginView {
     private fun isPasswordValid(password: String): Boolean {
         return password.length >= 6
     }
-
 
 
     companion object {

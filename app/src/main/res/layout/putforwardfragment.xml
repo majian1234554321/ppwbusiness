@@ -30,8 +30,6 @@
                           android:layout_height="wrap_content">
 
 
-
-
                 <RelativeLayout android:layout_width="match_parent"
 
                                 android:layout_height="79pt">
@@ -51,7 +49,8 @@
 
                     <TextView android:layout_width="wrap_content"
                               android:layout_alignParentRight="true"
-                              android:text="￥100.00"
+                              android:text="100.00"
+                              android:id="@+id/tv_totalPrice"
                               android:textColor="#FF333333"
                               android:textSize="25pt"
                               android:textStyle="bold"
@@ -76,6 +75,8 @@
                           android:layout_marginLeft="12pt"
                           android:layout_marginRight="12pt"
                           android:hint="请输入提现金额"
+                          android:id="@+id/et_price"
+                          android:inputType="numberDecimal"
                           android:paddingLeft="12pt"
 
                           android:background="@drawable/stroke_frame_97"
@@ -85,6 +86,7 @@
                 <TextView
                         android:paddingTop="4pt"
                         android:paddingLeft="12pt"
+                        android:id="@+id/tv_tips1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingBottom="20pt"
@@ -104,48 +106,107 @@
                           android:layout_height="wrap_content"/>
 
 
-                <RadioGroup android:layout_width="match_parent"
-                            android:id="@+id/rg"
-                            android:background="@drawable/solid_frame_alle"
-                            android:layout_margin="@dimen/spi_12"
-                            android:orientation="vertical" android:layout_height="wrap_content">
+                <LinearLayout android:layout_width="match_parent"
+                              android:id="@+id/rg"
 
-                    <RadioButton android:layout_width="match_parent" android:layout_height="wrap_content"
-                                 android:id="@+id/rb_wechat"
-                                 android:button="@null"
-                                 android:padding="@dimen/dpi_4"
-                                 android:checked="true"
-                                 android:drawableRight="@drawable/selector_radio"
-                                 android:text="微信"
-                    />
+
+                              android:orientation="vertical" android:layout_height="wrap_content">
+
+
+                    <RelativeLayout android:layout_width="match_parent"
+                                    android:paddingLeft="12pt"
+                                    android:id="@+id/rl_1"
+                                    android:paddingRight="12pt"
+                                    android:layout_height="wrap_content">
+                        <TextView android:layout_width="wrap_content"
+                                  android:text="微信"
+                                  android:id="@+id/tv_wechat1"
+                                  android:paddingTop="10pt"
+                                  android:paddingBottom="10pt"
+                                  android:textColor="#FF333333"
+                                  android:textSize="13pt"
+                                  android:layout_height="wrap_content"/>
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="未绑定"
+                                android:layout_alignParentRight="true"
+                                android:layout_gravity="right"
+                                android:id="@+id/tv_wechat2"
+                                android:layout_centerVertical="true"
+                                android:textColor="#FF999999"
+                                android:textSize="13pt"
+                        />
+                    </RelativeLayout>
+
+
                     <View android:layout_width="match_parent" android:layout_height="1dp"
-                          android:background="@color/white"
+                          android:background="#FFE6E6E6"
 
                     />
-                    <RadioButton android:layout_width="match_parent" android:layout_height="wrap_content"
-                                 android:button="@null"
-                                 android:drawableRight="@drawable/selector_radio"
-                                 android:text="支付宝"
-                                 android:padding="@dimen/dpi_4"
-                                 android:id="@+id/rb_alipay"
-                    />
+                    <RelativeLayout android:layout_width="match_parent"
+                                    android:paddingLeft="12pt"
+                                    android:paddingRight="12pt"
+                                    android:id="@+id/rl_2"
+                                    android:layout_height="wrap_content">
+                        <TextView android:layout_width="wrap_content"
+                                  android:text="支付宝"
+                                  android:id="@+id/tv_alipay1"
+                                  android:paddingTop="10pt"
+                                  android:paddingBottom="10pt"
+                                  android:textColor="#FF333333"
+                                  android:textSize="13pt"
+                                  android:layout_height="wrap_content"/>
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="未绑定"
+                                android:id="@+id/tv_alipay2"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_gravity="right"
+                                android:textColor="#FF999999"
+                                android:textSize="13pt"
+                        />
+                    </RelativeLayout>
 
                     <View android:layout_width="match_parent" android:layout_height="1dp"
 
-                          android:background="@color/white"
+                          android:background="#FFE6E6E6"
                     />
 
-                    <RadioButton android:layout_width="match_parent" android:layout_height="wrap_content"
-                                 android:id="@+id/rb_bank"
-                                 android:button="@null"
-                                 android:padding="@dimen/dpi_4"
-                                 android:drawableRight="@drawable/selector_radio"
-                                 android:text="银行卡"
-                    />
+                    <RelativeLayout android:layout_width="match_parent"
+                                    android:paddingLeft="12pt"
+                                    android:id="@+id/rl_3"
+                                    android:paddingRight="12pt"
+                                    android:layout_height="wrap_content">
+                        <TextView android:layout_width="wrap_content"
+                                  android:text="银行卡"
+                                  android:paddingTop="10pt"
+                                  android:id="@+id/tv_bank1"
+                                  android:paddingBottom="10pt"
+                                  android:textColor="#FF333333"
+                                  android:textSize="13pt"
+                                  android:layout_height="wrap_content"/>
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="未绑定"
+                                android:id="@+id/tv_bank2"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_gravity="right"
+                                android:textColor="#FF999999"
+                                android:textSize="13pt"
+                        />
+                    </RelativeLayout>
 
-                </RadioGroup>
+                </LinearLayout>
 
+                <View android:layout_width="match_parent" android:layout_height="1dp"
 
+                      android:background="#FFE6E6E6"
+                />
                 <TextView
                         android:layout_width="wrap_content"
                         android:paddingLeft="12pt"
@@ -169,7 +230,6 @@
                         android:textColor="#FFFFFFFF"
                         android:textSize="18pt"
                         android:layout_height="wrap_content"/>
-
 
 
             </LinearLayout>
@@ -230,8 +290,10 @@
                 <TextView android:layout_width="0dp"
                           android:id="@+id/tv_1"
                           android:text="资金去处"
+                          android:gravity="left"
                           android:textColor="#FF666666"
                           android:textSize="12pt"
+
                           android:layout_weight="1.5"
                           android:layout_height="wrap_content"/>
                 <TextView android:layout_width="0dp"
@@ -240,6 +302,7 @@
                           android:gravity="center"
                           android:textColor="#FF666666"
                           android:textSize="12pt"
+                          android:visibility="gone"
                           android:layout_weight="1.2"
                           android:layout_height="wrap_content"/>
                 <TextView android:layout_width="0dp"
@@ -262,7 +325,6 @@
 
             </LinearLayout>
         </LinearLayout>
-
 
 
     </com.google.android.material.appbar.AppBarLayout>

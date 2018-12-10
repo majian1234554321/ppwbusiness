@@ -2,6 +2,7 @@ package com.yjhh.ppwbusiness.adapter
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.gson.Gson
 import com.yjhh.ppwbusiness.R
@@ -14,6 +15,7 @@ import com.yjhh.ppwbusiness.views.reservation.ReservationDetailFragment
 import kotlinx.android.synthetic.main.feedbackdetailsfragment.*
 
 class FeedBackDetailsFragment : BaseFragment(), AboutView {
+
     override fun onSuccess(response: String?, flag: String?) {
 
         Log.i("FeedBackDetailsFragment", response)
@@ -41,11 +43,10 @@ class FeedBackDetailsFragment : BaseFragment(), AboutView {
     }
 
     override fun onFault(errorMsg: String?) {
-
+        Toast.makeText(mActivity, errorMsg, Toast.LENGTH_SHORT).show()
     }
 
     override fun getLayoutRes(): Int = R.layout.feedbackdetailsfragment
-
 
     override fun initView() {
 
@@ -55,7 +56,6 @@ class FeedBackDetailsFragment : BaseFragment(), AboutView {
         AboutPresent(mActivity, this).feedbackDetail(id)
 
     }
-
 
     companion object {
         fun newInstance(id: String): FeedBackDetailsFragment {

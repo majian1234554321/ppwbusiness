@@ -194,7 +194,7 @@ class EvaluateManageFragment : BaseFragment(), EvaluateView {
     }
 
     private fun initAdapter() {
-        mAdapter?.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
+
 
         recyclerView.adapter = mAdapter
 

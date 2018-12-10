@@ -104,7 +104,7 @@ class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetVie
 
     override fun onSuccess() {
 
-        finish()
+        //finish()
     }
 
 
@@ -126,7 +126,6 @@ class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetVie
             }
 
             R.id.tv_save -> {
-
                 if (!TextUtils.isEmpty(tv_shopTel.text.toString())) {
                     val map = SubmitShopAdminConfigModel()
                     map.address = tv_shopAddress.text.toString()
@@ -202,7 +201,6 @@ class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetVie
                 val sb = StringBuilder()
                 listHours.clear()
                 timeList.forEach {
-
 
 
                     sb.append(it.begin)

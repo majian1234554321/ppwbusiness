@@ -1,24 +1,47 @@
 package com.yjhh.ppwbusiness.views.reconciliation
 
-import android.util.Log
-import androidx.viewpager.widget.ViewPager
 import com.flyco.tablayout.listener.OnTabSelectListener
+import com.google.gson.Gson
+import com.yjhh.ppwbusiness.BaseApplication
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.MyPagerAdapter
-import com.yjhh.ppwbusiness.api.ApiServices
-import com.yjhh.ppwbusiness.api.ReconciliationService
 import com.yjhh.ppwbusiness.base.BaseFragment
-import com.yjhh.ppwbusiness.base.ProcessObserver2
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import com.yjhh.ppwbusiness.bean.ReconciliationBean
+import com.yjhh.ppwbusiness.bean.WithDrawBean
+import com.yjhh.ppwbusiness.ipresent.WithDrawPresent
+import com.yjhh.ppwbusiness.iview.WithDrowView
+
 
 import kotlinx.android.synthetic.main.reconciliationfragment.*
 
-class ReconciliationFragment : BaseFragment() {
+class ReconciliationFragment : BaseFragment(), WithDrowView {
+    override fun onSuccessView(response: String?,flag:String) {
+       val model =  Gson().fromJson<ReconciliationBean>(response, ReconciliationBean::class.java)
+
+
+        tv_in.text =  BaseApplication.getIns().getString(R.string.rmb_price_double2,model.totalIn)
+        tv_out.text =  BaseApplication.getIns().getString(R.string.rmb_price_double2,model.totalOut)
+
+        tv_price.text = BaseApplication.getIns().getString(R.string.rmb_price_double2,model.balance)
+
+
+        tv_inCount.text = "共${model.todayLogs[0].count}笔"
+        tv_inPrice.text = "+${ BaseApplication.getIns().getString(R.string.rmb_price_double2,model.todayLogs[0].money)}"
+
+        tv_outCount.text = "共${model.todayLogs[1].count}笔"
+        tv_outPrice.text = "+${ BaseApplication.getIns().getString(R.string.rmb_price_double2,model.todayLogs[1].money)}"
+
+    }
+
+    override fun onFault(errorMsg: String?) {
+
+    }
+
+
     override fun getLayoutRes(): Int = R.layout.reconciliationfragment
 
 
-    private val mTitles = arrayOf("全部", "收款", "提现")
+    private val mTitles = arrayOf("全部", "收入", "支出")
 
     override fun initView() {
 
@@ -37,13 +60,15 @@ class ReconciliationFragment : BaseFragment() {
         fagments.add(Reconciliation3Fragment())
         // fagments.add(Product4Fragment())
 
-
+        WithDrawPresent(mActivity,this).shopAdminWithdrawIndex()
+       // WithDrawPresent(mActivity).shopAdminWithdraw()
+       // WithDrawPresent(mActivity).logs(0,15)
 
 
 
         mViewPager.adapter = MyPagerAdapter(childFragmentManager, fagments, mTitles)
         mTabLayout.setViewPager(mViewPager)
-
+        mViewPager.offscreenPageLimit =fagments.size
         mTabLayout.setOnTabSelectListener(object : OnTabSelectListener {
             override fun onTabSelect(position: Int) {
                 mViewPager.currentItem = position

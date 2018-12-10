@@ -1,7 +1,9 @@
 package com.yjhh.ppwbusiness.ipresent
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
+import androidx.core.content.ContextCompat.startActivity
 import anet.channel.util.Utils
 import com.azhon.appupdate.utils.LogUtil
 import com.google.gson.Gson
@@ -18,7 +20,9 @@ import java.io.File
 import java.lang.StringBuilder
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
+import com.yjhh.ppwbusiness.api.ShopSetServices
 import com.yjhh.ppwbusiness.bean.VersionBean
+import com.yjhh.ppwbusiness.views.webview.BackViewActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -113,6 +117,36 @@ class CommonPresent(var context: Context, var view: CommonView) : BasePresent() 
             })
 
     }
+
+
+
+   /* fun  applyShop(){
+        ApiServices.getInstance()
+            .create(ShopSetServices::class.java)
+            .applyShop()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : ProcessObserver2(context) {
+                override fun processValue(response: String?) {
+                    Log.i("01018", response)
+                    if (response?.contains("\"")!!) {
+                        val intent = Intent(mActivity, BackViewActivity::class.java)
+                        intent.putExtra("url", response.replace("\"", ""))
+                        startActivity(intent)
+                    } else {
+                        val intent = Intent(mActivity, BackViewActivity::class.java)
+                        intent.putExtra("url", response)
+                        startActivity(intent)
+                    }
+
+                }
+
+                override fun onFault(message: String) {
+                    Log.i("01018", message)
+                }
+            })
+    }*/
+
 
 
 

@@ -3,6 +3,7 @@ package com.yjhh.ppwbusiness.views.main.main4
 
 import android.content.Intent
 import android.text.TextUtils
+import android.text.style.BackgroundColorSpan
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -26,6 +27,7 @@ import com.yjhh.ppwbusiness.utils.*
 import com.yjhh.ppwbusiness.views.cui.AppUpdateFragment
 import com.yjhh.ppwbusiness.views.login.LoginActivity
 import com.yjhh.ppwbusiness.views.merchant.MerchantSettingActivity
+import com.yjhh.ppwbusiness.views.webview.BackViewFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -71,6 +73,19 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
             tv_time.text = sb.toString()
         }
 
+
+        if (!TextUtils.isEmpty(model.adminUrl) && profile_image != null) {
+            profile_image.setOnLongClickListener {
+
+
+                (parentFragment as MainFragment).startBrotherFragment(
+                    BackViewFragment.newInstance(model.adminUrl)
+                )
+
+                true
+            }
+
+        }
 
         tv_address.text = model.address
     }
@@ -256,6 +271,8 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
                     model = Gson().fromJson<AccountBean>(response, AccountBean::class.java)
 
 
+                   // model.add
+
 
                     iev_account.setTextContent("${model?.roleName}: ${model?.name}")
 
@@ -294,7 +311,7 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
 
 
     override fun onResume() {
-        Log.i("Main4Fragment","Main4Fragment")
+        Log.i("Main4Fragment", "Main4Fragment")
         super.onResume()
         ShopSetPresent(mActivity, this)
             .getAllInfo()

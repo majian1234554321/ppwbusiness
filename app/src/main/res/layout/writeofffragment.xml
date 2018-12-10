@@ -153,7 +153,7 @@
                               android:layout_centerVertical="true"
                               android:layout_toLeftOf="@+id/tv_Y"
                               android:paddingTop="6pt"
-                              android:inputType="number"
+                              android:inputType="numberDecimal"
                               android:layout_gravity="right"
                               android:textColor="#FF333333"
                               android:textSize="13pt"

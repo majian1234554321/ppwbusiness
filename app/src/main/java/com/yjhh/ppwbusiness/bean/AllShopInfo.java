@@ -35,6 +35,8 @@ public class AllShopInfo {
     public List<?> images;
     public ArrayList<TimesBean> times;
 
+    public String adminUrl;
+
     public static class AccountBean {
         /**
          * order : 0

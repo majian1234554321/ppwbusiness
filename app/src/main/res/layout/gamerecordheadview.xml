@@ -5,7 +5,9 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
 
-    <ImageView android:layout_width="351pt"
+    <com.youth.banner.Banner android:layout_width="351pt"
+               android:id="@+id/banner"
+
                android:layout_marginTop="12.4pt"
                android:layout_height="97.7pt"/>
 
@@ -28,20 +30,22 @@
                           android:layout_height="wrap_content">
 
                 <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:padding="5pt"
                         android:layout_height="wrap_content"
                         android:text="期号"
-
+                        android:gravity="center"
                         android:textColor="#FF666666"
                         android:textSize="12pt"
                 />
 
                 <TextView
-                        android:layout_width="72pt"
+                        android:layout_width="match_parent"
                         android:layout_height="21pt"
                         android:text="20181111"
-                        android:textColor="#FF2E86FF"
+                        android:id="@+id/tv_no"
+                        android:gravity="center"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="15pt"
                 />
 
@@ -54,8 +58,9 @@
                           android:layout_height="wrap_content">
 
                 <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:padding="5pt"
+                        android:gravity="center"
                         android:layout_height="wrap_content"
                         android:text="活动状态"
                         android:textColor="#FF666666"
@@ -63,7 +68,9 @@
                 />
 
                 <TextView
-                        android:layout_width="72pt"
+                        android:layout_width="match_parent"
+                        android:id="@+id/tv_status"
+                        android:gravity="center"
                         android:layout_height="21pt"
                         android:text="20181111"
                         android:textColor="#FF2E86FF"
@@ -134,7 +141,7 @@
                     android:text="12121"
                     android:textStyle="bold"
                     android:padding="23pt"
-
+                    android:id="@+id/tv_yuser"
 
                     android:textColor="#FFC6AC81"
                     android:textSize="24pt"
@@ -167,6 +174,7 @@
             />
 
             <TextView
+                    android:id="@+id/tv_tuser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#FFC6AC81"

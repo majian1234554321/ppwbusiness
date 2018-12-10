@@ -11,21 +11,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class ReconciliationPresent(var context: Context) : BasePresent() {
-    fun index() {
-        ApiServices.getInstance().create(ReconciliationService::class.java)
-            .index()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : ProcessObserver2(context) {
-                override fun processValue(response: String?) {
-                    Log.i("ReconciliationFragment", response)
-                }
 
-                override fun onFault(message: String) {
-                    Log.i("ReconciliationFragment", message)
-                }
-            })
-    }
 
 
     fun logs(type: String, pageIndex: Int, pageSize: Int, flag: String) {

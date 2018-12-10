@@ -9,7 +9,7 @@
 
     <View android:layout_width="match_parent" android:layout_height="10pt"/>
 
-    <pl.droidsonroids.gif.GifImageView android:layout_width="60pt" android:layout_height="60pt"
+    <pl.droidsonroids.gif.GifImageView android:layout_width="50pt" android:layout_height="50pt"
                                        android:id="@+id/iv_image"
                                        android:layout_gravity="center"
                                        android:layout_centerInParent="true"

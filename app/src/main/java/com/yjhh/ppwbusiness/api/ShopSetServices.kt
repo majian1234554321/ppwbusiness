@@ -35,4 +35,8 @@ interface ShopSetServices {
     fun getAllInfo(): Observable<ResponseBody>//
 
 
+    @POST("shopAdminCommon/applyShop")
+    fun applyShop(): Observable<ResponseBody>//申请开店
+
+
 }

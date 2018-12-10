@@ -41,7 +41,7 @@ abstract class ProcessObserver2(var context: Context) : Observer<ResponseBody> {
     constructor(context: Context, showProgress: Boolean) : this(context) {
         this.showProgress = showProgress
         dialog = AlertDialogFactory.createFactory(context).getLoadingDialog("加载中...")
-        dialog?.setCancelable(false)
+        // dialog?.setCancelable(false)
     }
 
     override fun onNext(t: ResponseBody) {
@@ -70,6 +70,8 @@ abstract class ProcessObserver2(var context: Context) : Observer<ResponseBody> {
 
                     context.startActivity(Intent(context, LoginActivity::class.java))
                     (context as Activity).finish()
+                } else if ("01018" == jsonValue.optString("code")) {
+                    onFault("01018")
                 } else {
                     onFault(jsonValue.getString("message"))
                 }

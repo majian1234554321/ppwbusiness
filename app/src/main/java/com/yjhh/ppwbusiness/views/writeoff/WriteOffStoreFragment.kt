@@ -111,7 +111,7 @@ class WriteOffStoreFragment : BaseFragment(), CancellationView {
 
 
         mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(mActivity)
-        mAdapter?.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
+
         mAdapter?.isFirstOnly(false)
         mAdapter = WriteOffStoreAdapter(listsAll)
         mRecyclerView.adapter = mAdapter

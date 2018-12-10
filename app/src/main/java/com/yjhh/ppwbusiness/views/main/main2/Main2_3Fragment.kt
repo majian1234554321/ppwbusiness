@@ -79,7 +79,7 @@ class Main2_3Fragment : BaseFragment(), OrderView {
         mAdapter.setOnLoadMoreListener({
             loadMore()
         }, mRecyclerView)
-        mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT)
+
         mAdapter.isFirstOnly(false)
         mRecyclerView.adapter = mAdapter
 
