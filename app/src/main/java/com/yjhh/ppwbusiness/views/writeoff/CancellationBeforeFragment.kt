@@ -3,6 +3,7 @@ package com.yjhh.ppwbusiness.views.writeoff
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.scwang.smartrefresh.layout.header.ClassicsHeader
 
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.CancellationAdapter
@@ -13,7 +14,7 @@ import com.yjhh.ppwbusiness.bean.CancelationBeforeBean
 import com.yjhh.ppwbusiness.ipresent.CancellationPresent
 import com.yjhh.ppwbusiness.ipresent.ReservePresent
 import com.yjhh.ppwbusiness.iview.CancellationView
-import com.yjhh.ppwbusiness.views.cui.PPWHeader2
+
 import com.yjhh.ppwbusiness.views.cui.SpaceItemDecoration
 import kotlinx.android.synthetic.main.cancellationbeforefragment.*
 
@@ -92,7 +93,7 @@ class CancellationBeforeFragment : BaseFragment(), CancellationView {
     }
 
     private fun initRefreshLayout() {
-        swipeLayout.setRefreshHeader(PPWHeader2(context))
+        swipeLayout.setRefreshHeader(ClassicsHeader(context))
         swipeLayout.setOnRefreshListener { refreshLayout ->
             refresh()
         }

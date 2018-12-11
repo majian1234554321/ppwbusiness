@@ -56,8 +56,8 @@ interface SectionUserService {
 
 
     @FormUrlEncoded
-    @POST("user/setNickName")
-    fun setNickName(@FieldMap map: Map<String, String>): Observable<ResponseBody>//设置用户昵称
+    @POST("shopAdmin/editUserName")
+    fun editUserName(@FieldMap map: Map<String, String>): Observable<ResponseBody>//设置用户昵称
 
     @FormUrlEncoded
     @POST("shopAdminUser/save")

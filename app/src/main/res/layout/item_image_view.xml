@@ -3,32 +3,38 @@
                 android:orientation="vertical"
                 android:background="@color/white"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="122.7pt">
 
 
     <ImageView android:layout_width="match_parent"
                android:id="@+id/iv_image"
 
                android:layout_height="91.7pt"/>
-
-
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+    <TextView android:layout_width="wrap_content" android:layout_height="31pt"
               android:id="@+id/tv_No"
               android:padding="7pt"
               android:layout_below="@+id/iv_image"
               android:text="20181111期"
     />
-
-
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+    <TextView android:layout_width="wrap_content" android:layout_height="31pt"
               android:layout_gravity="right"
               android:layout_below="@+id/iv_image"
               android:layout_alignParentRight="true"
               android:gravity="center"
-            android:padding="7pt"
+              android:padding="7pt"
               android:textColor="#2C85FF"
               android:drawableRight="@drawable/arrow_right_48"
               android:text="查看详情"
+    />
+
+    <TextView android:layout_width="match_parent" android:layout_height="122.7pt"
+              android:background="#88000000"
+              android:textColor="@color/white"
+              android:textSize="17pt"
+              android:id="@+id/tv_background"
+              android:gravity="center"
+              android:text="已结束"
+
     />
 
 

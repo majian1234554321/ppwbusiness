@@ -17,7 +17,7 @@ import com.yjhh.ppwbusiness.ipresent.CancellationPresent
 import com.yjhh.ppwbusiness.ipresent.ReservePresent
 import com.yjhh.ppwbusiness.iview.CancellationView
 import com.yjhh.ppwbusiness.utils.CommItemDecoration
-import com.yjhh.ppwbusiness.views.cui.PPWHeader2
+
 import com.yjhh.ppwbusiness.views.cui.SpaceItemDecoration
 import kotlinx.android.synthetic.main.writeoffstorefragment.*
 
@@ -119,7 +119,7 @@ class WriteOffStoreFragment : BaseFragment(), CancellationView {
     }
 /*
     private fun initRefreshLayout() {
-        swipeLayout.setRefreshHeader(PPWHeader2(context))
+        swipeLayout.setRefreshHeader(ClassicsHeader(context))
         swipeLayout.setOnRefreshListener { refreshLayout ->
             refresh()
         }

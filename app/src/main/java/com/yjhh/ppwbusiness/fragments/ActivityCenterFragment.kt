@@ -4,6 +4,7 @@ import android.util.ArrayMap
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
+import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.ActivityCenterAdapter
 import com.yjhh.ppwbusiness.api.ActivityCenterService
@@ -14,7 +15,7 @@ import com.yjhh.ppwbusiness.bean.ActivityCenterBean
 import com.yjhh.ppwbusiness.bean.ActivityCenterBean2
 import com.yjhh.ppwbusiness.ipresent.ActivityCenterPrenent
 import com.yjhh.ppwbusiness.iview.ActivityCenterView
-import com.yjhh.ppwbusiness.views.cui.PPWHeader2
+
 import com.yjhh.ppwbusiness.views.cui.SpaceItemDecoration
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -35,12 +36,13 @@ class ActivityCenterFragment : BaseFragment(), ActivityCenterView {
                 list.clear()
                 listAll.clear()
                 model.items.forEach {
-                    if (it.status == 1) {
-                        list.add(ActivityCenterBean(1, it))
-                    } else {
-                        list.add(ActivityCenterBean(0, it))
-                    }
+//                    if (it.status == 1) {
+//                        list.add(ActivityCenterBean(1, it))
+//                    } else {
+//                        list.add(ActivityCenterBean(0, it))
+//                    }
 
+                    list.add(ActivityCenterBean(1, it))
                 }
                 listAll.addAll(list)
 
@@ -58,12 +60,12 @@ class ActivityCenterFragment : BaseFragment(), ActivityCenterView {
 
                     list.clear()
                     model.items.forEach {
-                        if (it.status == 1) {
-                            list.add(ActivityCenterBean(1, it))
-                        } else {
-                            list.add(ActivityCenterBean(0, it))
-                        }
-
+//                        if (it.status == 1) {
+//                            list.add(ActivityCenterBean(1, it))
+//                        } else {
+//                            list.add(ActivityCenterBean(0, it))
+//                        }
+                        list.add(ActivityCenterBean(1, it))
                     }
                     listAll.addAll(list)
 
@@ -123,7 +125,7 @@ class ActivityCenterFragment : BaseFragment(), ActivityCenterView {
     }
 
     private fun initRefreshLayout() {
-        swipeLayout.setRefreshHeader(PPWHeader2(context))
+        swipeLayout.setRefreshHeader(ClassicsHeader(context))
         swipeLayout.setOnRefreshListener { refreshLayout ->
             refresh()
         }

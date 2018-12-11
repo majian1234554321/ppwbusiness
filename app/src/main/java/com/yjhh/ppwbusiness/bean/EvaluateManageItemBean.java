@@ -11,12 +11,23 @@ public class EvaluateManageItemBean extends AbstractExpandableItem<SubCommentsBe
     public String content;
     public int grade;
     public int id;
+    public String createdTime;
     public boolean ifFile;
-    public boolean ifShop;
+    public String ifShop;
     public String nickName;
     public int time;
     public List<FilesBean> files;
-    public List<SubCommentsBean> subComments;
+    public List<SubCommentsBean> items;
+    public String pv;
+    public String pvText;
+    public String shopGrade;
+    public String shopGradeText;
+    public String shopLogoPath;
+    public String shopLogoUrl;
+    public String shopName;
+    public float shopScore;
+    public String timeText;
+    public String userName;
 
     @Override
     public int getItemType() {
@@ -51,26 +62,6 @@ public class EvaluateManageItemBean extends AbstractExpandableItem<SubCommentsBe
     }
 
 
-    public static class SubCommentsBean implements MultiItemEntity {
 
-        public String content;
-        public boolean ifFile;
-        public boolean ifShop;
-        public String nickName;
-        public int time;
-
-        public SubCommentsBean(String content, boolean ifFile, boolean ifShop, String nickName, int time) {
-            this.content = content;
-            this.ifFile = ifFile;
-            this.ifShop = ifShop;
-            this.nickName = nickName;
-            this.time = time;
-        }
-
-        @Override
-        public int getItemType() {
-            return ExpandableItemAdapter.TYPE_LEVEL_1;
-        }
-    }
 
 }

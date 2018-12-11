@@ -3,6 +3,7 @@ package com.yjhh.ppwbusiness.fragments
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.scwang.smartrefresh.layout.header.ClassicsHeader
 
 import com.tencent.mm.opensdk.utils.Log
 import com.yjhh.ppwbusiness.R
@@ -12,7 +13,7 @@ import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.bean.MyMessageBean
 import com.yjhh.ppwbusiness.ipresent.SectionUselessPresent
 import com.yjhh.ppwbusiness.iview.MyMessageView
-import com.yjhh.ppwbusiness.views.cui.PPWHeader2
+
 import com.yjhh.ppwbusiness.views.cui.SpaceItemDecoration
 
 import kotlinx.android.synthetic.main.messagecenter1fragment.*
@@ -27,7 +28,10 @@ class MessageCenter1Fragment : BaseFragment(), MyMessageView {
     var status = "-1"//状态，默认null(null/-1 全部 0未生效 1 有效的 2已过期的/失效的)
     override fun onSuccess(main1bean: MyMessageBean, flag: String) {
         if ("refresh" == flag) {
-            swipeLayout.finishRefresh()
+            if (swipeLayout != null) {
+                swipeLayout.finishRefresh()
+            }
+
             mAdapter.setNewData(main1bean.items as ArrayList<MyMessageBean.ItemsBean>)
 
         } else {
@@ -59,7 +63,7 @@ class MessageCenter1Fragment : BaseFragment(), MyMessageView {
         mAdapter = MyMessageFragmentAdapter(list)
         sectionCouponPresent = SectionUselessPresent(context, this)
         mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
-        swipeLayout.setRefreshHeader(PPWHeader2(context))
+        swipeLayout.setRefreshHeader(ClassicsHeader(context))
         initAdapter()
         initRefreshLayout()
         swipeLayout.autoRefresh()

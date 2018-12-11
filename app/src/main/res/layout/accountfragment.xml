@@ -39,7 +39,7 @@
                       android:background="@color/white" android:layout_height="wrap_content">
 
             <com.yjhh.ppwbusiness.views.cui.ItemEntryView android:layout_width="match_parent"
-                                                          app:ievtextValue="昵称"
+                                                          app:ievtextValue="名字"
                                                           android:paddingLeft="24pt"
                                                           android:id="@+id/iev_nickName"
                                                           android:paddingRight="12pt"

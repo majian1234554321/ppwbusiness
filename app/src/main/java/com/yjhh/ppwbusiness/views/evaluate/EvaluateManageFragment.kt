@@ -11,17 +11,25 @@ import com.chad.library.adapter.base.entity.MultiItemEntity
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener
 import com.google.gson.Gson
+import com.scwang.smartrefresh.layout.header.ClassicsHeader
 
 import com.yjhh.ppwbusiness.R
+import com.yjhh.ppwbusiness.R.id.*
 import com.yjhh.ppwbusiness.adapter.EvaluateManageAdapter
+import com.yjhh.ppwbusiness.api.ApiServices
+import com.yjhh.ppwbusiness.api.SectionEvluateService
 import com.yjhh.ppwbusiness.base.BaseFragment
+import com.yjhh.ppwbusiness.base.ProcessObserver2
 import com.yjhh.ppwbusiness.bean.EvaluateManageBean
 import com.yjhh.ppwbusiness.bean.EvaluateManageItemBean
+import com.yjhh.ppwbusiness.bean.EvaluateManageNavBean
 import com.yjhh.ppwbusiness.bean.SubCommentsBean
 import com.yjhh.ppwbusiness.ipresent.EvaluatePresent
 import com.yjhh.ppwbusiness.iview.EvaluateView
-import com.yjhh.ppwbusiness.views.cui.PPWHeader2
+
 import com.yjhh.ppwbusiness.views.cui.TabEntity
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.evaluatemanagefragment.*
 
 import java.util.*
@@ -29,8 +37,11 @@ import java.util.*
 class EvaluateManageFragment : BaseFragment(), EvaluateView {
 
     override fun onFault(errorMsg: String?) {
-        swipeLayout.finishRefresh()
-        if (startIndex==0) {
+        if (swipeLayout != null) {
+            swipeLayout.finishRefresh()
+        }
+
+        if (startIndex == 0) {
             val view = View.inflate(mActivity, R.layout.emptyview, null)
             view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
             mAdapter?.emptyView = view
@@ -43,67 +54,87 @@ class EvaluateManageFragment : BaseFragment(), EvaluateView {
 
         val gson = Gson()
         val bean = gson.fromJson<EvaluateManageBean>(value, EvaluateManageBean::class.java)
-        for (i in 0 until bean.items.size) {
-            val lv0 = bean.items[i]
 
-            var lv1: SubCommentsBean? = null
-            if (bean.items[i].subComments != null) {
-                for (j in 0 until bean.items[i].subComments.size) {
-                    val modle = bean.items[i].subComments[j]
-                    if (j == bean.items[i].subComments.size - 1) {
+        if (bean.items != null && bean.items.size > 0) {
+            list.clear()
+            for (i in 0 until bean.items.size) {
+                val lv0 = bean.items[i]
 
-                        lv1 = SubCommentsBean(
-                            modle.content,
-                            modle.ifFile,
-                            modle.ifShop,
-                            modle.nickName,
-                            modle.time,
-                            bean.items[i].id.toString(),
-                            false
-                        )
-                    } else {
-                        lv1 =
-                                SubCommentsBean(
-                                    modle.content,
-                                    modle.ifFile,
-                                    modle.ifShop,
-                                    modle.nickName,
-                                    modle.time,
-                                    bean.items[i].id.toString(),
-                                    true
-                                )
+
+
+                if (lv0.items != null && lv0.items.size > 0) {
+                    lv0.items.forEachIndexed { index, subCommentsBean ->
+                        if (index == lv0.items.size - 1) {
+                            subCommentsBean.last = true
+                            lv0.addSubItem(subCommentsBean)
+                        } else {
+                            subCommentsBean.last = false
+                            lv0.addSubItem(subCommentsBean)
+                        }
                     }
-                    lv0.addSubItem(lv1)
+                } else {
+                    val model = SubCommentsBean(
+                        "", "", "", bean.items[i].id.toString(), 0,
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                        , true
+                    )
+                    lv0.addSubItem(model)
                 }
-            } else {
-                lv1 =
-                        SubCommentsBean(
-                            "", false, false, "", 0,
-                            bean.items[i].id.toString(), false
-                        )
-                lv0.addSubItem(lv1)
+                list.add(lv0)
             }
 
 
-            list.add(lv0)
+
+            when (flag) {
+                "refresh" -> {
+                    listAll.clear()
+                    listAll.addAll(list)
+                    if (swipeLayout != null) {
+                        swipeLayout.finishRefresh()
+                    }
+
+                    if (startIndex == 0 && bean.items != null && bean.items.size == 0) {
+                        val view = View.inflate(mActivity, R.layout.emptyview, null)
+                        view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
+                        mAdapter?.emptyView = view
+                    } else {
+                        mAdapter?.setNewData(list)
+                    }
+
+                }
+
+
+                "load" -> {
+                    if (bean.items != null && bean.items.size == pageSize) {
+                        listAll.addAll(list)
+                        mAdapter?.addData(listAll)
+                        mAdapter?.loadMoreComplete()
+                    } else {
+                        listAll.addAll(list)
+                        mAdapter?.addData(list)
+
+                        mAdapter?.loadMoreEnd()
+                    }
+
+
+                }
+
+            }
+
+        } else {
+            if ("load" == flag) {
+                mAdapter?.loadMoreEnd()
+            }
         }
-
-        when (flag) {
-            "refresh" -> {
-                swipeLayout.finishRefresh()
-                mAdapter?.setNewData(list)
-                swipeLayout.finishRefresh()
-            }
-
-
-            "load" -> {
-                mAdapter?.addData(list)
-                mAdapter?.loadMoreComplete()
-            }
-        }
-
-
-
 
 
         mAdapter?.expandAll()
@@ -123,6 +154,7 @@ class EvaluateManageFragment : BaseFragment(), EvaluateView {
     var mAdapter: EvaluateManageAdapter? = null
 
     val list = ArrayList<MultiItemEntity>()
+    val listAll = ArrayList<MultiItemEntity>()
 
     var present: EvaluatePresent? = null
 
@@ -130,21 +162,55 @@ class EvaluateManageFragment : BaseFragment(), EvaluateView {
 
         present = EvaluatePresent(mActivity, this)
         recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
-        swipeLayout.setRefreshHeader(PPWHeader2(context))
+        swipeLayout.setRefreshHeader(ClassicsHeader(context))
 
-        mAdapter = EvaluateManageAdapter(mActivity, list)
+        mAdapter = EvaluateManageAdapter(mActivity, listAll)
 
-        for (i in mTitles.indices) {
-            mTabEntities.add(TabEntity(mTitles[i], R.mipmap.ic_launcher, R.mipmap.ic_launcher))
-        }
+//        for (i in mTitles.indices) {
+//            mTabEntities.add(TabEntity(mTitles[i], R.mipmap.ic_launcher, R.mipmap.ic_launcher))
+//        }
 
         initRefreshLayout()
+
+        ApiServices.getInstance()
+            .create(SectionEvluateService::class.java)
+            .nav()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : ProcessObserver2(mActivity) {
+                override fun processValue(response: String?) {
+                    Log.i("EvaluateManageFragment", response)
+
+                    //mTabLayout_7.
+
+                    val model = Gson().fromJson<Array<EvaluateManageNavBean>>(
+                        response,
+                        Array<EvaluateManageNavBean>::class.java
+                    )
+
+
+                    for (i in model.indices) {
+                        mTabEntities.add(TabEntity(model[i].title, R.mipmap.ic_launcher, R.mipmap.ic_launcher))
+                    }
+
+                    mTabLayout_7.setTabData(mTabEntities)
+                }
+
+                override fun onFault(message: String) {
+                    Log.i("EvaluateManageFragment", message)
+                }
+
+            })
+
+
+
+
 
         initAdapter()
 
         swipeLayout.autoRefresh()
 
-        mTabLayout_7.setTabData(mTabEntities)
+
 
         mTabLayout_7.setOnTabSelectListener(object : OnTabSelectListener {
             override fun onTabSelect(position: Int) {
@@ -180,10 +246,10 @@ class EvaluateManageFragment : BaseFragment(), EvaluateView {
 
         mAdapter?.setOnItemClickListener { adapter, view, position ->
 
-            if (list[position] is EvaluateManageItemBean) {
-                start(EvaluateDetailsFragment.newInstance((list[position] as EvaluateManageItemBean).id.toString()))
+            if (listAll[position] is EvaluateManageItemBean) {
+                start(EvaluateDetailsFragment.newInstance((listAll[position] as EvaluateManageItemBean).id.toString()))
             } else {
-                start(EvaluateDetailsFragment.newInstance((list[position] as SubCommentsBean).id))
+                start(EvaluateDetailsFragment.newInstance((listAll[position] as SubCommentsBean).id))
             }
 
 
@@ -210,6 +276,8 @@ class EvaluateManageFragment : BaseFragment(), EvaluateView {
         swipeLayout.setOnRefreshListener { refreshLayout ->
             refresh()
         }
+
+
     }
 
     private fun refresh() {

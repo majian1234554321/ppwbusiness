@@ -128,7 +128,7 @@
     <View android:layout_width="351pt"
           android:layout_gravity="center"
           android:layout_height="1pt"
-
+          android:layout_marginTop="8pt"
           android:background="#FFF2F2F2"
     />
 

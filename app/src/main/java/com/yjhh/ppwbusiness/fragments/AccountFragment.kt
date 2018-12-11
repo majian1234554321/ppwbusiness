@@ -36,7 +36,7 @@ class AccountFragment : BaseFragment(), View.OnClickListener {
             }
 
             R.id.iev_nickName -> {
-                start(SetNickNameFragment())
+                start(SetNickNameFragment.newInstance(name))
             }
 
             R.id.iev_bank->{
@@ -56,6 +56,9 @@ class AccountFragment : BaseFragment(), View.OnClickListener {
 
     override fun getLayoutRes(): Int = R.layout.accountfragment
 
+
+    var name :String?= null
+
     override fun initView() {
         arrayOf(tv_loginOut, iev_reset, iev_nickName, iev_bank, iev_alipay, iev_wx)
             .forEach {
@@ -69,6 +72,7 @@ class AccountFragment : BaseFragment(), View.OnClickListener {
                 iev_nickName.setTextContent(it.nickName)
             }
         }
+
 
 
 
@@ -86,7 +90,9 @@ class AccountFragment : BaseFragment(), View.OnClickListener {
                     tv_text.text = if (model.role == 0) "管理员账户" else "员工账户"
 
 
-                    iev_nickName.setTextContent(SharedPreferencesUtils.getParam(mActivity, "nickName", "").toString())
+                  name =   model.name
+
+                    iev_nickName.setTextContent(model.name)
 
                     ImageLoaderUtils.loadCircle(
                         mActivity,

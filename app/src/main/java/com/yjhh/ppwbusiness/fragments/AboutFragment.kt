@@ -1,14 +1,20 @@
 package com.yjhh.ppwbusiness.fragments
 
+import android.Manifest
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.google.gson.Gson
+import com.tbruyelle.rxpermissions2.RxPermissions
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.api.ApiServices
 import com.yjhh.ppwbusiness.api.SectionUselessService
 import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.base.ProcessObserver2
 import com.yjhh.ppwbusiness.bean.AboutBean
+import com.yjhh.ppwbusiness.utils.PhoneUtils
+import com.yjhh.ppwbusiness.utils.PhotoUtils
+import com.yjhh.ppwbusiness.views.cui.AlertDialogFactory
 import com.yjhh.ppwbusiness.views.webview.BackViewFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -43,6 +49,32 @@ class AboutFragment : BaseFragment(), View.OnClickListener {
                 }
             }
 
+            R.id.iev_5 -> {
+
+                val disposable = RxPermissions(this)
+                    .request(Manifest.permission.CALL_PHONE)
+                    .subscribe {
+                        if (it) {
+
+                            AlertDialogFactory.createFactory(mActivity).getAlertDialog(
+                                "拨打服务热线",
+                                iev_5.getTextContent(),
+                                "确定", "取消",
+                                { dlg, v ->
+                                    PhoneUtils.callPhone(mActivity, iev_5.getTextContent())
+                                }, { dlg, v ->
+                                })
+
+
+                        } else {
+                            Toast.makeText(mActivity, "请前往设置中心开启拨打电话", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                compositeDisposable.add(disposable)
+
+            }
+
             else -> {
             }
         }
@@ -55,7 +87,7 @@ class AboutFragment : BaseFragment(), View.OnClickListener {
 
     override fun initView() {
 
-        arrayOf(iev_1, iev_2, iev_3, iev_4).forEach {
+        arrayOf(iev_1, iev_2, iev_3, iev_4, iev_5).forEach {
             it.setOnClickListener(this)
         }
 

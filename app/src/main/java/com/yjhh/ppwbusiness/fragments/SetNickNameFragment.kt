@@ -1,10 +1,12 @@
 package com.yjhh.ppwbusiness.fragments
 
 import android.content.Intent
+import android.os.Bundle
 import android.util.ArrayMap
 import android.util.Log
 import android.widget.Toast
 import com.yjhh.ppwbusiness.R
+import com.yjhh.ppwbusiness.adapter.FeedBackDetailsFragment
 import com.yjhh.ppwbusiness.api.ApiServices
 import com.yjhh.ppwbusiness.api.SectionUserService
 import com.yjhh.ppwbusiness.base.BaseFragment
@@ -22,21 +24,22 @@ class SetNickNameFragment : BaseFragment() {
 
     override fun initView() {
 
-        et_nickName.setText(SharedPreferencesUtils.getParam(mActivity, "nickName", "").toString())
+
+        val value = arguments?.getString("value")
+
+        et_nickName.setText(value)
 
 
         tv_commit.setOnClickListener {
             val map = ArrayMap<String, String>()
-            map["nickName"] = et_nickName.text.toString()
+            map["name"] = et_nickName.text.toString()
             ApiServices.getInstance().create(SectionUserService::class.java)
-                .setNickName(map)
+                .editUserName(map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : ProcessObserver2(mActivity) {
                     override fun processValue(response: String?) {
-                        Toast.makeText(mActivity, "设置昵称成功", Toast.LENGTH_SHORT).show()
-
-
+                        Toast.makeText(mActivity, "设置名字成功", Toast.LENGTH_SHORT).show()
 
                         SharedPreferencesUtils.setParam(mActivity, "nickName", et_nickName.text.toString())
 
@@ -49,7 +52,7 @@ class SetNickNameFragment : BaseFragment() {
                     }
 
                     override fun onFault(message: String) {
-                        Toast.makeText(mActivity, "设置昵称失败", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(mActivity, "设置名字失败", Toast.LENGTH_SHORT).show()
                     }
 
                 })
@@ -57,6 +60,18 @@ class SetNickNameFragment : BaseFragment() {
         }
 
 
+    }
+
+
+    companion object {
+        fun newInstance(value: String?): SetNickNameFragment {
+            val fragment = SetNickNameFragment()
+            val bundle = Bundle()
+
+            bundle.putString("value", value)
+            fragment.arguments = bundle
+            return fragment
+        }
     }
 
 

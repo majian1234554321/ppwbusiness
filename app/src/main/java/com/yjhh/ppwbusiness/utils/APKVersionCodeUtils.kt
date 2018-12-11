@@ -39,7 +39,6 @@ object APKVersionCodeUtils {
         return verName
     }
 
-
     /**
      * 获取渠道名
      *
@@ -69,8 +68,6 @@ object APKVersionCodeUtils {
 
         return channelName
     }
-
-
 
      fun startUpdate(ctx: Context ,onDownloadListener:OnDownloadListener) {
         /*

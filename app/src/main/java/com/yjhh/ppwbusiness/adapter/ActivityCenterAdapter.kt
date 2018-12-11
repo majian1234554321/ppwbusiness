@@ -17,7 +17,7 @@ class ActivityCenterAdapter(data: List<ActivityCenterBean>) :
         when (helper?.itemViewType) {
             ActivityCenterBean.TEXT -> helper.setText(R.id.tv, item?.content?.statusText)
             ActivityCenterBean.IMG -> {
-                helper.setText(R.id.tv_No, item?.content?.dateSign)
+                helper.setText(R.id.tv_No, "${item?.content?.dateSign} 期")
 
                 if (item?.content != null && item?.content?.files != null && item?.content?.files?.isNotEmpty()!!) {
                     ImageLoaderUtils.load(
@@ -29,6 +29,8 @@ class ActivityCenterAdapter(data: List<ActivityCenterBean>) :
                         0
                     )
                 }
+
+                helper.setVisible(R.id.tv_background, item?.content?.status != 1)
 
 
             }

@@ -32,6 +32,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.azhon.appupdate.utils.Constant
 import com.google.gson.Gson
+import com.scwang.smartrefresh.layout.header.ClassicsHeader
 
 
 import com.tbruyelle.rxpermissions2.RxPermissions
@@ -45,7 +46,7 @@ import com.yjhh.ppwbusiness.iview.CancellationView
 import com.yjhh.ppwbusiness.views.CaptureActivity2
 import com.yjhh.ppwbusiness.utils.TextStyleUtils
 import com.yjhh.ppwbusiness.views.cui.PPWHeader
-import com.yjhh.ppwbusiness.views.cui.PPWHeader2
+
 import com.yjhh.ppwbusiness.views.reservation.ReservationOrderFragment
 import com.yjhh.ppwbusiness.views.writeoff.WriteOffFragment
 
@@ -78,8 +79,14 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
 
         tv_title.text = bean.shopName
 
-        sc_left.setcontent("${bean.preNum} 单")
-        sc_right.setcontent("${bean.preTotal} 单")
+
+        val textleft = "${bean.preNum} 单"
+
+        val textright = "${bean.preTotal} 单"
+
+
+        tv_left.text = TextStyleUtils.changeTextAa(textleft, textleft.length - 1, textleft.length, 13)
+        tv_right.text = TextStyleUtils.changeTextAa(textright, textright.length - 1, textright.length, 13)
 
     }
 
@@ -109,8 +116,6 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
             }
 
 
-
-
             R.id.tv_more -> {
                 (parentFragment as MainFragment).mBottomBar.setCurrentItem(1)
             }
@@ -118,7 +123,7 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
             R.id.iv_scan -> {
 
 
-                RxPermissions(this)
+                val dis = RxPermissions(this)
                     .request(Manifest.permission.CAMERA)
                     .subscribe {
                         if (it) {
@@ -129,6 +134,8 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
                             Toast.makeText(mActivity, "请前往设置中心开启照相机权限", Toast.LENGTH_SHORT).show()
                         }
                     }
+
+                compositeDisposable.add(dis)
 
 
             }
@@ -156,14 +163,14 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
 
         Main1Present(mActivity, this).shopAdminHome()
 
-        arrayOf(tv_setting, tv_more, iv_scan,ll_A,ll_B).forEach {
+        arrayOf(tv_setting, tv_more, iv_scan, ll_A, ll_B).forEach {
             it.setOnClickListener(this)
         }
 
 
-        // swipeLayout.setRefreshHeader(PPWHeader2(mActivity))
+         swipeLayout.setRefreshHeader(ClassicsHeader(mActivity))
 
-        swipeLayout.setRefreshHeader(PPWHeader2(mActivity,ContextCompat.getColor(mActivity,R.color.colorPrimary)))
+      //  swipeLayout.setRefreshHeader(ClassicsHeader(mActivity))
         swipeLayout.setOnRefreshListener { refreshLayout ->
             Main1Present(mActivity, this).shopAdminHome()
         }

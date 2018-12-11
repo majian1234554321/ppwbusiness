@@ -1,9 +1,13 @@
 package com.yjhh.ppwbusiness.adapter
 
 import android.content.Context
+import android.graphics.Color
 import android.opengl.Visibility
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
@@ -39,8 +43,6 @@ class EvaluateManageAdapter(var context: Context, data: List<MultiItemEntity>) :
         //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
 
 
-
-
         when (helper?.itemViewType) {
             TYPE_LEVEL_0 -> {
 
@@ -63,35 +65,42 @@ class EvaluateManageAdapter(var context: Context, data: List<MultiItemEntity>) :
 
 
 
-                helper.setText(R.id.tv_username, item?.nickName)
+
+
+                helper.getView<RatingBar>(R.id.id_ratingbar).setStar(item.shopScore)
+
+
+                helper.setText(R.id.tv_username, item?.userName)
                 helper.setText(R.id.tv_content, item?.content)
-                helper.setText(R.id.tv_time, TimeUtil.stampToDate2(item?.time.toString()))
+                helper.setText(R.id.tv_time, TimeUtil.stampToDate2(item?.createdTime))
 
-
-                helper.getView<RatingBar>(R.id.id_ratingbar)?.setStar(item?.grade?.toFloat()!!)
 
             }
 
             TYPE_LEVEL_1 -> {
 
-                val item = item22 as SubCommentsBean
+                val item22TYPE_LEVEL_1 = item22 as SubCommentsBean
+
+                helper.getView<LinearLayout>(R.id.ll_content).visibility =
+                        if (!TextUtils.isEmpty(item22TYPE_LEVEL_1.content)) View.VISIBLE else View.GONE
 
 
+                helper.getView<LinearLayout>(R.id.rl_more).visibility =
+                        if (item22TYPE_LEVEL_1.last) View.VISIBLE else View.GONE //最后一个item 显示查看详情
 
-                if (item.nickName != null) {
 
-                    helper.setText(R.id.tv_reply22, item.nickName)
-
-                    helper.setText(R.id.tv_content22, item.content)
-
-                    helper.setText(R.id.tv_time22, TimeUtil.stampToDate2(item.time.toString()))
-
-                    helper.setVisible(R.id.rl_more, !item.flag)
-
+                if (item22TYPE_LEVEL_1.ifShop == "0") {//// 商家
+                    helper.setBackgroundColor(R.id.rll, Color.parseColor("#F7EEDD"))
                 } else {
-                    helper.setVisible(R.id.ll_content,item.flag)
-                    helper.setVisible(R.id.rl_more, !item.flag)
+                    helper.setBackgroundColor(R.id.rll, Color.parseColor("#E7E7E7"))
                 }
+
+
+                helper.setText(R.id.tv_reply22, item22TYPE_LEVEL_1.userName)
+
+                helper.setText(R.id.tv_content22, item22TYPE_LEVEL_1.content)
+
+                helper.setText(R.id.tv_time22, TimeUtil.stampToDate2(item22TYPE_LEVEL_1.createdTime.toString()))
 
 
             }

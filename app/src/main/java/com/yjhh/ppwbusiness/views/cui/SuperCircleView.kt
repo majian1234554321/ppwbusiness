@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.View
 import com.yjhh.ppwbusiness.R
@@ -89,12 +90,31 @@ class SuperCircleView @JvmOverloads constructor(
         paint?.textSize = CircleLTextSize
 
 
-        canvas?.drawText(
-            content,
-            outsideCircleRadius / 2 + CircleSTextSize / 2,
-            outsideCircleRadius + CircleSTextSize / 2,
-            paint
-        )
+//
+//        canvas?.drawText(
+//            content,
+//
+//            outsideCircleRadius / 2 + CircleSTextSize / 2,
+//            outsideCircleRadius + CircleSTextSize / 2,
+//            paint
+//        )
+//
+//
+//
+//
+//
+//
+//
+//        paint?.textSize = 14f
+//        paint?.textAlign = Paint.Align.CENTER
+//        canvas?.drawText(
+//            "单",
+//            outsideCircleRadius / 2 + CircleSTextSize / 2+10f,
+//            outsideCircleRadius + CircleSTextSize / 2,
+//            paint
+//        )
+//
+//        canvas.drawPaint()
 
 
     }

@@ -5,7 +5,8 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.yjhh.ppwbusiness.views.cui.PPWHeader2
+import com.scwang.smartrefresh.layout.header.ClassicsHeader
+
 
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.ProductAdapter
@@ -173,7 +174,7 @@ class Product3Fragment : BaseFragment(), ProductView {
     }
 
     private fun initRefreshLayout() {
-        swipeLayout.setRefreshHeader(PPWHeader2(context))
+        swipeLayout.setRefreshHeader(ClassicsHeader(context))
         swipeLayout.setOnRefreshListener { refreshLayout ->
             refresh()
         }

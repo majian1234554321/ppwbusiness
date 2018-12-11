@@ -16,6 +16,7 @@ import com.yjhh.ppwbusiness.api.SectionUselessService
 import com.yjhh.ppwbusiness.base.BaseMainFragment
 import com.yjhh.ppwbusiness.base.ProcessObserver2
 import com.yjhh.ppwbusiness.bean.*
+import com.yjhh.ppwbusiness.bean.rxbean.RxUserInfo
 import com.yjhh.ppwbusiness.fragments.*
 import com.yjhh.ppwbusiness.ipresent.CommonPresent
 import com.yjhh.ppwbusiness.ipresent.Main1Present
@@ -30,6 +31,7 @@ import com.yjhh.ppwbusiness.views.merchant.MerchantSettingActivity
 import com.yjhh.ppwbusiness.views.webview.BackViewFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.accountfragment.*
 
 import kotlinx.android.synthetic.main.main4fragment.*
 import org.json.JSONObject
@@ -39,7 +41,6 @@ import java.lang.StringBuilder
 
 
 class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, ShopSetView {
-
 
     override fun onSuccess() {
         if (tv_status.text.toString() == "休息中") tv_status.text = "营业中" else tv_status.text = "休息中"
@@ -92,7 +93,6 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
 
     var dialog: AppUpdateFragment? = null
 
-
     internal var onDownloadListener: OnDownloadListener = object : OnDownloadListener {
         override fun start() {
 
@@ -110,7 +110,6 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
 
         }
     }
-
 
     override fun onSuccess(value: String?) {
 
@@ -219,11 +218,9 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
         }
     }
 
-
     var typeStatus = "0"     //店铺状态(0正常营业，1打烊/休息)
 
     override fun getLayoutRes(): Int = R.layout.main4fragment
-
 
     var model: AccountBean? = null
 
@@ -255,10 +252,30 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
 
 
         checkShopInfo()
+        getUserInfo()
+
+        val dis2 = RxBus.default.toFlowable(RxUserInfo::class.java).subscribe {
+            if (it != null) {
+                getUserInfo()
+            }
+        }
 
 
-        /*******************************获取当前账户*************************************/
+       compositeDisposable.addAll(dis2)
 
+    }
+
+    fun checkShopInfo() {
+        ShopSetPresent(mActivity, this)
+            .getAllInfo()
+    }
+
+    fun change() {
+        ShopSetPresent(mActivity, this)
+            .getAllInfo()
+    }
+
+    fun getUserInfo(){
         ApiServices.getInstance()
             .create(SectionUselessService::class.java)
             .currInfo()
@@ -267,12 +284,8 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
             .subscribe(object : ProcessObserver2(mActivity) {
                 override fun processValue(response: String?) {
                     Log.i("AccountFragment", response)
-
                     model = Gson().fromJson<AccountBean>(response, AccountBean::class.java)
-
-
-                   // model.add
-
+                    // model.add
 
                     iev_account.setTextContent("${model?.roleName}: ${model?.name}")
 
@@ -294,21 +307,7 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
                 }
 
             })
-
     }
-
-
-    fun checkShopInfo() {
-        ShopSetPresent(mActivity, this)
-            .getAllInfo()
-    }
-
-
-    fun change() {
-        ShopSetPresent(mActivity, this)
-            .getAllInfo()
-    }
-
 
     override fun onResume() {
         Log.i("Main4Fragment", "Main4Fragment")

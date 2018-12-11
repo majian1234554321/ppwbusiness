@@ -140,10 +140,10 @@ class BusinessHoursActivity : AppCompatActivity(), View.OnClickListener {
                         null,
                         "确定删除该时间段吗?",
                         "确定", "取消",
-                        AlertDialogFactory.OnClickListener { dlg, v ->
+                        { dlg, v ->
                             list.removeAt(position)
                             mAdapter?.notifyItemRemoved(position)
-                        }, AlertDialogFactory.OnClickListener { dlg, v -> })
+                        }, { dlg, v -> })
 
 
                 }

@@ -43,7 +43,7 @@
                           android:layout_toRightOf="@+id/tv_name"
                           android:background="@null"
                           android:id="@+id/et_name"
-
+                          android:singleLine="true"
                           android:layout_marginLeft="@dimen/sp_12"
                           android:textColor="#FF333333"
                           android:textSize="14pt"

@@ -77,7 +77,7 @@ class EmployeeFragment : BaseFragment(), View.OnClickListener {
         val model = arguments?.getSerializable("objectValue")
         if (model != null) {
             model as AccountBean
-            tv_name.text = model.roleName
+            tv_name.text = model.name
             tv_mobile.text = model.displayMobile
             tbv_title.setRightDisPlay(model.role == 0)
             mAdapter = EmployeeAdapter(lists, model.role == 0)

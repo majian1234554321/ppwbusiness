@@ -5,6 +5,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.scwang.smartrefresh.layout.header.ClassicsHeader
 
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.EvaluateManageAdapter
@@ -13,7 +14,7 @@ import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.bean.ReservationBean
 import com.yjhh.ppwbusiness.ipresent.ReservePresent
 import com.yjhh.ppwbusiness.iview.ReserveView
-import com.yjhh.ppwbusiness.views.cui.PPWHeader2
+
 import com.yjhh.ppwbusiness.views.cui.TabEntity
 
 import kotlinx.android.synthetic.main.reservationbeforefragment.*
@@ -21,8 +22,24 @@ import kotlinx.android.synthetic.main.reservationbeforefragment.*
 class ReservationBeforeFragment : BaseFragment(), ReserveView {
     override fun onSuccessReserve(model: ReservationBean, flag: String) {
         if ("refresh" == flag) {
-            mAdapter?.setNewData(model.items)
-            swipeLayout.finishRefresh()
+
+            if (swipeLayout!=null){
+                swipeLayout.finishRefresh()
+            }
+
+            if (pageIndex==0&&model.items.size==0){
+
+                val view = View.inflate(mActivity, R.layout.emptyview, null)
+                view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
+                mAdapter?.emptyView = view
+            }else{
+                mAdapter?.setNewData(model.items)
+                swipeLayout.finishRefresh()
+            }
+
+
+
+
         } else {
             mAdapter?.addData(model.items)
             if (model.items.size<pageSize){
@@ -35,7 +52,9 @@ class ReservationBeforeFragment : BaseFragment(), ReserveView {
     }
 
     override fun onFault(errorMsg: String?) {
-        swipeLayout.finishRefresh()
+        if (swipeLayout!=null){
+            swipeLayout.finishRefresh()
+        }
         val view = View.inflate(mActivity, R.layout.emptyview, null)
         view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
         mAdapter?.emptyView = view
@@ -125,7 +144,7 @@ class ReservationBeforeFragment : BaseFragment(), ReserveView {
     }
 
     private fun initRefreshLayout() {
-        swipeLayout.setRefreshHeader(PPWHeader2(context))
+        swipeLayout.setRefreshHeader(ClassicsHeader(context))
         swipeLayout.setOnRefreshListener { refreshLayout ->
             refresh()
         }

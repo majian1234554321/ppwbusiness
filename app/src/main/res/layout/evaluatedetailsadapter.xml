@@ -5,27 +5,36 @@
                 android:layout_height="wrap_content">
 
 
-    <TextView android:layout_width="wrap_content"
+    <TextView android:layout_width="match_parent"
               android:id="@+id/tv_reply"
+              android:paddingLeft="10pt"
+              android:paddingTop="4pt"
+              android:paddingBottom="4dp"
               android:text="商家回复："
               android:layout_height="wrap_content"/>
 
 
     <TextView android:layout_width="wrap_content"
               android:id="@+id/tv_time"
+              android:paddingLeft="10pt"
+              android:paddingRight="10pt"
+              android:paddingTop="4pt"
+              android:paddingBottom="4dp"
               android:text="2018-08-11"
               android:layout_alignParentRight="true"
               android:layout_height="wrap_content"/>
 
 
-    <TextView android:layout_width="wrap_content"
+    <TextView android:layout_width="match_parent"
               android:id="@+id/tv_content"
               android:layout_marginTop="@dimen/spi_12"
+              android:maxLines="3"
+              android:paddingLeft="10pt"
+              android:paddingRight="10pt"
+              android:ellipsize="end"
               android:layout_below="@+id/tv_reply"
               android:text="121212121212121："
               android:layout_height="wrap_content"/>
-
-
 
 
 </RelativeLayout>

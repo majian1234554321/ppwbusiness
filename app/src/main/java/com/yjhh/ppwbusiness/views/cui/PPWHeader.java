@@ -82,7 +82,7 @@ public class PPWHeader extends InternalClassics<PPWHeader> implements RefreshHea
         isRefreshing = true;
         // final View thisView = this;
         // thisView.startAnimation(mAnimation);
-        Log.i("PPWHeader", "onReleased");
+        // Log.i("PPWHeader", "onReleased");
     }
 
     @Override
@@ -90,7 +90,7 @@ public class PPWHeader extends InternalClassics<PPWHeader> implements RefreshHea
         //  final View thisView = this;
         isRefreshing = false;
         //thisView.clearAnimation();
-        Log.i("PPWHeader", "onFinish");
+        //  Log.i("PPWHeader", "onFinish");
         return 0;
     }
 
@@ -99,18 +99,33 @@ public class PPWHeader extends InternalClassics<PPWHeader> implements RefreshHea
     public void onMoving(boolean isDragging, float percent, int offset, int height, int maxDragHeight) {
 
 
-        // Log.i("PPWHeader", "offset" + offset + "height" + height);
+        Log.i("PPWHeader", "percent" + percent);
+
 
         if (offset > height) {
-            RelativeLayout.LayoutParams Params = (RelativeLayout.LayoutParams) sview.getLayoutParams();
+            RelativeLayout.LayoutParams Params = (RelativeLayout.LayoutParams) view.getLayoutParams();
             Params.height = offset;
-            Params.width = offset;
-            sview.setLayoutParams(Params);
+            view.setLayoutParams(Params);
+
+            RelativeLayout.LayoutParams Params2 = (RelativeLayout.LayoutParams) sview.getLayoutParams();
+            Params2.height = offset;
+            sview.setLayoutParams(Params2);
+        } else if (offset == height) {
+            RelativeLayout.LayoutParams Params2 = (RelativeLayout.LayoutParams) sview.getLayoutParams();
+            Params2.height = offset;
+            Params2.width = offset;
+            sview.setLayoutParams(Params2);
         }
 
 
-//        ObjectAnimator animatorY = ObjectAnimator.ofFloat(
-//                    imageView, "scaleY", percent);
+//        if (percent > 1f) {
+//            ObjectAnimator animatorY = ObjectAnimator.ofFloat(
+//                    sview, "scaleX", percent );
+//
+//            animatorY.getValues()
+//            animatorY.start();
+//        }
+
 
 //        if (percent > 1f) {
 //
@@ -138,15 +153,15 @@ public class PPWHeader extends InternalClassics<PPWHeader> implements RefreshHea
 //        }
 
 
-        if (mState == RefreshState.PullDownToRefresh || mState == RefreshState.RefreshReleased) {
-
-            ObjectAnimator animatory = ObjectAnimator.ofFloat(
-                    sview, "TranslationY", s, offset);
-            s = height - sview.getHeight();
-            animatory.start();
-
-
-        }
+//        if (mState == RefreshState.PullDownToRefresh || mState == RefreshState.RefreshReleased) {
+//
+//            ObjectAnimator animatory = ObjectAnimator.ofFloat(
+//                    sview, "TranslationY", s, offset);
+//            s = height - sview.getHeight();
+//            animatory.start();
+//
+//
+//        }
 
 
         if (mState == RefreshState.Refreshing) {
@@ -168,27 +183,32 @@ public class PPWHeader extends InternalClassics<PPWHeader> implements RefreshHea
 
     }
 
+    public float sY = 0f;
+    public float eY = 0f;
+
+
     @Override
     public void onStateChanged(@NonNull RefreshLayout refreshLayout, @NonNull RefreshState oldState, @NonNull RefreshState newState) {
 
         mState = newState;
         switch (newState) {
             case None:
-                Log.i("PPWHeader", "None");
+                // Log.i("PPWHeader", "None");
                 s = 0;
                 break;
             case PullDownToRefresh:
 
-
-                Log.i("PPWHeader", "PullDownToRefresh");
+                //  Log.i("PPWHeader", "PullDownToRefresh");
                 // imageView.setImageResource(R.drawable.icon_ppwwz);
                 break;
             case PullDownCanceled:
                 // Log.i("PPWHeader", "PullDownCanceled");
                 break;
             case ReleaseToRefresh:
-                Log.i("PPWHeader", "ReleaseToRefresh");
+                //  Log.i("PPWHeader", "ReleaseToRefresh");
                 // animSet.cancel();
+
+
                 break;
             case Refreshing:
                 // Log.i("PPWHeader", "Refreshing");

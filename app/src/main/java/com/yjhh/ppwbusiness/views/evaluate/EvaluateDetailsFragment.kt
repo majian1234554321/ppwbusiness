@@ -19,6 +19,7 @@ import com.yjhh.ppwbusiness.base.ProcessObserver2
 import com.yjhh.ppwbusiness.bean.EvaluateDetailsBean
 import com.yjhh.ppwbusiness.bean.EvaluateManageBean
 import com.yjhh.ppwbusiness.bean.EvaluateManageItemBean
+import com.yjhh.ppwbusiness.bean.SubmitShopReplyCommentModel
 import com.yjhh.ppwbusiness.utils.TimeUtil
 import com.yjhh.ppwbusiness.views.cui.RatingBar
 import com.yjhh.ppwbusiness.views.evaluate.ninegrid.NineGridView
@@ -31,22 +32,23 @@ import kotlinx.android.synthetic.main.evaluatedetailsfragment.*
 class EvaluateDetailsFragment : BaseFragment() {
     override fun getLayoutRes(): Int = R.layout.evaluatedetailsfragment
 
+    var replayId: String? = null
     var mAdapter: EvaluateDetailsAdapter? = null
 
-    val list = ArrayList<EvaluateManageItemBean>()
+    val list = ArrayList<EvaluateDetailsBean.ItemsBean>()
     override fun initView() {
 
-
-        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(mActivity)
+        mAdapter = EvaluateDetailsAdapter(list)
         addHeadView()
-        recyclerView.adapter = EvaluateDetailsAdapter(list)
+        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(mActivity)
+        recyclerView.adapter = mAdapter
+
 
         val map = androidx.collection.ArrayMap<String, String>()
 
         val id = arguments?.getString("id")
 
         map["id"] = id.toString()//类别，默认null（null/0全部 1好评 2中评 3差评）
-
         ApiServices.getInstance()
             .create(SectionEvluateService::class.java)
             .comment(map)
@@ -67,25 +69,30 @@ class EvaluateDetailsFragment : BaseFragment() {
                     val list1212 = bean.files
 
 
+//                    list1212.forEach {
+//                        url.add(it.fileUrl)
+//                    }
 
-                    list1212.forEach {
-                        url.add(it.fileUrl)
+                    if (bean != null) {
+                        if (bean.items != null && bean.items.size > 0) {
+                            replayId = bean.items[bean.items.lastIndex].id
+                        } else {
+                            replayId = bean.id
+                        }
                     }
 
 
                     nineGridView?.setAdapter(NineGridViewClickAdapter(context, url))
 
 
-
-
-                    tv_username?.text = bean?.nickName
+                    tv_username?.text = bean?.userName
                     tv_content?.text = bean?.content
-                    tv_time?.text = TimeUtil.stampToDate2(bean.time.toString())
+                    tv_time?.text = bean.timeText
 
-                    id_ratingbar?.setStar(bean?.grade?.toFloat()!!)
+                    bean?.shopScore?.let { id_ratingbar?.setStar(it) }
 
 
-                    mAdapter?.setNewData(list)
+                    mAdapter?.setNewData(bean.items)
 
                 }
 
@@ -95,13 +102,29 @@ class EvaluateDetailsFragment : BaseFragment() {
 
 
 
+        tv_send.setOnClickListener {
 
+            val model = SubmitShopReplyCommentModel()
 
+            model.commentId = replayId
+            model.content = tv_replyContext.text.toString()
 
-        mAdapter = EvaluateDetailsAdapter(list)
-        addHeadView()
-        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(mActivity)
-        recyclerView.adapter = mAdapter
+            ApiServices.getInstance()
+                .create(SectionEvluateService::class.java)
+                .reply(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : ProcessObserver2(mActivity) {
+                    override fun processValue(response: String?) {
+                        Log.i("EvaluateDetailsFragment", response)
+                    }
+
+                    override fun onFault(message: String) {
+                        Log.i("EvaluateDetailsFragment", message)
+                    }
+
+                })
+        }
 
 
     }

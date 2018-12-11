@@ -12,7 +12,7 @@ import com.yjhh.ppwbusiness.R;
 public class SportView extends View {
     float progress = 100;
 
-    final float radius = 45f;
+    final float radius = 30f;
     RectF arcRectF = new RectF();
 
     public SportView(Context context) {
@@ -53,7 +53,7 @@ public class SportView extends View {
 
         paint.setColor(getResources().getColor(R.color.zthj));
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(15f);
+        paint.setStrokeWidth(10f);
 
         arcRectF.set(centerX - radius, centerY - radius, centerX + radius, centerY + radius);
         canvas.drawArc(arcRectF, 135, progress * 3.6f, false, paint);

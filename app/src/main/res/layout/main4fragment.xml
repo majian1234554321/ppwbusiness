@@ -140,7 +140,7 @@
         <com.yjhh.ppwbusiness.views.cui.ItemEntryView
                 android:id="@+id/iev_account"
                 app:ievtextValue="当前账户"
-                app:ievdrwableleft="@drawable/icon_zhanghu"
+                app:ievdrwableleft="@drawable/icon_guanyu"
                 app:ievbackground="@color/white"
                 app:ievunderline="true"
                 app:ievtextpadding="@dimen/sp_12"
@@ -177,7 +177,7 @@
         <com.yjhh.ppwbusiness.views.cui.ItemEntryView
                 android:id="@+id/iev_about"
                 app:ievtextValue="关于我们"
-                app:ievdrwableleft="@drawable/icon_guanyu"
+                app:ievdrwableleft="@drawable/icon_zhanghu"
                 app:ievbackground="@color/white"
                 app:ievtextColor="@color/all_3"
                 android:layout_marginTop="10pt"

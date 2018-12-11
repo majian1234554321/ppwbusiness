@@ -3,6 +3,7 @@ package com.yjhh.ppwbusiness.fragments
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.scwang.smartrefresh.layout.header.ClassicsHeader
 
 import com.tencent.mm.opensdk.utils.Log
 import com.yjhh.ppwbusiness.R
@@ -12,7 +13,7 @@ import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.bean.MyMessageBean
 import com.yjhh.ppwbusiness.ipresent.SectionUselessPresent
 import com.yjhh.ppwbusiness.iview.MyMessageView
-import com.yjhh.ppwbusiness.views.cui.PPWHeader2
+
 import com.yjhh.ppwbusiness.views.cui.SpaceItemDecoration
 
 import kotlinx.android.synthetic.main.messagecenter1fragment.*
@@ -64,7 +65,7 @@ class MessageCenter2Fragment : BaseFragment(), MyMessageView {
         mAdapter = MyMessageFragmentAdapter(list)
         sectionCouponPresent = SectionUselessPresent(context, this)
         mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
-        swipeLayout.setRefreshHeader(PPWHeader2(context))
+        swipeLayout.setRefreshHeader(ClassicsHeader(context))
         initAdapter()
         initRefreshLayout()
         swipeLayout.autoRefresh()

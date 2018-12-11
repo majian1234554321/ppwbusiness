@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.google.gson.Gson
+import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.AllFeedBackAdapter
 import com.yjhh.ppwbusiness.adapter.FeedBackDetailsFragment
@@ -15,7 +16,7 @@ import com.yjhh.ppwbusiness.bean.AllFeedBackBean
 import com.yjhh.ppwbusiness.ipresent.AboutPresent
 import com.yjhh.ppwbusiness.ipresent.ReservePresent
 import com.yjhh.ppwbusiness.iview.AboutView
-import com.yjhh.ppwbusiness.views.cui.PPWHeader2
+
 import kotlinx.android.synthetic.main.allfeedbackfragment.*
 import com.yjhh.ppwbusiness.R.id.recyclerView
 
@@ -90,7 +91,7 @@ class AllFeedBackFragment : BaseFragment(), AboutView {
 
 
     private fun initRefreshLayout() {
-        swipeLayout.setRefreshHeader(PPWHeader2(context))
+        swipeLayout.setRefreshHeader(ClassicsHeader(context))
         swipeLayout.setOnRefreshListener { refreshLayout ->
             refresh()
         }

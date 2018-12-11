@@ -3,14 +3,14 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:background="@color/f8"
-                android:layout_height="wrap_content">
+                android:layout_height="100pt">
 
 
     <View android:layout_width="match_parent" android:layout_height="10pt"/>
 
-    <com.yjhh.ppwbusiness.views.cui.IImageView android:layout_width="80pt" android:layout_height="80pt"
+    <com.yjhh.ppwbusiness.views.cui.IImageView android:layout_width="50pt" android:layout_height="50pt"
                                                android:id="@+id/iv_image"
-
+                                               android:layout_centerHorizontal="true"
                                                android:layout_gravity="center"
                                                android:src="@drawable/icon_ppw"
                                                android:text="121212"
@@ -18,21 +18,16 @@
     <View android:layout_width="match_parent" android:layout_height="10pt"/>
 
 
-    <RelativeLayout android:layout_width="40pt"
-                    android:id="@+id/rl"
-                    android:layout_marginLeft="30pt"
-                    android:layout_marginTop="25pt" android:layout_height="40pt">
 
-        <com.yjhh.ppwbusiness.views.cui.SportView android:layout_width="40pt"
+
+        <com.yjhh.ppwbusiness.views.cui.SportView android:layout_width="30pt"
                                                   android:id="@+id/sview"
+                                                  android:layout_centerInParent="true"
                                                   android:layout_gravity="center"
-
                                                   android:layout_alignParentTop="true"
-
-
-                                                  android:layout_height="40pt"
+                                                  android:layout_height="30pt"
         />
-    </RelativeLayout>
+
 
 
 </RelativeLayout>
