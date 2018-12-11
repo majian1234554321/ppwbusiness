@@ -20,6 +20,6 @@ public class Constants {
     public static final String APP_ID_WX = "888888888888";
 
 
-    public static final long MAX_COUNT_TIME = 5L;
+    public static final long MAX_COUNT_TIME = 60L;
 
 }

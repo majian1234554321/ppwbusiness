@@ -7,6 +7,7 @@ import android.widget.Toast
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.yjhh.ppwbusiness.BaseApplication
+import com.yjhh.ppwbusiness.Constants.MAX_COUNT_TIME
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.ipresent.PasswordPresent
@@ -40,7 +41,7 @@ class ForgotPasswordFragment:BaseFragment(), View.OnClickListener, PasswordView 
 
     val TYPE = "22"//1登录 2注册 21 重置密码 22找回密码
     val refId = "";//推荐人ID/phone
-    private val MAX_COUNT_TIME = 5L
+
 
 
     override fun onClick(v: View?) {

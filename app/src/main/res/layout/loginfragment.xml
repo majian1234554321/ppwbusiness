@@ -5,13 +5,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:id="@+id/rl_title"
+                    android:paddingTop="8dp"
+                    android:background="@color/colorPrimary"
+                    android:layout_height="48pt">
+
+
+        <TextView
+                android:id="@+id/regist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:gravity="center"
+                android:layout_marginBottom="10dp"
+
+                android:layout_centerInParent="true"
+                android:text="拍拍味商家版"
+                android:textColor="@color/white"
+                android:textSize="17pt"/>
+
+    </RelativeLayout>
+
+
     <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/logo"
+            android:layout_below="@+id/rl_title"
             app:civ_border_color="@color/cd"
             app:civ_border_width="1px"
             android:src="@drawable/icon_place"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginTop="16pt"
+
             android:layout_width="62pt"
             android:layout_centerHorizontal="true"
             android:layout_height="62pt"
@@ -200,6 +225,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_marginTop="20.5pt"
             android:textColor="#FFC6AC81"
             android:layout_marginLeft="24dp"
             android:id="@+id/tv_kaidian"

@@ -83,7 +83,7 @@
                             android:layout_height="wrap_content">
 
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                          android:text="商户名称"
+                          android:text="店铺名称"
                           android:layout_marginTop="12pt"
                           android:layout_marginBottom="9pt"
 
@@ -207,7 +207,7 @@
             />
 
             <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                      android:text="商户地址"
+                      android:text="店铺地址"
                       android:paddingLeft="24pt"
                       android:textColor="#FF333333"
                       android:layout_marginTop="12pt"
@@ -234,7 +234,7 @@
                       android:paddingLeft="24pt"
                       android:textSize="14pt"
                       android:textColor="#FF333333"
-                      android:text="商户描述"
+                      android:text="店铺描述"
             />
 
 
