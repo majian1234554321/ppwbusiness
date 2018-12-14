@@ -48,7 +48,7 @@
                                   android:layout_height="wrap_content"/>
 
                         <TextView android:layout_width="match_parent"
-                                  android:text="100.00"
+
                                   android:textStyle="bold"
                                   android:id="@+id/tv_in"
                                   android:gravity="center"
@@ -71,7 +71,7 @@
                                   android:layout_height="wrap_content"/>
 
                         <TextView android:layout_width="match_parent"
-                                  android:text="100.00"
+
                                   android:textStyle="bold"
                                   android:gravity="center"
                                   android:id="@+id/tv_out"
@@ -112,7 +112,7 @@
 
                     <TextView android:layout_width="wrap_content"
                               android:layout_alignParentBottom="true"
-                              android:text="￥100.00"
+
                               android:id="@+id/tv_price"
                               android:layout_centerVertical="true"
                               android:layout_toRightOf="@+id/tv_X"
@@ -172,7 +172,7 @@
 
 
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                              android:text="共88笔" android:textColor="#FF333333"
+                              android:textColor="#FF333333"
                               android:textSize="13pt"
                               android:id="@+id/tv_inCount"
                               android:layout_centerInParent="true"
@@ -181,7 +181,7 @@
                     />
 
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                              android:text="+999.00" android:textColor="#FF333333"
+                               android:textColor="#FF333333"
                               android:textSize="13pt"
                               android:id="@+id/tv_inPrice"
                               android:layout_alignParentRight="true"
@@ -220,7 +220,7 @@
 
 
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                              android:text="共88笔"
+
                               android:textColor="#FF333333"
                               android:textSize="13pt"
                               android:id="@+id/tv_outCount"
@@ -230,7 +230,7 @@
                     />
 
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                              android:text="+999.00"
+
                               android:textColor="#FF333333"
                               android:textSize="13pt"
                               android:gravity="right"
@@ -320,10 +320,13 @@
                 android:paddingBottom="15dp"
                 android:paddingTop="15dp"
                 app:tl_indicator_width_equal_title="true"
-                tl:tl_textBold="SELECT"
-                tl:tl_underline_color="#1A000000"
+                app:tl_textBold="SELECT"
+                app:tl_indicator_color="#FF333333"
+                app:tl_textSelectColor="#FF333333"
+                app:tl_textUnselectColor="#FF333333"
+                app:tl_underline_color="#FF333333"
                 tl:tl_underline_gravity="TOP"
-                tl:tl_underline_height="1dp"/>
+                />
 
 
     </com.google.android.material.appbar.AppBarLayout>

@@ -36,9 +36,13 @@ import com.yjhh.ppwbusiness.views.cui.AbsSheetDialog
 import com.yjhh.ppwbusiness.views.cui.AlertDialogFactory
 import com.yjhh.ppwbusiness.views.cui.BottomVerSheetDialog
 import com.zhihu.matisse.Matisse
+import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.a_feedbackfragment.*
+import top.zibin.luban.CompressionPredicate
+import top.zibin.luban.Luban
+import top.zibin.luban.OnCompressListener
 import java.io.File
 import java.lang.StringBuilder
 import java.util.*
@@ -90,7 +94,6 @@ class A_FeedBackFragment : BaseFragment(), View.OnClickListener, CommonView {
 
 
 
-
                     ApiServices.getInstance()
                         .create(SectionUselessService::class.java)
                         .feedback(model)
@@ -98,8 +101,23 @@ class A_FeedBackFragment : BaseFragment(), View.OnClickListener, CommonView {
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(object : ProcessObserver2(mActivity) {
                             override fun processValue(response: String?) {
+
                                 Toast.makeText(mActivity, "反馈提交成功", Toast.LENGTH_SHORT).show()
-                                mActivity.onBackPressed()
+                                et_1.text.clear()
+                                et_2.text.clear()
+                                et_3.text.clear()
+                                et_4.text.clear()
+                                et_5.text.clear()
+
+                                lists.clear()
+                                listsId.clear()
+
+                                lists.add("EMPTY")
+                                listsId.add("EMPTY")
+
+                                mAdapter?.notifyDataSetChanged()
+
+                                // mActivity.onBackPressed()
                             }
 
                             override fun onFault(message: String) {
@@ -156,7 +174,7 @@ class A_FeedBackFragment : BaseFragment(), View.OnClickListener, CommonView {
                 photo()
 
             } else {
-               // start(PhotoFragment(lists[position]))
+                // start(PhotoFragment(lists[position]))
 
                 val dialog = PhotoFragment(lists)
                 dialog?.show(childFragmentManager, "TAG")
@@ -296,7 +314,18 @@ class A_FeedBackFragment : BaseFragment(), View.OnClickListener, CommonView {
                 val file = File(it)
                 listFiles.add(file)
             }
-            present?.UpLoadFiles(listFiles)
+
+
+            val dis = Flowable.just(listFiles).map {
+                Luban.with(mActivity).load(list).get()
+            }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    Log.i("onActivityResult", "${it.size}1212");
+                    present?.UpLoadFiles(it)
+                }
+
+            compositeDisposable.add(dis)
 
             mAdapter?.notifyDataSetChanged()
 
@@ -317,7 +346,37 @@ class A_FeedBackFragment : BaseFragment(), View.OnClickListener, CommonView {
             }
 
             mAdapter?.setNewData(lists)
-            present?.UpLoadFile(file)
+
+
+
+
+            Luban.with(mActivity)
+                .load(file)
+                .ignoreBy(100)
+                .filter(object : CompressionPredicate {
+                    override fun apply(path: String?): Boolean {
+                        return !(TextUtils.isEmpty(path) || path?.toLowerCase()?.endsWith(".gif")!!)
+                    }
+
+                }).setCompressListener(object : OnCompressListener {
+                    override fun onSuccess(filevalue: File?) {
+
+                        val listfilevalue = ArrayList<File?>();
+                        listfilevalue.add(filevalue)
+
+                        present?.UpLoadFiles(listfilevalue)
+                    }
+
+                    override fun onError(e: Throwable?) {
+
+                    }
+
+                    override fun onStart() {
+
+                    }
+
+                }).launch()
+
 
         }
 

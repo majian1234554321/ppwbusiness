@@ -67,36 +67,36 @@ class BackViewActivity : AppCompatActivity() {
                 }
             }
         }
+        iv_back.setOnClickListener { finish() }
+
+        val map = HashMap<String, String?>()
+        map.put("User-Agent", WebSettings.getDefaultUserAgent(BaseApplication.context) + "PPW_App")
+        map.put("userAgent", "PPW_App")
+
+        map.put("PPW-TERMINAL", "1") //（0 用户端 1商户端)
+        map.put(
+            "PPW-APP-VERSION",
+            APKVersionCodeUtils.getVersionCode(
+                BaseApplication.context
+
+            ).toString()
+        )
+        //.header("PPW-SIGN", "XMLHttpRequest")
+        map.put("PPW-TIMESTAMP", (System.currentTimeMillis() / 1000).toInt().toString())
+        map.put("PPW-API-VERSION", "1.0")
+        map.put("PPW-MARKET-ID", APKVersionCodeUtils.getChannelName(BaseApplication.context))
+
+        map.put("PPW-DEVICE-ID", APKVersionCodeUtils.getChannelName(BaseApplication.context))
+
+        map.put(
+            "JSESSIONID",
+            SharedPreferencesUtils.getParam(BaseApplication.context, "sessionId", "-1").toString()
+        )
 
 
-//        val map = HashMap<String, String?>()
-//        map.put("User-Agent", WebSettings.getDefaultUserAgent(BaseApplication.context) + "PPW_App")
-//        map.put("userAgent", "PPW_App")
-//
-//        map.put("PPW-TERMINAL", "1") //（0 用户端 1商户端)
-//        map.put(
-//            "PPW-APP-VERSION",
-//            APKVersionCodeUtils.getVersionCode(
-//                BaseApplication.context
-//
-//            ).toString()
-//        )
-//        //.header("PPW-SIGN", "XMLHttpRequest")
-//        map.put("PPW-TIMESTAMP", (System.currentTimeMillis() / 1000).toInt().toString())
-//        map.put("PPW-API-VERSION", "1.0")
-//        map.put("PPW-MARKET-ID", APKVersionCodeUtils.getChannelName(BaseApplication.context))
-//
-//        map.put("PPW-DEVICE-ID", APKVersionCodeUtils.getChannelName(BaseApplication.context))
-//
-//        map.put(
-//            "JSESSIONID",
-//            SharedPreferencesUtils.getParam(BaseApplication.context, "sessionId", "-1").toString()
-//        )
-//
-//
-//        mWebView.loadUrl(url, map)
+        mWebView.loadUrl(url, map)
 
-        mWebView.loadUrl(url)
+      //  mWebView.loadUrl(url)
         mWebView.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView, url: String) {
                 super.onPageFinished(view, url)

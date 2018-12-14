@@ -35,7 +35,6 @@
     </style>
 
 
-
     <declare-styleable name="TitleBarView">
         <attr name="textColor" format="color"/>
         <attr name="textValue" format="string"/>
@@ -88,7 +87,6 @@
     </declare-styleable>
 
 
-
     <style name="BaseDialog" parent="Theme.MaterialComponents.Dialog">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>
@@ -105,7 +103,6 @@
         <item name="android:paddingLeft">4dp</item>
         <item name="android:paddingRight">4dp</item>
     </style>
-
 
 
 </resources>

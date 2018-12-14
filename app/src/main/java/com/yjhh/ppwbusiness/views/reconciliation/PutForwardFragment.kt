@@ -2,6 +2,7 @@ package com.yjhh.ppwbusiness.views.reconciliation
 
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.text.TextUtils
 import android.util.Half.toFloat
 import android.view.View
@@ -33,42 +34,86 @@ class PutForwardFragment : BaseFragment(), WithDrowView, View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.tv_wechat2 -> {
-                selectPosition = 0
 
-                tv_wechat1.setTextColor(Color.parseColor("#2C85FF"))
-                tv_wechat2.setTextColor(Color.parseColor("#2C85FF"))
 
-                tv_alipay1.setTextColor(Color.parseColor("#333333"))
-                tv_alipay2.setTextColor(Color.parseColor("#333333"))
+                if ("未绑定" != tv_wechat2.text.toString()) {
 
-                tv_bank1.setTextColor(Color.parseColor("#333333"))
-                tv_bank2.setTextColor(Color.parseColor("#333333"))
+                    selectPosition = 0
+                    tv_wechat2.compoundDrawablePadding = 8
+                    val drawable = context.resources.getDrawable(
+                        R.drawable.icon_check
+                    )
+                    drawable.setBounds(0, 0, drawable.minimumWidth, drawable.minimumHeight);
+                    tv_wechat2.setCompoundDrawables(null, null, drawable, null)
+                    tv_alipay2.setCompoundDrawables(null, null, null, null)
+                    tv_bank2.setCompoundDrawables(null, null, null, null)
+
+
+                    tv_wechat1.setTextColor(Color.parseColor("#2C85FF"))
+                    tv_wechat2.setTextColor(Color.parseColor("#2C85FF"))
+
+
+                    tv_alipay1.setTextColor(Color.parseColor("#333333"))
+                    tv_alipay2.setTextColor(Color.parseColor("#333333"))
+
+                    tv_bank1.setTextColor(Color.parseColor("#333333"))
+                    tv_bank2.setTextColor(Color.parseColor("#333333"))
+
+                }
+
 
             }
             R.id.tv_alipay2 -> {
-                selectPosition = 1
 
-                tv_wechat1.setTextColor(Color.parseColor("#333333"))
-                tv_wechat2.setTextColor(Color.parseColor("#333333"))
+                if ("未绑定" != tv_alipay2.text.toString()) {
 
-                tv_alipay1.setTextColor(Color.parseColor("#2C85FF"))
-                tv_alipay2.setTextColor(Color.parseColor("#2C85FF"))
+                    selectPosition = 1
 
-                tv_bank1.setTextColor(Color.parseColor("#333333"))
-                tv_bank2.setTextColor(Color.parseColor("#333333"))
+                    val drawable = context.resources.getDrawable(
+                        R.drawable.icon_check
+                    )
+                    tv_alipay2.compoundDrawablePadding = 8
+                    drawable.setBounds(0, 0, drawable.minimumWidth, drawable.minimumHeight);
+                    tv_wechat2.setCompoundDrawables(null, null, null, null)
+                    tv_alipay2.setCompoundDrawables(null, null, drawable, null)
+                    tv_bank2.setCompoundDrawables(null, null, null, null)
+
+
+                    tv_wechat1.setTextColor(Color.parseColor("#333333"))
+                    tv_wechat2.setTextColor(Color.parseColor("#333333"))
+
+                    tv_alipay1.setTextColor(Color.parseColor("#2C85FF"))
+                    tv_alipay2.setTextColor(Color.parseColor("#2C85FF"))
+
+                    tv_bank1.setTextColor(Color.parseColor("#333333"))
+                    tv_bank2.setTextColor(Color.parseColor("#333333"))
+                }
             }
 
             R.id.tv_bank2 -> {
-                selectPosition = 2
 
-                tv_wechat1.setTextColor(Color.parseColor("#333333"))
-                tv_wechat2.setTextColor(Color.parseColor("#333333"))
+                if ("未绑定" != tv_bank2.text.toString()) {
 
-                tv_alipay1.setTextColor(Color.parseColor("#333333"))
-                tv_alipay2.setTextColor(Color.parseColor("#333333"))
+                    selectPosition = 2
 
-                tv_bank1.setTextColor(Color.parseColor("#2C85FF"))
-                tv_bank2.setTextColor(Color.parseColor("#2C85FF"))
+                    tv_bank2.compoundDrawablePadding = 8
+                    val drawable = context.resources.getDrawable(
+                        R.drawable.icon_check
+                    )
+                    drawable.setBounds(0, 0, drawable.minimumWidth, drawable.minimumHeight);
+                    tv_wechat2.setCompoundDrawables(null, null, null, null)
+                    tv_alipay2.setCompoundDrawables(null, null, null, null)
+                    tv_bank2.setCompoundDrawables(null, null, drawable, null)
+
+                    tv_wechat1.setTextColor(Color.parseColor("#333333"))
+                    tv_wechat2.setTextColor(Color.parseColor("#333333"))
+
+                    tv_alipay1.setTextColor(Color.parseColor("#333333"))
+                    tv_alipay2.setTextColor(Color.parseColor("#333333"))
+
+                    tv_bank1.setTextColor(Color.parseColor("#2C85FF"))
+                    tv_bank2.setTextColor(Color.parseColor("#2C85FF"))
+                }
             }
 
 
@@ -201,7 +246,7 @@ class PutForwardFragment : BaseFragment(), WithDrowView, View.OnClickListener {
         val dis = RxTextView.textChanges(et_price).subscribe {
             if (!TextUtils.isEmpty(it) && it.toString().toFloat() > balance) {
                 tv_tips1.visibility = View.VISIBLE
-                tv_tips1.text = "最高提现${balance}元"
+                tv_tips1.text = "超出账户可提现金额,请核实后输入"
             } else if (!TextUtils.isEmpty(it) && it.toString().toFloat() < minRange) {
                 tv_tips1.visibility = View.VISIBLE
                 tv_tips1.text = "最低提现${minRange}元"

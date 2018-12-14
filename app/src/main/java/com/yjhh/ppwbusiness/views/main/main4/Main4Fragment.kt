@@ -1,12 +1,15 @@
 package com.yjhh.ppwbusiness.views.main.main4
 
 
+import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.text.TextUtils
 import android.text.style.BackgroundColorSpan
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.azhon.appupdate.listener.OnDownloadListener
 
 import com.google.gson.Gson
@@ -43,18 +46,35 @@ import java.lang.StringBuilder
 class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, ShopSetView {
 
     override fun onSuccess() {
-        if (tv_status.text.toString() == "休息中") tv_status.text = "营业中" else tv_status.text = "休息中"
+        if (tv_status.text.toString() == "休息中") {
+            tv_status.text = "营业中"
+            tv_status.setBackgroundResource(R.drawable.stroke_frame_zthj)
+        } else {
+            tv_status.text = "休息中"
+            tv_status.setBackgroundResource(R.drawable.stroke_frame_jthj)
+        }
     }
 
     override fun AllShopInfoSuccess(model: AllShopInfo) {
         if (model.openStatus == 0) {
             tv_status.text = "营业中"
             typeStatus = "0"
+            tv_status.setBackgroundResource(R.drawable.stroke_frame_zthj)
         } else {
             tv_status.text = "休息中"
             typeStatus = "1"
+            tv_status.setBackgroundResource(R.drawable.stroke_frame_jthj)
         }
 
+
+        ImageLoaderUtils.loadCircle(
+            mActivity,
+            profile_image,
+            model?.logoUrl,
+            R.drawable.icon_logoholder,
+            R.drawable.icon_logoholder
+
+        )
 
         tv_name.text = model.name
 
@@ -114,23 +134,25 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
     override fun onSuccess(value: String?) {
 
 
-        val model = Gson().fromJson<VersionBean>(value, VersionBean::class.java)
+        val modelVersionBean = Gson().fromJson<VersionBean>(value, VersionBean::class.java)
 
-        dialog = if (model.ifCover == 1) {//是否强制覆盖(0否 1是)
-            AppUpdateFragment(true)
-        } else {
-            AppUpdateFragment(false)
-        }
-        dialog?.show(childFragmentManager, "TAG")
+        if (APKVersionCodeUtils.getVerName(mActivity) != modelVersionBean.version) {
 
-        dialog?.setOnAppUpdate(object : AppUpdateFragment.AppUpdateListener {
-            override fun onAppUpdate() {
-                APKVersionCodeUtils.startUpdate(mActivity, onDownloadListener)
+            dialog = if (modelVersionBean.ifCover == 1) {//是否强制覆盖(0否 1是)
+                AppUpdateFragment(true, modelVersionBean.content,modelVersionBean.marketUrl)
+            } else {
+                AppUpdateFragment(false, modelVersionBean.content,modelVersionBean.marketUrl)
             }
+            dialog?.show(childFragmentManager, "TAG")
 
-        })
+            dialog?.setOnAppUpdate(object : AppUpdateFragment.AppUpdateListener {
+                override fun onAppUpdate() {
+                    APKVersionCodeUtils.startUpdate(mActivity, modelVersionBean.downloadUrl, onDownloadListener)
+                }
 
+            })
 
+        }
     }
 
     override fun onFault(errorMsg: String?) {
@@ -261,7 +283,7 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
         }
 
 
-       compositeDisposable.addAll(dis2)
+        compositeDisposable.addAll(dis2)
 
     }
 
@@ -275,7 +297,7 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
             .getAllInfo()
     }
 
-    fun getUserInfo(){
+    fun getUserInfo() {
         ApiServices.getInstance()
             .create(SectionUselessService::class.java)
             .currInfo()
@@ -289,13 +311,13 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
 
                     iev_account.setTextContent("${model?.roleName}: ${model?.name}")
 
-                    ImageLoaderUtils.loadCircle(
-                        mActivity,
-                        profile_image,
-                        model?.avatarUrl,
-                        R.drawable.icon_logoholder,
-                        R.drawable.icon_logoholder
-                    )
+//                    ImageLoaderUtils.load(
+//                        mActivity,
+//                        profile_image,
+//                        model?.logoUrl,
+//                        R.drawable.icon_logoholder,
+//                        R.drawable.icon_logoholder
+//                    )
 
 
                 }

@@ -10,6 +10,9 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.yjhh.ppwbusiness.R;
+
+import java.net.URL;
 
 public class ImageLoaderUtils {
 
@@ -17,19 +20,20 @@ public class ImageLoaderUtils {
 
     /**
      * 圆角图片加载
+     *
+     * @param context      上下文
+     * @param imageView    图片显示控件
+     * @param url          图片链接
+     * @param defaultImage 默认占位图片
+     * @param errorImage   加载失败后图片
+     * @param radius       图片圆角半径
+     * @return
      * @author leibing
      * @createTime 2016/8/15
      * @lastModify 2016/8/15
-     * @param context 上下文
-     * @param imageView 图片显示控件
-     * @param url 图片链接
-     * @param defaultImage 默认占位图片
-     * @param errorImage 加载失败后图片
-     * @param radius 图片圆角半径
-     * @return
      */
     public static void load(Context context, ImageView imageView, String url, int defaultImage,
-                            int errorImage , int radius){
+                            int errorImage, int radius) {
         //RequestOptions 设置请求参数，通过apply方法设置
         RequestOptions options = new RequestOptions()
                 // 但不保证所有图片都按序加载
@@ -53,6 +57,7 @@ public class ImageLoaderUtils {
 
     /**
      * 加载resoures下的文件
+     *
      * @param context
      * @param imageView
      * @param url
@@ -83,6 +88,7 @@ public class ImageLoaderUtils {
 
     /**
      * 加载圆形头像
+     *
      * @param context
      * @param imageView
      * @param url
@@ -101,6 +107,7 @@ public class ImageLoaderUtils {
                 .dontAnimate() //防止设置placeholder导致第一次不显示网络图片,只显示默认图片的问题
                 .placeholder(defaultImage)
                 .error(errorImage)
+                .fallback(defaultImage)
                 // 缓存原始数据
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                 .centerCrop()
@@ -116,5 +123,25 @@ public class ImageLoaderUtils {
                     }
                 });
     }
+
+
+    public static void load(Context context,ImageView imageView, String url, int id) {
+
+
+        RequestOptions options = new RequestOptions()
+                .placeholder(id)//图片加载出来前，显示的图片
+                .fallback(id) //url为空的时候,显示的图片
+                .error(id);//图片加载失败后，显示的图片
+
+
+        Glide.with(context)
+                .load(url) //图片地址
+                .apply(options)
+                .into(imageView);
+
+
+    }
+
+
 }
 

@@ -86,11 +86,11 @@ class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetVie
             tv_time.text = sb.toString()
         }
 
-        ImageLoaderUtils.loadCircle(
+        ImageLoaderUtils.load(
             this,
             iv_image,
             model.logoUrl,
-            R.drawable.icon_logoholder,
+
             R.drawable.icon_logoholder
         )
 
@@ -99,7 +99,7 @@ class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetVie
 
     override fun onFault(errorMsg: String?) {
 
-        Toast.makeText(this, "设置店铺信息失败", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, errorMsg, Toast.LENGTH_LONG).show()
     }
 
     override fun onSuccess() {
@@ -122,6 +122,17 @@ class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetVie
             }
 
             R.id.iv_back -> {
+                if (!TextUtils.isEmpty(tv_shopTel.text.toString())) {
+                    val map = SubmitShopAdminConfigModel()
+                    map.address = tv_shopAddress.text.toString()
+                    map.content = tv_shopDesc.text.toString()
+                    map.mobile = tv_shopTel.text.toString()
+                    map.status = typeStatus
+                    map.times = listHours
+                    present?.editConfig(map)
+                } else {
+                    Toast.makeText(this, "商家的联系电话不能为空", Toast.LENGTH_SHORT).show()
+                }
                 finish()
             }
 

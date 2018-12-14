@@ -34,7 +34,7 @@ class ReservationBeforeFragment : BaseFragment(), ReserveView {
                 mAdapter?.emptyView = view
             }else{
                 mAdapter?.setNewData(model.items)
-                swipeLayout.finishRefresh()
+
             }
 
 
@@ -147,6 +147,7 @@ class ReservationBeforeFragment : BaseFragment(), ReserveView {
         swipeLayout.setRefreshHeader(ClassicsHeader(context))
         swipeLayout.setOnRefreshListener { refreshLayout ->
             refresh()
+            swipeLayout.finishRefresh()
         }
     }
 

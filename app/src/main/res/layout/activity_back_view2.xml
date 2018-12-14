@@ -14,9 +14,9 @@
                 android:layout_marginLeft="12pt"
                 android:id="@+id/iv_back"
                 android:src="@drawable/icon_arrow_left_white"
-                android:layout_width="17pt"
+                android:layout_width="25pt"
                 android:layout_centerVertical="true"
-                android:layout_height="17pt"/>
+                android:layout_height="25pt"/>
 
         <TextView
                 android:id="@+id/tv_title"

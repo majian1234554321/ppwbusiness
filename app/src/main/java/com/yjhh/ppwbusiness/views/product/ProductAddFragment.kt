@@ -23,7 +23,9 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.azhon.appupdate.utils.PermissionUtil.requestPermission
 import com.google.gson.Gson
+import com.jakewharton.rxbinding2.widget.RxTextView
 import com.tbruyelle.rxpermissions2.RxPermissions
 
 import com.yjhh.ppwbusiness.R
@@ -56,12 +58,17 @@ import com.yjhh.ppwbusiness.views.cui.GridRecyclerItemDecoration
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.internal.entity.CaptureStrategy
+import com.zhihu.matisse.internal.utils.PhotoMetadataUtils.getPath
+import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 
 import kotlinx.android.synthetic.main.productadd.*
+import top.zibin.luban.CompressionPredicate
+import top.zibin.luban.Luban
+import top.zibin.luban.OnCompressListener
 import java.io.File
 import java.lang.StringBuilder
 
@@ -146,6 +153,39 @@ class ProductAddFragment : BaseFragment(), CommonView {
         }
 
 
+        val dis = RxTextView.textChanges(et_price).subscribe {
+            if (it.toString().contains(".")) {
+                if (it.toString().length - 1 - it.toString().indexOf(".") > 2) {
+                    var it = it.toString().subSequence(
+                        0,
+                        it.toString().indexOf(".") + 2 + 1
+                    )
+                    et_price.setText(it);
+                    et_price.setSelection(it.length); //光标移到最后
+                }
+            }
+            //如果"."在起始位置,则起始位置自动补0
+            if (it.toString().trim().substring(0).equals(".")) {
+                val it = "0$it";
+                et_price.setText(it);
+                et_price.setSelection(2);
+            }
+
+            //如果起始位置为0,且第二位跟的不是".",则无法后续输入
+            if (it.toString().startsWith("0")
+                && it.toString().trim().length > 1
+            ) {
+                if (it.toString().substring(1, 2) != ".") {
+                    et_price.setText(it.subSequence(0, 1))
+                    et_price.setSelection(1);
+
+                }
+            }
+
+
+        }
+
+
         //recyclerView.addItemDecoration(GridRecyclerItemDecoration(20))
         recyclerView.layoutManager = androidx.recyclerview.widget.GridLayoutManager(mActivity, 3)
         mAdapter = ProductAdd(mActivity, lists)
@@ -158,7 +198,7 @@ class ProductAddFragment : BaseFragment(), CommonView {
 
         mAdapter?.setOnItemClickListener(OnRecycleViewItemClickListener { view, position, flag ->
             if (flag) {
-               // start(PhotoFragment(lists[position]))
+                // start(PhotoFragment(lists[position]))
 
                 val dialog = PhotoFragment(lists)
                 dialog?.show(childFragmentManager, "TAG")
@@ -351,18 +391,6 @@ class ProductAddFragment : BaseFragment(), CommonView {
             val list = Matisse.obtainPathResult(data)
 
 
-//            val file = File(list[0])
-//
-//            lists.add(file.path)
-//
-//            while (lists.size > 3) {
-//                lists.removeAt(lists.lastIndex)
-//            }
-//
-//
-//            mAdapter?.notifyDataSetChanged()
-//            present?.UpLoadFile(file)
-
             val listFiles = ArrayList<File>()
 
             lists.addAll(list)
@@ -370,7 +398,18 @@ class ProductAddFragment : BaseFragment(), CommonView {
                 val file = File(it)
                 listFiles.add(file)
             }
-            present?.UpLoadFiles(listFiles)
+
+
+            val dis = Flowable.just(listFiles).map {
+                Luban.with(mActivity).load(list).get()
+            }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    Log.i("onActivityResult", "${it.size}1212");
+                    present?.UpLoadFiles(it)
+                }
+
+            compositeDisposable.add(dis)
 
             mAdapter?.notifyDataSetChanged()
 
@@ -394,7 +433,38 @@ class ProductAddFragment : BaseFragment(), CommonView {
 
                 mAdapter?.notifyDataSetChanged()
 
-                present?.UpLoadFiles(listFiles)
+
+
+
+                Luban.with(mActivity)
+                    .load(file)
+                    .ignoreBy(100)
+                    .filter(object : CompressionPredicate {
+                        override fun apply(path: String?): Boolean {
+                            return !(TextUtils.isEmpty(path) || path?.toLowerCase()?.endsWith(".gif")!!)
+                        }
+
+                    }).setCompressListener(object : OnCompressListener {
+                        override fun onSuccess(filevalue: File?) {
+                            // Log.i("onActivityResult", filevalue?.length().toString())
+
+                            val listfilevalue = ArrayList<File?>();
+                            listfilevalue.add(filevalue)
+
+                            present?.UpLoadFiles(listfilevalue)
+                        }
+
+                        override fun onError(e: Throwable?) {
+                            Log.i("onActivityResult", e.toString())
+                        }
+
+                        override fun onStart() {
+                            Log.i("onActivityResult", "SSSSSS")
+                        }
+
+                    }).launch()
+
+
             } else {
 
             }

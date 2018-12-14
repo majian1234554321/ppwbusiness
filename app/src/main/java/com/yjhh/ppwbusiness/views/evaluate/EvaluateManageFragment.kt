@@ -131,6 +131,15 @@ class EvaluateManageFragment : BaseFragment(), EvaluateView {
             }
 
         } else {
+            if (startIndex==0&&swipeLayout!=null){
+                swipeLayout.finishRefresh()
+
+                val view = View.inflate(mActivity, R.layout.emptyview, null)
+                view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
+                mAdapter?.emptyView = view
+
+            }
+
             if ("load" == flag) {
                 mAdapter?.loadMoreEnd()
             }
@@ -246,10 +255,10 @@ class EvaluateManageFragment : BaseFragment(), EvaluateView {
 
         mAdapter?.setOnItemClickListener { adapter, view, position ->
 
-            if (listAll[position] is EvaluateManageItemBean) {
-                start(EvaluateDetailsFragment.newInstance((listAll[position] as EvaluateManageItemBean).id.toString()))
+            if (adapter.data[position] is EvaluateManageItemBean) {
+                start(EvaluateDetailsFragment.newInstance((adapter.data[position] as EvaluateManageItemBean).id.toString()))
             } else {
-                start(EvaluateDetailsFragment.newInstance((listAll[position] as SubCommentsBean).id))
+                start(EvaluateDetailsFragment.newInstance((adapter.data[position] as SubCommentsBean).id))
             }
 
 

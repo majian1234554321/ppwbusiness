@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <com.yjhh.ppwbusiness.views.cui.ItemEntryView android:layout_width="match_parent"
+                                                  android:id="@+id/iev_1"
+                                                  app:ievtextColor="@color/all_3"
+                                                  app:ievbackground="@color/white"
+                                                  app:ievunderline="true"
+                                                  app:ievtextpadding="@dimen/sp_12"
+                                                  android:layout_height="wrap_content"/>
+
+</LinearLayout>

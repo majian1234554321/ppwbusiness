@@ -18,12 +18,11 @@ class EvaluateDetailsAdapter(data: List<EvaluateDetailsBean.ItemsBean>) :
 
 
 
-        if (item?.ifShop == "0") {//// 商家
+        if (item?.ifShop == "1") {// 商家
             helper?.setBackgroundColor(R.id.tv_reply, Color.parseColor("#F7EEDD"))
         } else {
             helper?.setBackgroundColor(R.id.tv_reply, Color.parseColor("#E7E7E7"))
         }
-
 
 
     }

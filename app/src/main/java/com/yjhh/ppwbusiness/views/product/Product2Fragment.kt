@@ -34,9 +34,19 @@ class Product2Fragment : BaseFragment(), ProductView {
 
         when (flag) {
             "refresh" -> {
-                swipeLayout.finishRefresh()
-                mAdapter.setNewData(result?.items)
-                swipeLayout.finishRefresh()
+
+                if (startindex==0&&result?.items?.size==0){
+
+                        val view = View.inflate(mActivity, R.layout.emptyview, null)
+                        view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
+                        mAdapter?.emptyView = view
+
+                }else{
+                    mAdapter.setNewData(result?.items)
+                }
+
+
+
             }
             "DELETE" -> {
                 result?.position?.let { mAdapter.data.removeAt(it) }
@@ -182,6 +192,7 @@ class Product2Fragment : BaseFragment(), ProductView {
         swipeLayout.setRefreshHeader(ClassicsHeader(context))
         swipeLayout.setOnRefreshListener { refreshLayout ->
             refresh()
+            swipeLayout.finishRefresh()
         }
     }
 

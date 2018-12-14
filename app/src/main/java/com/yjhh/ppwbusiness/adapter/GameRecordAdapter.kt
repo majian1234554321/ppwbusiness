@@ -10,7 +10,7 @@ class GameRecordAdapter(data: List<ActivityCenterBean2.ItemsBean.Regs>) :
     override fun convert(helper: BaseViewHolder?, item: ActivityCenterBean2.ItemsBean.Regs?) {
 
         helper?.setText(R.id.tv_time, item?.date)
-        helper?.setText(R.id.tv_people, item?.text)
+        helper?.setText(R.id.tv_people, item?.total)
 
     }
 

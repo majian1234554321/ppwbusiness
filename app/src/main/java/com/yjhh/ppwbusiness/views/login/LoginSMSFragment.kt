@@ -11,6 +11,7 @@ import com.yjhh.ppwbusiness.BaseApplication
 import com.yjhh.ppwbusiness.Constants.MAX_COUNT_TIME
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.api.ApiServices
+import com.yjhh.ppwbusiness.api.CommonService
 import com.yjhh.ppwbusiness.api.ShopSetServices
 import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.base.ProcessObserver2
@@ -46,6 +47,49 @@ class LoginSMSFragment : BaseFragment(), PasswordView, View.OnClickListener {
             R.id.loginPassword -> {
                 mActivity.onBackPressed()
             }
+
+
+
+            R.id.tv_kaidian -> {
+                ApiServices.getInstance().create(CommonService::class.java)
+                    .init()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(object : ProcessObserver2(mActivity) {
+                        override fun processValue(response: String?) {
+                            Log.i("01018", response)
+                            start(BackViewFragment.newInstance(JSONObject(response).optString("applyShopUrl")))
+
+                        }
+
+                        override fun onFault(message: String) {
+                            Log.i("01018", message)
+                        }
+                    })
+            }
+
+            R.id.tv_question -> {
+                ApiServices.getInstance().create(CommonService::class.java)
+                    .init()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(object : ProcessObserver2(context) {
+                        override fun processValue(response: String?) {
+                            Log.i("EvaluateManageFragment", response)
+
+                            start(BackViewFragment.newInstance(JSONObject(response).optString("helpIndexUrl")))
+                        }
+
+                        override fun onFault(message: String) {
+                            Log.i("EvaluateManageFragment", message)
+                        }
+
+                    })
+
+
+            }
+
+
             else -> {
             }
         }
@@ -138,7 +182,7 @@ class LoginSMSFragment : BaseFragment(), PasswordView, View.OnClickListener {
 
     override fun initView() {
 
-        arrayOf(loginPassword, btn_login).forEach {
+        arrayOf(loginPassword, btn_login,tv_kaidian,tv_question).forEach {
             it.setOnClickListener(this)
         }
 

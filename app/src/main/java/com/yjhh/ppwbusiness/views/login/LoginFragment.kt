@@ -13,6 +13,7 @@ import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.api.ApiServices
+import com.yjhh.ppwbusiness.api.CommonService
 import com.yjhh.ppwbusiness.api.ShopSetServices
 import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.base.ProcessObserver2
@@ -34,7 +35,7 @@ import kotlinx.android.synthetic.main.loginfragment.*
 import org.json.JSONObject
 import java.util.concurrent.TimeUnit
 
-class LoginFragment : BaseFragment(), View.OnClickListener, LoginView,CommonView {
+class LoginFragment : BaseFragment(), View.OnClickListener, LoginView, CommonView {
     override fun getLayoutRes(): Int = R.layout.loginfragment
 
 
@@ -133,23 +134,14 @@ class LoginFragment : BaseFragment(), View.OnClickListener, LoginView,CommonView
             }
 
             R.id.tv_kaidian -> {
-                ApiServices.getInstance()
-                    .create(ShopSetServices::class.java)
-                    .applyShop()
+                ApiServices.getInstance().create(CommonService::class.java)
+                    .init()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(object : ProcessObserver2(mActivity) {
                         override fun processValue(response: String?) {
                             Log.i("01018", response)
-                            if (response?.contains("\"")!!) {
-                                val intent = Intent(mActivity, BackViewActivity::class.java)
-                                intent.putExtra("url", response.replace("\"", ""))
-                                startActivity(intent)
-                            } else {
-                                val intent = Intent(mActivity, BackViewActivity::class.java)
-                                intent.putExtra("url", response)
-                                startActivity(intent)
-                            }
+                            start(BackViewFragment.newInstance(JSONObject(response).optString("applyShopUrl")))
 
                         }
 
@@ -159,8 +151,29 @@ class LoginFragment : BaseFragment(), View.OnClickListener, LoginView,CommonView
                     })
             }
 
+            R.id.tv_question -> {
+                ApiServices.getInstance().create(CommonService::class.java)
+                    .init()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(object : ProcessObserver2(context) {
+                        override fun processValue(response: String?) {
+                            Log.i("EvaluateManageFragment", response)
+
+                            start(BackViewFragment.newInstance(JSONObject(response).optString("helpIndexUrl")))
+                        }
+
+                        override fun onFault(message: String) {
+                            Log.i("EvaluateManageFragment", message)
+                        }
+
+                    })
+
+
+            }
 
             else -> {
+
             }
         }
     }
@@ -168,7 +181,7 @@ class LoginFragment : BaseFragment(), View.OnClickListener, LoginView,CommonView
     override fun initView() {
 
 
-        CommonPresent(mActivity,this)
+        CommonPresent(mActivity, this)
 
 
         val disposable1 = RxView.clicks(btn_login)
@@ -191,7 +204,7 @@ class LoginFragment : BaseFragment(), View.OnClickListener, LoginView,CommonView
             )
 
 
-        val view = arrayOf(iv_show_pwd, forget_password, loginSMS, tv_kaidian)
+        val view = arrayOf(iv_show_pwd, forget_password, loginSMS, tv_kaidian, tv_question)
 
 
         view.forEach {

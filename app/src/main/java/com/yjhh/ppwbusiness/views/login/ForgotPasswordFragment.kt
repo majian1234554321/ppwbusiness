@@ -1,5 +1,6 @@
 package com.yjhh.ppwbusiness.views.login
 
+import android.text.InputType
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
@@ -16,9 +17,10 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_forgot_password.*
+
 import java.util.concurrent.TimeUnit
 
-class ForgotPasswordFragment:BaseFragment(), View.OnClickListener, PasswordView {
+class ForgotPasswordFragment : BaseFragment(), View.OnClickListener, PasswordView {
 
     override fun onSuccess(value: String?) {
         Toast.makeText(BaseApplication.context, "重置密码成功", Toast.LENGTH_SHORT).show()
@@ -38,20 +40,44 @@ class ForgotPasswordFragment:BaseFragment(), View.OnClickListener, PasswordView 
     }
 
 
-
     val TYPE = "22"//1登录 2注册 21 重置密码 22找回密码
     val refId = "";//推荐人ID/phone
 
 
-
     override fun onClick(v: View?) {
 
-        if (et_phone.text.length == 11 && et_password.text.length >= 6 && et_verifyCode.text != null) {
-            val present = PasswordPresent(BaseApplication.context, this)
-            present.forgotPassword(et_phone.text.toString(), et_password.text.toString(), et_verifyCode.text.toString())
-        } else {
-            Toast.makeText(BaseApplication.context, "手机号、密码、验证码不符合要求", Toast.LENGTH_SHORT).show()
+        when (v?.id) {
+
+            R.id.iv_show_pwd -> {
+                if (et_password.inputType != InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
+                    et_password.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                    iv_show_pwd.setImageResource(R.drawable.pass_visuable)
+                } else {
+                    et_password.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                    iv_show_pwd.setImageResource(R.drawable.pass_gone)
+                }
+                val pwd = et_password.text.toString()
+                if (!TextUtils.isEmpty(pwd))
+                    et_password.setSelection(pwd.length)
+            }
+
+            R.id.bt_commit -> {
+                if (et_phone.text.length == 11 && et_password.text.length >= 6 && et_verifyCode.text != null) {
+                    val present = PasswordPresent(BaseApplication.context, this)
+                    present.forgotPassword(
+                        et_phone.text.toString(),
+                        et_password.text.toString(),
+                        et_verifyCode.text.toString()
+                    )
+                } else {
+                    Toast.makeText(BaseApplication.context, "手机号、密码、验证码不符合要求", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            else -> {
+            }
         }
+
 
     }
 
@@ -59,7 +85,11 @@ class ForgotPasswordFragment:BaseFragment(), View.OnClickListener, PasswordView 
 
     override fun initView() {
         val regByAccountPresent = PasswordPresent(context, this)
-        bt_commit.setOnClickListener(this)
+
+
+        arrayOf(iv_show_pwd, bt_commit).forEach {
+            it.setOnClickListener(this)
+        }
 
 
         val disposable = RxView.clicks(tv_verifyCode)

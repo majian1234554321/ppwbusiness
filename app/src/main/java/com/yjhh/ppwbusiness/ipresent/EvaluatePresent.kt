@@ -18,7 +18,7 @@ class EvaluatePresent(var context: Context, var view: EvaluateView) : BasePresen
 
         val map = androidx.collection.ArrayMap<String, String>()
         map["type"] = type//类别，默认null（null/0全部 1好评 2中评 3差评）
-        map["isHasfile"] = isHasfile//是否包含附件，默认null（null/0 全部 1包含附件）
+        map["hasFile"] = isHasfile//是否包含附件，默认null（null/0 全部 1包含附件）
         map["pageIndex"] = startIndex.toString()
         map["pageSize"] = pageSize.toString()
 

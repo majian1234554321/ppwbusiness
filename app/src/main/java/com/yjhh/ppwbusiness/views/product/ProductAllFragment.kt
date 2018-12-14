@@ -1,17 +1,14 @@
 package com.yjhh.ppwbusiness.views.product
 
 import android.content.Intent
-import android.graphics.Color
+
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+
 import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.RelativeLayout
+
 import android.widget.TextView
 import android.widget.Toast
-import com.chad.library.adapter.base.BaseQuickAdapter
+
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
 
 import com.yjhh.ppwbusiness.R
@@ -29,13 +26,7 @@ import com.yjhh.ppwbusiness.iview.ProductView
 import com.yjhh.ppwbusiness.utils.RxBus
 
 import com.yjhh.ppwbusiness.views.cui.SpaceItemDecoration
-import com.yjhh.ppwbusiness.views.product.twoview.BaseViewAdapter
-import com.yjhh.ppwbusiness.views.product.twoview.BindData
-import com.yjhh.ppwbusiness.views.product.twoview.LeftBean
-import com.yjhh.ppwbusiness.views.product.twoview.RightBean
-import kotlinx.android.synthetic.main.pickerview_custom_time.*
 
-import kotlinx.android.synthetic.main.product1fragment.*
 import kotlinx.android.synthetic.main.productallfragment.*
 import java.util.ArrayList
 
@@ -57,9 +48,15 @@ class ProductAllFragment : BaseFragment(), ProductView {
 
         when (flag) {
             "refresh" -> {
-                swipeLayout.finishRefresh()
-                mAdapter.setNewData(result?.items)
-                swipeLayout.finishRefresh()
+                if (startindex == 0 && result?.items?.size == 0) {
+                    val view = View.inflate(mActivity, R.layout.emptyview, null)
+                    view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
+                    mAdapter?.emptyView = view
+
+                } else {
+                    mAdapter.setNewData(result?.items)
+                }
+
             }
             "DELETE" -> {
                 result?.position?.let { mAdapter.data.removeAt(it) }
@@ -100,7 +97,7 @@ class ProductAllFragment : BaseFragment(), ProductView {
     }
 
     override fun onFault(errorMsg: String?) {
-        swipeLayout.finishRefresh()
+
 
         if (startindex == 0) {
             val view = View.inflate(mActivity, R.layout.emptyview, null)
@@ -132,10 +129,12 @@ class ProductAllFragment : BaseFragment(), ProductView {
 
         val dis = RxBus.default.toFlowable(Intent::class.java).subscribe {
             if (it != null && "ProductAddFragment" == it.getStringExtra("TYPE")) {
-                swipeLayout.autoRefresh()
+                if (swipeLayout != null)
+                    swipeLayout.autoRefresh()
             }
         }
 
+        compositeDisposable.add(dis)
 
         mAdapter.setOnItemClickListener { adapter, view, position ->
 
@@ -223,6 +222,7 @@ class ProductAllFragment : BaseFragment(), ProductView {
         swipeLayout.setRefreshHeader(ClassicsHeader(context))
         swipeLayout.setOnRefreshListener { refreshLayout ->
             refresh()
+            swipeLayout.finishRefresh()
         }
     }
 

@@ -146,7 +146,7 @@
 
                 <ImageView
                         android:id="@+id/iv_show_pwd"
-                        android:layout_width="40dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
                         android:scaleType="centerInside"
                         android:src="@drawable/pass_gone"/>

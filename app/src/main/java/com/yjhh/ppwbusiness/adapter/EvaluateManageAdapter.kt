@@ -89,7 +89,7 @@ class EvaluateManageAdapter(var context: Context, data: List<MultiItemEntity>) :
                         if (item22TYPE_LEVEL_1.last) View.VISIBLE else View.GONE //最后一个item 显示查看详情
 
 
-                if (item22TYPE_LEVEL_1.ifShop == "0") {//// 商家
+                if (item22TYPE_LEVEL_1.ifShop == "1") {//// 商家
                     helper.setBackgroundColor(R.id.rll, Color.parseColor("#F7EEDD"))
                 } else {
                     helper.setBackgroundColor(R.id.rll, Color.parseColor("#E7E7E7"))

@@ -16,4 +16,5 @@ public class VersionBean {
     public int ifCover;
     public String version;
     public String versionRequest;
+    public String marketUrl;
 }

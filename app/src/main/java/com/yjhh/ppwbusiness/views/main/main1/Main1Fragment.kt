@@ -59,7 +59,7 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
     }
 
     override fun onsuccessShopAdmin(bean: ShopAdminBean) {
-        swipeLayout.finishRefresh()
+
         val stringToday = mActivity.getString(
             R.string.rmb_price_double,
             bean.account.today
@@ -91,7 +91,7 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
     }
 
     override fun onFault(errorMsg: String?) {
-        swipeLayout.finishRefresh()
+
     }
 
     override fun onClick(v: View?) {
@@ -168,11 +168,12 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
         }
 
 
-         swipeLayout.setRefreshHeader(ClassicsHeader(mActivity))
+        swipeLayout.setRefreshHeader(ClassicsHeader(mActivity))
 
-      //  swipeLayout.setRefreshHeader(ClassicsHeader(mActivity))
+        //  swipeLayout.setRefreshHeader(ClassicsHeader(mActivity))
         swipeLayout.setOnRefreshListener { refreshLayout ->
             Main1Present(mActivity, this).shopAdminHome()
+            swipeLayout.finishRefresh()
         }
 
         val lists = ArrayList<Main1Bean>()
@@ -236,21 +237,26 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
     override fun onSuccessCancellation(response: String?, flag: String?) {
 
 
-        val model = Gson().fromJson<QCodeBean>(response, QCodeBean::class.java)
+        if (response?.contains("message")!!) {
+            val model = Gson().fromJson<QCodeBean>(response, QCodeBean::class.java)
 
-        if ("1" == model.type) { ////1.登录 2.核销
+            if ("1" == model.type) { ////1.登录 2.核销
 
-            if (model.data != null) {
+                if (model.data != null) {
 
-                CancellationPresent(mActivity, this).qCodeLogin(model.data.split("code=")[1])
+                    CancellationPresent(mActivity, this).qCodeLogin(model.data.split("code=")[1])
 
+                }
+
+            } else {
+
+                (parentFragment as MainFragment).startBrotherFragment(
+
+                    WriteOffFragment.newInstance(model.data.split("id=")[1])
+                )
             }
-
         } else {
 
-            (parentFragment as MainFragment).startBrotherFragment(
-                WriteOffFragment.newInstance("123")
-            )
         }
 
 

@@ -80,7 +80,7 @@ class GameRecordFragment : BaseFragment() {
                         ?.start()
 
                     mAdapter?.setNewData(model.regs)
-
+                    tbv_title.setTitle(model.name)
                     val stime = "开始时间:  ${TimeUtil.stampToDate(model.effectiveTime)}"
                     tv_sTime?.text = TextStyleUtils.changeTextColor(stime, 0, 5, Color.parseColor("#999999"))
 

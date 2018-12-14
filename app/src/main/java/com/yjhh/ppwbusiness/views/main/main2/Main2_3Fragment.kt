@@ -3,6 +3,8 @@ package com.yjhh.ppwbusiness.views.main.main2
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.TextView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
 
@@ -20,7 +22,14 @@ import java.util.ArrayList
 class Main2_3Fragment : BaseFragment(), OrderView {
     override fun onSuccess(model: OrderBean, flag: String) {
         if ("refresh" == flag) {
-            mAdapter.setNewData(model.items)
+
+            if (startindex == 0&&model.items.isEmpty()) {
+                val view = View.inflate(mActivity, R.layout.emptyview, null)
+                view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
+                mAdapter?.emptyView = view
+            }else{
+                mAdapter.setNewData(model.items)
+            }
             swipeLayout.finishRefresh()
 
         } else {
@@ -35,7 +44,14 @@ class Main2_3Fragment : BaseFragment(), OrderView {
     }
 
     override fun onFault(errorMsg: String?) {
-        swipeLayout.finishRefresh()
+        if (swipeLayout != null) {
+            swipeLayout.finishRefresh()
+        }
+        if (startindex == 0) {
+            val view = View.inflate(mActivity, R.layout.emptyview, null)
+            view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
+            mAdapter?.emptyView = view
+        }
     }
 
     override fun onLazyInitView(savedInstanceState: Bundle?) {

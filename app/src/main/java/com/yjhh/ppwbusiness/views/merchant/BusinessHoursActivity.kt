@@ -34,7 +34,39 @@ class BusinessHoursActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.iv_back -> {
-                this.finish()
+
+                if (listA.size == list.size && listA.containsAll(list)) {
+                    this.finish()
+                } else {
+                    AlertDialogFactory.createFactory(this).getAlertDialog(
+                        null,
+                        "请确认保存?",
+                        "确定", "取消",
+                        { dlg, v ->
+                            ApiServices.getInstance().create(ShopSetServices::class.java)
+                                .editTimes(list.toArray(arrayOfNulls<ShopTimesModel>(list.size)))
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(object : ProcessObserver2(this@BusinessHoursActivity) {
+                                    override fun processValue(response: String?) {
+                                        val intent = Intent()
+                                        intent.putExtra("time", list)
+                                        setResult(RESULT_OK, intent)
+                                        finish()
+                                    }
+
+                                    override fun onFault(message: String) {
+                                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                                        finish()
+                                    }
+
+                                })
+                        }, { dlg, v ->
+                            this.finish()
+                        })
+                }
+
+
             }
 
             R.id.tv_save -> {
@@ -42,7 +74,7 @@ class BusinessHoursActivity : AppCompatActivity(), View.OnClickListener {
                     .editTimes(list.toArray(arrayOfNulls<ShopTimesModel>(list.size)))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(object :ProcessObserver2(this@BusinessHoursActivity){
+                    .subscribe(object : ProcessObserver2(this@BusinessHoursActivity) {
                         override fun processValue(response: String?) {
                             val intent = Intent()
                             intent.putExtra("time", list)
@@ -70,6 +102,7 @@ class BusinessHoursActivity : AppCompatActivity(), View.OnClickListener {
 
     var mAdapter: BusinessHoursAdapter? = null
     val list = ArrayList<ShopTimesModel>()
+    val listA = ArrayList<ShopTimesModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,6 +116,7 @@ class BusinessHoursActivity : AppCompatActivity(), View.OnClickListener {
         list.clear()
         val timeList = intent.getParcelableArrayListExtra<ShopTimesModel>("time")
         list.addAll(timeList)
+        listA.addAll(timeList)
 
 
         recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
@@ -136,14 +170,8 @@ class BusinessHoursActivity : AppCompatActivity(), View.OnClickListener {
 
                 else -> {
 
-                    AlertDialogFactory.createFactory(this).getAlertDialog(
-                        null,
-                        "确定删除该时间段吗?",
-                        "确定", "取消",
-                        { dlg, v ->
-                            list.removeAt(position)
-                            mAdapter?.notifyItemRemoved(position)
-                        }, { dlg, v -> })
+                    list.removeAt(position)
+                    mAdapter?.notifyItemRemoved(position)
 
 
                 }

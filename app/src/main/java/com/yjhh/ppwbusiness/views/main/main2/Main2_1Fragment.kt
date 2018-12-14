@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.ArrayMap
 import android.util.Log
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
@@ -38,8 +40,19 @@ class Main2_1Fragment : BaseFragment(), OrderView {
 
     override fun onSuccess(model: OrderBean, flag: String) {
         if ("refresh" == flag) {
-            mAdapter.setNewData(model.items)
-            swipeLayout.finishRefresh()
+
+
+
+            if (startindex == 0&&model.items.isEmpty()) {
+                val view = View.inflate(mActivity, R.layout.emptyview, null)
+                view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
+                mAdapter?.emptyView = view
+            }else{
+                mAdapter.setNewData(model.items)
+            }
+
+
+
 
         } else {
             if (pageSize > model.items.size) {
@@ -53,7 +66,14 @@ class Main2_1Fragment : BaseFragment(), OrderView {
     }
 
     override fun onFault(errorMsg: String?) {
-        swipeLayout.finishRefresh()
+        if (swipeLayout != null) {
+
+        }
+        if (startindex == 0) {
+            val view = View.inflate(mActivity, R.layout.emptyview, null)
+            view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
+            mAdapter?.emptyView = view
+        }
     }
 
     override fun onLazyInitView(savedInstanceState: Bundle?) {
@@ -108,6 +128,7 @@ class Main2_1Fragment : BaseFragment(), OrderView {
         swipeLayout.setRefreshHeader(ClassicsHeader(context))
         swipeLayout.setOnRefreshListener { refreshLayout ->
             refresh()
+            swipeLayout.finishRefresh()
         }
     }
 

@@ -30,7 +30,7 @@ class CancellationBeforeFragment : BaseFragment(), CancellationView {
         if (model.items != null) {
 
             if ("refresh" == flag) {
-                swipeLayout.finishRefresh()
+
                 mAdapter?.setNewData(model.items)
             } else {
                 mAdapter?.addData(model.items)
@@ -96,6 +96,7 @@ class CancellationBeforeFragment : BaseFragment(), CancellationView {
         swipeLayout.setRefreshHeader(ClassicsHeader(context))
         swipeLayout.setOnRefreshListener { refreshLayout ->
             refresh()
+            swipeLayout.finishRefresh()
         }
     }
 

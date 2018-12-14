@@ -71,9 +71,13 @@
                 android:name="UMENG_CHANNEL"
                 android:value="${UMENG_CHANNEL_VALUE}"/>
 
-        <activity android:name=".views.login.LoginActivity">
+        <activity android:name=".views.login.LoginActivity"
+                  android:windowSoftInputMode="adjustPan|adjustResize"
+        >
         </activity>
-        <activity android:name=".views.main.MainActivity">
+        <activity android:name=".views.main.MainActivity"
+                  android:windowSoftInputMode="adjustPan"
+        >
         </activity>
         <activity android:name=".views.merchant.MerchantSettingActivity">
         </activity>

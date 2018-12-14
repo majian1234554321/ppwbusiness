@@ -27,7 +27,7 @@ class ShopSetPresent(var context: Context, var view: ShopSetView) : BasePresent(
                 Log.i("ShopSetPresent", response)
 
                 view.onSuccess()
-                Toast.makeText(context, "设置店铺信息成功", Toast.LENGTH_LONG).show()
+               // Toast.makeText(context, "设置店铺信息成功", Toast.LENGTH_LONG).show()
             }
 
             override fun onFault(message: String) {
@@ -49,7 +49,7 @@ class ShopSetPresent(var context: Context, var view: ShopSetView) : BasePresent(
             .create(ShopSetServices::class.java)
             .editOpen(maps), object : ProcessObserver2(context, true) {
             override fun onFault(message: String) {
-                Toast.makeText(context, "设置店铺状态失败", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, message, Toast.LENGTH_LONG).show()
             }
 
             override fun processValue(response: String?) {
@@ -68,7 +68,7 @@ class ShopSetPresent(var context: Context, var view: ShopSetView) : BasePresent(
 
         toSubscribe2(ApiServices.getInstance()
             .create(ShopSetServices::class.java)
-            .getAllInfo(), object : ProcessObserver2(context, true) {
+            .getAllInfo(), object : ProcessObserver2(context) {
             override fun onFault(message: String) {
                 Log.i("getAllInfo", message)
             }

@@ -34,6 +34,7 @@ public class AccountBean implements Serializable {
      * userId : 1022
      */
 
+    public String logoUrl;
     public String displayMobile;
     public int id;
     public String mobile;

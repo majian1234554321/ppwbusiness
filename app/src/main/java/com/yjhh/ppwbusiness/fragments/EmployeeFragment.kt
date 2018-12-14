@@ -23,6 +23,7 @@ import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.base.ProcessObserver2
 import com.yjhh.ppwbusiness.bean.AccountBean
 import com.yjhh.ppwbusiness.bean.EmployeeBean
+import com.yjhh.ppwbusiness.bean.ManngerBean
 import com.yjhh.ppwbusiness.bean.ProductBean
 
 import com.yjhh.ppwbusiness.views.cui.TitleBarView
@@ -77,8 +78,7 @@ class EmployeeFragment : BaseFragment(), View.OnClickListener {
         val model = arguments?.getSerializable("objectValue")
         if (model != null) {
             model as AccountBean
-            tv_name.text = model.name
-            tv_mobile.text = model.displayMobile
+
             tbv_title.setRightDisPlay(model.role == 0)
             mAdapter = EmployeeAdapter(lists, model.role == 0)
         } else {
@@ -123,6 +123,36 @@ class EmployeeFragment : BaseFragment(), View.OnClickListener {
 
 
         loadNetData()
+
+
+
+
+
+        ApiServices.getInstance().create(
+            SectionUserService::class.java
+        ).mgr()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : ProcessObserver2(mActivity) {
+                override fun processValue(response: String?) {
+
+
+                  val modelY =   Gson().fromJson<ManngerBean>(response,ManngerBean::class.java)
+
+
+
+                    tv_name.text = modelY.name
+                    tv_mobile.text = modelY.displayMobile
+                    Log.i("ApiServices", response)
+                }
+
+                override fun onFault(message: String) {
+                    Log.i("ApiServices", message)
+                }
+
+            })
+
+
     }
 
 

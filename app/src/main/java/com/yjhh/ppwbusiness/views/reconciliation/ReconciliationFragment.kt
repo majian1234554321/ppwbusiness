@@ -15,21 +15,21 @@ import com.yjhh.ppwbusiness.iview.WithDrowView
 import kotlinx.android.synthetic.main.reconciliationfragment.*
 
 class ReconciliationFragment : BaseFragment(), WithDrowView {
-    override fun onSuccessView(response: String?,flag:String) {
-       val model =  Gson().fromJson<ReconciliationBean>(response, ReconciliationBean::class.java)
+    override fun onSuccessView(response: String?, flag: String) {
+        val model = Gson().fromJson<ReconciliationBean>(response, ReconciliationBean::class.java)
 
 
-        tv_in.text =  BaseApplication.getIns().getString(R.string.rmb_price_double2,model.totalIn)
-        tv_out.text =  BaseApplication.getIns().getString(R.string.rmb_price_double2,model.totalOut)
+        tv_in.text = BaseApplication.getIns().getString(R.string.rmb_price_double, model.totalIn)
+        tv_out.text = BaseApplication.getIns().getString(R.string.rmb_price_double, model.totalOut)
 
-        tv_price.text = BaseApplication.getIns().getString(R.string.rmb_price_double2,model.balance)
+        tv_price.text = BaseApplication.getIns().getString(R.string.rmb_price_double2, model.balance)
 
 
         tv_inCount.text = "共${model.todayLogs[0].count}笔"
-        tv_inPrice.text = "+${ BaseApplication.getIns().getString(R.string.rmb_price_double2,model.todayLogs[0].money)}"
+        tv_inPrice.text = "+${BaseApplication.getIns().getString(R.string.rmb_price_double, model.todayLogs[0].money)}"
 
         tv_outCount.text = "共${model.todayLogs[1].count}笔"
-        tv_outPrice.text = "+${ BaseApplication.getIns().getString(R.string.rmb_price_double2,model.todayLogs[1].money)}"
+        tv_outPrice.text = "-${BaseApplication.getIns().getString(R.string.rmb_price_double, model.todayLogs[1].money)}"
 
     }
 
@@ -49,7 +49,7 @@ class ReconciliationFragment : BaseFragment(), WithDrowView {
             start(PutForwardFragment())
         }
 
-        iv_back.setOnClickListener{
+        iv_back.setOnClickListener {
             mActivity.onBackPressed()
         }
 
@@ -60,15 +60,14 @@ class ReconciliationFragment : BaseFragment(), WithDrowView {
         fagments.add(Reconciliation3Fragment())
         // fagments.add(Product4Fragment())
 
-        WithDrawPresent(mActivity,this).shopAdminWithdrawIndex()
-       // WithDrawPresent(mActivity).shopAdminWithdraw()
-       // WithDrawPresent(mActivity).logs(0,15)
-
+        WithDrawPresent(mActivity, this).shopAdminWithdrawIndex()
+        // WithDrawPresent(mActivity).shopAdminWithdraw()
+        // WithDrawPresent(mActivity).logs(0,15)
 
 
         mViewPager.adapter = MyPagerAdapter(childFragmentManager, fagments, mTitles)
         mTabLayout.setViewPager(mViewPager)
-        mViewPager.offscreenPageLimit =fagments.size
+        mViewPager.offscreenPageLimit = fagments.size
         mTabLayout.setOnTabSelectListener(object : OnTabSelectListener {
             override fun onTabSelect(position: Int) {
                 mViewPager.currentItem = position

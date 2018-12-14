@@ -83,7 +83,7 @@ class ProductPresent(var context: Context, var view: ProductView) : BasePresent(
 
         map["ids"] = ids
 
-        map["status"] = status//上架状态(0上架 1下架)
+        map["saleStatus"] = status//上架状态(0上架 1下架)
 
         toSubscribe2(
             ApiServices.getInstance()
@@ -106,7 +106,7 @@ class ProductPresent(var context: Context, var view: ProductView) : BasePresent(
 
         map["id"] = id
         map["itemId"] = itemId
-        map["status"] = status//上架状态(0上架 1下架)
+        map["saleStatus"] = status//上架状态(0上架 1下架)
 
         toSubscribe2(
             ApiServices.getInstance()

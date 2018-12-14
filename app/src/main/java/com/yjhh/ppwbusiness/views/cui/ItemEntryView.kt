@@ -26,18 +26,25 @@ class ItemEntryView @JvmOverloads constructor(
     defStyleAttr
 ) {
 
-    fun setTextContent(name: String) {
+    fun setTextContent(name: String?): ItemEntryView {
         tv_content.text = name
+        return this
     }
 
     fun getTextContent(): String {
         return tv_content.text.toString()
+
     }
 
-    fun setArrow(){
-        iv_arrow.visibility= View.INVISIBLE
+    fun setArrow() {
+        iv_arrow.visibility = View.INVISIBLE
     }
 
+
+  public  fun setLeftTitle(name: String?): ItemEntryView {
+        tv_name.text = name
+        return this
+    }
 
     init {
 
@@ -109,11 +116,8 @@ class ItemEntryView @JvmOverloads constructor(
         tv_name.compoundDrawablePadding = 12
 
 
-
 //        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
 //        textView2.setCompoundDrawables(drawable,null,null,null);
-
-
 
 
         val line = view.findViewById<View>(R.id.line)

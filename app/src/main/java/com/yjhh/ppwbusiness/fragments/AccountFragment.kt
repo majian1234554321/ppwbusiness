@@ -4,6 +4,9 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.util.Log
 import android.view.View
+import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.gson.Gson
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.api.ApiServices
@@ -39,13 +42,13 @@ class AccountFragment : BaseFragment(), View.OnClickListener {
                 start(SetNickNameFragment.newInstance(name))
             }
 
-            R.id.iev_bank->{
+            R.id.iev_bank -> {
 
             }
-            R.id.iev_alipay->{
+            R.id.iev_alipay -> {
 
             }
-            R.id.iev_wx->{
+            R.id.iev_wx -> {
 
             }
 
@@ -57,7 +60,7 @@ class AccountFragment : BaseFragment(), View.OnClickListener {
     override fun getLayoutRes(): Int = R.layout.accountfragment
 
 
-    var name :String?= null
+    var name: String? = null
 
     override fun initView() {
         arrayOf(tv_loginOut, iev_reset, iev_nickName, iev_bank, iev_alipay, iev_wx)
@@ -90,7 +93,19 @@ class AccountFragment : BaseFragment(), View.OnClickListener {
                     tv_text.text = if (model.role == 0) "管理员账户" else "员工账户"
 
 
-                  name =   model.name
+                    ImageLoaderUtils.loadImgId(
+                        mActivity,
+                        iv_image,
+                        if (model.role == 0) R.drawable.icon_admin  else R.drawable.icon_ordinary,
+                        R.drawable.icon_logoholder,
+                        R.drawable.icon_logoholder, 5
+                    )
+
+
+
+
+
+                    name = model.name
 
                     iev_nickName.setTextContent(model.name)
 
@@ -108,10 +123,11 @@ class AccountFragment : BaseFragment(), View.OnClickListener {
                         if (model.binds[0] != null) {
                             if (model.binds[0].bindStatus == 1) {
                                 iev_bank.setTextContent(model.binds[0].text)
+
                             } else {
                                 iev_bank.setTextContent("未绑定")
                             }
-
+                            iev_bank.setLeftContent(model.binds[0].title)
                         }
 
 
@@ -121,7 +137,7 @@ class AccountFragment : BaseFragment(), View.OnClickListener {
                             } else {
                                 iev_alipay.setTextContent("未绑定")
                             }
-
+                            iev_alipay.setLeftContent(model.binds[1].title)
                         }
 
 
@@ -131,10 +147,8 @@ class AccountFragment : BaseFragment(), View.OnClickListener {
                             } else {
                                 iev_wx.setTextContent("未绑定")
                             }
-
+                            iev_wx.setLeftContent(model.binds[2].title)
                         }
-
-
 
 
                     }

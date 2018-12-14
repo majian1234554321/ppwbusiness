@@ -11,7 +11,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
         flavorDimensions "default"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -50,7 +50,7 @@ android {
     productFlavors {
 
         company {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "xiaomi"]
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "company"]
         }
 
         yingyongbao {

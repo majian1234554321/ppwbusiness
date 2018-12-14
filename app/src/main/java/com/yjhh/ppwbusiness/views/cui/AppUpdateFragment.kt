@@ -4,21 +4,33 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.Color
+import android.graphics.Paint
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import com.google.android.material.button.MaterialButton
 import androidx.fragment.app.DialogFragment
 import android.view.*
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat
+import com.yjhh.ppwbusiness.BaseApplication
 import com.yjhh.ppwbusiness.R
+import com.yjhh.ppwbusiness.utils.SpannableStringUtils
+import com.yjhh.ppwbusiness.views.webview.BackViewActivity
+import com.yjhh.ppwbusiness.views.webview.BackViewFragment
 import kotlinx.android.synthetic.main.appupdatefragment.*
 import me.jessyan.autosize.internal.CustomAdapt
 
 
 @SuppressLint("ValidFragment")
-class AppUpdateFragment(var flag: Boolean) : androidx.fragment.app.DialogFragment(), CustomAdapt {
+class AppUpdateFragment(var flag: Boolean, var content: String, var url: String) :
+    androidx.fragment.app.DialogFragment(), CustomAdapt {
 
 
     override fun isBaseOnWidth(): Boolean {
@@ -41,9 +53,55 @@ class AppUpdateFragment(var flag: Boolean) : androidx.fragment.app.DialogFragmen
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(activity)
         val view = LayoutInflater.from(activity).inflate(R.layout.appupdatefragment, null);
+
+
+        val tv_content = view.findViewById<TextView>(R.id.tv_content)
         val btn_ok = view.findViewById<TextView>(R.id.btn_ok);
         val btn_cancel = view.findViewById<TextView>(R.id.btn_cancel);
         val ll_pt = view.findViewById<LinearLayout>(R.id.ll_pt);
+
+        val tv_download = view.findViewById<TextView>(R.id.tv_download);
+
+
+
+        tv_download.paint.flags = Paint.UNDERLINE_TEXT_FLAG;
+
+
+        tv_download.setOnClickListener {
+            val intent = Intent(activity, BackViewActivity::class.java)
+            intent.putExtra("url", url)
+
+            startActivity(intent)
+
+
+            dismiss()
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        tv_content.text = content
 
         mb = view.findViewById<MaterialButton>(R.id.mb)
 

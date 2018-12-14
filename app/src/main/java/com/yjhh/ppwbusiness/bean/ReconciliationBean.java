@@ -31,7 +31,7 @@ public class ReconciliationBean {
          * title : 入账账单
          */
 
-        public float count;
+        public int count;
         public String countText;
         public float flag;
         public float money;

@@ -21,7 +21,7 @@ import java.util.*
 class Main2Fragment : BaseMainFragment() {
 
 
-    private val mTitles = arrayOf("全部订单", "未付款", "已付款")
+    private val mTitles = arrayOf( "未付款", "已付款","全部订单")
     override fun getLayoutRes(): Int = R.layout.main2fragment
 
 
@@ -29,9 +29,10 @@ class Main2Fragment : BaseMainFragment() {
 
         val fagments = ArrayList<BaseFragment>()
 
-        fagments.add(Main2_1Fragment())
+
         fagments.add(Main2_2Fragment())
         fagments.add(Main2_3Fragment())
+        fagments.add(Main2_1Fragment())
         // fagments.add(Product4Fragment())
         tv_to.setOnClickListener {
 

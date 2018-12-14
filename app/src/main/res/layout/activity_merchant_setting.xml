@@ -27,6 +27,7 @@
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                   android:id="@+id/tv_save"
                   android:textSize="15pt"
+                  android:visibility="invisible"
                   android:paddingRight="@dimen/spi_12"
                   android:textColor="@color/zthj"
                   android:layout_alignParentRight="true"
@@ -55,11 +56,11 @@
                             android:layout_marginBottom="7.5pt"
                             android:layout_height="wrap_content">
 
-                <de.hdodenhof.circleimageview.CircleImageView android:layout_width="51.5pt"
-                                                              android:src="@mipmap/ic_launcher"
-                                                              android:layout_alignParentRight="true"
-                                                              android:layout_height="51.5pt"
-                                                              android:id="@+id/iv_image"
+                <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="51.5pt"
+                        android:layout_alignParentRight="true"
+                        android:layout_height="51.5pt"
+                        android:id="@+id/iv_image"
                 />
 
                 <TextView android:layout_width="wrap_content"
@@ -83,7 +84,7 @@
                             android:layout_height="wrap_content">
 
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                          android:text="店铺名称"
+                          android:text="商户名称"
                           android:layout_marginTop="12pt"
                           android:layout_marginBottom="9pt"
 
@@ -95,8 +96,8 @@
 
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                           android:layout_alignParentRight="true"
-                            android:id="@+id/tv_name"
-                          android:text="商户名称"
+                          android:id="@+id/tv_name"
+                          tools:text="商户名称"
                           android:layout_marginTop="12pt"
                           android:layout_marginBottom="9pt"
 
@@ -128,7 +129,7 @@
                           android:textColor="#FF333333"
                           android:textSize="14pt"
                           android:gravity="center"
-                          android:text="店铺状态"
+                          android:text="手动打烊"
                 />
 
                 <com.yjhh.ppwbusiness.views.cui.toggle.ToggleButton
@@ -222,7 +223,7 @@
                       android:layout_marginTop="12pt"
                       android:textSize="12pt"
                       android:singleLine="true"
-                        android:paddingStart="12pt"
+                      android:paddingStart="12pt"
                       android:textColor="#FF333333"
                       android:id="@+id/tv_shopAddress"
                       android:padding="4dp"

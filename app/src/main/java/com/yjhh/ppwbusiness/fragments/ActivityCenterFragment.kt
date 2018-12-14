@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.activitycenterfragment.*
 
 class ActivityCenterFragment : BaseFragment(), ActivityCenterView {
     override fun onFault(errorMsg: String?) {
-        swipeLayout.finishRefresh()
+
     }
 
     override fun onSuccessView(response: String?, flag: String) {
@@ -32,11 +32,11 @@ class ActivityCenterFragment : BaseFragment(), ActivityCenterView {
 
         when (flag) {
             "refresh" -> {
-                swipeLayout.finishRefresh()
+
                 list.clear()
                 listAll.clear()
                 model.items.forEach {
-//                    if (it.status == 1) {
+                    //                    if (it.status == 1) {
 //                        list.add(ActivityCenterBean(1, it))
 //                    } else {
 //                        list.add(ActivityCenterBean(0, it))
@@ -60,7 +60,7 @@ class ActivityCenterFragment : BaseFragment(), ActivityCenterView {
 
                     list.clear()
                     model.items.forEach {
-//                        if (it.status == 1) {
+                        //                        if (it.status == 1) {
 //                            list.add(ActivityCenterBean(1, it))
 //                        } else {
 //                            list.add(ActivityCenterBean(0, it))
@@ -128,6 +128,7 @@ class ActivityCenterFragment : BaseFragment(), ActivityCenterView {
         swipeLayout.setRefreshHeader(ClassicsHeader(context))
         swipeLayout.setOnRefreshListener { refreshLayout ->
             refresh()
+            swipeLayout.finishRefresh()
         }
     }
 

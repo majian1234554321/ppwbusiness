@@ -75,23 +75,24 @@ class MainActivity : BaseActivity(), CommonView {
 
 
     override fun onSuccess(value: String?) {
-        val model = Gson().fromJson<VersionBean>(value, VersionBean::class.java)
-
-        dialog = if (model.ifCover == 1) {//是否强制覆盖(0否 1是)
-            AppUpdateFragment(true)
-        } else {
-            AppUpdateFragment(false)
-        }
-
-        dialog?.show(supportFragmentManager, "TAG")
-
-        dialog?.setOnAppUpdate(object : AppUpdateFragment.AppUpdateListener {
-            override fun onAppUpdate() {
-                APKVersionCodeUtils.startUpdate(this@MainActivity, onDownloadListener)
+        val modelVersionBean = Gson().fromJson<VersionBean>(value, VersionBean::class.java)
+        if (APKVersionCodeUtils.getVerName(this) != modelVersionBean.version) {
+            dialog = if (modelVersionBean.ifCover == 1) {//是否强制覆盖(0否 1是)
+                AppUpdateFragment(true, modelVersionBean.content,modelVersionBean.marketUrl)
+            } else {
+                AppUpdateFragment(false, modelVersionBean.content,modelVersionBean.marketUrl)
             }
 
-        })
+            dialog?.show(supportFragmentManager, "TAG")
 
+            dialog?.setOnAppUpdate(object : AppUpdateFragment.AppUpdateListener {
+                override fun onAppUpdate() {
+                    APKVersionCodeUtils.startUpdate(this@MainActivity, modelVersionBean.downloadUrl, onDownloadListener)
+                }
+
+            })
+
+        }
     }
 
     override fun onFault(errorMsg: String?) {

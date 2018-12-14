@@ -33,12 +33,12 @@ class AllFeedBackFragment : BaseFragment(), AboutView {
         when (flag) {
             "refresh" -> {
                 if (pageIndex == 0 && "refresh" == flag && modle.items != null && modle.items.isEmpty()) {
-                    swipeLayout.finishRefresh()
+
                     val view = View.inflate(mActivity, R.layout.emptyview, null)
                     view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
                     mAdapter?.emptyView = view
                 } else {
-                    swipeLayout.finishRefresh()
+
                     mAdapter?.setNewData(modle.items)
 
 
@@ -59,7 +59,7 @@ class AllFeedBackFragment : BaseFragment(), AboutView {
 
     override fun onFault(errorMsg: String?) {
         if (pageIndex == 0) {
-            swipeLayout.finishRefresh()
+
             val view = View.inflate(mActivity, R.layout.emptyview, null)
             view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
             mAdapter?.emptyView = view
@@ -94,6 +94,7 @@ class AllFeedBackFragment : BaseFragment(), AboutView {
         swipeLayout.setRefreshHeader(ClassicsHeader(context))
         swipeLayout.setOnRefreshListener { refreshLayout ->
             refresh()
+            swipeLayout.finishRefresh()
         }
     }
 

@@ -1,12 +1,13 @@
 package com.yjhh.ppwbusiness.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class PhotoBean {
+public class PhotoBean implements Serializable {
 
     public List<ItemBean> item;
 
-    public static class ItemBean {
+    public static class ItemBean implements Serializable {
         /**
          * beforeName : 1541425795284.jpg
          * contentType : multipart/form-data

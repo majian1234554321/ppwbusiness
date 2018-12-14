@@ -2,11 +2,13 @@ package com.yjhh.ppwbusiness.views.evaluate
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.TextUtils
 import androidx.collection.ArrayMap
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import com.google.gson.Gson
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.R.id.recyclerView
@@ -20,6 +22,8 @@ import com.yjhh.ppwbusiness.bean.EvaluateDetailsBean
 import com.yjhh.ppwbusiness.bean.EvaluateManageBean
 import com.yjhh.ppwbusiness.bean.EvaluateManageItemBean
 import com.yjhh.ppwbusiness.bean.SubmitShopReplyCommentModel
+import com.yjhh.ppwbusiness.utils.PhoneUtils
+import com.yjhh.ppwbusiness.utils.PhotoUtils
 import com.yjhh.ppwbusiness.utils.TimeUtil
 import com.yjhh.ppwbusiness.views.cui.RatingBar
 import com.yjhh.ppwbusiness.views.evaluate.ninegrid.NineGridView
@@ -44,10 +48,84 @@ class EvaluateDetailsFragment : BaseFragment() {
         recyclerView.adapter = mAdapter
 
 
-        val map = androidx.collection.ArrayMap<String, String>()
-
         val id = arguments?.getString("id")
 
+        loadNetData(id)
+
+
+
+
+
+        tv_send.setOnClickListener {
+
+            val model = SubmitShopReplyCommentModel()
+
+            if (!TextUtils.isEmpty(tv_replyContext.text.toString())) {
+                model.commentId = replayId
+                model.content = tv_replyContext.text.toString()
+
+
+                ApiServices.getInstance()
+                    .create(SectionEvluateService::class.java)
+                    .reply(model)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(object : ProcessObserver2(mActivity) {
+                        override fun processValue(response: String?) {
+                            Log.i("EvaluateDetailsFragment", response)
+                            recyclerView.scrollToPosition(list.lastIndex)
+                            tv_replyContext.text.clear()
+                            PhoneUtils.hideKeyboard(mActivity)
+                            loadNetData(id)
+                        }
+
+                        override fun onFault(message: String) {
+                            Log.i("EvaluateDetailsFragment", message)
+                        }
+
+                    })
+
+            } else {
+                Toast.makeText(context, "回复内容不能为空", Toast.LENGTH_SHORT).show()
+            }
+
+
+        }
+
+
+    }
+
+    var nineGridView: NineGridView? = null
+    var tv_content: TextView? = null
+    var tv_time: TextView? = null
+    var tv_username: TextView? = null
+    var id_ratingbar: RatingBar? = null
+
+    private fun addHeadView() {
+        val headView = View.inflate(mActivity, R.layout.evaluatedetailshead, null)
+        nineGridView = headView.findViewById(R.id.nineGrid)
+        tv_time = headView.findViewById(R.id.tv_time)
+        tv_content = headView.findViewById(R.id.tv_content)
+        tv_username = headView.findViewById(R.id.tv_username)
+        id_ratingbar = headView.findViewById(R.id.id_ratingbar)
+
+        mAdapter?.addHeaderView(headView)
+    }
+
+    companion object {
+        fun newInstance(id: String): EvaluateDetailsFragment {
+            val fragment = EvaluateDetailsFragment()
+            val bundle = Bundle()
+            bundle.putSerializable("id", id)
+            fragment.arguments = bundle
+            return fragment
+        }
+    }
+
+    fun loadNetData(id: String?) {
+
+
+        val map = androidx.collection.ArrayMap<String, String>()
         map["id"] = id.toString()//类别，默认null（null/0全部 1好评 2中评 3差评）
         ApiServices.getInstance()
             .create(SectionEvluateService::class.java)
@@ -98,62 +176,6 @@ class EvaluateDetailsFragment : BaseFragment() {
 
             })
 
-
-
-
-
-        tv_send.setOnClickListener {
-
-            val model = SubmitShopReplyCommentModel()
-
-            model.commentId = replayId
-            model.content = tv_replyContext.text.toString()
-
-            ApiServices.getInstance()
-                .create(SectionEvluateService::class.java)
-                .reply(model)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : ProcessObserver2(mActivity) {
-                    override fun processValue(response: String?) {
-                        Log.i("EvaluateDetailsFragment", response)
-                    }
-
-                    override fun onFault(message: String) {
-                        Log.i("EvaluateDetailsFragment", message)
-                    }
-
-                })
-        }
-
-
-    }
-
-    var nineGridView: NineGridView? = null
-    var tv_content: TextView? = null
-    var tv_time: TextView? = null
-    var tv_username: TextView? = null
-    var id_ratingbar: RatingBar? = null
-
-    private fun addHeadView() {
-        val headView = View.inflate(mActivity, R.layout.evaluatedetailshead, null)
-        nineGridView = headView.findViewById(R.id.nineGrid)
-        tv_time = headView.findViewById(R.id.tv_time)
-        tv_content = headView.findViewById(R.id.tv_content)
-        tv_username = headView.findViewById(R.id.tv_username)
-        id_ratingbar = headView.findViewById(R.id.id_ratingbar)
-
-        mAdapter?.addHeaderView(headView)
-    }
-
-    companion object {
-        fun newInstance(id: String): EvaluateDetailsFragment {
-            val fragment = EvaluateDetailsFragment()
-            val bundle = Bundle()
-            bundle.putSerializable("id", id)
-            fragment.arguments = bundle
-            return fragment
-        }
     }
 
 
