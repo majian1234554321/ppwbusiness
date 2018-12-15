@@ -3,6 +3,7 @@ package com.yjhh.ppwbusiness.ipresent
 import android.content.Context
 import android.util.ArrayMap
 import android.util.Log
+import android.widget.Toast
 import com.yjhh.ppwbusiness.api.ApiServices
 import com.yjhh.ppwbusiness.api.CancellationService
 import com.yjhh.ppwbusiness.base.BasePresent
@@ -29,12 +30,12 @@ class CancellationPresent(var context: Context, var view: CancellationView) : Ba
             override fun processValue(response: String?) {
                 Log.i("CancellationPresent", response)
 
-                view.onSuccessCancellation(response,"")
+                view.onSuccessCancellation(response, "")
             }
 
             override fun onFault(message: String) {
                 Log.i("CancellationPresent", message)
-                view.onSuccessCancellation(message,"")
+                view.onSuccessCancellation(message, "")
             }
 
         })
@@ -154,32 +155,25 @@ class CancellationPresent(var context: Context, var view: CancellationView) : Ba
     }
 
 
-
-
-    fun qCodeLogin(value: String){
+    fun qCodeLogin(value: String) {
         ApiServices.getInstance()
             .create(CancellationService::class.java)
             .qCodeLogin(value)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object :ProcessObserver2(context){
+            .subscribe(object : ProcessObserver2(context) {
                 override fun processValue(response: String?) {
                     Log.i("CancellationPresent", response)
+                    Toast.makeText(context, "登录成功", Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onFault(message: String) {
                     Log.i("CancellationPresent", message)
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
                 }
 
             })
     }
-
-
-
-
-
-
-
 
 
 }

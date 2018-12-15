@@ -35,16 +35,15 @@ class Product2Fragment : BaseFragment(), ProductView {
         when (flag) {
             "refresh" -> {
 
-                if (startindex==0&&result?.items?.size==0){
+                if (startindex == 0 && result?.items?.size == 0) {
+                    mAdapter.setNewData(result?.items)
+                    val view = View.inflate(mActivity, R.layout.emptyview, null)
+                    view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
+                    mAdapter?.emptyView = view
 
-                        val view = View.inflate(mActivity, R.layout.emptyview, null)
-                        view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
-                        mAdapter?.emptyView = view
-
-                }else{
+                } else {
                     mAdapter.setNewData(result?.items)
                 }
-
 
 
             }

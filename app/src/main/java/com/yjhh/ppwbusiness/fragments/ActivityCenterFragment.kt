@@ -2,6 +2,8 @@ package com.yjhh.ppwbusiness.fragments
 
 import android.util.ArrayMap
 import android.util.Log
+import android.view.View
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
@@ -33,20 +35,26 @@ class ActivityCenterFragment : BaseFragment(), ActivityCenterView {
         when (flag) {
             "refresh" -> {
 
-                list.clear()
-                listAll.clear()
-                model.items.forEach {
-                    //                    if (it.status == 1) {
-//                        list.add(ActivityCenterBean(1, it))
-//                    } else {
-//                        list.add(ActivityCenterBean(0, it))
-//                    }
+                    if (pageIndex == 0&&model.items.isEmpty()) {
+                        val view = View.inflate(mActivity, R.layout.emptyview, null)
+                        view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
+                        mAdapter?.emptyView = view
+                    }else{
+                        list.clear()
+                        listAll.clear()
+                        model.items.forEach {
 
-                    list.add(ActivityCenterBean(1, it))
-                }
-                listAll.addAll(list)
+                            list.add(ActivityCenterBean(1, it))
+                        }
+                        listAll.addAll(list)
 
-                mAdapter?.setNewData(listAll)
+                        mAdapter?.setNewData(listAll)
+                    }
+
+
+
+
+
 
             }
             else -> {

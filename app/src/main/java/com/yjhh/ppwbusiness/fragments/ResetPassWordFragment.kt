@@ -67,14 +67,14 @@ class ResetPassWordFragment : BaseFragment(), PasswordView {
 
         val style = SpannableStringBuilder(text)
         style.setSpan(ForegroundColorSpan(Color.parseColor("#FF999999")), 0, 7, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        //  style.setSpan( ForegroundColorSpan(Color.RED),fstart,fend,Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+
 
         tv_mobile.text = style
         present = PasswordPresent(context, this)
 
         bt_commit.setOnClickListener {
             if (!TextUtils.isEmpty(et_verifyCode.text.toString()) && et_password.text.toString().length >= 6) {
-                present?.resetPassword(et_verifyCode.text.toString(), et_password.text.toString(), "1")
+                present?.resetPassword(et_password.text.toString(), et_verifyCode.text.toString(), "1")
             } else {
                 Toast.makeText(mActivity, "请输入验证码并且密码长度大于6位", Toast.LENGTH_SHORT).show()
             }

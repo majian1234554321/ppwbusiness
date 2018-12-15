@@ -39,15 +39,13 @@ class LoginSMSFragment : BaseFragment(), PasswordView, View.OnClickListener {
                 present?.fromSms(
                     et_mobile.text.toString()
                     , et_verifyCode.text.toString()
-                    , identity
-                    , "Android"
+
                 )
 
             }
             R.id.loginPassword -> {
                 mActivity.onBackPressed()
             }
-
 
 
             R.id.tv_kaidian -> {
@@ -122,38 +120,21 @@ class LoginSMSFragment : BaseFragment(), PasswordView, View.OnClickListener {
         if ("01018" == errorMsg) {
 
 
-            ApiServices.getInstance()
-                .create(ShopSetServices::class.java)
-                .applyShop()
+            ApiServices.getInstance().create(CommonService::class.java)
+                .init()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : ProcessObserver2(mActivity) {
                     override fun processValue(response: String?) {
                         Log.i("01018", response)
-
-                        if (response?.contains("\"")!!) {
-
-                            val intent = Intent(mActivity, BackViewActivity::class.java)
-                            intent.putExtra("url", response.replace("\"",""))
-                            startActivity(intent)
-                        } else {
-                            val intent = Intent(mActivity, BackViewActivity::class.java)
-                            intent.putExtra("url", response)
-                            startActivity(intent)
-                        }
-
-
-
-
+                        start(BackViewFragment.newInstance(JSONObject(response).optString("applyShopUrl")))
 
                     }
 
                     override fun onFault(message: String) {
                         Log.i("01018", message)
                     }
-
                 })
-
 
         } else {
 
@@ -170,11 +151,7 @@ class LoginSMSFragment : BaseFragment(), PasswordView, View.OnClickListener {
         Toast.makeText(BaseApplication.context, "验证码发送失败$errorMsg", Toast.LENGTH_SHORT).show()
     }
 
-
-    val identity = ""//身份（即客户端类型，0用户 1骑手 2商户）
     val TYPE = "1"//1登录 2注册 21 重置密码 22找回密码
-    val refId = "";//推荐人ID/phone
-
 
     var present: PasswordPresent? = null
 
@@ -182,7 +159,7 @@ class LoginSMSFragment : BaseFragment(), PasswordView, View.OnClickListener {
 
     override fun initView() {
 
-        arrayOf(loginPassword, btn_login,tv_kaidian,tv_question).forEach {
+        arrayOf(loginPassword, btn_login, tv_kaidian, tv_question).forEach {
             it.setOnClickListener(this)
         }
 

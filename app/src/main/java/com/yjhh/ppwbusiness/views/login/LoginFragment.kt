@@ -45,32 +45,20 @@ class LoginFragment : BaseFragment(), View.OnClickListener, LoginView, CommonVie
         if ("01018" == errorMsg) {
 
 
-            ApiServices.getInstance()
-                .create(ShopSetServices::class.java)
-                .applyShop()
+            ApiServices.getInstance().create(CommonService::class.java)
+                .init()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : ProcessObserver2(mActivity) {
                     override fun processValue(response: String?) {
                         Log.i("01018", response)
-                        if (response?.contains("\"")!!) {
-
-                            val intent = Intent(mActivity, BackViewActivity::class.java)
-                            intent.putExtra("url", response.replace("\"", ""))
-                            startActivity(intent)
-                        } else {
-                            val intent = Intent(mActivity, BackViewActivity::class.java)
-                            intent.putExtra("url", response)
-                            startActivity(intent)
-                        }
-
+                        start(BackViewFragment.newInstance(JSONObject(response).optString("applyShopUrl")))
 
                     }
 
                     override fun onFault(message: String) {
                         Log.i("01018", message)
                     }
-
                 })
 
 
@@ -102,7 +90,7 @@ class LoginFragment : BaseFragment(), View.OnClickListener, LoginView, CommonVie
         mActivity.finish()
     }
 
-    val identity = ""//2商户
+
 
     override fun onClick(v: View?) {
         when (v?.id) {
@@ -192,8 +180,8 @@ class LoginFragment : BaseFragment(), View.OnClickListener, LoginView, CommonVie
                         val loginPresent = LoginPresent(mActivity, this)
                         loginPresent.login(
                             et_mobile.text.toString(),
-                            et_password.text.toString(),
-                            identity
+                            et_password.text.toString()
+
                         )
                     } else {
                         Toast.makeText(mActivity, "账号密码信息错误", Toast.LENGTH_SHORT).show()

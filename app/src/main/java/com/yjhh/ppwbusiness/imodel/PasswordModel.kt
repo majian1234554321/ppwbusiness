@@ -22,18 +22,19 @@ class PasswordModel {
         with(map) {
             put("type", type)
             put("phone", phone)
+            put("len", "")
         }
         return ApiServices.getInstance().create(LoginService::class.java).sendSms(map)
     }
 
 
-    fun fromSms(account: String, smsCode: String,identity: String, deviceName: String): Observable<ResponseBody> {
+    fun fromSms(account: String, smsCode: String): Observable<ResponseBody> {
         map.clear()
         with(map) {
             put("account", account)
             put("smsCode", smsCode)
-            put("identity", identity)
-            put("deviceName", deviceName)
+
+
         }
         return ApiServices.getInstance().create(LoginService::class.java).fromSms(map)
     }
@@ -46,7 +47,7 @@ class PasswordModel {
         phone: String,
         password: String,
         smsCode: String,
-        identity: String,
+
         refId: String
     ): Observable<ResponseBody> {
         map.clear()
@@ -54,7 +55,7 @@ class PasswordModel {
             put("phone", phone)
             put("password", password)
             put("smsCode", smsCode)
-            put("identity", identity)
+
             put("refId", refId)
 
         }

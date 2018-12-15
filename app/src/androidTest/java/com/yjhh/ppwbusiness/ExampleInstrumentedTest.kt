@@ -1,7 +1,9 @@
 package com.yjhh.ppwbusiness
 
+import android.util.Log
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
+import com.yjhh.ppwbusiness.utils.APKVersionCodeUtils
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,7 +20,11 @@ class ExampleInstrumentedTest {
     @Test
     fun useAppContext() {
         // Context of the app under test.
-        val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("com.yjhh.ppwbusiness", appContext.packageName)
+
+
+
+
+        Log.i("TAGS",APKVersionCodeUtils.sign("MAP","MPP"))
+
     }
 }

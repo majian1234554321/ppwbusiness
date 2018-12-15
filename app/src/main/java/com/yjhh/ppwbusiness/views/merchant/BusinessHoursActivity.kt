@@ -1,5 +1,6 @@
 package com.yjhh.ppwbusiness.views.merchant
 
+import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -31,6 +32,9 @@ import kotlinx.android.synthetic.main.activity_business_hours.*
 import java.lang.StringBuilder
 
 class BusinessHoursActivity : AppCompatActivity(), View.OnClickListener {
+
+    var dialog: AlertDialog? = null
+
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.iv_back -> {
@@ -38,7 +42,7 @@ class BusinessHoursActivity : AppCompatActivity(), View.OnClickListener {
                 if (listA.size == list.size && listA.containsAll(list)) {
                     this.finish()
                 } else {
-                    AlertDialogFactory.createFactory(this).getAlertDialog(
+                    dialog = AlertDialogFactory.createFactory(this).getAlertDialog(
                         null,
                         "请确认保存?",
                         "确定", "取消",
@@ -289,6 +293,13 @@ class BusinessHoursActivity : AppCompatActivity(), View.OnClickListener {
         }
 
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (dialog != null) {
+            dialog = null
+        }
     }
 
 

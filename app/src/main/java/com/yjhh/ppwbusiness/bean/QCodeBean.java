@@ -21,4 +21,5 @@ public class QCodeBean {
     public String message;
     public boolean success;
     public String type;
+    public String title;
 }

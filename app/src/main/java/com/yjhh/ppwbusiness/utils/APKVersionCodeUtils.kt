@@ -7,7 +7,10 @@ import android.text.TextUtils
 import com.azhon.appupdate.config.UpdateConfiguration
 import com.azhon.appupdate.listener.OnDownloadListener
 import com.azhon.appupdate.manager.DownloadManager
+import com.baidu.mapsdkplatform.comjni.util.JNIMD5
 import com.yjhh.ppwbusiness.R
+import java.lang.StringBuilder
+import java.util.*
 
 object APKVersionCodeUtils {
     fun getVersionCode(mContext: Context): Int {
@@ -98,9 +101,26 @@ object APKVersionCodeUtils {
             .setShowNewerToast(true)
             .setConfiguration(configuration)
             .setAuthorities(ctx.packageName)
-           // .setApkDescription("1.支持断点下载\n2.支持Android N\n3.支持Android O\n4.支持自定义下载过程\n5.支持 设备>=Android M 动态权限的申请\n6.支持通知栏进度条展示(或者自定义显示进度)")
+            // .setApkDescription("1.支持断点下载\n2.支持Android N\n3.支持Android O\n4.支持自定义下载过程\n5.支持 设备>=Android M 动态权限的申请\n6.支持通知栏进度条展示(或者自定义显示进度)")
             .download()
     }
+
+
+    fun sign(vararg args: String): String {
+        val sb = StringBuilder()
+        args.forEach {
+            sb.append(it)
+        }
+
+
+        sb.append(Calendar.getInstance().timeInMillis)
+            .append("e170d38d-ff86-11e8-bc8e-b06ebfbca2e4")
+
+
+
+        return JNIMD5.getSignMD5String(sb.toString())
+    }
+
 
 }
 

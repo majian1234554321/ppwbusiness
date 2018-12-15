@@ -52,7 +52,6 @@ class TitleBarView @JvmOverloads constructor(
 
     init {
 
-
         val type = context.theme.obtainStyledAttributes(attributeSet, R.styleable.TitleBarView, defStyleAttr, 0)
         val textValue = type.getString(R.styleable.TitleBarView_textValue)
         val textColor =

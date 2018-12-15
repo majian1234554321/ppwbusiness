@@ -14,6 +14,8 @@ public class ManngerBean {
      * userId : 1022
      */
 
+    public String maxPersonText;
+
     public String displayMobile;
     public String id;
     public String mobile;

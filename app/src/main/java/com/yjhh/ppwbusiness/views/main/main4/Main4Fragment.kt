@@ -139,9 +139,9 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
         if (APKVersionCodeUtils.getVerName(mActivity) != modelVersionBean.version) {
 
             dialog = if (modelVersionBean.ifCover == 1) {//是否强制覆盖(0否 1是)
-                AppUpdateFragment(true, modelVersionBean.content,modelVersionBean.marketUrl)
+                AppUpdateFragment(true, modelVersionBean.content, modelVersionBean.marketUrl)
             } else {
-                AppUpdateFragment(false, modelVersionBean.content,modelVersionBean.marketUrl)
+                AppUpdateFragment(false, modelVersionBean.content, modelVersionBean.marketUrl)
             }
             dialog?.show(childFragmentManager, "TAG")
 
@@ -152,6 +152,8 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
 
             })
 
+        } else {
+            iev_updateVersion.setTextContent("当前已经是最新版本")
         }
     }
 
@@ -252,9 +254,7 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
             , iev_message, iev_notice, iev_Management, iev_about, iev_account, iev_updateVersion
         )
 
-        arrayView.forEach {
-            it.setOnClickListener(this)
-        }
+
 
 
         if (!TextUtils.isEmpty(SharedPreferencesUtils.getParam(context, "sessionId", "") as String)) {
@@ -285,6 +285,11 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
 
         compositeDisposable.addAll(dis2)
 
+
+        arrayView.forEach {
+            it.setOnClickListener(this)
+        }
+
     }
 
     fun checkShopInfo() {
@@ -310,15 +315,6 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
                     // model.add
 
                     iev_account.setTextContent("${model?.roleName}: ${model?.name}")
-
-//                    ImageLoaderUtils.load(
-//                        mActivity,
-//                        profile_image,
-//                        model?.logoUrl,
-//                        R.drawable.icon_logoholder,
-//                        R.drawable.icon_logoholder
-//                    )
-
 
                 }
 

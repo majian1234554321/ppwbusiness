@@ -20,7 +20,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
     <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.BLUETOOTH"/>
@@ -72,10 +72,12 @@
                 android:value="${UMENG_CHANNEL_VALUE}"/>
 
         <activity android:name=".views.login.LoginActivity"
+                  android:launchMode="singleTask"
                   android:windowSoftInputMode="adjustPan|adjustResize"
         >
         </activity>
         <activity android:name=".views.main.MainActivity"
+                  android:screenOrientation="portrait"
                   android:windowSoftInputMode="adjustPan"
         >
         </activity>

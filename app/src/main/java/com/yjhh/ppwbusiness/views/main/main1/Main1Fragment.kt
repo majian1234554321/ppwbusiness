@@ -41,6 +41,7 @@ import com.yjhh.ppwbusiness.base.BaseActivity.REQUEST_CODE
 import com.yjhh.ppwbusiness.bean.QCodeBean
 import com.yjhh.ppwbusiness.ipresent.CancellationPresent
 import com.yjhh.ppwbusiness.iview.CancellationView
+import com.yjhh.ppwbusiness.utils.APKVersionCodeUtils
 
 
 import com.yjhh.ppwbusiness.views.CaptureActivity2

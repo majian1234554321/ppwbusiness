@@ -33,11 +33,11 @@ class PasswordPresent(var context: Context, var registView: PasswordView) : Base
             })
     }
 
-    fun fromSms(account: String, smsCode: String, identity: String, deviceName: String) {
+    fun fromSms(account: String, smsCode: String) {
 
 
         toSubscribe2(
-            regByAccountModel.fromSms(account, smsCode, identity, deviceName)
+            regByAccountModel.fromSms(account, smsCode)
             , object : ProcessObserver2(context) {
 
                 override fun processValue(response: String?) {
@@ -54,9 +54,9 @@ class PasswordPresent(var context: Context, var registView: PasswordView) : Base
     }
 
 
-    fun regByAccount(phone: String, password: String, smsCode: String, identity: String, refId: String) {
+    fun regByAccount(phone: String, password: String, smsCode: String, refId: String) {
         toSubscribe2(
-            regByAccountModel.regByAccount2(phone, password, smsCode, identity, refId),
+            regByAccountModel.regByAccount2(phone, password, smsCode,  refId),
             object : ProcessObserver2(context) {
                 override fun processValue(response: String?) {
                     registView.onSuccess(response)

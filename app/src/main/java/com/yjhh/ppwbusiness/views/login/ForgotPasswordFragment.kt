@@ -24,7 +24,7 @@ class ForgotPasswordFragment : BaseFragment(), View.OnClickListener, PasswordVie
 
     override fun onSuccess(value: String?) {
         Toast.makeText(BaseApplication.context, "重置密码成功", Toast.LENGTH_SHORT).show()
-        mActivity.finish()
+        mActivity.onBackPressed()
     }
 
     override fun onFault(errorMsg: String?) {

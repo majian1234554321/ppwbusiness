@@ -4,6 +4,8 @@ package com.yjhh.ppwbusiness.base;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.umeng.analytics.MobclickAgent;
 import com.yjhh.ppwbusiness.utils.SharedPreferencesUtils;
 import io.reactivex.disposables.CompositeDisposable;
 import me.jessyan.autosize.internal.CustomAdapt;
@@ -21,6 +24,16 @@ import java.util.List;
 
 public abstract class BaseFragment extends SupportFragment implements CustomAdapt {
 
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart(getClass().getSimpleName()); //统计页面("MainScreen"为页面名称，可自定义)
+    }
+
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd(getClass().getSimpleName());
+    }
 
     @Override
     public boolean isBaseOnWidth() {
@@ -45,8 +58,19 @@ public abstract class BaseFragment extends SupportFragment implements CustomAdap
         SharedPreferencesUtils.setParam(context, "sessionId", "");
         SharedPreferencesUtils.setParam(context, "type", "");
 
+        removeCookie(mActivity);
+
 
     }
+
+
+    private void removeCookie(Context context) {
+        CookieSyncManager.createInstance(context);
+        CookieManager cookieManager = CookieManager.getInstance();
+        cookieManager.removeAllCookie();
+        CookieSyncManager.getInstance().sync();
+    }
+
 
     public CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -156,7 +180,6 @@ public abstract class BaseFragment extends SupportFragment implements CustomAdap
             }
         }
     }
-
 
 
 }

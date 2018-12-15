@@ -14,9 +14,9 @@ class LoginPresent(var context: Context, var loginView: LoginView) : BasePresent
 
 
 
-    fun login(username: String, password: String, identity: String) {
+    fun login(username: String, password: String) {
 
-        toSubscribe2(loginModel.login(username, password, identity), object : ProcessObserver2(context) {
+        toSubscribe2(loginModel.login(username, password), object : ProcessObserver2(context) {
             override fun processValue(response: String?) {
                     loginView.onSuccess(response)
             }

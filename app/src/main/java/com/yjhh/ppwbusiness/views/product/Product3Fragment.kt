@@ -2,6 +2,7 @@ package com.yjhh.ppwbusiness.views.product
 
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -17,6 +18,7 @@ import com.yjhh.ppwbusiness.iview.ProductView
 
 import com.yjhh.ppwbusiness.views.cui.SpaceItemDecoration
 import kotlinx.android.synthetic.main.productallfragment.*
+
 import java.util.ArrayList
 
 class Product3Fragment : BaseFragment(), ProductView {
@@ -37,10 +39,10 @@ class Product3Fragment : BaseFragment(), ProductView {
             "refresh" -> {
 
                 if (startindex==0&&result?.items?.size==0){
-
+                    mAdapter.setNewData(result?.items)
                     val view = View.inflate(mActivity, R.layout.emptyview, null)
                     view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
-                    mAdapter?.emptyView = view
+                    mAdapter?.setEmptyView(R.layout.emptyview, mRecyclerView.parent as ViewGroup)
 
                 }else{
                     mAdapter.setNewData(result?.items)

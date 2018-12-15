@@ -186,6 +186,9 @@ class ProductAddFragment : BaseFragment(), CommonView {
         }
 
 
+        compositeDisposable.add(dis)
+
+
         //recyclerView.addItemDecoration(GridRecyclerItemDecoration(20))
         recyclerView.layoutManager = androidx.recyclerview.widget.GridLayoutManager(mActivity, 3)
         mAdapter = ProductAdd(mActivity, lists)

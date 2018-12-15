@@ -1,23 +1,26 @@
 package com.yjhh.ppwbusiness.api;
 
 
+import android.util.Log;
 import androidx.annotation.NonNull;
 
 import android.webkit.WebSettings;
 import com.yjhh.ppwbusiness.BaseApplication;
 import com.yjhh.ppwbusiness.Constants;
 import com.yjhh.ppwbusiness.utils.APKVersionCodeUtils;
+import com.yjhh.ppwbusiness.utils.Md5Util;
 import com.yjhh.ppwbusiness.utils.SharedPreferencesUtils;
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import okhttp3.*;
 import okhttp3.logging.HttpLoggingInterceptor;
+import okio.Buffer;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.Iterator;
+import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
 public class ApiServices {
@@ -39,22 +42,10 @@ public class ApiServices {
 
         HttpLoggingInterceptor logInterceptor = new HttpLoggingInterceptor();
 
-            //显示日志
-            logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        //显示日志
+        logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         httpClient.addInterceptor(logInterceptor);
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         httpClient.addInterceptor(
@@ -63,18 +54,57 @@ public class ApiServices {
                     public Response intercept(@NonNull Chain chain) throws IOException {
                         Request original = chain.request();
 
+                        StringBuilder sb = new StringBuilder();
+                        sb.delete(0, sb.length());
+                        RequestBody requestBody = original.body();
+                        Buffer buffer = new Buffer();
+                        requestBody.writeTo(buffer);
+                        Charset charset = Charset.forName("UTF-8");
+                        MediaType contentType = requestBody.contentType();
+                        if (contentType != null) {
+                            charset = contentType.charset(Charset.defaultCharset());
+                        }
+                        String paramsStr = buffer.readString(charset);
+                        buffer.close();
+
+                        if (requestBody instanceof FormBody) {
+
+                            FormBody oldFormBody = (FormBody) requestBody;
+
+
+                            TreeMap<String, String> treeMap = new TreeMap<>();
+
+                            for (int i = 0; i < oldFormBody.size(); i++) {
+                                treeMap.put(oldFormBody.encodedName(i), oldFormBody.encodedValue(i));
+                            }
+
+                            Iterator it = treeMap.keySet().iterator();
+                            while (it.hasNext()) {
+                                //it.next()得到的是key，tm.get(key)得到obj
+                                String key = (String) it.next();
+                                sb.append(key).
+                                        append(treeMap.get(key).getBytes("utf-8"),"gbk"));
+                            }
+
+                        }
+                        sb.append("e170d38d-ff86-11e8-bc8e-b06ebfbca2e4")
+                                .append(String.valueOf((int) (System.currentTimeMillis() / 1000)));
+                        String signValue = sb.toString();
+
+                        Log.i("ApiServices", "原参数" + paramsStr + "\n拼接参数：" + signValue + "\nMD5小写：" + Md5Util.getMD5(signValue, 32).toLowerCase());
+
+
                         Request request = original.newBuilder()
-
-
                                 .removeHeader("User-Agent")
                                 .addHeader("User-Agent", WebSettings.getDefaultUserAgent(BaseApplication.context) + "PPW_App")
                                 .header("userAgent", "PPW_App")
                                 .header("X-Requested-With", "XMLHttpRequest")
                                 .header("PPW-TERMINAL", "1") //（0 用户端 1商户端)
                                 .header("PPW-APP-VERSION", String.valueOf(APKVersionCodeUtils.INSTANCE.getVersionCode(BaseApplication.context)))
-                                //.header("PPW-SIGN", "XMLHttpRequest")
+                                .removeHeader("PPW-SIGN")
+                                .header("PPW-SIGN", Md5Util.getMD5(signValue, 32).toLowerCase())
                                 .header("PPW-TIMESTAMP", String.valueOf((int) (System.currentTimeMillis() / 1000)))
-                                .header("PPW-API-VERSION", "1.0")
+                                .header("PPW-API-VERSION", APKVersionCodeUtils.INSTANCE.getVerName(BaseApplication.context))
                                 .header("PPW-MARKET-ID", APKVersionCodeUtils.INSTANCE.getChannelName(BaseApplication.context))
 
                                 .header("PPW-DEVICE-ID", APKVersionCodeUtils.INSTANCE.getChannelName(BaseApplication.context))

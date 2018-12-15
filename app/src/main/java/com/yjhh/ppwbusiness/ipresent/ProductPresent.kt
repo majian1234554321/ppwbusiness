@@ -80,7 +80,7 @@ class ProductPresent(var context: Context, var view: ProductView) : BasePresent(
 
     fun editProductStatusByBatch(ids: String, status: String) {
 
-
+        map.clear()
         map["ids"] = ids
 
         map["saleStatus"] = status//上架状态(0上架 1下架)
@@ -103,7 +103,7 @@ class ProductPresent(var context: Context, var view: ProductView) : BasePresent(
 
     fun editSaleStatus(id: String, itemId:String,status: String, position: Int, flag: String) {
 
-
+        map.clear()
         map["id"] = id
         map["itemId"] = itemId
         map["saleStatus"] = status//上架状态(0上架 1下架)

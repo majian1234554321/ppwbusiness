@@ -6,6 +6,7 @@ import android.content.Context;
 import androidx.multidex.MultiDex;
 import android.util.Log;
 
+import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.message.*;
 
@@ -66,6 +67,8 @@ public class BaseApplication extends Application {
 
 
         UMConfigure.init(context, UMConfigure.DEVICE_TYPE_PHONE, "baac46d4fef8c9868cdb299d4d608e50");
+        MobclickAgent.setScenarioType(context, MobclickAgent.EScenarioType.E_UM_NORMAL);
+
         //如需手动获取device token，可以调用mPushAgent.getRegistrationId()方法（需在注册成功后调用）。
         initUpush();
     }

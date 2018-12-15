@@ -46,7 +46,7 @@ public class AccountBean implements Serializable {
     public int userId;
     public List<BindsBean> binds;
 
-    public static class BindsBean {
+    public static class BindsBean implements Serializable {
         /**
          * bindLinkUrl : http://www.paipaiwei.com
          * bindStatus : 1

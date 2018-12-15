@@ -33,7 +33,10 @@ import io.reactivex.schedulers.Schedulers
 
 import kotlinx.android.synthetic.main.employeefragment.*
 
+
 class EmployeeFragment : BaseFragment(), View.OnClickListener {
+
+    // var maxPersonText = 0
 
     override fun onClick(v: View?) {
         when (v?.id) {
@@ -55,25 +58,18 @@ class EmployeeFragment : BaseFragment(), View.OnClickListener {
     override fun initView() {
         tbv_title.setOnRightClickListener(object : TitleBarView.OnRightClickListion {
             override fun setOnRightClick() {
-                if (lists.size < 5) {
-                    startForResult(EmployeeADUFragment.newInstance("ADD", "", "", "", -1), 10086)
-                } else {
-                    Toast.makeText(_mActivity, "最多只能添加5位店员", Toast.LENGTH_SHORT).show()
-                }
+
+                startForResult(EmployeeADUFragment.newInstance("ADD", "", "", "", -1), 10086)
+
+//                if (lists.size < maxPersonText) {
+//
+//                } else {
+//                    Toast.makeText(_mActivity, "最多只能添加${maxPersonText}位店员", Toast.LENGTH_SHORT).show()
+//                }
             }
 
         })
 
-        val textValue = "店员 上限：5"
-        val spannableString = SpannableString(textValue)
-        spannableString.setSpan(AbsoluteSizeSpan(12, true), 2, textValue.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        spannableString.setSpan(
-            ForegroundColorSpan(Color.parseColor("#FF552E")),
-            2,
-            textValue.length,
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        tv_tips.text = spannableString
 
         val model = arguments?.getSerializable("objectValue")
         if (model != null) {
@@ -94,30 +90,26 @@ class EmployeeFragment : BaseFragment(), View.OnClickListener {
 
         mAdapter?.setOnItemClickListener { adapter, view, position ->
 
-            if (lists.size < 5) {
 
-                if (model != null) {
-                    model as AccountBean
-                    if (model.role == 0) {
-                        startForResult(
-                            EmployeeADUFragment.newInstance(
-                                "DELETE",
-                                lists[position].id,
-                                lists[position].mobile,
-                                lists[position].name,
-                                position
-                            ), 10086
-                        )
-                    }
-
-                } else {
-
+            if (model != null) {
+                model as AccountBean
+                if (model.role == 0) {
+                    startForResult(
+                        EmployeeADUFragment.newInstance(
+                            "DELETE",
+                            lists[position].id,
+                            lists[position].mobile,
+                            lists[position].name,
+                            position
+                        ), 10086
+                    )
                 }
 
-
             } else {
-                Toast.makeText(_mActivity, "最多只能添加5位店员", Toast.LENGTH_SHORT).show()
+
             }
+
+
         }
 
 
@@ -136,14 +128,30 @@ class EmployeeFragment : BaseFragment(), View.OnClickListener {
             .subscribe(object : ProcessObserver2(mActivity) {
                 override fun processValue(response: String?) {
 
-
-                  val modelY =   Gson().fromJson<ManngerBean>(response,ManngerBean::class.java)
-
-
+                    val modelY = Gson().fromJson<ManngerBean>(response, ManngerBean::class.java)
 
                     tv_name.text = modelY.name
                     tv_mobile.text = modelY.displayMobile
                     Log.i("ApiServices", response)
+                    //maxPersonText = modelY.maxPersonText
+
+                    val textValue = "店员 ${modelY.maxPersonText}"
+                    val spannableString = SpannableString(textValue)
+                    spannableString.setSpan(
+                        AbsoluteSizeSpan(12, true),
+                        2,
+                        textValue.length,
+                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                    spannableString.setSpan(
+                        ForegroundColorSpan(Color.parseColor("#FF552E")),
+                        2,
+                        textValue.length,
+                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                    tv_tips.text = spannableString
+
+
                 }
 
                 override fun onFault(message: String) {

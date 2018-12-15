@@ -4,14 +4,13 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebChromeClient
-import android.webkit.WebSettings
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.webkit.*
+import android.widget.Toast
 import com.yjhh.ppwbusiness.BaseApplication
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.base.BaseFragment
@@ -102,6 +101,16 @@ class BackViewFragment : BaseFragment() {
 
         mWebView.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView, url: String) {
+
+
+                val cookieManager = CookieManager.getInstance();
+                val CookieStr = cookieManager.getCookie(url)
+
+                //  val Common.cookie = CookieStr
+                // Toast.makeText(activity, CookieStr, Toast.LENGTH_SHORT).show()
+
+                Log.i("BackViewFragment", CookieStr)
+
                 super.onPageFinished(view, url)
 
             }
