@@ -18,6 +18,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.Iterator;
 import java.util.TreeMap;
@@ -57,14 +58,17 @@ public class ApiServices {
                         StringBuilder sb = new StringBuilder();
                         sb.delete(0, sb.length());
                         RequestBody requestBody = original.body();
+
+
                         Buffer buffer = new Buffer();
-                        requestBody.writeTo(buffer);
-                        Charset charset = Charset.forName("UTF-8");
-                        MediaType contentType = requestBody.contentType();
-                        if (contentType != null) {
-                            charset = contentType.charset(Charset.defaultCharset());
-                        }
-                        String paramsStr = buffer.readString(charset);
+                        if (requestBody != null)
+                            requestBody.writeTo(buffer);
+
+
+                        // Log.i("ApiServices", "XXXX" +  URLDecoder.decode(buffer.readUtf8(), "utf-8"));
+
+
+                        String paramsStr = URLDecoder.decode(buffer.readUtf8(), "utf-8");
                         buffer.close();
 
                         if (requestBody instanceof FormBody) {
@@ -83,7 +87,9 @@ public class ApiServices {
                                 //it.next()得到的是key，tm.get(key)得到obj
                                 String key = (String) it.next();
                                 sb.append(key).
-                                        append(treeMap.get(key).getBytes("utf-8"),"gbk"));
+                                        append(
+                                                URLDecoder.decode(treeMap.get(key), "utf-8")
+                                        );
                             }
 
                         }

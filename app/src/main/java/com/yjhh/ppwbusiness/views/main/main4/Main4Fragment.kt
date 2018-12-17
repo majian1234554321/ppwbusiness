@@ -99,6 +99,7 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
             profile_image.setOnLongClickListener {
 
 
+
                 (parentFragment as MainFragment).startBrotherFragment(
                     BackViewFragment.newInstance(model.adminUrl)
                 )
@@ -198,7 +199,7 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
             R.id.iev_Management -> {
 
                 (parentFragment as MainFragment).startBrotherFragment(
-                    EmployeeFragment.newInstance(model)
+                    EmployeeFragment.newInstance(modelX)
                 )
 
             }
@@ -246,7 +247,7 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
 
     override fun getLayoutRes(): Int = R.layout.main4fragment
 
-    var model: AccountBean? = null
+    var modelX: AccountBean? = null
 
     override fun initView() {
         val arrayView = arrayOf(
@@ -311,10 +312,10 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
             .subscribe(object : ProcessObserver2(mActivity) {
                 override fun processValue(response: String?) {
                     Log.i("AccountFragment", response)
-                    model = Gson().fromJson<AccountBean>(response, AccountBean::class.java)
+                    modelX = Gson().fromJson<AccountBean>(response, AccountBean::class.java)
                     // model.add
 
-                    iev_account.setTextContent("${model?.roleName}: ${model?.name}")
+                    iev_account.setTextContent("${modelX?.roleName}: ${modelX?.name}")
 
                 }
 
