@@ -1,5 +1,7 @@
 package com.yjhh.ppwbusiness.fragments
 
+import android.view.View
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -28,24 +30,35 @@ class MessageCenter2Fragment : BaseFragment(), MyMessageView {
     var status = "-1"//状态，默认null(null/-1 全部 0未生效 1 有效的 2已过期的/失效的)
     override fun onSuccess(main1bean: MyMessageBean, flag: String) {
         if ("refresh" == flag) {
-            if (swipeLayout!=null) {
-                swipeLayout.finishRefresh()
+            if (startindex==0&&main1bean.items.isEmpty()) {
+                val view = View.inflate(mActivity, R.layout.emptyview, null)
+                view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
+                mRecyclerView.addItemDecoration(SpaceItemDecoration(0))
+                mAdapter.emptyView = view
+            }else{
+                mAdapter.setNewData(main1bean.items as ArrayList<MyMessageBean.ItemsBean>)
             }
 
-            mAdapter.setNewData(main1bean.items as ArrayList<MyMessageBean.ItemsBean>)
-
         } else {
-            mAdapter.addData(main1bean.items as ArrayList<MyMessageBean.ItemsBean>)
-            mAdapter.loadMoreComplete()
+            if (main1bean.items.size<pageSize){
+                mAdapter.addData(main1bean.items as ArrayList<MyMessageBean.ItemsBean>)
+                mAdapter.loadMoreEnd()
+            }else{
+                mAdapter.addData(main1bean.items as ArrayList<MyMessageBean.ItemsBean>)
+                mAdapter.loadMoreComplete()
+            }
         }
     }
 
     override fun onFault(errorMsg: String?) {
-        // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val view = View.inflate(mActivity, R.layout.emptyview, null)
+        view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
+        mRecyclerView.addItemDecoration(SpaceItemDecoration(0))
+        mAdapter.emptyView = view
     }
 
     var startindex = 0
-    val pageSize = 10
+    val pageSize = 15
 
     var share = "0"
 
@@ -61,7 +74,7 @@ class MessageCenter2Fragment : BaseFragment(), MyMessageView {
 
 
 
-        mRecyclerView.addItemDecoration(SpaceItemDecoration(30))
+        mRecyclerView.addItemDecoration(SpaceItemDecoration(30,"bottom"))
         mAdapter = MyMessageFragmentAdapter(list)
         sectionCouponPresent = SectionUselessPresent(context, this)
         mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
@@ -115,7 +128,7 @@ class MessageCenter2Fragment : BaseFragment(), MyMessageView {
 
 
     private fun loadMore() {
-        Toast.makeText(context, "onload", Toast.LENGTH_SHORT).show()
+
 
         startindex++
         sectionCouponPresent.usermessage(status, share, startindex, pageSize, "load")

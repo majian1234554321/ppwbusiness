@@ -61,7 +61,7 @@ class CommonPresent(var context: Context, var view: CommonView) : BasePresent() 
 
 
         val list = ArrayList<MultipartBody.Part>()
-
+        list.clear()
 
         files.forEachIndexed { index, it ->
             run {
@@ -92,9 +92,7 @@ class CommonPresent(var context: Context, var view: CommonView) : BasePresent() 
     }
 
 
-
-
-    fun checkVersion(){
+    fun checkVersion() {
         ApiServices.getInstance()
             .create(CommonService::class.java)
             .version()
@@ -104,7 +102,7 @@ class CommonPresent(var context: Context, var view: CommonView) : BasePresent() 
                 override fun processValue(response: String?) {
                     Log.i("MainActivity", response)
 
-                   view.onSuccess(response)
+                    view.onSuccess(response)
 
 
                 }
@@ -119,35 +117,32 @@ class CommonPresent(var context: Context, var view: CommonView) : BasePresent() 
     }
 
 
+    /* fun  applyShop(){
+         ApiServices.getInstance()
+             .create(ShopSetServices::class.java)
+             .applyShop()
+             .subscribeOn(Schedulers.io())
+             .observeOn(AndroidSchedulers.mainThread())
+             .subscribe(object : ProcessObserver2(context) {
+                 override fun processValue(response: String?) {
+                     Log.i("01018", response)
+                     if (response?.contains("\"")!!) {
+                         val intent = Intent(mActivity, BackViewActivity::class.java)
+                         intent.putExtra("url", response.replace("\"", ""))
+                         startActivity(intent)
+                     } else {
+                         val intent = Intent(mActivity, BackViewActivity::class.java)
+                         intent.putExtra("url", response)
+                         startActivity(intent)
+                     }
 
-   /* fun  applyShop(){
-        ApiServices.getInstance()
-            .create(ShopSetServices::class.java)
-            .applyShop()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : ProcessObserver2(context) {
-                override fun processValue(response: String?) {
-                    Log.i("01018", response)
-                    if (response?.contains("\"")!!) {
-                        val intent = Intent(mActivity, BackViewActivity::class.java)
-                        intent.putExtra("url", response.replace("\"", ""))
-                        startActivity(intent)
-                    } else {
-                        val intent = Intent(mActivity, BackViewActivity::class.java)
-                        intent.putExtra("url", response)
-                        startActivity(intent)
-                    }
+                 }
 
-                }
-
-                override fun onFault(message: String) {
-                    Log.i("01018", message)
-                }
-            })
-    }*/
-
-
+                 override fun onFault(message: String) {
+                     Log.i("01018", message)
+                 }
+             })
+     }*/
 
 
 }

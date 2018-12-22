@@ -6,19 +6,102 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
+import com.azhon.appupdate.listener.OnDownloadListener
+import com.google.gson.Gson
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.base.BaseActivity
-import com.yjhh.ppwbusiness.utils.ActivityCollector
-import com.yjhh.ppwbusiness.utils.LogUtils
-import com.yjhh.ppwbusiness.utils.RxCountDown
-import com.yjhh.ppwbusiness.utils.SharedPreferencesUtils
+import com.yjhh.ppwbusiness.bean.VersionBean
+import com.yjhh.ppwbusiness.ipresent.CommonPresent
+import com.yjhh.ppwbusiness.iview.CommonView
+import com.yjhh.ppwbusiness.utils.*
+import com.yjhh.ppwbusiness.views.cui.AppUpdateFragment
 import com.yjhh.ppwbusiness.views.login.LoginActivity
 import com.yjhh.ppwbusiness.views.main.MainActivity
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
+import io.reactivex.schedulers.Schedulers
+import java.io.File
+import java.lang.Exception
 
-class SplashActivity : BaseActivity() {
+class SplashActivity : BaseActivity(), CommonView {
+
+    var dialog: AppUpdateFragment? = null
+
+
+    internal var onDownloadListener: OnDownloadListener = object : OnDownloadListener {
+        override fun start() {
+
+        }
+
+        override fun downloading(max: Int, progress: Int) {
+            Log.i("MainActivity", "下载进度${progress / max.toDouble()}%${Thread.currentThread().name}")
+            val dis = Observable.create<String> {
+                it.onNext(
+                    "下载进度 ${getString(
+                        R.string.rmb_price_double,
+                        progress / max.toDouble() * 100
+                    )}%"
+                )
+
+            }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    dialog?.setTitle(it)
+                }
+        }
+
+        override fun done(apk: File) {
+            Log.i("MainActivity", "下载完成")
+
+            val dis = Observable.create<String> {
+                it.onNext("下载完成")
+            }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    dialog?.setTitle(it)
+                }
+
+        }
+
+        override fun error(e: Exception) {
+
+        }
+    }
+
+
+    override fun onSuccess(value: String?) {
+        val modelVersionBean = Gson().fromJson<VersionBean>(value, VersionBean::class.java)
+        if (APKVersionCodeUtils.getVerName(this) != modelVersionBean.version) {
+            dialog = if (modelVersionBean.ifCover == 1) {//是否强制覆盖(0否 1是)
+                AppUpdateFragment(true, modelVersionBean.content, modelVersionBean.marketUrl)
+            } else {
+                AppUpdateFragment(false, modelVersionBean.content, modelVersionBean.marketUrl)
+            }
+
+            dialog?.show(supportFragmentManager, "TAG")
+
+            dialog?.setOnAppUpdate(object : AppUpdateFragment.AppUpdateListener {
+                override fun onAppUpdate() {
+                    APKVersionCodeUtils.startUpdate(
+                        this@SplashActivity,
+                        modelVersionBean.downloadUrl,
+                        onDownloadListener
+                    )
+                }
+
+            })
+
+        }
+    }
+
+    override fun onFault(errorMsg: String?) {
+        //  TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setStatusBar()
@@ -26,6 +109,7 @@ class SplashActivity : BaseActivity() {
         setContentView(R.layout.activity_splash)
 
 
+        CommonPresent(this, this).checkVersion()
 
 
 

@@ -28,76 +28,8 @@ import io.reactivex.Observable
 import java.lang.Exception
 
 
-class MainActivity : BaseActivity(), CommonView {
+class MainActivity : BaseActivity(){
 
-    var dialog: AppUpdateFragment? = null
-
-
-    internal var onDownloadListener: OnDownloadListener = object : OnDownloadListener {
-        override fun start() {
-
-        }
-
-        override fun downloading(max: Int, progress: Int) {
-            Log.i("MainActivity", "下载进度${progress / max.toDouble()}%${Thread.currentThread().name}")
-            val dis = Observable.create<String> {
-                it.onNext(
-                    "下载进度 ${getString(
-                        R.string.rmb_price_double,
-                        progress / max.toDouble() * 100
-                    )}%"
-                )
-
-            }.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    dialog?.setTitle(it)
-                }
-        }
-
-        override fun done(apk: File) {
-            Log.i("MainActivity", "下载完成")
-
-            val dis = Observable.create<String> {
-                it.onNext("下载完成")
-            }.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    dialog?.setTitle(it)
-                }
-
-        }
-
-        override fun error(e: Exception) {
-
-        }
-    }
-
-
-    override fun onSuccess(value: String?) {
-        val modelVersionBean = Gson().fromJson<VersionBean>(value, VersionBean::class.java)
-        if (APKVersionCodeUtils.getVerName(this) != modelVersionBean.version) {
-            dialog = if (modelVersionBean.ifCover == 1) {//是否强制覆盖(0否 1是)
-                AppUpdateFragment(true, modelVersionBean.content,modelVersionBean.marketUrl)
-            } else {
-                AppUpdateFragment(false, modelVersionBean.content,modelVersionBean.marketUrl)
-            }
-
-            dialog?.show(supportFragmentManager, "TAG")
-
-            dialog?.setOnAppUpdate(object : AppUpdateFragment.AppUpdateListener {
-                override fun onAppUpdate() {
-                    APKVersionCodeUtils.startUpdate(this@MainActivity, modelVersionBean.downloadUrl, onDownloadListener)
-                }
-
-            })
-
-        }
-    }
-
-    override fun onFault(errorMsg: String?) {
-        //  TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -107,8 +39,6 @@ class MainActivity : BaseActivity(), CommonView {
         if (findFragment(MainFragment::class.java) == null) {
             loadRootFragment(R.id.fl_container, MainFragment.newInstance())
         }
-
-        CommonPresent(this, this).checkVersion()
 
     }
 

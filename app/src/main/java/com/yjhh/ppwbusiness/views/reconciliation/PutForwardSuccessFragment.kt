@@ -33,6 +33,9 @@ class PutForwardSuccessFragment : BaseFragment() {
         tv_5.text = model.bindTypeText
         tv_6.text = model.orderNo
 
+        tv_tips.text = model.title
+        tv_price.text = model.moneText
+
 
     }
 

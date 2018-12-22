@@ -40,9 +40,6 @@ class PasswordModel {
     }
 
 
-
-
-
     fun regByAccount2(
         phone: String,
         password: String,
@@ -64,7 +61,7 @@ class PasswordModel {
     }
 
 
-    fun forgotPassword(phone: String?, password: String?,smsCode:String?): Observable<ResponseBody> { //
+    fun forgotPassword(phone: String?, password: String?, smsCode: String?): Observable<ResponseBody> { //
 
         map.clear()
         map["phone"] = phone

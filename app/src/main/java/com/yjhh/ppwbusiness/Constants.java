@@ -3,7 +3,7 @@ package com.yjhh.ppwbusiness;
 public class Constants {
     public static String BASE_URL = "http://192.168.2.200:8080/api/"; //18062433667
 
-    //public static String BASE_URL = "https://www.paipaiwei.com/api/";
+    //  public static String BASE_URL = "https://www.paipaiwei.com/api/";
 
     //public static String BASE_URL = "http://192.168.2.218:8081/api/";
 

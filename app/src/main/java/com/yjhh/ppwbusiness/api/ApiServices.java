@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
@@ -60,21 +61,9 @@ public class ApiServices {
                         RequestBody requestBody = original.body();
 
 
-                        Buffer buffer = new Buffer();
-                        if (requestBody != null)
-                            requestBody.writeTo(buffer);
-
-
-                        // Log.i("ApiServices", "XXXX" +  URLDecoder.decode(buffer.readUtf8(), "utf-8"));
-
-
-                        String paramsStr = URLDecoder.decode(buffer.readUtf8(), "utf-8");
-                        buffer.close();
-
                         if (requestBody instanceof FormBody) {
 
                             FormBody oldFormBody = (FormBody) requestBody;
-
 
                             TreeMap<String, String> treeMap = new TreeMap<>();
 
@@ -88,16 +77,20 @@ public class ApiServices {
                                 String key = (String) it.next();
                                 sb.append(key).
                                         append(
-                                                URLDecoder.decode(treeMap.get(key), "utf-8")
+                                                URLDecoder.decode(Objects.requireNonNull(treeMap.get(key)).replaceAll("%(?![0-9a-fA-F]{2})", "%25")
+                                                                .replaceAll("\\+", "%2B")
+                                                        , "utf-8")
                                         );
                             }
 
                         }
+
+
                         sb.append("e170d38d-ff86-11e8-bc8e-b06ebfbca2e4")
                                 .append(String.valueOf((int) (System.currentTimeMillis() / 1000)));
                         String signValue = sb.toString();
 
-                        Log.i("ApiServices", "原参数" + paramsStr + "\n拼接参数：" + signValue + "\nMD5小写：" + Md5Util.getMD5(signValue, 32).toLowerCase());
+                        Log.i("ApiServices", "\n拼接参数：" + signValue + "\nMD5小写：" + Md5Util.getMD5(signValue, 32).toLowerCase());
 
 
                         Request request = original.newBuilder()
@@ -107,19 +100,17 @@ public class ApiServices {
                                 .header("X-Requested-With", "XMLHttpRequest")
                                 .header("PPW-TERMINAL", "1") //（0 用户端 1商户端)
                                 .header("PPW-APP-VERSION", String.valueOf(APKVersionCodeUtils.INSTANCE.getVersionCode(BaseApplication.context)))
-                                .removeHeader("PPW-SIGN")
                                 .header("PPW-SIGN", Md5Util.getMD5(signValue, 32).toLowerCase())
                                 .header("PPW-TIMESTAMP", String.valueOf((int) (System.currentTimeMillis() / 1000)))
                                 .header("PPW-API-VERSION", APKVersionCodeUtils.INSTANCE.getVerName(BaseApplication.context))
                                 .header("PPW-MARKET-ID", APKVersionCodeUtils.INSTANCE.getChannelName(BaseApplication.context))
-
                                 .header("PPW-DEVICE-ID", APKVersionCodeUtils.INSTANCE.getChannelName(BaseApplication.context))
-
                                 .header("JSESSIONID", String.valueOf(SharedPreferencesUtils.getParam(BaseApplication.context, "sessionId", "-1")))
                                 .method(original.method(), original.body())
                                 .build();
-
                         return chain.proceed(request);
+
+
                     }
                 });
 

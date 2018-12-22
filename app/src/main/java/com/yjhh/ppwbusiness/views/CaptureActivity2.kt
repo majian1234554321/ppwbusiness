@@ -22,8 +22,6 @@ import java.util.*
 
 class CaptureActivity2 : BaseActivity(), View.OnClickListener {
 
-
-
     var mCustomPopWindow: CustomPopWindow? = null
 
     override fun onClick(v: View?) = when (v?.id) {
