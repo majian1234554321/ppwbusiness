@@ -2,6 +2,7 @@ package com.yjhh.ppwbusiness.views.reconciliation
 
 import com.flyco.tablayout.listener.OnTabSelectListener
 import com.google.gson.Gson
+import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.yjhh.ppwbusiness.BaseApplication
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.MyPagerAdapter
@@ -55,14 +56,27 @@ class ReconciliationFragment : BaseFragment(), WithDrowView {
 
         val fagments = ArrayList<BaseFragment>()
 
-        fagments.add(Reconciliation1Fragment())
-        fagments.add(Reconciliation2Fragment())
-        fagments.add(Reconciliation3Fragment())
+        val f1 = Reconciliation1Fragment()
+        val f2 = Reconciliation2Fragment()
+        val f3 = Reconciliation3Fragment()
+
+        fagments.add(f1)
+        fagments.add(f2)
+        fagments.add(f3)
         // fagments.add(Product4Fragment())
 
         WithDrawPresent(mActivity, this).shopAdminWithdrawIndex()
         // WithDrawPresent(mActivity).shopAdminWithdraw()
         // WithDrawPresent(mActivity).logs(0,15)
+
+
+        swipeLayout.setRefreshHeader(ClassicsHeader(context))
+        swipeLayout.setOnRefreshListener { refreshLayout ->
+            f1.loadNetData()
+            f2.loadNetData()
+            f3.loadNetData()
+            swipeLayout.finishRefresh()
+        }
 
 
         mViewPager.adapter = MyPagerAdapter(childFragmentManager, fagments, mTitles)
@@ -75,6 +89,8 @@ class ReconciliationFragment : BaseFragment(), WithDrowView {
 
             override fun onTabReselect(position: Int) {
                 if (position == 0) {
+
+                } else {
 
                 }
             }

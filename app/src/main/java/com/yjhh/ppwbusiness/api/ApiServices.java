@@ -60,7 +60,6 @@ public class ApiServices {
                         sb.delete(0, sb.length());
                         RequestBody requestBody = original.body();
 
-
                         if (requestBody instanceof FormBody) {
 
                             FormBody oldFormBody = (FormBody) requestBody;
@@ -83,6 +82,14 @@ public class ApiServices {
                                         );
                             }
 
+                        }
+
+                        if (original.method().equals("GET")) {
+                            sb.append( "code");
+                            sb.append( original.url().queryParameter("code"));
+
+
+                            Log.i("ApiServicesGET", original.url().queryParameter("code"));
                         }
 
 

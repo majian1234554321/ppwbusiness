@@ -55,7 +55,7 @@ class Reconciliation2Fragment:BaseFragment() , WithDrowView {
     val pageSize = 15
     var pageIndex = 0
 
-    val type = "1"////类型 null全部 1收入 2支出
+    val type = "2"////类型 null全部 1收入 2支出
 
 
     var mAdapter: ReconciliationAdapter? = null
@@ -79,6 +79,11 @@ class Reconciliation2Fragment:BaseFragment() , WithDrowView {
 
         }
 
+    }
+
+    fun loadNetData() {
+        pageIndex = 0;
+        present?.shopAdminWithdrawLogs(type, pageIndex, pageSize, "refresh")
     }
 
 

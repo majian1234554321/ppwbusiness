@@ -1,6 +1,9 @@
 package com.yjhh.ppwbusiness.views.writeoff
 
 import android.os.Bundle
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
@@ -29,9 +32,23 @@ class CancellationBeforeFragment : BaseFragment(), CancellationView {
 
         if (model.items != null) {
 
+
+
             if ("refresh" == flag) {
 
-                mAdapter?.setNewData(model.items)
+
+                if (pageIndex==0&&model?.items?.size==0){
+                    mAdapter?.setNewData(model?.items)
+                    val view = View.inflate(mActivity, R.layout.emptyview, null)
+                    view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
+                    mAdapter?.setEmptyView(R.layout.emptyview, mRecyclerView.parent as ViewGroup)
+
+                }else{
+                    mAdapter?.setNewData(model.items)
+                }
+
+
+
             } else {
                 mAdapter?.addData(model.items)
                 if (model.items.size < pageSize) {
@@ -48,7 +65,11 @@ class CancellationBeforeFragment : BaseFragment(), CancellationView {
     }
 
     override fun onFault(errorMsg: String?) {
-
+        if (pageIndex == 0) {
+            val view = View.inflate(mActivity, R.layout.emptyview, null)
+            view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
+            mAdapter?.emptyView = view
+        }
     }
 
     override fun getLayoutRes(): Int = R.layout.cancellationbeforefragment

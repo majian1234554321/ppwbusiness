@@ -2,58 +2,50 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:orientation="vertical"
-                android:background="#FFFFFF"
+                android:background="#000000"
                 android:id="@+id/rl"
                 android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <LinearLayout android:layout_width="match_parent"
-                  android:orientation="vertical"
-
-                  android:layout_height="wrap_content">
-
-        <RelativeLayout android:layout_width="match_parent"
-                        android:visibility="gone"
-                        android:layout_height="48dp"
-
-        >
-
-            <TextView android:layout_width="wrap_content"
-                      android:text="1212"
-                      android:layout_centerInParent="true"
-                      android:textColor="#FF333333"
-                      android:textSize="22pt"
-                      android:id="@+id/tv_index"
-                      android:layout_height="wrap_content"/>
-
-            <ImageView android:layout_width="25pt" android:layout_height="25pt"
-                       android:id="@+id/iv_close"
-                       android:layout_alignParentRight="true"
-                       android:layout_centerInParent="true"
-                       android:layout_marginRight="16pt"
-                       android:src="@drawable/icon_close"
-            />
-
-        </RelativeLayout>
-
-        <com.youth.banner.Banner
-                android:id="@+id/banner"
-                android:layout_width="match_parent"
-                android:layout_height="375pt"/>
-
-        <TextView android:layout_width="match_parent"
-                  android:text="121212"
-                  android:id="@+id/tv_tips"
-                  android:paddingLeft="24pt"
-                  android:paddingRight="24pt"
-                  android:paddingTop="8pt"
-                  android:maxLines="3"
-                  android:ellipsize="end"
-                  android:textColor="#FF333333"
-                  android:textSize="13pt"
-                  android:layout_height="wrap_content"/>
+    <RelativeLayout android:layout_width="match_parent"
+                    android:background="#000000"
+                    android:paddingLeft="15pt"
+                    android:layout_height="64pt">
 
 
-    </LinearLayout>
+        <ImageView
+                android:id="@+id/iv_back"
+                android:src="@drawable/icon_arrow_left_white"
+                android:layout_width="22pt"
+                android:layout_centerVertical="true"
+                android:layout_height="22pt"/>
 
+        <TextView
+                android:id="@+id/tv_title"
+                android:layout_gravity="center"
+                android:textSize="24sp"
+                android:textColor="@color/white"
+
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <TextView
+                android:id="@+id/iv_right"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="8pt"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+
+    </RelativeLayout>
+
+
+
+    <com.youth.banner.Banner
+            android:id="@+id/banner"
+            android:layout_marginTop="107pt"
+
+            android:layout_width="match_parent"
+            android:layout_height="375pt"/>
 
 </RelativeLayout>

@@ -20,7 +20,7 @@ class ReconciliationAdapter(data: List<ReconciliationItemBean.ItemsBean>) :
 
             helper?.setText(
                 R.id.tv_price,
-                BaseApplication.getIns().getString(R.string.rmb_price_doublec, item?.money)
+                BaseApplication.getIns().getString(R.string.rmb_price_doublep, item?.money)
             )
 
             helper?.setTextColor(R.id.tv_price, Color.parseColor("#54B36D"))
@@ -31,7 +31,7 @@ class ReconciliationAdapter(data: List<ReconciliationItemBean.ItemsBean>) :
             )
             helper?.setText(
                 R.id.tv_price,
-               BaseApplication.getIns().getString(R.string.rmb_price_doublep, item?.money)
+               BaseApplication.getIns().getString(R.string.rmb_price_doublec, item?.money)
             )
 
             helper?.setTextColor(R.id.tv_price, Color.parseColor("#FF552E"))

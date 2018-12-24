@@ -188,6 +188,9 @@ class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetVie
 
             }
 
+
+
+
             present?.editOpen(typeStatus)
 
 

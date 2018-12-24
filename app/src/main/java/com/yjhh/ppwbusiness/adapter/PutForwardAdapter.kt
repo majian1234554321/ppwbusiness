@@ -20,7 +20,7 @@ class PutForwardAdapter(data: List<ReconciliationItemBean.ItemsBean>) :
 
             helper?.setText(
                 R.id.tv_4,
-                BaseApplication.getIns().getString(R.string.rmb_price_doublec, item?.money)
+                BaseApplication.getIns().getString(R.string.rmb_price_doublep, item?.money)
             )
 
             helper?.setTextColor(R.id.tv_4, Color.parseColor("#54B36D"))
@@ -29,7 +29,7 @@ class PutForwardAdapter(data: List<ReconciliationItemBean.ItemsBean>) :
 
             helper?.setText(
                 R.id.tv_4,
-                BaseApplication.getIns().getString(R.string.rmb_price_doublep, item?.money)
+                BaseApplication.getIns().getString(R.string.rmb_price_doublec, item?.money)
             )
 
             helper?.setTextColor(R.id.tv_4, Color.parseColor("#FF552E"))

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+
+<RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tl="http://schemas.android.com/tools"
@@ -9,335 +10,364 @@
         android:layout_height="match_parent">
 
 
-    <com.google.android.material.appbar.AppBarLayout
+    <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
-            android:background="@color/white"
-            android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Light">
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:contentScrim="@color/white"
-                app:expandedTitleMarginBottom="100dp"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed"
-        >
+            android:layout_height="48dp"
+            android:id="@+id/toolbar"
+            android:layout_gravity="top"
+            app:contentInsetStart="@dimen/spi_8"
+            android:background="@color/colorPrimary"
+            app:layout_collapseMode="pin">
 
-
-            <LinearLayout android:layout_width="match_parent"
-                          android:layout_marginTop="48dp"
-                          android:layout_below="@+id/tbv_title"
-                          android:orientation="vertical"
-                          android:layout_height="wrap_content">
-
-
-                <LinearLayout android:layout_width="match_parent"
-                              android:orientation="horizontal"
-                              android:layout_height="wrap_content">
-
-                    <LinearLayout android:layout_width="0dp"
-                                  android:orientation="vertical"
-                                  android:layout_weight="1"
-                                  android:padding="17pt"
-                                  android:gravity="center"
-                                  android:layout_height="wrap_content">
-                        <TextView android:layout_width="match_parent"
-                                  android:text="总收入金额（元）"
-                                  android:gravity="center"
-                                  android:textColor="#FF888888"
-                                  android:textSize="13pt"
-                                  android:layout_height="wrap_content"/>
-
-                        <TextView android:layout_width="match_parent"
-
-                                  android:textStyle="bold"
-                                  android:id="@+id/tv_in"
-                                  android:gravity="center"
-                                  android:textColor="#FF333333"
-                                  android:textSize="30pt"
-                                  android:layout_height="wrap_content"/>
-                    </LinearLayout>
-
-                    <LinearLayout android:layout_width="0dp"
-                                  android:orientation="vertical"
-                                  android:layout_weight="1"
-                                  android:padding="17pt"
-                                  android:gravity="center"
-                                  android:layout_height="wrap_content">
-                        <TextView android:layout_width="match_parent"
-                                  android:gravity="center"
-                                  android:text="总支出金额（元）"
-                                  android:textColor="#FF888888"
-                                  android:textSize="13pt"
-                                  android:layout_height="wrap_content"/>
-
-                        <TextView android:layout_width="match_parent"
-
-                                  android:textStyle="bold"
-                                  android:gravity="center"
-                                  android:id="@+id/tv_out"
-                                  android:textColor="#FF333333"
-                                  android:textSize="30pt"
-
-                                  android:layout_height="wrap_content"/>
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-
-                <View
-                        android:layout_gravity="center"
-                        android:layout_width="351pt"
-                        android:layout_height="0.5pt"
-                        android:background="#FFE6E6E6"
-                />
-
-
-                <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:paddingLeft="12pt"
-                        android:paddingRight="12pt"
-                        android:paddingTop="8.5pt"
-                        android:paddingBottom="8.5pt"
+        <RelativeLayout android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
+            <ImageView android:layout_width="17pt" android:layout_height="17pt"
+                       android:id="@+id/iv_back"
+                       android:layout_centerVertical="true"
+                       android:src="@drawable/icon_arrow_left_white"
+            />
 
-                    <TextView android:layout_width="wrap_content"
-                              android:text="可提现余额："
-                              android:textColor="#FF333333"
-                              android:id="@+id/tv_X"
-                              android:layout_centerVertical="true"
-                              android:textSize="14pt"
-                              android:layout_height="wrap_content"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/white"
+                    android:textSize="17pt"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"
+                    android:text="资金对账"/>
 
-                    <TextView android:layout_width="wrap_content"
-                              android:layout_alignParentBottom="true"
-
-                              android:id="@+id/tv_price"
-                              android:layout_centerVertical="true"
-                              android:layout_toRightOf="@+id/tv_X"
-                              android:textColor="#FFFF552E"
-                              android:textSize="15pt"
-                              android:layout_height="wrap_content"/>
+        </RelativeLayout>
 
 
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-
-                              android:id="@+id/tv_forward"
-                              android:layout_centerVertical="true"
-                              android:text="提现"
-                              android:drawablePadding="@dimen/spi_8"
-                              android:drawableRight="@drawable/icon_right_bule"
-                              android:textColor="#FF2C85FF"
-                              android:textSize="14pt"
-                              android:layout_alignParentRight="true"
-
-                    />
-
-                </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
 
 
-                <TextView android:layout_width="match_parent"
-                          android:paddingLeft="12pt"
-                          android:paddingRight="12pt"
-                          android:paddingTop="5.5pt"
-                          android:paddingBottom="5.5pt"
-                          android:background="#FFF8F8F8"
-
-                          android:textSize="13pt"
-                          android:layout_height="wrap_content"
-                          android:text="今日账单 （2018-11-11）"
-                />
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tl="http://schemas.android.com/tools"
+            android:layout_below="@+id/toolbar"
+            android:background="@color/f8"
+            android:id="@+id/swipeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
-                <RelativeLayout android:layout_width="match_parent"
-                                android:orientation="horizontal"
-                                android:paddingLeft="12pt"
-                                android:paddingRight="12pt"
-                                android:paddingTop="9.5pt"
-                                android:paddingBottom="9.5pt"
-                                android:textColor="#FF999999"
-                                android:textSize="13pt"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tl="http://schemas.android.com/tools"
+                android:layout_below="@+id/tbv_title"
+                android:background="@color/f8"
 
-                                android:layout_height="wrap_content">
-
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                              android:text="收入账单"
-                              android:textColor="#FF333333"
-                              android:textSize="13pt"
-                              android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
 
-                    />
-
-
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                              android:textColor="#FF333333"
-                              android:textSize="13pt"
-                              android:id="@+id/tv_inCount"
-                              android:layout_centerInParent="true"
-                              android:layout_weight="1"
-
-                    />
-
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                               android:textColor="#FF333333"
-                              android:textSize="13pt"
-                              android:id="@+id/tv_inPrice"
-                              android:layout_alignParentRight="true"
-                              android:gravity="right"
-                              android:layout_weight="2"
-
-                    />
-
-
-                </RelativeLayout>
-
-                <View
-                        android:layout_width="351pt"
-                        android:layout_height="0.5pt"
-                        android:layout_gravity="center"
-                        android:background="#FFE6E6E6"
-                />
-
-                <RelativeLayout android:layout_width="match_parent"
-                                android:paddingLeft="12pt"
-                                android:paddingRight="12pt"
-                                android:paddingTop="9.5pt"
-                                android:paddingBottom="9.5pt"
-                                android:orientation="horizontal"
-
-                                android:layout_height="wrap_content">
-
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                              android:text="支出订单"
-                              android:textColor="#FF333333"
-                              android:textSize="13pt"
-                              android:layout_weight="1"
-
-
-                    />
-
-
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-
-                              android:textColor="#FF333333"
-                              android:textSize="13pt"
-                              android:id="@+id/tv_outCount"
-                              android:layout_centerInParent="true"
-                              android:layout_weight="1"
-
-                    />
-
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-
-                              android:textColor="#FF333333"
-                              android:textSize="13pt"
-                              android:gravity="right"
-                              android:id="@+id/tv_outPrice"
-                              android:layout_alignParentRight="true"
-                              android:layout_weight="2"
-
-                    />
-
-
-                </RelativeLayout>
-
-
-                <RelativeLayout android:layout_width="match_parent"
-                                android:background="#FFF8F8F8"
-                                android:layout_height="wrap_content">
-
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                              android:text="历史账单"
-                              android:textColor="#FF999999"
-                              android:textSize="13pt"
-                              android:background="#FFF8F8F8"
-                              android:paddingLeft="12pt"
-                              android:paddingRight="12pt"
-                              android:paddingTop="5.5pt"
-                              android:paddingBottom="5.5pt"
-                    />
-
-
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                              android:text="展示近3个月记录"
-                              android:layout_alignParentRight="true"
-                              android:textColor="#FF999999"
-                              android:textSize="13pt"
-                              android:background="#FFF8F8F8"
-                              android:paddingLeft="12pt"
-                              android:paddingRight="12pt"
-                              android:paddingTop="5.5pt"
-                              android:paddingBottom="5.5pt"
-                    />
-
-
-                </RelativeLayout>
-
-
-            </LinearLayout>
-
-
-            <androidx.appcompat.widget.Toolbar
+            <com.google.android.material.appbar.AppBarLayout
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_gravity="top"
-                    app:contentInsetStart="@dimen/spi_8"
-                    android:background="@color/colorPrimary"
-                    app:layout_collapseMode="pin">
+                    android:background="@color/white"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/ThemeOverlay.AppCompat.Light">
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:contentScrim="@color/white"
+                        app:expandedTitleMarginBottom="100dp"
+                        app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                >
 
-                <RelativeLayout android:layout_width="match_parent"
+
+                    <LinearLayout android:layout_width="match_parent"
+
+                                  android:layout_below="@+id/tbv_title"
+                                  android:orientation="vertical"
+                                  android:layout_height="wrap_content">
+
+
+                        <LinearLayout android:layout_width="match_parent"
+                                      android:orientation="horizontal"
+                                      android:layout_height="wrap_content">
+
+                            <LinearLayout android:layout_width="0dp"
+                                          android:orientation="vertical"
+                                          android:layout_weight="1"
+                                          android:padding="17pt"
+                                          android:gravity="center"
+                                          android:layout_height="wrap_content">
+                                <TextView android:layout_width="match_parent"
+                                          android:text="总收入金额（元）"
+                                          android:gravity="center"
+                                          android:textColor="#FF888888"
+                                          android:textSize="13pt"
+                                          android:layout_height="wrap_content"/>
+
+                                <TextView android:layout_width="match_parent"
+
+                                          android:textStyle="bold"
+                                          android:id="@+id/tv_in"
+                                          android:gravity="center"
+                                          android:textColor="#FF333333"
+                                          android:textSize="30pt"
+                                          android:layout_height="wrap_content"/>
+                            </LinearLayout>
+
+                            <LinearLayout android:layout_width="0dp"
+                                          android:orientation="vertical"
+                                          android:layout_weight="1"
+                                          android:padding="17pt"
+                                          android:gravity="center"
+                                          android:layout_height="wrap_content">
+                                <TextView android:layout_width="match_parent"
+                                          android:gravity="center"
+                                          android:text="总支出金额（元）"
+                                          android:textColor="#FF888888"
+                                          android:textSize="13pt"
+                                          android:layout_height="wrap_content"/>
+
+                                <TextView android:layout_width="match_parent"
+
+                                          android:textStyle="bold"
+                                          android:gravity="center"
+                                          android:id="@+id/tv_out"
+                                          android:textColor="#FF333333"
+                                          android:textSize="30pt"
+
+                                          android:layout_height="wrap_content"/>
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+                        <View
+                                android:layout_gravity="center"
+                                android:layout_width="351pt"
+                                android:layout_height="0.5pt"
+                                android:background="#FFE6E6E6"
+                        />
+
+
+                        <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:paddingLeft="12pt"
+                                android:paddingRight="12pt"
+                                android:paddingTop="8.5pt"
+                                android:paddingBottom="8.5pt"
                                 android:layout_height="wrap_content">
 
-                    <ImageView android:layout_width="17pt" android:layout_height="17pt"
-                               android:id="@+id/iv_back"
-                               android:layout_centerVertical="true"
-                               android:src="@drawable/icon_arrow_left_white"
-                    />
 
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:textColor="@color/white"
-                            android:textSize="17pt"
-                            android:textStyle="bold"
-                            android:layout_height="wrap_content"
-                            android:text="资金对账"/>
+                            <TextView android:layout_width="wrap_content"
+                                      android:text="可提现余额："
+                                      android:textColor="#FF333333"
+                                      android:id="@+id/tv_X"
+                                      android:layout_centerVertical="true"
+                                      android:textSize="14pt"
+                                      android:layout_height="wrap_content"/>
 
-                </RelativeLayout>
+                            <TextView android:layout_width="wrap_content"
+                                      android:layout_alignParentBottom="true"
+
+                                      android:id="@+id/tv_price"
+                                      android:layout_centerVertical="true"
+                                      android:layout_toRightOf="@+id/tv_X"
+                                      android:textColor="#FFFF552E"
+                                      android:textSize="15pt"
+                                      android:layout_height="wrap_content"/>
 
 
-            </androidx.appcompat.widget.Toolbar>
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-        <com.flyco.tablayout.SlidingTabLayout
-                app:tl_tab_space_equal="true"
-                android:id="@+id/mTabLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/thj"
-                android:layout_gravity="center"
-                android:paddingBottom="15dp"
-                android:paddingTop="15dp"
-                app:tl_indicator_width_equal_title="true"
-                app:tl_textBold="SELECT"
-                app:tl_indicator_color="#FF333333"
-                app:tl_textSelectColor="#FF333333"
-                app:tl_textUnselectColor="#FF333333"
-                app:tl_underline_color="#FF333333"
-                tl:tl_underline_gravity="TOP"
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+
+                                      android:id="@+id/tv_forward"
+                                      android:layout_centerVertical="true"
+                                      android:text="提现"
+                                      android:drawablePadding="@dimen/spi_8"
+                                      android:drawableRight="@drawable/icon_right_bule"
+                                      android:textColor="#FF2C85FF"
+                                      android:textSize="14pt"
+                                      android:layout_alignParentRight="true"
+
+                            />
+
+                        </RelativeLayout>
+
+
+                        <TextView android:layout_width="match_parent"
+                                  android:paddingLeft="12pt"
+                                  android:paddingRight="12pt"
+                                  android:paddingTop="5.5pt"
+                                  android:paddingBottom="5.5pt"
+                                  android:background="#FFF8F8F8"
+
+                                  android:textSize="13pt"
+                                  android:layout_height="wrap_content"
+                                  android:text="今日账单 （2018-11-11）"
+                        />
+
+
+                        <RelativeLayout android:layout_width="match_parent"
+                                        android:orientation="horizontal"
+                                        android:paddingLeft="12pt"
+                                        android:paddingRight="12pt"
+                                        android:paddingTop="9.5pt"
+                                        android:paddingBottom="9.5pt"
+                                        android:textColor="#FF999999"
+                                        android:textSize="13pt"
+
+                                        android:layout_height="wrap_content">
+
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                      android:text="收入账单"
+                                      android:textColor="#FF333333"
+                                      android:textSize="13pt"
+                                      android:layout_weight="1"
+
+
+                            />
+
+
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                      android:textColor="#FF333333"
+                                      android:textSize="13pt"
+                                      android:id="@+id/tv_inCount"
+                                      android:layout_centerInParent="true"
+                                      android:layout_weight="1"
+
+                            />
+
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                      android:textColor="#FF333333"
+                                      android:textSize="13pt"
+                                      android:id="@+id/tv_inPrice"
+                                      android:layout_alignParentRight="true"
+                                      android:gravity="right"
+                                      android:layout_weight="2"
+
+                            />
+
+
+                        </RelativeLayout>
+
+                        <View
+                                android:layout_width="351pt"
+                                android:layout_height="0.5pt"
+                                android:layout_gravity="center"
+                                android:background="#FFE6E6E6"
+                        />
+
+                        <RelativeLayout android:layout_width="match_parent"
+                                        android:paddingLeft="12pt"
+                                        android:paddingRight="12pt"
+                                        android:paddingTop="9.5pt"
+                                        android:paddingBottom="9.5pt"
+                                        android:orientation="horizontal"
+
+                                        android:layout_height="wrap_content">
+
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                      android:text="支出账单"
+                                      android:textColor="#FF333333"
+                                      android:textSize="13pt"
+                                      android:layout_weight="1"
+
+
+                            />
+
+
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+
+                                      android:textColor="#FF333333"
+                                      android:textSize="13pt"
+                                      android:id="@+id/tv_outCount"
+                                      android:layout_centerInParent="true"
+                                      android:layout_weight="1"
+
+                            />
+
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+
+                                      android:textColor="#FF333333"
+                                      android:textSize="13pt"
+                                      android:gravity="right"
+                                      android:id="@+id/tv_outPrice"
+                                      android:layout_alignParentRight="true"
+                                      android:layout_weight="2"
+
+                            />
+
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout android:layout_width="match_parent"
+                                        android:background="#FFF8F8F8"
+                                        android:layout_height="wrap_content">
+
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                      android:text="历史账单"
+                                      android:textColor="#FF999999"
+                                      android:textSize="13pt"
+                                      android:background="#FFF8F8F8"
+                                      android:paddingLeft="12pt"
+                                      android:paddingRight="12pt"
+                                      android:paddingTop="5.5pt"
+                                      android:paddingBottom="5.5pt"
+                            />
+
+
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                      android:text="展示近3个月记录"
+                                      android:layout_alignParentRight="true"
+                                      android:textColor="#FF999999"
+                                      android:textSize="13pt"
+                                      android:background="#FFF8F8F8"
+                                      android:paddingLeft="12pt"
+                                      android:paddingRight="12pt"
+                                      android:paddingTop="5.5pt"
+                                      android:paddingBottom="5.5pt"
+                            />
+
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+
+
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+                <com.flyco.tablayout.SlidingTabLayout
+                        app:tl_tab_space_equal="true"
+                        android:id="@+id/mTabLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/thj"
+                        android:layout_gravity="center"
+                        android:paddingBottom="15dp"
+                        android:paddingTop="15dp"
+                        app:tl_indicator_width_equal_title="true"
+                        app:tl_textBold="SELECT"
+                        app:tl_indicator_color="#FF333333"
+                        app:tl_textSelectColor="#FF333333"
+                        app:tl_textUnselectColor="#FF333333"
+                        app:tl_underline_color="#FF333333"
+                        tl:tl_underline_gravity="TOP"
                 />
 
 
-    </com.google.android.material.appbar.AppBarLayout>
+            </com.google.android.material.appbar.AppBarLayout>
 
 
-        <androidx.viewpager.widget.ViewPager
-                android:layout_width="match_parent"
-                android:id="@+id/mViewPager"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                android:layout_height="match_parent"/>
+            <androidx.viewpager.widget.ViewPager
+                    android:layout_width="match_parent"
+                    android:id="@+id/mViewPager"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    android:layout_height="match_parent"/>
 
 
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+</RelativeLayout>

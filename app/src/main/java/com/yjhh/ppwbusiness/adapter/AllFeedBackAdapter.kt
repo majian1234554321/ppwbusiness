@@ -14,7 +14,7 @@ class AllFeedBackAdapter(data: List<AllFeedBackBean.ItemsBean>) :
     override fun convert(helper: BaseViewHolder?, item: AllFeedBackBean.ItemsBean?) {
 
 
-        helper?.setText(R.id.tv_title, item?.name)
+        helper?.setText(R.id.tv_title, item?.title)
         helper?.setText(R.id.tv_content, item?.cause)
 
 

@@ -91,6 +91,12 @@ class Reconciliation1Fragment : BaseFragment(), WithDrowView {
     }
 
 
+    fun loadNetData() {
+        pageIndex = 0;
+        present?.shopAdminWithdrawLogs(type, pageIndex, pageSize, "refresh")
+    }
+
+
     private fun initAdapter() {
         mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
         mAdapter = ReconciliationAdapter(lists)

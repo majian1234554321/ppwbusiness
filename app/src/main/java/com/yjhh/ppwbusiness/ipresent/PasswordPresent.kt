@@ -24,6 +24,8 @@ class PasswordPresent(var context: Context, var registView: PasswordView) : Base
 
                 override fun processValue(response: String?) {
                     registView.onSuccessSMS(response)
+
+
                 }
 
                 override fun onFault(message: String) {
@@ -31,6 +33,7 @@ class PasswordPresent(var context: Context, var registView: PasswordView) : Base
                 }
 
             })
+
     }
 
     fun fromSms(account: String, smsCode: String) {
@@ -87,6 +90,8 @@ class PasswordPresent(var context: Context, var registView: PasswordView) : Base
 
     fun resetPassword(newPassword: String, smsCode: String,type:String) {
         val map = ArrayMap<String, String>()
+
+        map.put("password", "")
         map.put("newPassword", newPassword)
         map.put("smsCode", smsCode)
         map.put("type", type)
@@ -100,7 +105,7 @@ class PasswordPresent(var context: Context, var registView: PasswordView) : Base
             }
 
             override fun onFault(message: String) {
-                registView. onSuccess(message)
+                registView. onFault(message)
             }
 
         })

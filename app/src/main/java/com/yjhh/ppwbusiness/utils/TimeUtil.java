@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -18,7 +19,7 @@ public class TimeUtil {
      */
     public static String stampToDate(String s) {
 
-        if (TextUtils.isEmpty(s)){
+        if (TextUtils.isEmpty(s)) {
             return "";
         }
 
@@ -32,7 +33,7 @@ public class TimeUtil {
 
 
     public static String stampToDate2(String s) {
-        if (TextUtils.isEmpty(s)){
+        if (TextUtils.isEmpty(s)) {
             return "";
         }
         String res;
@@ -45,7 +46,7 @@ public class TimeUtil {
 
 
     public static String stampToDate(String s, String stytle) {
-        if (TextUtils.isEmpty(s)){
+        if (TextUtils.isEmpty(s)) {
             return "";
         }
         String res;
@@ -61,7 +62,7 @@ public class TimeUtil {
      * 将时间转换为时间戳
      */
     public static String dateToStamp(String s) throws ParseException {
-        if (TextUtils.isEmpty(s)){
+        if (TextUtils.isEmpty(s)) {
             return "";
         }
         String res;
@@ -84,6 +85,25 @@ public class TimeUtil {
 
         return days + "$" + hours + "$" + minutes + "$" + second;
 
+    }
+
+
+    private boolean isTimeRange(String s, String e) throws ParseException {
+        SimpleDateFormat df = new SimpleDateFormat("HH:mm");
+        Date now = df.parse(df.format(new Date()));
+        Date begin = df.parse(s);
+        Date end = df.parse(e);
+        Calendar nowTime = Calendar.getInstance();
+        nowTime.setTime(now);
+        Calendar beginTime = Calendar.getInstance();
+        beginTime.setTime(begin);
+        Calendar endTime = Calendar.getInstance();
+        endTime.setTime(end);
+        if (nowTime.before(endTime) && nowTime.after(beginTime)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 

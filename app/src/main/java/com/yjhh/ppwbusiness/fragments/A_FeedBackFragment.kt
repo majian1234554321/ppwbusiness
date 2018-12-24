@@ -176,7 +176,7 @@ class A_FeedBackFragment : BaseFragment(), View.OnClickListener, CommonView {
             } else {
                 // start(PhotoFragment(lists[position]))
 
-                val dialog = PhotoFragment(lists)
+                val dialog = PhotoFragment(lists,position)
                 dialog?.show(childFragmentManager, "TAG")
             }
 

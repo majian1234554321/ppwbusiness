@@ -54,7 +54,7 @@ class ShopSetPresent(var context: Context, var view: ShopSetView) : BasePresent(
 
             override fun processValue(response: String?) {
                 view.onSuccess()
-                // Toast.makeText(context, if (status == "0") "营业中" else "打烊", Toast.LENGTH_LONG).show()
+                 Toast.makeText(context, if (status == "0") "开始营业" else "打烊成功", Toast.LENGTH_LONG).show()
             }
 
         }

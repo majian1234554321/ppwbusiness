@@ -41,9 +41,13 @@
     <TextView android:layout_width="wrap_content"
               android:layout_below="@+id/tv_paystatus"
               android:id="@+id/tv_endstatus"
+
+              android:layout_centerHorizontal="true"
+              android:text="121212"
+
               android:layout_marginLeft="20pt"
               android:layout_height="wrap_content"
-              android:layout_toRightOf="@+id/tv_time"
+
 
               android:textColor="#FF999999"
               android:textSize="12pt"

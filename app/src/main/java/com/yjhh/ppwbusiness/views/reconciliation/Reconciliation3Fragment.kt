@@ -54,12 +54,18 @@ class Reconciliation3Fragment : BaseFragment(), WithDrowView {
     val pageSize = 15
     var pageIndex = 0
 
-    val type = "2"////类型 null全部 1收入 2支出
+    val type = "1"////类型 null全部 1收入 2支出
 
 
     var mAdapter: ReconciliationAdapter? = null
     val lists = ArrayList<ReconciliationItemBean.ItemsBean>()
     var present: WithDrawPresent? = null
+
+    fun loadNetData() {
+        pageIndex = 0;
+        present?.shopAdminWithdrawLogs(type, pageIndex, pageSize, "refresh")
+    }
+
 
     override fun initView() {
 

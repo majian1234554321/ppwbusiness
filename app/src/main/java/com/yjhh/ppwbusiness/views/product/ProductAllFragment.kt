@@ -191,7 +191,7 @@ class ProductAllFragment : BaseFragment(), ProductView {
                     val list = ArrayList<String>()
                     list.add((adapter.data[position] as ProductBean.ItemsBean).logoUrl)
 
-                    val dialog = PhotoFragment(list)
+                    val dialog = PhotoFragment(list,position)
                     dialog?.show(childFragmentManager, "TAG")
                 }
 

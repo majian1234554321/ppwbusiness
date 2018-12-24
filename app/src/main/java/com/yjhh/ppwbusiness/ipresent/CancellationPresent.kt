@@ -47,7 +47,7 @@ class CancellationPresent(var context: Context, var view: CancellationView) : Ba
 
         map.clear()
         map["pageIndex"] = pageIndex.toString()
-        map["pageIndex"] = pageSize.toString()
+        map["pageSize"] = pageSize.toString()
 
 
         toSubscribe2(ApiServices.getInstance()

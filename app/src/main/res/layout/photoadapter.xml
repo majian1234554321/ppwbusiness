@@ -5,7 +5,7 @@
 
     <ImageView android:layout_width="115pt"
                android:id="@+id/iv"
-
+               android:layout_marginBottom="2pt"
             android:scaleType="center"
                android:layout_centerInParent="true"
                android:layout_height="115pt"/>

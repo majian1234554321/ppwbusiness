@@ -251,10 +251,16 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
 
             } else {
 
-                (parentFragment as MainFragment).startBrotherFragment(
+                if (model.ifApi){
 
-                    WriteOffFragment.newInstance(model.data.split("id=")[1])
-                )
+                    (parentFragment as MainFragment).startBrotherFragment(
+
+                        WriteOffFragment.newInstance(model.data.split("id=")[1])
+                    )
+                }else{
+                    Toast.makeText(mActivity, model.message, Toast.LENGTH_LONG).show()
+                }
+
             }
         } else {
 

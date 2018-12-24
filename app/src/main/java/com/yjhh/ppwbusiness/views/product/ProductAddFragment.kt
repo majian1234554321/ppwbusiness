@@ -203,7 +203,7 @@ class ProductAddFragment : BaseFragment(), CommonView {
             if (flag) {
                 // start(PhotoFragment(lists[position]))
 
-                val dialog = PhotoFragment(lists)
+                val dialog = PhotoFragment(lists,position)
                 dialog?.show(childFragmentManager, "TAG")
             } else {
                 photo()

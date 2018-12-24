@@ -27,6 +27,7 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
+
 import kotlinx.android.synthetic.main.loginsmsfragment.*
 import org.json.JSONObject
 import java.util.concurrent.TimeUnit
@@ -145,50 +146,8 @@ class LoginSMSFragment : BaseFragment(), PasswordView, View.OnClickListener {
 
     override fun onSuccessSMS(value: String?) {
         Toast.makeText(BaseApplication.context, "验证码发送成功", Toast.LENGTH_SHORT).show()
-    }
 
-    override fun onFaultSMS(errorMsg: String?) {
-        Toast.makeText(BaseApplication.context, "验证码发送失败$errorMsg", Toast.LENGTH_SHORT).show()
-    }
-
-    val TYPE = "1"//1登录 2注册 21 重置密码 22找回密码
-
-    var present: PasswordPresent? = null
-
-    override fun getLayoutRes(): Int = R.layout.loginsmsfragment
-
-    override fun initView() {
-
-        arrayOf(loginPassword, btn_login, tv_kaidian, tv_question).forEach {
-            it.setOnClickListener(this)
-        }
-
-
-
-        present = PasswordPresent(context, this)
-
-
-        val disposable = RxView.clicks(tv_verifyCode)
-            //防止重复点击
-            .throttleFirst(1, TimeUnit.SECONDS)
-            .subscribeOn(AndroidSchedulers.mainThread())
-            .flatMap {
-                val phone = et_mobile.text.toString()
-                if (!TextUtils.isEmpty(phone) && phone.length == 11) {
-                    Observable.just(true)
-                } else {
-                    Toast.makeText(mActivity, "手机号码不符合要求", Toast.LENGTH_SHORT).show()
-                    Observable.empty()
-                }
-            }
-            .doOnNext {
-                Log.i("TAG", "初始化")
-                if (it) {
-                    present?.sendSms(TYPE, et_mobile.text.toString())
-                }
-
-            }
-            .observeOn(AndroidSchedulers.mainThread())
+        val disposable = Observable.just(true)
             .flatMap {
                 if (it) {
                     RxView.enabled(tv_verifyCode).accept(false)
@@ -219,6 +178,75 @@ class LoginSMSFragment : BaseFragment(), PasswordView, View.OnClickListener {
         compositeDisposable.add(disposable)
 
 
+    }
+
+    override fun onFaultSMS(errorMsg: String?) {
+
+
+
+
+        if ("01018" == errorMsg) {
+            ApiServices.getInstance().create(CommonService::class.java)
+                .init()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : ProcessObserver2(mActivity) {
+                    override fun processValue(response: String?) {
+                        Log.i("01018", response)
+                        start(BackViewFragment.newInstance(JSONObject(response).optString("applyShopUrl")))
+
+                    }
+
+                    override fun onFault(message: String) {
+                        Log.i("01018", message)
+                    }
+                })
+
+        } else {
+            Toast.makeText(BaseApplication.context, "验证码发送失败$errorMsg", Toast.LENGTH_SHORT).show()
+        }
+
+
+    }
+
+    val TYPE = "1"//1登录 2注册 21 重置密码 22找回密码
+
+    var present: PasswordPresent? = null
+
+    override fun getLayoutRes(): Int = R.layout.loginsmsfragment
+
+    override fun initView() {
+
+        arrayOf(loginPassword, btn_login, tv_kaidian, tv_question).forEach {
+            it.setOnClickListener(this)
+        }
+
+
+
+        present = PasswordPresent(context, this)
+
+
+        val dis = RxView.clicks(tv_verifyCode)
+            //防止重复点击
+            .throttleFirst(1, TimeUnit.SECONDS)
+            .subscribeOn(AndroidSchedulers.mainThread())
+            .flatMap {
+                val phone = et_mobile.text.toString()
+                if (!TextUtils.isEmpty(phone) && phone.length == 11) {
+                    Observable.just(true)
+                } else {
+                    Toast.makeText(mActivity, "手机号码不符合要求", Toast.LENGTH_SHORT).show()
+                    Observable.empty()
+                }
+            }.subscribe {
+                if (it) {
+                    present?.sendSms(TYPE, et_mobile.text.toString())
+                } else {
+
+                }
+            }
+
+        compositeDisposable.add(dis)
     }
 
 

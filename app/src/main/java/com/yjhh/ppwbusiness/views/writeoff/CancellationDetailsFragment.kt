@@ -1,12 +1,14 @@
 package com.yjhh.ppwbusiness.views.writeoff
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.adapter.PhotoAdapter
 import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.base.ProcessObserver2.constructor.gson
 import com.yjhh.ppwbusiness.bean.CancelationBeforeBean
+import com.yjhh.ppwbusiness.fragments.PhotoFragment
 import com.yjhh.ppwbusiness.ipresent.CancellationPresent
 import com.yjhh.ppwbusiness.iview.CancellationView
 import com.yjhh.ppwbusiness.utils.TimeUtil
@@ -49,9 +51,15 @@ class CancellationDetailsFragment : BaseFragment(), CancellationView {
                 }
 
 
+                val mAdapter = PhotoAdapter(list, true)
 
+                recyclerView.adapter = mAdapter
 
-                recyclerView.adapter = PhotoAdapter(list, true)
+                mAdapter.setOnItemClickListener { adapter, view, position ->
+                    val dialog = PhotoFragment(list,position)
+                    dialog?.show(childFragmentManager, "TAG")
+                }
+
             }
 
 
