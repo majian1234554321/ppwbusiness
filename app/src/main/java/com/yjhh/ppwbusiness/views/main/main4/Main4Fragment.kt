@@ -147,6 +147,10 @@ class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, Shop
             dialog?.show(childFragmentManager, "TAG")
 
             dialog?.setOnAppUpdate(object : AppUpdateFragment.AppUpdateListener {
+                override fun close() {
+                    dialog?.dismiss()
+                }
+
                 override fun onAppUpdate() {
                     APKVersionCodeUtils.startUpdate(mActivity, modelVersionBean.downloadUrl, onDownloadListener)
                 }

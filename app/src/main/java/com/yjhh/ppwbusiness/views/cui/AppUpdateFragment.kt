@@ -107,7 +107,7 @@ class AppUpdateFragment(var flag: Boolean, var content: String, var url: String)
 
         mb?.setOnClickListener { appUpdateListener?.onAppUpdate() }
         btn_ok.setOnClickListener { appUpdateListener?.onAppUpdate() }
-        btn_cancel.setOnClickListener { dismiss() }
+        btn_cancel.setOnClickListener { appUpdateListener?.close() }
         builder.setView(view)
 
         val dialog = builder.create()
@@ -148,6 +148,8 @@ class AppUpdateFragment(var flag: Boolean, var content: String, var url: String)
 
     interface AppUpdateListener {
         fun onAppUpdate()
+
+        fun close()
     }
 
 

@@ -85,6 +85,39 @@ class SplashActivity : BaseActivity(), CommonView {
             dialog?.show(supportFragmentManager, "TAG")
 
             dialog?.setOnAppUpdate(object : AppUpdateFragment.AppUpdateListener {
+                override fun close() {
+                    dialog?.dismiss()
+                    RxCountDown.countdown(3)
+                        .subscribe(object : DisposableObserver<Int>() {
+                            override fun onNext(t: Int) {
+
+                            }
+
+                            override fun onError(e: Throwable) {
+
+                            }
+
+                            override fun onComplete() {
+
+                                if (!TextUtils.isEmpty(
+                                        SharedPreferencesUtils.getParam(
+                                            this@SplashActivity,
+                                            "sessionId",
+                                            ""
+                                        ) as String
+                                    )
+                                ) {
+                                    ActivityCollector.JumpActivity(this@SplashActivity, MainActivity::class.java)
+                                } else {
+
+                                    ActivityCollector.JumpActivity(this@SplashActivity, LoginActivity::class.java)
+                                }
+
+                                finish()
+                            }
+                        })
+                }
+
                 override fun onAppUpdate() {
                     APKVersionCodeUtils.startUpdate(
                         this@SplashActivity,
@@ -94,6 +127,39 @@ class SplashActivity : BaseActivity(), CommonView {
                 }
 
             })
+
+        }else{
+
+            RxCountDown.countdown(3)
+                .subscribe(object : DisposableObserver<Int>() {
+                    override fun onNext(t: Int) {
+
+                    }
+
+                    override fun onError(e: Throwable) {
+
+                    }
+
+                    override fun onComplete() {
+
+                        if (!TextUtils.isEmpty(
+                                SharedPreferencesUtils.getParam(
+                                    this@SplashActivity,
+                                    "sessionId",
+                                    ""
+                                ) as String
+                            )
+                        ) {
+                            ActivityCollector.JumpActivity(this@SplashActivity, MainActivity::class.java)
+                        } else {
+
+                            ActivityCollector.JumpActivity(this@SplashActivity, LoginActivity::class.java)
+                        }
+
+                        finish()
+                    }
+                })
+
 
         }
     }
@@ -114,35 +180,8 @@ class SplashActivity : BaseActivity(), CommonView {
 
 
 
-        RxCountDown.countdown(3)
-            .subscribe(object : DisposableObserver<Int>() {
-                override fun onNext(t: Int) {
 
-                }
 
-                override fun onError(e: Throwable) {
-
-                }
-
-                override fun onComplete() {
-
-                    if (!TextUtils.isEmpty(
-                            SharedPreferencesUtils.getParam(
-                                this@SplashActivity,
-                                "sessionId",
-                                ""
-                            ) as String
-                        )
-                    ) {
-                        ActivityCollector.JumpActivity(this@SplashActivity, MainActivity::class.java)
-                    } else {
-
-                        ActivityCollector.JumpActivity(this@SplashActivity, LoginActivity::class.java)
-                    }
-
-                    finish()
-                }
-            })
 
 
     }

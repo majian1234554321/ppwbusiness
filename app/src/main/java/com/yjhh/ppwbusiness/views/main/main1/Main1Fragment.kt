@@ -98,11 +98,25 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
     override fun onClick(v: View?) {
         when (v?.id) {
 
-            R.id.tv_setting -> {
+//            R.id.tv_setting -> {
 //                (parentFragment as MainFragment).startBrotherFragment(
 //                    ProductManagementFragment()
 //                )
+//            }
+
+
+            R.id.tv_head1 ->{
+                (parentFragment as MainFragment).startBrotherFragment(
+                    ReconciliationFragment()
+                )
             }
+
+            R.id.tv_head2 ->{
+                (parentFragment as MainFragment).startBrotherFragment(
+                    ReconciliationFragment()
+                )
+            }
+
 
             R.id.ll_A -> {
                 (parentFragment as MainFragment).startBrotherFragment(
@@ -164,7 +178,7 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
 
         Main1Present(mActivity, this).shopAdminHome()
 
-        arrayOf(tv_setting, tv_more, iv_scan, ll_A, ll_B).forEach {
+        arrayOf(tv_head1, tv_head2, tv_more, iv_scan, ll_A, ll_B).forEach {
             it.setOnClickListener(this)
         }
 
@@ -247,6 +261,8 @@ class Main1Fragment : BaseMainFragment(), View.OnClickListener, Main1View, Order
 
                     CancellationPresent(mActivity, this).qCodeLogin(model.data.split("code=")[1])
 
+                }else{
+                    Toast.makeText(mActivity, model.message, Toast.LENGTH_LONG).show()
                 }
 
             } else {

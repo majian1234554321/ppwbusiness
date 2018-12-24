@@ -164,7 +164,14 @@ class PutForwardFragment : BaseFragment(), WithDrowView, View.OnClickListener {
             "wirDraw" -> {
 
 
+                present?.shopAdminWithdraw()
+                pageIndex = 0
+                present?.logs(pageIndex, pageSize, "refresh")
+
                 start(PutForwardSuccessFragment.newInstance(response))
+
+
+
 
             }
 

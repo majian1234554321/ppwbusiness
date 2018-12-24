@@ -14,6 +14,7 @@ import com.yjhh.ppwbusiness.base.BaseActivity
 import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.ipresent.CancellationPresent
 import com.yjhh.ppwbusiness.iview.CancellationView
+import com.yjhh.ppwbusiness.utils.SharedPreferencesUtils
 import com.yjhh.ppwbusiness.views.cui.CustomPopWindow
 import com.yjhh.ppwbusiness.views.writeoff.CancellationBeforeActivity
 
@@ -72,6 +73,33 @@ class CaptureActivity2 : BaseActivity(), View.OnClickListener {
         arrayOf(iv_back, tv_save).forEach {
             it.setOnClickListener(this)
         }
+
+
+
+
+
+        val a = (SharedPreferencesUtils.getParam(this@CaptureActivity2, "type", "-1") as String).toInt()
+
+
+
+        if (a or 64 == a) {
+            tv_save.visibility = View.VISIBLE
+        } else {
+            tv_save.visibility = View.GONE
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         linearLayout.setOnClickListener {
             if (!isOpen) {

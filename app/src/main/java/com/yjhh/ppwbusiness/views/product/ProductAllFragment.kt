@@ -24,6 +24,7 @@ import com.yjhh.ppwbusiness.ipresent.ProductPresent
 import com.yjhh.ppwbusiness.ipresent.SectionUselessPresent
 import com.yjhh.ppwbusiness.iview.ProductView
 import com.yjhh.ppwbusiness.utils.RxBus
+import com.yjhh.ppwbusiness.views.cui.AlertDialogFactory
 
 import com.yjhh.ppwbusiness.views.cui.SpaceItemDecoration
 
@@ -51,6 +52,7 @@ class ProductAllFragment : BaseFragment(), ProductView {
                 if (startindex == 0 && result?.items?.size == 0) {
                     val view = View.inflate(mActivity, R.layout.emptyview, null)
                     view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
+                    mAdapter.setNewData(result?.items)
                     mAdapter?.emptyView = view
 
                 } else {
@@ -144,14 +146,25 @@ class ProductAllFragment : BaseFragment(), ProductView {
             when (view.id) {
                 R.id.tv_delete -> {
 
-                    present.delProduct(
-                        (adapter.data[position] as ProductBean.ItemsBean).id,
-                        (adapter.data[position] as ProductBean.ItemsBean).itemId,
 
 
-                        position,
-                        "DELETE"
-                    )
+
+                    val dialog = AlertDialogFactory.createFactory(mActivity).getAlertDialog(
+                        "删除商品",
+                        "确定删除?",
+                        "确定", "取消",
+                        { dlg, v ->
+
+                            present.delProduct(
+                                (adapter.data[position] as ProductBean.ItemsBean).id.toString(),
+                                (adapter.data[position] as ProductBean.ItemsBean).itemId,
+                                position,
+                                "DELETE"
+                            )
+                        }, { dlg, v ->
+                            dlg.dismiss()
+                        })
+
 
                 }
 

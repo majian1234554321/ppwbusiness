@@ -13,6 +13,7 @@ import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.bean.ProductBean
 import com.yjhh.ppwbusiness.ipresent.ProductPresent
 import com.yjhh.ppwbusiness.iview.ProductView
+import com.yjhh.ppwbusiness.views.cui.AlertDialogFactory
 
 import com.yjhh.ppwbusiness.views.cui.SpaceItemDecoration
 import kotlinx.android.synthetic.main.productallfragment.*
@@ -66,7 +67,12 @@ class Product2Fragment : BaseFragment(), ProductView {
 
             "UNSELL" -> {
                 Toast.makeText(mActivity, "商品下架成功", Toast.LENGTH_SHORT).show()
-                mAdapter.getItem(result?.position!!)?.saleStatus = 1
+               // mAdapter.getItem(result?.position!!)?.saleStatus = 1
+
+
+                mAdapter.data.removeAt(result?.position!!)
+
+
                 mAdapter.notifyDataSetChanged()
             }
 
@@ -117,7 +123,7 @@ class Product2Fragment : BaseFragment(), ProductView {
 
         initAdapter()
         initRefreshLayout()
-        swipeLayout.autoRefresh()
+
 
         mAdapter.setOnItemClickListener { adapter, view, position ->
 
@@ -126,12 +132,28 @@ class Product2Fragment : BaseFragment(), ProductView {
             when (view.id) {
                 R.id.tv_delete -> {
 
-                    present.delProduct(
-                        (adapter.data[position] as ProductBean.ItemsBean).id.toString(),
-                        (adapter.data[position] as ProductBean.ItemsBean).itemId,
-                        position,
-                        "DELETE"
-                    )
+
+
+                    val dialog = AlertDialogFactory.createFactory(mActivity).getAlertDialog(
+                        "删除商品",
+                        "确定删除?",
+                        "确定", "取消",
+                        { dlg, v ->
+
+                            present.delProduct(
+                                (adapter.data[position] as ProductBean.ItemsBean).id.toString(),
+                                (adapter.data[position] as ProductBean.ItemsBean).itemId,
+                                position,
+                                "DELETE"
+                            )
+                        }, { dlg, v ->
+                            dlg.dismiss()
+                        })
+
+
+
+
+
 
                 }
 
@@ -171,6 +193,11 @@ class Product2Fragment : BaseFragment(), ProductView {
         }
 
 
+    }
+
+
+    override fun onLazyInitView(savedInstanceState: Bundle?) {
+        swipeLayout.autoRefresh()
     }
 
 

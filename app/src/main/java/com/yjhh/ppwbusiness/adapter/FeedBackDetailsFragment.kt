@@ -9,6 +9,7 @@ import com.yjhh.ppwbusiness.R
 import com.yjhh.ppwbusiness.base.BaseFragment
 import com.yjhh.ppwbusiness.bean.AccountBean
 import com.yjhh.ppwbusiness.bean.AllFeedBackBean
+import com.yjhh.ppwbusiness.fragments.PhotoFragment
 import com.yjhh.ppwbusiness.ipresent.AboutPresent
 import com.yjhh.ppwbusiness.iview.AboutView
 import com.yjhh.ppwbusiness.views.reservation.ReservationDetailFragment
@@ -36,7 +37,16 @@ class FeedBackDetailsFragment : BaseFragment(), AboutView {
             modle.images.forEach {
                 list.add(it.fileUrl)
             }
-            recyclerView.adapter = PhotoAdapter(list, false)
+
+          val mAdapter=   PhotoAdapter(list, false)
+
+            recyclerView.adapter = mAdapter
+
+            mAdapter.setOnItemClickListener { adapter, view, position ->
+                val dialog = PhotoFragment(list,position)
+                dialog?.show(childFragmentManager, "TAG")
+            }
+
         }
 
 
