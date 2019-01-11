@@ -95,6 +95,15 @@ class ProductManagementFragment2 : BaseFragment(), View.OnClickListener {
 
             override fun onPageSelected(position: Int) {
                 mTabLayout.currentTab = position
+
+                if (position==0){
+                    f1.autoRefresh()
+                }else if (position==1) {
+                    f2.autoRefresh()
+                }else if (position==2){
+                    f3.autoRefresh()
+                }
+
             }
 
             override fun onPageScrollStateChanged(state: Int) {

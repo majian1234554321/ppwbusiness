@@ -18,7 +18,7 @@ import io.reactivex.schedulers.Schedulers
 
 class ShopSetPresent(var context: Context, var view: ShopSetView) : BasePresent() {
     val maps = androidx.collection.ArrayMap<String, String>()
-    fun editConfig(map: SubmitShopAdminConfigModel) {
+    fun editConfig(map: SubmitShopAdminConfigModel,status: String) {
 
         toSubscribe2(ApiServices.getInstance()
             .create(ShopSetServices::class.java)
@@ -26,7 +26,7 @@ class ShopSetPresent(var context: Context, var view: ShopSetView) : BasePresent(
             override fun processValue(response: String?) {
                 Log.i("ShopSetPresent", response)
 
-                view.onSuccess()
+                view.onSuccess(status)
                // Toast.makeText(context, "设置店铺信息成功", Toast.LENGTH_LONG).show()
             }
 

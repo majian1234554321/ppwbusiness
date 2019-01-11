@@ -19,6 +19,7 @@ import androidx.core.content.FileProvider
 import android.text.TextUtils
 import android.util.ArrayMap
 import android.util.Log
+import android.view.KeyEvent
 import android.view.View
 import android.widget.Toast
 import com.jakewharton.rxbinding2.widget.RxTextView
@@ -45,6 +46,7 @@ import com.zhihu.matisse.listener.OnSelectedListener
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_merchant_setting.*
+
 import java.io.File
 import java.io.IOException
 import java.lang.StringBuilder
@@ -53,6 +55,10 @@ import java.util.*
 import kotlin.text.Typography.times
 
 class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetView {
+    override fun onSuccess(statues: String?) {
+        Toast.makeText(this, "店铺设置成功", Toast.LENGTH_LONG).show()
+        finish()
+    }
 
     var listHours = ArrayList<ShopTimesModel>()
 
@@ -122,31 +128,31 @@ class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetVie
             }
 
             R.id.iv_back -> {
-                if (!TextUtils.isEmpty(tv_shopTel.text.toString())) {
+                if (!TextUtils.isEmpty(tv_shopTel.text.toString()) && tv_shopTel.text.length == 11) {
                     val map = SubmitShopAdminConfigModel()
                     map.address = tv_shopAddress.text.toString()
                     map.content = tv_shopDesc.text.toString()
                     map.mobile = tv_shopTel.text.toString()
                     map.status = typeStatus
                     map.times = listHours
-                    present?.editConfig(map)
+                    present?.editConfig(map, "editConfig")
                 } else {
-                    Toast.makeText(this, "商家的联系电话不能为空", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "商家的联系电话不符合规范", Toast.LENGTH_SHORT).show()
                 }
-                finish()
+
             }
 
             R.id.tv_save -> {
-                if (!TextUtils.isEmpty(tv_shopTel.text.toString())) {
+                if (!TextUtils.isEmpty(tv_shopTel.text.toString()) && tv_shopTel.text.length == 11) {
                     val map = SubmitShopAdminConfigModel()
                     map.address = tv_shopAddress.text.toString()
                     map.content = tv_shopDesc.text.toString()
                     map.mobile = tv_shopTel.text.toString()
                     map.status = typeStatus
                     map.times = listHours
-                    present?.editConfig(map)
+                    present?.editConfig(map, "editConfig")
                 } else {
-                    Toast.makeText(this, "商家的联系电话不能为空", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "商家的联系电话不符合规范", Toast.LENGTH_SHORT).show()
                 }
 
 
@@ -203,6 +209,30 @@ class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetVie
         compositeDisposable.add(dis)
 
 
+    }
+
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+
+            if (!TextUtils.isEmpty(tv_shopTel.text.toString()) && tv_shopTel.text.length == 11) {
+                val map = SubmitShopAdminConfigModel()
+                map.address = tv_shopAddress.text.toString()
+                map.content = tv_shopDesc.text.toString()
+                map.mobile = tv_shopTel.text.toString()
+                map.status = typeStatus
+                map.times = listHours
+                present?.editConfig(map, "editConfig")
+            } else {
+                Toast.makeText(this, "商家的联系电话不符合规范", Toast.LENGTH_SHORT).show()
+            }
+            return true
+        }
+
+        return super.onKeyDown(keyCode, event)
     }
 
 

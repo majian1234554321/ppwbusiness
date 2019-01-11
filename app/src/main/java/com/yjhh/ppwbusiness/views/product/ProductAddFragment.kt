@@ -29,6 +29,7 @@ import com.jakewharton.rxbinding2.widget.RxTextView
 import com.tbruyelle.rxpermissions2.RxPermissions
 
 import com.yjhh.ppwbusiness.R
+import com.yjhh.ppwbusiness.R.id.*
 
 import com.yjhh.ppwbusiness.adapter.ProductAdd
 import com.yjhh.ppwbusiness.api.ApiServices

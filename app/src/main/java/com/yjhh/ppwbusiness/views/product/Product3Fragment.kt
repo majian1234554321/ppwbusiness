@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.common.zcommon.utils.RecyclerViewNoBugLinearLayoutManager
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
 
 
@@ -56,6 +57,13 @@ class Product3Fragment : BaseFragment(), ProductView {
                 result?.position?.let {
                     mAdapter.notifyItemRemoved(it)
                 }
+
+                if (mAdapter.data.size==0) {
+                    val view = View.inflate(mActivity, R.layout.emptyview, null)
+                    view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
+                    mAdapter?.setEmptyView(R.layout.emptyview, mRecyclerView.parent as ViewGroup)
+                }
+
             }
 
             "load" -> {
@@ -83,6 +91,12 @@ class Product3Fragment : BaseFragment(), ProductView {
 
                 mAdapter.notifyDataSetChanged()
 
+
+                if (mAdapter.data.size==0) {
+                    val view = View.inflate(mActivity, R.layout.emptyview, null)
+                    view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
+                    mAdapter?.setEmptyView(R.layout.emptyview, mRecyclerView.parent as ViewGroup)
+                }
 
             }
 
@@ -115,7 +129,7 @@ class Product3Fragment : BaseFragment(), ProductView {
         mAdapter = ProductAdapter(list)
         present = ProductPresent(context, this)
 
-        mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
+        mRecyclerView.layoutManager = RecyclerViewNoBugLinearLayoutManager(context)
 
         initAdapter()
         initRefreshLayout()
@@ -192,10 +206,19 @@ class Product3Fragment : BaseFragment(), ProductView {
     }
 
 
+    public fun autoRefresh() {
+        swipeLayout.autoRefresh()
+
+    }
+
+
     private fun initAdapter() {
 
 
         mRecyclerView.adapter = mAdapter
+
+
+        
 
         mAdapter.setOnLoadMoreListener({
             loadMore()

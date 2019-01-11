@@ -5,6 +5,7 @@ import com.yjhh.ppwbusiness.bean.AllShopInfo
 
 interface ShopSetView : BaseView {
     fun onSuccess()
+    fun onSuccess(statues:String?)
 
     fun AllShopInfoSuccess(model: AllShopInfo)
 

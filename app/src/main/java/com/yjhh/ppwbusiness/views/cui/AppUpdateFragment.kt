@@ -73,7 +73,6 @@ class AppUpdateFragment(var flag: Boolean, var content: String, var url: String)
 
             startActivity(intent)
 
-
             dismiss()
         }
 
@@ -111,13 +110,13 @@ class AppUpdateFragment(var flag: Boolean, var content: String, var url: String)
         builder.setView(view)
 
         val dialog = builder.create()
-
+        dialog.setCancelable(false)
+        dialog.setCanceledOnTouchOutside(false)
         if (flag) {
             ll_pt.visibility = View.GONE
             mb?.visibility = View.VISIBLE
 
-            dialog.setCancelable(false)
-            dialog.setCanceledOnTouchOutside(false)
+
             dialog.setOnKeyListener(DialogInterface.OnKeyListener { dialog, keyCode, event ->
                 if (keyCode == KeyEvent.KEYCODE_BACK) {
                     return@OnKeyListener true

@@ -73,7 +73,7 @@ dependencies {
     api 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0'
     api 'com.jakewharton.rxbinding2:rxbinding-design:2.0.0'
     api 'com.jakewharton.rxbinding2:rxbinding-recyclerview-v7:2.0.0'
-    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.44'
     api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
     api 'com.zhihu.android:matisse:0.5.2-beta4'
     api 'com.contrarywind:Android-PickerView:4.1.6'

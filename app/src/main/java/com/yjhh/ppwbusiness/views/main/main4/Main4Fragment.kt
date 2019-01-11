@@ -45,6 +45,8 @@ import java.lang.StringBuilder
 
 class Main4Fragment : BaseMainFragment(), View.OnClickListener, CommonView, ShopSetView {
 
+
+
     override fun onSuccess() {
         if (tv_status.text.toString() == "休息中") {
             tv_status.text = "营业中"

@@ -8,10 +8,13 @@ import android.view.View
 
 import android.widget.TextView
 import android.widget.Toast
+import com.common.zcommon.utils.RecyclerViewNoBugLinearLayoutManager
 
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
 
 import com.yjhh.ppwbusiness.R
+import com.yjhh.ppwbusiness.R.id.mRecyclerView
+import com.yjhh.ppwbusiness.R.id.swipeLayout
 import com.yjhh.ppwbusiness.adapter.MyMessageFragmentAdapter
 import com.yjhh.ppwbusiness.adapter.ProductAdapter
 import com.yjhh.ppwbusiness.base.BaseFragment
@@ -61,10 +64,9 @@ class ProductAllFragment : BaseFragment(), ProductView {
 
             }
             "DELETE" -> {
-                result?.position?.let { mAdapter.data.removeAt(it) }
-                result?.position?.let {
-                    mAdapter.notifyItemRemoved(it)
-                }
+                result?.position?.let { mAdapter.data.removeAt(it)
+                    mAdapter.notifyItemRemoved(it)}
+
             }
 
             "load" -> {
@@ -122,7 +124,7 @@ class ProductAllFragment : BaseFragment(), ProductView {
         mAdapter = ProductAdapter(list)
         present = ProductPresent(context, this)
 
-        mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
+        mRecyclerView.layoutManager = RecyclerViewNoBugLinearLayoutManager(context)
 
         initAdapter()
         initRefreshLayout()
@@ -239,11 +241,18 @@ class ProductAllFragment : BaseFragment(), ProductView {
         }
     }
 
-    private fun refresh() {
+    public fun refresh() {
         startindex = 0
         present.allproducts(categoryId, order, orderType, status, startindex, pageSize, "refresh")
 
     }
+
+
+    public fun autoRefresh() {
+        swipeLayout.autoRefresh()
+
+    }
+
 
     private fun loadMore() {
 

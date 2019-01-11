@@ -81,41 +81,28 @@ class SplashActivity : BaseActivity(), CommonView {
             } else {
                 AppUpdateFragment(false, modelVersionBean.content, modelVersionBean.marketUrl)
             }
-
             dialog?.show(supportFragmentManager, "TAG")
-
             dialog?.setOnAppUpdate(object : AppUpdateFragment.AppUpdateListener {
                 override fun close() {
+
+
+                    if (!TextUtils.isEmpty(
+                            SharedPreferencesUtils.getParam(
+                                this@SplashActivity,
+                                "sessionId",
+                                ""
+                            ) as String
+                        )
+                    ) {
+                        ActivityCollector.JumpActivity(this@SplashActivity, MainActivity::class.java)
+                    } else {
+
+                        ActivityCollector.JumpActivity(this@SplashActivity, LoginActivity::class.java)
+                    }
+
                     dialog?.dismiss()
-                    RxCountDown.countdown(3)
-                        .subscribe(object : DisposableObserver<Int>() {
-                            override fun onNext(t: Int) {
+                    finish()
 
-                            }
-
-                            override fun onError(e: Throwable) {
-
-                            }
-
-                            override fun onComplete() {
-
-                                if (!TextUtils.isEmpty(
-                                        SharedPreferencesUtils.getParam(
-                                            this@SplashActivity,
-                                            "sessionId",
-                                            ""
-                                        ) as String
-                                    )
-                                ) {
-                                    ActivityCollector.JumpActivity(this@SplashActivity, MainActivity::class.java)
-                                } else {
-
-                                    ActivityCollector.JumpActivity(this@SplashActivity, LoginActivity::class.java)
-                                }
-
-                                finish()
-                            }
-                        })
                 }
 
                 override fun onAppUpdate() {
@@ -128,7 +115,7 @@ class SplashActivity : BaseActivity(), CommonView {
 
             })
 
-        }else{
+        } else {
 
             RxCountDown.countdown(3)
                 .subscribe(object : DisposableObserver<Int>() {
@@ -160,14 +147,13 @@ class SplashActivity : BaseActivity(), CommonView {
                     }
                 })
 
-
         }
     }
 
     override fun onFault(errorMsg: String?) {
-        //  TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        ActivityCollector.JumpActivity(this@SplashActivity, MainActivity::class.java)
+        finish()
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setStatusBar()
@@ -176,12 +162,6 @@ class SplashActivity : BaseActivity(), CommonView {
 
 
         CommonPresent(this, this).checkVersion()
-
-
-
-
-
-
 
 
     }

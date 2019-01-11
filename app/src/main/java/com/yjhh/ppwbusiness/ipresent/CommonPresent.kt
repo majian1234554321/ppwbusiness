@@ -109,7 +109,7 @@ class CommonPresent(var context: Context, var view: CommonView) : BasePresent() 
 
                 override fun onFault(message: String) {
                     Log.i("MainActivity", message)
-
+                    view.onFault(message)
                 }
 
             })

@@ -34,12 +34,15 @@
                         android:layout_width="73.5pt"
                         android:layout_height="73.5pt"
                         android:src="@drawable/icon_place"
-                      />
+                />
 
                 <TextView android:layout_width="wrap_content"
                           android:id="@+id/tv_name"
                           android:layout_alignTop="@+id/profile_image"
                           android:textColor="#FFF3DAAF"
+                          android:maxEms="8"
+                          android:singleLine="true"
+                          android:ellipsize="end"
                           android:textSize="16pt"
                           android:layout_toRightOf="@+id/profile_image"
                           android:paddingLeft="@dimen/spi_12"
@@ -101,6 +104,8 @@
                           android:layout_toRightOf="@+id/profile_image"
                           android:paddingLeft="@dimen/spi_12"
                           tools:text="未登录21212121212"
+                          android:maxLines="2"
+                          android:ellipsize="end"
                           android:textSize="12pt"
                           android:layout_height="wrap_content"/>
 

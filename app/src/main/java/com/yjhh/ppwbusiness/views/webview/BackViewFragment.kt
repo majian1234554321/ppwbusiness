@@ -103,13 +103,15 @@ class BackViewFragment : BaseFragment() {
             override fun onPageFinished(view: WebView, url: String) {
 
 
-                val cookieManager = CookieManager.getInstance();
-                val CookieStr = cookieManager.getCookie(url)
+//                val cookieManager = CookieManager.getInstance();
+//                val CookieStr = cookieManager.getCookie(url)
+//                mWebView.clearCache(true);
 
-                //  val Common.cookie = CookieStr
-                // Toast.makeText(activity, CookieStr, Toast.LENGTH_SHORT).show()
 
-                Log.i("BackViewFragment", CookieStr)
+//                //  val Common.cookie = CookieStr
+//                // Toast.makeText(activity, CookieStr, Toast.LENGTH_SHORT).show()
+//
+//                Log.i("BackViewFragment", CookieStr)
 
                 super.onPageFinished(view, url)
 

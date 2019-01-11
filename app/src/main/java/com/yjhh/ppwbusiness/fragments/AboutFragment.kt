@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.yjhh.ppwbusiness.R
+import com.yjhh.ppwbusiness.R.id.*
 import com.yjhh.ppwbusiness.adapter.AboutAdapter
 import com.yjhh.ppwbusiness.api.ApiServices
 import com.yjhh.ppwbusiness.api.SectionUselessService

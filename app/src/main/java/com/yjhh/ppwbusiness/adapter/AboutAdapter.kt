@@ -18,9 +18,6 @@ class AboutAdapter(data: List<AboutBean.FunctionsBean>) :
     override fun convert(helper: BaseViewHolder?, item: AboutBean.FunctionsBean?) {
 
 
-
-
-
         when (item?.name) {
 
             "客服电话" -> {

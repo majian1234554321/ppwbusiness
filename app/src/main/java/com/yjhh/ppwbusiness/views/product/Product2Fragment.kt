@@ -2,9 +2,11 @@ package com.yjhh.ppwbusiness.views.product
 
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.common.zcommon.utils.RecyclerViewNoBugLinearLayoutManager
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
 
 import com.yjhh.ppwbusiness.R
@@ -49,10 +51,20 @@ class Product2Fragment : BaseFragment(), ProductView {
 
             }
             "DELETE" -> {
-                result?.position?.let { mAdapter.data.removeAt(it) }
                 result?.position?.let {
+                    mAdapter.data.removeAt(it)
                     mAdapter.notifyItemRemoved(it)
                 }
+
+
+
+
+                if (mAdapter.data.size == 0) {
+                    val view = View.inflate(mActivity, R.layout.emptyview, null)
+                    view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
+                    mAdapter?.setEmptyView(R.layout.emptyview, mRecyclerView.parent as ViewGroup)
+                }
+
             }
 
             "load" -> {
@@ -67,13 +79,22 @@ class Product2Fragment : BaseFragment(), ProductView {
 
             "UNSELL" -> {
                 Toast.makeText(mActivity, "商品下架成功", Toast.LENGTH_SHORT).show()
-               // mAdapter.getItem(result?.position!!)?.saleStatus = 1
+                // mAdapter.getItem(result?.position!!)?.saleStatus = 1
 
 
                 mAdapter.data.removeAt(result?.position!!)
 
-
                 mAdapter.notifyDataSetChanged()
+
+
+
+                if (mAdapter.data.size == 0) {
+                    val view = View.inflate(mActivity, R.layout.emptyview, null)
+                    view.findViewById<TextView>(R.id.tv_tips).text = "暂无数据"
+                    mAdapter?.setEmptyView(R.layout.emptyview, mRecyclerView.parent as ViewGroup)
+                }
+
+
             }
 
             "SELL" -> {
@@ -119,7 +140,7 @@ class Product2Fragment : BaseFragment(), ProductView {
         mAdapter = ProductAdapter(list)
         present = ProductPresent(context, this)
 
-        mRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
+        mRecyclerView.layoutManager = RecyclerViewNoBugLinearLayoutManager(context)
 
         initAdapter()
         initRefreshLayout()
@@ -131,7 +152,6 @@ class Product2Fragment : BaseFragment(), ProductView {
         mAdapter.setOnItemChildClickListener { adapter, view, position ->
             when (view.id) {
                 R.id.tv_delete -> {
-
 
 
                     val dialog = AlertDialogFactory.createFactory(mActivity).getAlertDialog(
@@ -149,10 +169,6 @@ class Product2Fragment : BaseFragment(), ProductView {
                         }, { dlg, v ->
                             dlg.dismiss()
                         })
-
-
-
-
 
 
                 }
@@ -240,6 +256,11 @@ class Product2Fragment : BaseFragment(), ProductView {
         this.orderType = orderType
         if (swipeLayout != null)
             swipeLayout.autoRefresh()
+
+    }
+
+    public fun autoRefresh() {
+        swipeLayout.autoRefresh()
 
     }
 
