@@ -143,17 +143,11 @@ class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetVie
             }
 
             R.id.tv_save -> {
-                if (!TextUtils.isEmpty(tv_shopTel.text.toString()) && tv_shopTel.text.length == 11) {
-                    val map = SubmitShopAdminConfigModel()
-                    map.address = tv_shopAddress.text.toString()
-                    map.content = tv_shopDesc.text.toString()
-                    map.mobile = tv_shopTel.text.toString()
-                    map.status = typeStatus
-                    map.times = listHours
-                    present?.editConfig(map, "editConfig")
-                } else {
-                    Toast.makeText(this, "商家的联系电话不符合规范", Toast.LENGTH_SHORT).show()
-                }
+
+                val intent = Intent(this, SwitchShop::class.java)
+
+
+                startActivityForResult(intent, 10085)
 
 
             }
@@ -239,27 +233,44 @@ class MerchantSettingActivity : BaseActivity(), View.OnClickListener, ShopSetVie
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == 10086) {
-            val timeList = data?.getParcelableArrayListExtra<ShopTimesModel>("time")
-            if (timeList != null) {
-                val sb = StringBuilder()
-                listHours.clear()
-                timeList.forEach {
+
+        when (requestCode) {
+            10086 -> {
+                val timeList = data?.getParcelableArrayListExtra<ShopTimesModel>("time")
+                if (timeList != null) {
+                    val sb = StringBuilder()
+                    listHours.clear()
+                    timeList.forEach {
 
 
-                    sb.append(it.begin)
-                        .append(" - ")
-                        .append(it.end)
-                        .append("   ")
+                        sb.append(it.begin)
+                            .append(" - ")
+                            .append(it.end)
+                            .append("   ")
 
 
 
-                    listHours.add(ShopTimesModel(it.begin, it.end))
+                        listHours.add(ShopTimesModel(it.begin, it.end))
 
+                    }
+
+                    tv_time.text = sb.toString()
                 }
 
-                tv_time.text = sb.toString()
+            }
+
+            10085 -> {
+
+                present?.getAllInfo()
+
+
+            }
+
+
+            else -> {
             }
         }
+
+
     }
 }

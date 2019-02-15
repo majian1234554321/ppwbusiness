@@ -39,4 +39,13 @@ interface ShopSetServices {
     fun applyShop(): Observable<ResponseBody>//申请开店
 
 
+
+    @POST("shopAdminUser/toggleList")
+    fun toggleList(): Observable<ResponseBody>//待切换的店铺列表
+
+    @FormUrlEncoded
+    @POST("shopAdminUser/toggle")
+    fun toggle(@FieldMap map: Map<String, String>): Observable<ResponseBody>//申请开店
+
+
 }

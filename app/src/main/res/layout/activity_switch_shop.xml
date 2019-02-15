@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:background="#E6E6E6"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".views.merchant.SwitchShop">
+
+    <com.yjhh.ppwbusiness.views.cui.TitleBarView android:layout_width="match_parent"
+                                                 android:id="@+id/tbv_title"
+                                                 app:textValue="店铺切换"
+                                                 app:textColor="@color/white"
+                                                 android:layout_height="wrap_content"/>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+          android:padding="12pt"
+            android:text="当前店铺"
+            android:background="@color/white"
+            android:textColor="#FF333333"
+            android:textSize="19pt"
+    />
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="horizontal"
+                  android:paddingLeft="12pt"
+                  android:paddingRight="12pt"
+                  android:background="@color/white"
+                  android:gravity="center_vertical"
+                  android:layout_height="65pt">
+
+        <ImageView android:layout_width="52.5pt"
+                   android:id="@+id/iv_image"
+                   android:layout_marginRight="11pt"
+                   android:layout_height="52.5pt"/>
+
+        <TextView android:layout_width="match_parent"
+                  tools:text="12121"
+                  android:id="@+id/tv_text"
+                  android:text="拍拍味一店"
+                  android:textColor="#FF333333"
+                  android:textSize="14pt"
+                  android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:background="@color/white"
+            android:layout_marginTop="10pt" android:layout_width="match_parent"
+            android:id="@+id/recyclerView"
+            android:layout_height="wrap_content"/>
+
+
+</LinearLayout>

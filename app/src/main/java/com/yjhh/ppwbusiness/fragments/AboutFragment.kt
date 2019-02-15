@@ -58,8 +58,11 @@ class AboutFragment : BaseFragment() {
                     Log.i("AboutFragment", response)
 
                     val model = Gson().fromJson<AboutBean>(response, AboutBean::class.java)
-                    list.addAll(model.functions)
-                    mAdapter?.setNewData(model.functions)
+                    if (model.functions!=null){
+                        list.addAll(model.functions)
+                        mAdapter?.setNewData(model.functions)
+                    }
+
 
 
                     tv_introduce.text = "\t\t\t\t${model.content}"

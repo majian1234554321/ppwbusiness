@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:paddingLeft="12pt"
+                android:paddingRight="12pt"
+                android:layout_height="65pt">
+
+
+    <ImageView android:layout_width="52.5pt"
+               android:id="@+id/iv_image"
+               android:layout_marginRight="11pt"
+               android:layout_centerVertical="true"
+
+               android:layout_height="52.5pt"/>
+
+    <TextView android:layout_width="match_parent"
+              tools:text="12121"
+
+              android:id="@+id/tv_text"
+              android:layout_toRightOf="@+id/iv_image"
+              android:text="拍拍味一店"
+              android:layout_centerVertical="true"
+              android:textColor="#FF333333"
+              android:textSize="14pt"
+              android:layout_height="wrap_content"/>
+
+
+    <ImageView android:layout_width="7pt" android:layout_height="13pt"
+               android:layout_alignParentRight="true"
+               android:layout_centerVertical="true"
+               android:src="@drawable/icon_arrow_right_gray"
+    />
+
+
+</RelativeLayout>

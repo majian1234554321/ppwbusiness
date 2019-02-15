@@ -132,8 +132,8 @@ dependencies {
     implementation 'com.umeng.sdk:utdid:1.1.5.3'
     //PushSDK
     implementation 'com.umeng.sdk:push:4.2.0'
-    implementation  'com.umeng.umsdk:analytics:7.5.4'
-    implementation  'com.umeng.umsdk:common:1.5.4'
+    implementation 'com.umeng.umsdk:analytics:7.5.4'
+    implementation 'com.umeng.umsdk:common:1.5.4'
     implementation(name: 'arclayout-release', ext: 'aar')
     // implementation(name: 'zxinglibrary-release', ext: 'aar')
     // implementation project(':zxinglibrary')

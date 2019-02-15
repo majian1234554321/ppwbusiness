@@ -77,6 +77,13 @@ class LoginFragment : BaseFragment(), View.OnClickListener, LoginView, CommonVie
         val sessionId = jsonObject.getString("sessionId")
         val type = jsonObject.getString("type")
 
+
+        val multiShop = jsonObject.optBoolean("multiShop")
+
+
+
+
+
         SharedPreferencesUtils.setParam(mActivity, "mobile", mobile)
         SharedPreferencesUtils.setParam(mActivity, "nickName", nickName)
         SharedPreferencesUtils.setParam(mActivity, "sessionId", sessionId)
@@ -86,10 +93,19 @@ class LoginFragment : BaseFragment(), View.OnClickListener, LoginView, CommonVie
 
         //  RxBus.default.post(LoginBean(mobile, true))
 
-        startActivity(Intent(mActivity, MainActivity::class.java))
-        mActivity.finish()
-    }
 
+        //
+
+        start(LoginTipsFragment())
+//        if (multiShop) {
+//            start(LoginTipsFragment())
+//        } else {
+//            startActivity(Intent(mActivity, MainActivity::class.java))
+//            mActivity.finish()
+//        }
+
+
+    }
 
 
     override fun onClick(v: View?) {
